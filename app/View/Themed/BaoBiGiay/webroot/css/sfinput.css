@@ -1,0 +1,95 @@
+
+.file-tag-container {
+
+}
+
+.file-tag-container .text-wrap {
+    height: auto;
+    width: auto;
+    border: 1px solid #9DACCC;
+    position: relative;
+}
+
+.file-tag-container .text-wrap .text-tags {
+    -moz-box-sizing: border-box;
+    cursor: text;
+    padding: 3px 5px 3px 3px;
+    float: left;
+    left: 0;
+    min-height: 25px;
+    width: 100%;
+}
+
+.file-tag-container .text-wrap .text-tags .text-tag {
+    float: left;
+}
+
+.file-tag-container .text-wrap .text-tags .text-tag .text-button {
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 #E2E6F0;
+    border: 1px solid #9DACCC;
+    border-radius: 2px;
+    color: #000000;
+    cursor: pointer;
+    float: left;
+    font: 11px "lucida grande", tahoma, verdana, arial, sans-serif;
+    height: 20px;
+    margin: 0 2px 2px 0;
+    padding: 0 5px 0 3px;
+}
+
+.text-wrap-input-tag {
+    float: left;
+    width: 100px;
+}
+
+.form-control-tag-textarea {
+    width: 100%;
+}
+
+.file-tag-container .text-wrap textarea,
+.file-tag-container .text-wrap input {
+    -moz-box-sizing: border-box;
+    border: none;
+    height: auto;
+    margin: 0;
+    outline: medium none;
+    overflow: hidden;
+    padding: 3px 5px 4px;
+    resize: none;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.sf-input-dropdown-container {
+}
+
+.sf-input-dropdown-item-even{
+
+}
+
+.sf-input-dropdown-item-odd{
+
+}
+
+.sf-input-selected-dropdown-item{
+    background-color: #eee !important;
+}
+
+.sf-dropdown-ul {
+    background-color: #bbb;
+    padding: 0;
+    margin: 0;
+}
+
+.sf-dropdown-ul > li {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+    margin: 1px;
+    background-color: #fff;
+}
+
+.sf-dropdown-ul > li:hover {
+    background-color: #eee;
+}

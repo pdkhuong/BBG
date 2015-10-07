@@ -1,0 +1,39 @@
+{"datatype": "json",
+	"mtype": "POST",
+	"colNames": ["Type Id", "Object Name", "Link Table", "Extra Information"],
+	"colModel": [
+		{
+			"name": "id",
+			"index": "id",
+			"key": true,
+			"width": 75,
+			"align": "right"
+		},
+		{
+			"name": "name",
+			"index": "name",
+			"width": 120,
+			"align": "left"
+		},
+		{
+			"name": "link_table",
+			"index": "link_table",
+			"width": 120,
+			"align": "left"
+		},
+		{
+			"name": "extra_data",
+			"index": "extra_data",
+			"width": 120,
+			"align": "left"
+		}
+	],
+	"sortname": "name",
+	"sortorder": "desc",
+	"scrollOffset": 0,
+	"viewrecords": true,
+	"height": "100%",
+	"width": "100%",
+	"caption": "Object Types",
+	"conditionMap": "function(d){if(d.id == 1) return \"class='danger'\";}"
+}

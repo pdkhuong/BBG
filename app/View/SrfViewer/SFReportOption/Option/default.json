@@ -1,0 +1,41 @@
+{"datatype": "json",
+	"mtype": "POST",
+	"colNames": ["Type Id", "Object Name", "Link Table", "Total Object Count"],
+	"colModel": [
+		{
+			"name": "id",
+			"index": "id",
+			"key": true,
+			"width": 1,
+			"align": "right"
+		},
+		{
+			"name": "name",
+			"index": "name",
+			"width": 4,
+			"align": "left"
+		},
+		{
+			"name": "link_table",
+			"index": "link_table",
+			"width": 4,
+			"align": "right"
+		}
+		,
+		{
+			"name": "TotalObject",
+			"width": 3,
+			"align": "right"
+		}
+	],
+	"sortname": "name",
+	"sortorder": "desc",
+	"scrollOffset": 0,
+	"viewrecords": true,
+	"firstRowAsHeader": true,
+	"height": "100%",
+	"width": "100%",
+	"caption": "Object Types - No Extra",
+	"conditionMap": "function(d){if(d.id2 == 3) return \"class='danger'\";}",
+	"conditionMapPhp": "#outputvar# = (#datavar#['id2'] == 3 ? 'class=\"danger\"' : '');"
+}

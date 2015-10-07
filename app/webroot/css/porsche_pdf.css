@@ -1,0 +1,245 @@
+body {
+	font-family: 'newsgoth for porsche wps';
+	font-size: 12px;
+}
+
+@page:before {
+	counter-increment: pages;
+}
+
+.page-intro {
+	page-break-after: always;
+	text-align: center;
+	counter-reset: pages;
+}
+
+.page-summary {
+	page-break-after: always;
+}
+
+.page-intro img {
+	width: 200px;
+}
+
+.page-intro h1 {
+	margin-top: 600px;
+	margin-bottom: 0;
+}
+
+.page-intro p {
+	font-size: 14px;
+}
+
+header {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 1cm;
+	text-align: center;
+	border-bottom: 0.1pt solid #000;
+}
+
+body {
+	margin: 1cm 0 1.5cm 0;
+}
+
+header img {
+	width: 4cm;
+}
+
+footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 0.8cm;
+	border-top: 1pt solid #000;
+}
+
+footer .page-number-info {
+	text-align: right;
+}
+
+footer .page-number:before {
+	content: counter(page);
+}
+
+footer .page-total:before {
+	content: counter(pages);
+}
+
+h1, h2, h3, h4, th {
+	font-family: 'franklin gothic for porsche';
+}
+
+h1 {
+	font-size: 36px;
+}
+
+h3 {
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+h4 {
+	font-size: 16px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table td{
+	vertical-align: top;
+}
+
+td {
+	padding: 2px 5px;
+	border-top: 0.1pt solid #fff;
+}
+
+/*tr:last-child td {
+	border-bottom: none;
+}*/
+
+table th {
+	vertical-align: bottom;
+	text-align: left;
+	line-height: 1;
+}
+
+table thead th {
+	font-size: 16px;
+	padding-top: 20px;
+}
+
+table th:first-child {
+	width:70%;
+}
+
+table th:last-child,
+table td:last-child {
+	text-align: right;
+}
+
+table tfoot th {
+	font-size: 18px;
+}
+
+table.result-table tr.correct td {
+	background: #ddd;
+}
+
+table.result-table.user tr.correct td {
+	background: none;
+}
+
+td.value,
+th.value {
+	text-align: center;
+}
+
+table.result-table.user {
+	
+}
+
+table.result-table.user tr.correct td.answer {
+	background: #ddd;
+}
+
+table.result-table.user td.answer-correct {
+	background: #7ac37a;
+	border-left: 0.1pt solid #fff;
+}
+
+table.result-table.user td.answer-wrong {
+	background: #ff7373;
+	border-left: 0.1pt solid #fff;
+}
+
+table.user-infos {
+	margin-top: 600px;
+}
+
+table.user-infos td,
+table.short-infos td {
+	border: 0.1pt solid #000;
+	text-align: left;
+}
+
+table.user-infos td:first-child,
+table.short-infos td:first-child {
+	width: 40%;
+}
+
+tfoot td {
+	border-top: 0.1pt solid #000;
+	border-bottom: 0.1pt solid #000;
+}
+
+.result-wrapper {
+	page-break-before: always;
+}
+
+.result-wrapper table {
+	margin-bottom: 1cm;
+}
+
+.pvca .charts h3 {
+	margin: 0;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.pvca .charts h3:first-child {
+	margin-top: 0;
+}
+
+.pvca table th:first-child {
+	width:auto;
+}
+
+.pvca table thead th {
+	width: 25%;
+	font-family: 'newsgoth for porsche wps';
+	font-size: 12px;
+	font-weight:normal;
+	text-align: center;
+}
+
+.pvca table tbody th {
+	font-size: 14px;
+	padding-left: 5px;
+}
+
+.pvca table tbody .categorie td,
+.pvca table tbody .categorie th {
+	background: #ddd;
+}
+
+.pvca table.technical-data td:last-child {
+	text-align: left;
+}
+
+.pvca table.technical-data td,
+.pvca table.technical-data th {
+	border: 0.1pt solid #000;
+}
+
+.pvca table.technical-data {
+	page-break-inside: avoid;
+}
+
+.pvca .page {
+	page-break-before: always;
+}
+
+.pvca .page.first {
+	page-break-before: avoid;
+}
+
+.pvca .page-break {
+	page-break-after: always;
+}

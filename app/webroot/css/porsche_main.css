@@ -1,0 +1,169 @@
+.float {
+	float: left;
+	
+	margin-right: 20px;
+}
+
+a.password {
+	cursor: pointer;
+}
+
+.sortable-container {
+	border: 4px dashed #ddd;
+	height: 510px;
+	overflow: scroll;
+}
+
+.sortable-container.items-active {
+	border: 4px dashed #c1ffb3;
+}
+
+.sortable, .sortable-attachments, .select-list  {
+	width: 170px;
+	min-height: 375px;
+	margin: 10px;
+}
+
+.sortable li, .sortable-attachments li, .select-list li {
+	width: 160px;
+	background: #ddd;
+	margin-bottom: 10px;
+	cursor: pointer;
+	overflow: hidden;
+	padding: 5px;
+	position: relative;
+}
+
+.select-list li.model,
+.assignedCompetitors .select-list li {
+	min-height: 105px;
+}
+
+.sortable li span, .sortable-attachments li span, .select-list li span {
+	color: #333;
+	width: 100%;
+	overflow: hidden;
+	display: block;
+}
+
+.select-list li input[type=checkbox] {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+}
+
+li.item-active, li.item-mandatory {
+	background-color: #ffacac !important;
+}
+
+.placeholder {
+	background-color: #ffacac !important;
+	height: 105px;
+}
+
+.tabs {
+	width: 98%;
+}
+
+/* Modify Users Page */
+#profile-page h3,
+.show-admin-bar {
+	display: none;
+}
+
+table.result-table th {
+	font-weight: bold;
+}
+
+table.result-table th:first-child {
+	width:70%;
+}
+
+table.result-table th:last-child,
+table.result-table td:last-child {
+	text-align: right;
+}
+
+table.result-table tfoot th {
+	font-size: 18px;
+}
+
+table.result-table tr.question td {
+	font-weight: bold;
+	font-size: 14px;
+	padding-top: 30px;
+}
+
+table.result-table tr.correct td {
+	font-weight: bold;
+	color: green;
+}
+
+table.result-table tr.wrong td {
+	font-weight: bold;
+	color: red;
+}
+
+.pvca .vehicle-image {
+
+		width:160px;
+		margin-right:10px;
+		height: 140px;
+		float: left;
+	}
+
+.pvca .vehicle-image span,
+.pvca .vehicle-image img {
+		display: block;
+	}
+
+.pvca .vs {
+		float: left;
+		font-weight: bold;
+		height: 130px;
+		width: 30px;
+	}
+
+.pvca .evaluation-content h3 {
+		padding: 5px 30px;
+		font-size: 16px;
+		cursor: pointer; position: relative; margin-top: 1px; zoom: 1;
+	}
+
+.pvca .accordion>div {
+		display: none;
+	}
+
+.pvca .steering {
+		text-align: right;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+.pvca .competition_details{margin-bottom:30px;}
+.pvca .competition_details td{padding:5px;border:1px solid #CCC;}
+.pvca tr.categorie{font-weight:bold;}
+.pvca td.porsche{background:#FAFAFA;}
+.pvca thead{font-weight:bold;}
+.pvca td{vertical-align:top;}
+.pvca .competition_details td{max-width:100px;text-align:center;min-width:100px;vertical-align:middle;height:50px;}
+.pvca .competition_details .first_col{text-align:left;max-width:150px;}
+.pvca .notes .first_col{width:200px;}
+	
+.pvca img.graph{
+		margin:20px 0px 50px 0px;
+		width:auto;
+		display:block;
+		max-width:100%;
+		/*width: 800px;*/
+		height:auto;
+	}
+	
+.pvca .notes{margin-bottom:30px;}
+.pvca table.notes{width:60%;}
+.pvca ul.notes{list-style:none;width:60%;}
+.pvca ul.notes li a{padding:6px 10px;border:1px solid #EEE;background:#F5F5F5;display:block;text-decoration:none;color:#333;font-weight:bold;}
+.pvca ul.notes li div{display:none;}
+.pvca ul.notes .note_crit_wrapper a{padding-left:20px;font-weight:normal;margin-top:-1px;background:#FBFBFB;}
+.pvca div.note_crit{padding:10px 0px 10px 32px;}
+.pvca h3 {font-size: 17px;}

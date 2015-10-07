@@ -1,0 +1,69 @@
+[
+	{
+		"table": "table1",
+		"alias": "tbl1",
+		"columns": [
+			{
+				"column": "col1",
+				"alias": "col1",
+				"formula": null,
+				"group": false,
+				"order": "desc"
+			}
+		],
+		"join": [],
+		"filter": [
+			{
+				"column": "col2",
+				"val": ":someValue",
+				"formula": "#col# = #val#"
+			}
+		],
+		"require": true
+	},
+	{
+		"table": "table2",
+		"columns": [
+			{
+				"column": "col1",
+				"alias": "table_2_col1",
+				"formula": null,
+				"group": false
+			},
+			{
+				"column": "col2",
+				"alias": "table_2_col2",
+				"formula": null,
+				"group": false
+			}
+		],
+		"join": [
+			{
+				"column": "t1id",
+				"join_table": "tbl1",
+				"join_column": "id"
+			}
+		],
+		"filter": []
+	},
+	{
+		"table": "table3",
+		"columns": [
+			{
+				"column": "col1",
+				"alias": "table_3_col1",
+				"formula": null,
+				"group": false
+			}
+		],
+		"join": [
+			{
+				"column": "t1id",
+				"join_table": "table2",
+				"join_column": "id",
+				"formula": "#this_column# like '%' + #ref_column# + '%'"
+			}
+		],
+		"filter": []
+	}
+]

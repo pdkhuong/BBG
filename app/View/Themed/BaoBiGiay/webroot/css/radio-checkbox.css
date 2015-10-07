@@ -1,0 +1,65 @@
+.clearfix:before,.clearfix:after{content:"";display:table}
+.clearfix:after{clear:both}
+.clearfix{*zoom:1}
+
+.coolcheckbox-24,.coolradio-24{display:inline-block;padding:0;margin:0;}
+.coolcheckbox-24>a,.coolradio-24>a{height:24px;width:24px;display:inline-block;float:left;cursor:pointer;margin:0;background:url('../img/radio-checkbox/radio-checkbox-grey-24.png') no-repeat;}
+.coolcheckbox-24>a:focus,.coolradio-24>a:focus{outline:0 none}
+.coolcheckbox-24 label,.coolradio-24 label{display:block;float:left;margin:0px 6px;cursor:pointer}
+.coolcheckbox-24 a.disabled,.coolcheckbox-24 label.disabled,.coolradio-24 a.disabled,.coolradio-24 label.disabled{cursor:not-allowed}
+.coolcheckbox-24>a{background-position:0 0}
+.coolcheckbox-24>a:hover{background-position:-24px 0}
+.coolcheckbox-24>a:focus{background-position:-24px 0}
+.coolcheckbox-24>a.checked{background-position:-48px 0}
+.coolcheckbox-24>a.checked:focus{background-position:-48px 0}
+.coolcheckbox-24>a.checked.disabled{background-position:-96px 0}
+.coolcheckbox-24>a.disabled{background-position:-72px 0}
+.coolradio-24>a{background-position:-120px 0}
+.coolradio-24>a:hover{background-position:-144px 0}
+.coolradio-24>a:focus{background-position:-144px 0}
+.coolradio-24>a.checked{background-position:-168px 0}
+.coolradio-24>a.checked:focus{background-position:-168px 0}
+.coolradio-24>a.checked.disabled{background-position:-216px 0}
+.coolradio-24>a.disabled{background-position:-192px 0}
+
+.coolcheckbox-14,.coolradio-14{display:inline-block;padding:0;margin:0;height:14px;}
+.coolcheckbox-14>a,.coolradio-14>a{height:14px;width:14px;display:inline-block;float:left;cursor:pointer;margin:0;background:url('../img/radio-checkbox/radio-checkbox-grey-14.png') no-repeat;margin-left:5px;margin-top: 3px;}
+.coolcheckbox-14>a:focus,.coolradio-14>a:focus{outline:0 none}
+.coolcheckbox-14 label,.coolradio-14 label{display:block;float:left;margin:0 6px;cursor:pointer}
+.coolcheckbox-14 a.disabled,.coolcheckbox-14 label.disabled,.coolradio-14 a.disabled,.coolradio-14 label.disabled{cursor:not-allowed}
+.coolcheckbox-14>a{background-position:0 0}
+.coolcheckbox-14>a:hover{background-position:-14px 0}
+.coolcheckbox-14>a:focus{background-position:-14px 0}
+.coolcheckbox-14>a.checked{background-position:-28px 0}
+.coolcheckbox-14>a.checked:focus{background-position:-28px 0}
+.coolcheckbox-14>a.checked.disabled{background-position:-56px 0}
+.coolcheckbox-14>a.disabled{background-position:-42px 0}
+.coolradio-14>a{background-position:-70px 0}
+.coolradio-14>a:hover{background-position:-84px 0}
+.coolradio-14>a:focus{background-position:-84px 0}
+.coolradio-14>a.checked{background-position:-98px 0}
+.coolradio-14>a.checked:focus{background-position:-98px 0}
+.coolradio-14>a.checked.disabled{background-position:-126 px 0}
+.coolradio-14>a.disabled{background-position:-112px 0}
+
+.coolcheckbox-18,.coolradio-18{display:inline-block;padding:0;margin:0;height:14px;}
+.coolcheckbox-18>a,.coolradio-18>a{height:18px;width:18px;display:inline-block;float:left;cursor:pointer;margin:0;background:url('../img/radio-checkbox/radio-checkbox-grey-18.png') no-repeat;margin-left:5px;margin-top: 1px;}
+.coolcheckbox-18>a:focus,.coolradio-18>a:focus{outline:0 none}
+.coolcheckbox-18 label,.coolradio-18 label{display:block;float:left;margin:0px 6px;cursor:pointer;}
+.coolcheckbox-18 a.disabled,.coolcheckbox-18 label.disabled,.coolradio-18 a.disabled,.coolradio-18 label.disabled{cursor:not-allowed}
+.coolcheckbox-18>a{background-position:0 0}
+.coolcheckbox-18>a:hover{background-position:-18px 0}
+.coolcheckbox-18>a:focus{background-position:-18px 0}
+.coolcheckbox-18>a.checked{background-position:-36px 0}
+.coolcheckbox-18>a.checked:focus{background-position:-36px 0}
+.coolcheckbox-18>a.checked.disabled{background-position:-72px 0}
+.coolcheckbox-18>a.disabled{background-position:-54px 0}
+.coolradio-18>a{background-position:-90px 0}
+.coolradio-18>a:hover{background-position:-108px 0}
+.coolradio-18>a:focus{background-position:-108px 0}
+.coolradio-18>a.checked{background-position:-126px 0}
+.coolradio-18>a.checked:focus{background-position:-126px 0}
+.coolradio-18>a.checked.disabled{background-position:-162 px 0}
+.coolradio-18>a.disabled{background-position:-144px 0}
+
+.orange a{border:1px solid #ff702a;}

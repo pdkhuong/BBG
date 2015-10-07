@@ -1,0 +1,66 @@
+[
+	{
+		"table": "object_type",
+		"columns": [
+			{
+				"column": "id",
+				"alias": "id",
+				"formula": null,
+				"group": true
+			},
+			{
+				"column": "id",
+				"alias": "id2",
+				"formula": null,
+				"group": true
+			},
+			{
+				"column": "name",
+				"alias": "name",
+				"formula": null,
+				"group": true
+			},
+			{
+				"column": "link_table",
+				"alias": "link_table",
+				"formula": null,
+				"group": true
+			},
+			{
+				"column": "extra_data",
+				"alias": "extra_data",
+				"formula": null,
+				"group": true
+			}
+		],
+		"join": [],
+		"filter": [
+			{
+				"formula": "#tbl#.#col# <= #val#",
+				"column": "id",
+				"val": "typeid"
+			}
+		],
+		"require": true
+	},
+	{
+		"table": "object",
+		"columns": [
+			{
+				"column": "id",
+				"alias": "TotalObject",
+				"formula": "COUNT(*)",
+				"group": false
+			}
+		],
+		"join": [
+			{
+				"column": "object_type_id",
+				"join_table": "object_type",
+				"join_column": "id"
+			}
+		],
+		"filter": [],
+		"require": true
+	}
+]
