@@ -1,5 +1,5 @@
 <h3>
-  <?= __("Update Roles For %s", array("<i>{$user['UserModel']['name']}</i>")) ?>
+  <?= __("Update Roles For %s", array("<i>{$user['UserModel']['display_name']}</i>")) ?>
 </h3>
 
 <hr />

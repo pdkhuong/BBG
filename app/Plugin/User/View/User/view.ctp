@@ -7,10 +7,10 @@ $userStatus = Configure::read('User.UserStatus');
 <hr>
 <div class="bs-docs-section">
   <div class="bs-callout bs-callout-danger">
-    <p><code><?= __('Name') ?></code>: <?= $data['UserModel']['name'] ?></p>
-    <p><code><?= __('Email') ?></code>: <?= $data['UserModel']['email'] ?></p>
-    <p><code><?= __('Address') ?></code>: <?= $data['UserModel']['address'] ?></p>
-    <p><code><?= __('Status') ?></code>: <?= $userStatus[$data['UserModel']['status']] ?></p>
+    <p><code><?= __('Name') ?></code>: <?= $data['UserModel']['display_name'] ?></p>
+    <p><code><?= __('Email') ?></code>: <?= $data['UserModel']['user_email'] ?></p>
+    <p><code><?= __('Address') ?></code>: <?= $data['UserModel']['user_login'] ?></p>
+    <p><code><?= __('Status') ?></code>: <?= $userStatus[$data['UserModel']['user_status']] ?></p>
   </div>
 </div>
 

@@ -1,120 +1,112 @@
 <?php
 App::uses('UtilLib', 'Lib');
 App::uses('AppModel', 'Model');
-App::uses('UserAccount', 'User.Model');
+App::uses('PasswordHash', 'Lib');
 App::uses('UserRoleAccess', 'User.Model');
 App::uses('UserLoginHistory', 'User.Model');
 App::uses('SFEmail', 'EmailTemplate.Model');
 
 class UserModel extends AppModel {
 
-  var $useTable = 'user';
+  var $useTable = 'wp_users';
   var $multiLanguage = null;
   public $actsAs = array('MultiLanguage.MultiLanguage');
-  var $hasOne = array('User.UserAccount');
   var $validate = array(
-    'name' =>
-    array(
-      'notNull' =>
-      array(
-        'rule' => 'notEmpty',
-        'required' => true,
-        'message' => 'Name field cannot be left blank',
-      ),
-      'size' =>
-      array(
-        'rule' =>
-        array(
+    'user_login' => array(
+      'size' => array(
+        'rule' => array(
           0 => 'maxLength',
-          1 => 255,
+          1 => 60,
         ),
-        'message' => 'Please enter a text no larger than 255 characters long',
+        'message' => 'Please enter a text no larger than 60 characters long',
+        'allowEmpty' => false,
       ),
-    ),
-    'firstname' =>
-    array(
-      'size' =>
-      array(
-        'rule' =>
-        array(
-          0 => 'maxLength',
-          1 => 255,
-        ),
-        'message' => 'Please enter a text no larger than 255 characters long',
-        'allowEmpty' => true,
-      ),
-    ),
-    'lastname' =>
-    array(
-      'size' =>
-      array(
-        'rule' =>
-        array(
-          0 => 'maxLength',
-          1 => 255,
-        ),
-        'message' => 'Please enter a text no larger than 255 characters long',
-        'allowEmpty' => true,
-      ),
-    ),
-    'username' =>
-    array(
-      'size' =>
-      array(
-        'rule' =>
-        array(
-          0 => 'maxLength',
-          1 => 255,
-        ),
-        'message' => 'Please enter a text no larger than 255 characters long',
-        'allowEmpty' => true,
-      ),
-      'unique_username' =>
-      array(
-        'rule' =>
-        array(
+      'unique_user_login' => array(
+        'rule' => array(
           0 => 'checkUnique',
-          1 =>
-          array(
-            0 => 'username',
+          1 => array(
+            0 => 'user_login',
           ),
         ),
         'message' => 'Username already exists',
       ),
     ),
-    'email' =>
-    array(
-      'size' =>
-      array(
-        'rule' =>
-        array(
+    'user_email' => array(
+      'size' => array(
+        'rule' => array(
           0 => 'maxLength',
-          1 => 255,
+          1 => 100,
         ),
-        'message' => 'Please enter a text no larger than 255 characters long',
+        'message' => 'Please enter a text no larger than 100 characters long',
         'allowEmpty' => false,
       ),
-      'email' =>
-      array(
-        'rule' =>
-        array(
+      'user_email' => array(
+        'rule' => array(
           0 => 'email',
         ),
         'message' => 'Please enter a valid email address',
       ),
-      'unique_email' =>
-      array(
-        'rule' =>
-        array(
+      'unique_user_email' => array(
+        'rule' => array(
           0 => 'checkUnique',
-          1 =>
-          array(
-            0 => 'email',
+          1 => array(
+            0 => 'user_email',
           ),
         ),
         'message' => 'Email already exists',
       ),
-    )
+    ),
+    'firstname' =>array(
+      'size' => array(
+          'rule' => array(
+            0 => 'maxLength',
+            1 => 100,
+          ),
+          'message' => 'Please enter a text no larger than 100 characters long',
+          'allowEmpty' => false,
+      ),
+    ),
+    'lastname' => array(
+      'size' => array(
+        'rule' => array(
+          0 => 'maxLength',
+          1 => 100,
+        ),
+        'message' => 'Please enter a text no larger than 100 characters long',
+        'allowEmpty' => false,
+      ),
+    ),
+    'password' => array(
+      'size' => array(
+        'rule' => array(
+          0 => 'maxLength',
+          1 => 60,
+        ),
+        'message' => 'Please enter a text no larger than 60 characters long',
+        'allowEmpty' => false,
+      ),
+      'notNull' => array(
+        'rule' => 'notEmpty',
+        'required' => true,
+        'message' => 'Password field cannot be left blank',
+      ),
+      'minLength' => array(
+        'rule'    => array('minLength', 6),
+        'message' => 'Minimum 6 characters long'
+      ),
+    ),
+    'password_confirmation' => array(
+      'notNull' => array(
+        'rule'     => 'notEmpty',
+        'required' => true,
+        'message'  => 'Password Confirmation field cannot be left blank',
+      ),
+      'match_password' => array(
+        'rule'    => array('isMatchedValidate', 'password'),
+        'message' => 'Password does not match the confirmation password',
+      ),
+    ),
+
   );
 
   public function verifyLogin($email, $password) {
@@ -200,23 +192,21 @@ class UserModel extends AppModel {
   }
 
   public function register($data){
-    if(!empty($data['UserAccount']['password'])) {
-      $data['UserAccount']['password'] = sha1($data['UserAccount']['password']);
+    $wp_hasher = new PasswordHash(8, true);
+    $inputPassword = trim($data['UserModel']['password']);
+    if(!empty($inputPassword)) {
+      $data['UserModel']['user_pass'] = $wp_hasher->HashPassword($inputPassword);
     }
-    if(!empty($data['UserAccount']['password_confirmation'])) {
-      $data['UserAccount']['password_confirmation'] = sha1($data['UserAccount']['password_confirmation']);
-    }
-
+    $data['UserModel']['display_name'] = $data['UserModel']['firstname'].' '.$data['UserModel']['lastname'];
+    $data['UserModel']['user_registered'] = date('Y-m-d H:i:s', time());
     if (USER_AUTO_ACTIVE == 1) {
-      $data['UserModel']['status'] = USER_ACTIVE;
+      $data['UserModel']['user_status'] = USER_ACTIVE;
     }
     else {
-      $data['UserModel']['status'] = USER_INACTIVE;
-      $data['UserAccount']['reset_token_password'] = UtilLib::generateToken();
-      $data['UserAccount']['reset_token_time'] = date('Y-m-d H:i:s');
+      $data['UserModel']['user_status'] = USER_INACTIVE;
+      $data['UserModel']['user_activation_key'] = UtilLib::generateToken();
     }
-
-    if (!$this->saveAll($data)) {
+    if (!$this->save($data)) {
       return false;
     }
 
@@ -230,30 +220,18 @@ class UserModel extends AppModel {
       $Email->template('User.activate_account');
 
       $Email->viewVars(array(
-                         'token' => $data['UserAccount']['reset_token_password'],
-                         'name' => $data['UserModel']['name']
+                         'token' => $data['UserModel']['user_activation_key'],
+                         'name' => $data['UserModel']['display_name']
                        ));
 
       $Email->from($noreplyConf['from']);
-      $Email->to($data['UserModel']['email']);
+      $Email->to($data['UserModel']['user_email']);
       $Email->subject(__('Please activate your account'));
       $Email->send();
     }
 
     $this->addRegisteredRole($this->getId());
     return true;
-  }
-  public function OauthRegister($data){
-    $data['UserModel']['status'] = USER_ACTIVE;
-    try{
-      $rs = $this->saveAll($data, array('validate'=>false));
-      if($rs){
-        $this->addRegisteredRole($this->getId());
-      }
-      return $this->getId();
-    } catch (Exception $ex) {
-      return false;
-    }
   }
   public function activeAccount($user_account_record){
     $this->save(array(

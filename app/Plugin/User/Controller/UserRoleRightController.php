@@ -16,7 +16,9 @@ class UserRoleRightController extends AppController {
   function afterFilter() {
     parent::afterFilter();
   }
-
+  public function index(){
+    die();
+  }
   public function generate() {
 
     $rights = Configure::read('User.UserRight');

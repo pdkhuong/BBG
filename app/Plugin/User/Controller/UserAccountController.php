@@ -42,45 +42,6 @@ class UserAccountController extends AppController {
     }
   }
 
-  public function register() {
-    $this->UserAccount->validate['password'] = array(
-      'notNull' =>
-      array(
-        'rule' => 'notEmpty',
-        'required' => true,
-        'message' => 'Password field cannot be left blank',
-      ),
-      'minLength' =>
-      array(
-        'rule'    => array('minLength', USER_MIN_PASSWORD_LENGTH),
-        'message' => 'Minimum ' . USER_MIN_PASSWORD_LENGTH . ' characters long'
-      ),
-    );
-    $this->UserAccount->validate['password_confirmation'] = array(
-      'notNull'        => array(
-        'rule'     => 'notEmpty',
-        'required' => true,
-        'message'  => 'Password Confirmation field cannot be left blank',
-      ),
-      'match_password' => array(
-        'rule'    => array('isMatchedValidate', 'password'),
-        'message' => 'Password does not match the confirmation password',
-      ),
-    );
-
-    if (empty($this->request->data)) {
-      $this->request->data = NULL;
-    }
-    else {
-      if($this->UserModel->register($this->request->data)) {
-        if (USER_AUTO_ACTIVE == 1) {
-          $this->view = 'register_success_non_active';
-        } else {
-          $this->view = 'register_success_active';
-        }
-      }
-    }
-  }
 
   public function myProfile(){
     if ($this->loggedUser->User->id <= 0) {

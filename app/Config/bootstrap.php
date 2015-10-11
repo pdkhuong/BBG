@@ -139,13 +139,12 @@ Configure::write('USER_EXCLUDE_CONTROLLER', array(
       'MultiLanguageController' => array('change' => 1)
     ),
     'User' => array(
-      'UserAccountController' => array(
+      /*'UserAccountController' => array(
         'register' => 1, 'logout' => 1, 'login' => 1, 'activate' => 1,
         'myProfile' => 1, 'forgotPassword' => 1, 'resetPassword' => 1,
         'profile' => 1,
       ),
-      'UserAdminController' => array('logout' => 1, 'login' => 1),
-      'OAuthController' => array('fbLogin' => 1, 'googleLogin' => 1, 'twitterLogin' => 1),
+      'UserAdminController' => array('logout' => 1, 'login' => 1),*/
     ),
   )
 ));
@@ -160,7 +159,7 @@ Configure::write('USER_EXCLUDE_PARENT_CONTROLLER', array(
   'plugin' => array(
     'Plugin01' => array(
       'Test01Controller' => 1
-    )
+    ),
   )
 ));
 

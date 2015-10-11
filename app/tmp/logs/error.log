@@ -2496,3 +2496,844 @@ Request URL: /css/rainbow.css
 Stack Trace:
 #0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2015-10-07 04:50:07 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-07 05:04:11 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-07 05:04:13 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-08 09:36:37 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-08 10:13:51 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-08 12:58:24 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-08 14:56:15 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-09 07:18:42 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-09 08:45:12 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-09 08:45:17 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-09 08:46:00 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-09 08:47:56 Error: Fatal Error (4): syntax error, unexpected ';' in [/Datas/Sources/BaoBiGiay/app/Config/bootstrap.php, line 158]
+2015-10-09 08:47:56 Error: [FatalErrorException] syntax error, unexpected ';'
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/Datas/Sources/...', 158)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/Datas/Sources/...', 158, Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/Datas/Sources/...', 158, Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2015-10-09 08:48:10 Error: Fatal Error (4): syntax error, unexpected ';' in [/Datas/Sources/BaoBiGiay/app/Config/bootstrap.php, line 163]
+2015-10-09 08:48:10 Error: [FatalErrorException] syntax error, unexpected ';'
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/Datas/Sources/...', 163)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/Datas/Sources/...', 163, Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/Datas/Sources/...', 163, Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2015-10-09 08:48:30 Error: [MissingViewException] View file "/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/register.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/register.ctp',
+)
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#4 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2015-10-09 08:48:45 Error: [MissingViewException] View file "/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/register.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/register.ctp',
+)
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#4 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2015-10-09 10:48:18 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /css/rainbow.css
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-10 06:14:04 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'UserModel.email' in 'where clause'
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT COUNT(*)...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT COUNT(*)...', Array, Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT COUNT(*)...', false)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2750): DboSource->read(Object(UserModel), Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2722): Model->_readDataSource('count', Array)
+#6 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3111): Model->find('count', Array)
+#7 /Datas/Sources/BaoBiGiay/app/Model/AppModel.php(466): Model->isUnique(Array, false)
+#8 [internal function]: AppModel->checkUnique(Array, Array, Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Validator/CakeValidationRule.php(277): call_user_func_array(Array, Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Validator/CakeValidationSet.php(137): CakeValidationRule->process('email', Array, Array)
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Model/ModelValidator.php(261): CakeValidationSet->validate(Array, false)
+#12 /Datas/Sources/BaoBiGiay/lib/Cake/Model/ModelValidator.php(101): ModelValidator->errors(Array)
+#13 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3141): ModelValidator->validates(Array)
+#14 /Datas/Sources/BaoBiGiay/lib/Cake/Model/ModelValidator.php(136): Model->validates(Array)
+#15 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2393): ModelValidator->validateAssociated(Array, Array)
+#16 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2229): Model->validateAssociated(Array, Array)
+#17 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2073): Model->saveAssociated(Array, Array)
+#18 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(181): Model->saveAll(Array)
+#19 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(34): UserModel->register(Array)
+#20 [internal function]: UserController->register()
+#21 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#22 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#23 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#24 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#25 {main}
+2015-10-10 06:14:57 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_account`, CONSTRAINT `user_account_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserAccount), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2298): Model->save(Array, Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2073): Model->saveAssociated(Array, Array)
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(181): Model->saveAll(Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(34): UserModel->register(Array)
+#8 [internal function]: UserController->register()
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 06:15:13 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_account`, CONSTRAINT `user_account_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserAccount), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2298): Model->save(Array, Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2073): Model->saveAssociated(Array, Array)
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(181): Model->saveAll(Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(34): UserModel->register(Array)
+#8 [internal function]: UserController->register()
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 06:18:20 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_account`, CONSTRAINT `user_account_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserAccount), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2298): Model->save(Array, Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2073): Model->saveAssociated(Array, Array)
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(181): Model->saveAll(Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(34): UserModel->register(Array)
+#8 [internal function]: UserController->register()
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 06:18:48 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_account`, CONSTRAINT `user_account_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserAccount), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2298): Model->save(Array, Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2073): Model->saveAssociated(Array, Array)
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(181): Model->saveAll(Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(34): UserModel->register(Array)
+#8 [internal function]: UserController->register()
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 10:39:22 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_account`, CONSTRAINT `user_account_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserAccount), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2298): Model->save(Array, Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2073): Model->saveAssociated(Array, Array)
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(181): Model->saveAll(Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(34): UserModel->register(Array)
+#8 [internal function]: UserController->register()
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 10:42:04 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_account`, CONSTRAINT `user_account_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserAccount), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2298): Model->save(Array, Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2073): Model->saveAssociated(Array, Array)
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(181): Model->saveAll(Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(34): UserModel->register(Array)
+#8 [internal function]: UserController->register()
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 18:01:14 Error: Fatal Error (4): syntax error, unexpected '.', expecting ')' in [/Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php, line 96]
+2015-10-10 18:01:14 Error: [FatalErrorException] syntax error, unexpected '.', expecting ')'
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/Datas/Sources/...', 96)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/Datas/Sources/...', 96, Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/Datas/Sources/...', 96, Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2015-10-10 18:18:57 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'UserModel.email' in 'where clause'
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT COUNT(*)...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT COUNT(*)...', Array, Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT COUNT(*)...', false)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2750): DboSource->read(Object(UserModel), Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2722): Model->_readDataSource('count', Array)
+#6 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3111): Model->find('count', Array)
+#7 /Datas/Sources/BaoBiGiay/app/Model/AppModel.php(466): Model->isUnique(Array, false)
+#8 [internal function]: AppModel->checkUnique(Array, Array, Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Validator/CakeValidationRule.php(277): call_user_func_array(Array, Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Validator/CakeValidationSet.php(137): CakeValidationRule->process('user_email', Array, Array)
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Model/ModelValidator.php(261): CakeValidationSet->validate(Array, false)
+#12 /Datas/Sources/BaoBiGiay/lib/Cake/Model/ModelValidator.php(101): ModelValidator->errors(Array)
+#13 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3141): ModelValidator->validates(Array)
+#14 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1675): Model->validates(Array)
+#15 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(210): Model->save(Array)
+#16 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#17 [internal function]: UserController->register()
+#18 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#19 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#20 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#21 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#22 {main}
+2015-10-10 18:20:48 Error: [ConfigureException] /Datas/Sources/BaoBiGiay/app/Config/email.php not found.
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Network/Email/CakeEmail.php(1093): CakeEmail->_applyConfig('noreply')
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Network/Email/CakeEmail.php(345): CakeEmail->config('noreply')
+#2 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(217): CakeEmail->__construct('noreply')
+#3 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#4 [internal function]: UserController->register()
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#6 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#7 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#8 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2015-10-10 18:21:56 Error: [ConfigureException] Unknown email configuration "noreply".
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Network/Email/CakeEmail.php(1093): CakeEmail->_applyConfig('noreply')
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Network/Email/CakeEmail.php(345): CakeEmail->config('noreply')
+#2 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(217): CakeEmail->__construct('noreply')
+#3 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#4 [internal function]: UserController->register()
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#6 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#7 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#8 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2015-10-10 18:24:22 Error: [SocketException] Invalid email: "admin@localhost"
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Network/Email/CakeEmail.php(592): CakeEmail->_setEmail('_from', Array, NULL)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Network/Email/CakeEmail.php(364): CakeEmail->_setEmailSingle('_from', Array, NULL, 'From requires o...')
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Network/Email/CakeEmail.php(1209): CakeEmail->from(Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Network/Email/CakeEmail.php(1093): CakeEmail->_applyConfig('noreply')
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Network/Email/CakeEmail.php(345): CakeEmail->config('noreply')
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(217): CakeEmail->__construct('noreply')
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#7 [internal function]: UserController->register()
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#11 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2015-10-10 18:24:39 Error: [SocketException] You need to specify at least one destination for to, cc or bcc.
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(231): CakeEmail->send()
+#1 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#2 [internal function]: UserController->register()
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#6 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2015-10-10 18:28:03 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_role_access`, CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserRoleAccess), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(158): Model->save(Array)
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(234): UserModel->addRegisteredRole('1')
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#7 [internal function]: UserController->register()
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#11 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2015-10-10 18:28:14 Error: [MissingViewException] View file "/Datas/Sources/BaoBiGiay/app/Plugin/User/View/UserAccount/activate.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Datas/Sources/BaoBiGiay/app/Plugin/User/View/UserAccount/activate.ctp',
+)
+Request URL: /user/account/activate
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserAccountController), Object(CakeRequest), Object(CakeResponse))
+#4 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2015-10-10 18:30:22 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_role_access`, CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserRoleAccess), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(158): Model->save(Array)
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(234): UserModel->addRegisteredRole('1')
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#7 [internal function]: UserController->register()
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#11 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2015-10-10 18:32:58 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_role_access`, CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserRoleAccess), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(158): Model->save(Array)
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(234): UserModel->addRegisteredRole('1')
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#7 [internal function]: UserController->register()
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#11 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2015-10-10 18:34:15 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_role_access`, CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserRoleAccess), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(158): Model->save(Array)
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(234): UserModel->addRegisteredRole('1')
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#7 [internal function]: UserController->register()
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#11 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2015-10-10 18:35:01 Error: [MissingActionException] Action UserController::activate() could not be found.
+Exception Attributes: array (
+  'controller' => 'UserController',
+  'action' => 'activate',
+)
+Request URL: /user/activate/71dd357636f8c0f87c596f3570186551
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#2 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-10-10 18:37:16 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_role_access`, CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserRoleAccess), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(158): Model->save(Array)
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(234): UserModel->addRegisteredRole('1')
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#7 [internal function]: UserController->register()
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#11 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2015-10-10 18:37:38 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_role_access`, CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserRoleAccess), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(158): Model->save(Array)
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(234): UserModel->addRegisteredRole('1')
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#7 [internal function]: UserController->register()
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#11 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2015-10-10 18:40:06 Error: Fatal Error (1): Class 'PasswordHash' not found in [/Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php, line 197]
+2015-10-10 18:40:06 Error: [FatalErrorException] Class 'PasswordHash' not found
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(1, 'Class 'Password...', '/Datas/Sources/...', 197)
+#1 [internal function]: ErrorHandler::handleError(1, 'Class 'Password...', '/Datas/Sources/...', 197, Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 1, 'Class 'Password...', '/Datas/Sources/...', 197, Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2015-10-10 18:48:34 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_role_access`, CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserRoleAccess), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(158): Model->save(Array)
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(238): UserModel->addRegisteredRole('1')
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#7 [internal function]: UserController->register()
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#11 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2015-10-10 19:07:48 Error: [MissingTableException] Table user_accounts for model UserAccount was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'user_accounts',
+  'class' => 'UserAccount',
+  'ds' => 'default',
+)
+Request URL: /user/activate/71dd357636f8c0f87c596f3570186551
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3310): Model->setSource('user_accounts')
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1063): Model->getDataSource()
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2750): DboSource->read(Object(UserModel), Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2722): Model->_readDataSource('first', Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(599): Model->find('first', Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(799): DboSource->query('findByUserActiv...', Array, Object(UserModel))
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): Model->__call('findByUserActiv...', Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): UserModel->findByUserActivationKey('71dd357636f8c0f...')
+#8 [internal function]: UserController->activate('71dd357636f8c0f...')
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 19:08:40 Error: [MissingTableException] Table user_accounts for model UserAccount was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'user_accounts',
+  'class' => 'UserAccount',
+  'ds' => 'default',
+)
+Request URL: /user/activate/71dd357636f8c0f87c596f3570186551
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3310): Model->setSource('user_accounts')
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1063): Model->getDataSource()
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2750): DboSource->read(Object(UserModel), Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2722): Model->_readDataSource('first', Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(599): Model->find('first', Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(799): DboSource->query('findByUserActiv...', Array, Object(UserModel))
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): Model->__call('findByUserActiv...', Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): UserModel->findByUserActivationKey('71dd357636f8c0f...')
+#8 [internal function]: UserController->activate('71dd357636f8c0f...')
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 19:09:42 Error: [MissingTableException] Table user_accounts for model UserAccount was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'user_accounts',
+  'class' => 'UserAccount',
+  'ds' => 'default',
+)
+Request URL: /user/activate/71dd357636f8c0f87c596f3570186551
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3310): Model->setSource('user_accounts')
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1063): Model->getDataSource()
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2750): DboSource->read(Object(UserModel), Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2722): Model->_readDataSource('first', Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(599): Model->find('first', Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(799): DboSource->query('findByUserActiv...', Array, Object(UserModel))
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): Model->__call('findByUserActiv...', Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): UserModel->findByUserActivationKey('71dd357636f8c0f...')
+#8 [internal function]: UserController->activate('71dd357636f8c0f...')
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 19:09:53 Error: [MissingTableException] Table user_accounts for model UserAccount was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'user_accounts',
+  'class' => 'UserAccount',
+  'ds' => 'default',
+)
+Request URL: /user/activate/71dd357636f8c0f87c596f3570186551
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3310): Model->setSource('user_accounts')
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1063): Model->getDataSource()
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2750): DboSource->read(Object(UserModel), Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2722): Model->_readDataSource('first', Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(599): Model->find('first', Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(799): DboSource->query('findByUserActiv...', Array, Object(UserModel))
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): Model->__call('findByUserActiv...', Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): UserModel->findByUserActivationKey('71dd357636f8c0f...')
+#8 [internal function]: UserController->activate('71dd357636f8c0f...')
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 19:10:31 Error: [MissingTableException] Table user_accounts for model UserAccount was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'user_accounts',
+  'class' => 'UserAccount',
+  'ds' => 'default',
+)
+Request URL: /user/activate/71dd357636f8c0f87c596f3570186551
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3310): Model->setSource('user_accounts')
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1063): Model->getDataSource()
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2750): DboSource->read(Object(UserModel), Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2722): Model->_readDataSource('first', Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(599): Model->find('first', Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(799): DboSource->query('findByUserActiv...', Array, Object(UserModel))
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): Model->__call('findByUserActiv...', Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): UserModel->findByUserActivationKey('71dd357636f8c0f...')
+#8 [internal function]: UserController->activate('71dd357636f8c0f...')
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 19:10:38 Error: [MissingTableException] Table user_accounts for model UserAccount was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'user_accounts',
+  'class' => 'UserAccount',
+  'ds' => 'default',
+)
+Request URL: /user/activate/71dd357636f8c0f87c596f3570186551
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(3310): Model->setSource('user_accounts')
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1063): Model->getDataSource()
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2750): DboSource->read(Object(UserModel), Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(2722): Model->_readDataSource('first', Array)
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(599): Model->find('first', Array)
+#5 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(799): DboSource->query('findByUserActiv...', Array, Object(UserModel))
+#6 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): Model->__call('findByUserActiv...', Array)
+#7 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(43): UserModel->findByUserActivationKey('71dd357636f8c0f...')
+#8 [internal function]: UserController->activate('71dd357636f8c0f...')
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#10 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#12 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-10-10 19:11:44 Error: [MissingViewException] View file "/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/activate.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/activate.ctp',
+)
+Request URL: /user/activate/71dd357636f8c0f87c596f3570186551
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#4 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2015-10-10 19:19:54 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1' for key 'PRIMARY'
+Request URL: /user/activate/5d73ad5d24142f343776264f493dc8b6
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserModel), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(52): Model->save(Array, false)
+#5 [internal function]: UserController->activate('5d73ad5d24142f3...')
+#6 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#7 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#9 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2015-10-10 19:20:19 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1' for key 'PRIMARY'
+Request URL: /user/activate/5d73ad5d24142f343776264f493dc8b6
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserModel), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(52): Model->save(Array, false)
+#5 [internal function]: UserController->activate('5d73ad5d24142f3...')
+#6 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#7 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#9 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2015-10-10 19:20:35 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1' for key 'PRIMARY'
+Request URL: /user/activate/5d73ad5d24142f343776264f493dc8b6
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserModel), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(53): Model->save(Array, false)
+#5 [internal function]: UserController->activate('5d73ad5d24142f3...')
+#6 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#7 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#9 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2015-10-10 19:21:11 Error: Fatal Error (4): syntax error, unexpected 'public' (T_PUBLIC) in [/Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php, line 59]
+2015-10-10 19:21:11 Error: [FatalErrorException] syntax error, unexpected 'public' (T_PUBLIC)
+Request URL: /user/activate/5d73ad5d24142f343776264f493dc8b6
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/Datas/Sources/...', 59)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/Datas/Sources/...', 59, Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/Datas/Sources/...', 59, Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2015-10-11 04:28:27 Error: Fatal Error (1): Class 'PasswordHash' not found in [/Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php, line 79]
+2015-10-11 04:28:27 Error: [FatalErrorException] Class 'PasswordHash' not found
+Request URL: /user/edit
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(1, 'Class 'Password...', '/Datas/Sources/...', 79)
+#1 [internal function]: ErrorHandler::handleError(1, 'Class 'Password...', '/Datas/Sources/...', 79, Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 1, 'Class 'Password...', '/Datas/Sources/...', 79, Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2015-10-11 04:47:13 Error: [PDOException] SQLSTATE[HY000]: General error: 1467 Failed to read auto-increment value from storage engine
+Request URL: /user/register
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserModel), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(209): Model->save(Array)
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(33): UserModel->register(Array)
+#6 [internal function]: UserController->register()
+#7 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#10 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2015-10-11 04:57:13 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`baobigiay`.`user_role_access`, CONSTRAINT `user_role_access_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+Request URL: /user/edit
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `ba...', Array)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `ba...')
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Model/Model.php(1761): DboSource->create(Object(UserRoleAccess), Array, Array)
+#4 /Datas/Sources/BaoBiGiay/app/Plugin/User/Model/UserModel.php(157): Model->save(Array)
+#5 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserController.php(83): UserModel->addRegisteredRole('2')
+#6 [internal function]: UserController->edit()
+#7 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#8 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#10 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2015-10-11 05:16:00 Error: [MissingActionException] Action UserController::listing() could not be found.
+Exception Attributes: array (
+  'controller' => 'UserController',
+  'action' => 'listing',
+)
+Request URL: /user/listing
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#2 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-10-11 05:19:28 Error: [MissingActionException] Action UserController::listing() could not be found.
+Exception Attributes: array (
+  'controller' => 'UserController',
+  'action' => 'listing',
+)
+Request URL: /user/listing/
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#2 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-10-11 05:24:47 Error: [MissingViewException] View file "/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/index.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/index.ctp',
+)
+Request URL: /user
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#4 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2015-10-11 05:25:33 Error: [MissingViewException] View file "/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/index.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Datas/Sources/BaoBiGiay/app/Plugin/User/View/User/index.ctp',
+)
+Request URL: /user
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#4 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2015-10-11 05:33:39 Error: [MissingActionException] Action UserController::role-access() could not be found.
+Exception Attributes: array (
+  'controller' => 'UserController',
+  'action' => 'role-access',
+)
+Request URL: /user/role-access/user/3
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserController), Object(CakeRequest), Object(CakeResponse))
+#2 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-10-11 08:49:13 Error: [MissingControllerException] Controller class UserDataAccessController could not be found.
+Exception Attributes: array (
+  'class' => 'UserDataAccessController',
+  'plugin' => 'User',
+)
+Request URL: /user/data-access/3
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-10-11 08:50:29 Error: [MissingActionException] Action UserRoleRightController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'UserRoleRightController',
+  'action' => 'index',
+)
+Request URL: /user/access
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserRoleRightController), Object(CakeRequest), Object(CakeResponse))
+#2 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-10-11 08:52:35 Error: [MissingPluginException] Plugin CodeGenerator could not be found.
+Exception Attributes: array (
+  'plugin' => 'CodeGenerator',
+)
+Request URL: /user/access/generate
+Stack Trace:
+#0 /Datas/Sources/BaoBiGiay/app/Plugin/User/Controller/UserRoleRightController.php(31): CakePlugin::path('CodeGenerator')
+#1 [internal function]: UserRoleRightController->generate()
+#2 /Datas/Sources/BaoBiGiay/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UserRoleRightController), Array)
+#3 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#4 /Datas/Sources/BaoBiGiay/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UserRoleRightController), Object(CakeRequest), Object(CakeResponse))
+#5 /Datas/Sources/BaoBiGiay/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
