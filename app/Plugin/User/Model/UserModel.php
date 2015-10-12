@@ -108,38 +108,35 @@ class UserModel extends AppModel {
     ),
 
   );
-
+  public function checkPassword($password, $hash){
+    if ( strlen($hash) <= 32 ) {
+      $check = hash_equals($hash, md5($password));
+    }else{
+      $wp_hasher = new PasswordHash(8, true);
+      $check = $wp_hasher->CheckPassword($password, $hash);
+    }
+    return $check;
+  }
   public function verifyLogin($email, $password) {
     $message = '';
     $loggedUser = new stdClass();
-    $user = $this->findByEmail($email);
-    if (empty($user) || empty($user['UserModel']) || empty($user['UserAccount']) || $user['UserAccount']['password'] != sha1($password)) {
+    $user = $this->findByUserEmail($email);
+    if (empty($user) || empty($user['UserModel']) || !$this->checkPassword($password, $user['UserModel']['user_pass'])) {
       $message =  __('The email or password you entered is incorrect');
-      if(isset($user['UserAccount']) && $user['UserAccount']['id'] > 0) {
-        $user['UserAccount']['number_attempt'] += 1;
-        $account = new UserAccount();
-        $account->save($user['UserAccount'], array('validate' => false, 'callbacks' => false));
-      }
-    } elseif ($user['UserModel']['status'] == USER_DISABLE) {
+    } elseif ($user['UserModel']['user_status'] == USER_DISABLE) {
       $message = __('Your account has been disabled');
-    } elseif ($user['UserModel']['status'] == USER_INACTIVE) {
+    } elseif ($user['UserModel']['user_status'] == USER_INACTIVE) {
       $message = __('Your account was not activated. Please check your email then active the account to continue');
     } else {
-      $account = new UserAccount();
-      $user['UserAccount']['number_attempt'] = 0;
-      $user['UserAccount']['last_login'] = date('Y-m-d H:i:s');
-      $account->save($user['UserAccount'], array('validate' => false, 'callbacks' => false));
+      //$history = new UserLoginHistory();
+      //$history->save(array('user_id' => $user['UserModel']['id'], 'ip' => $_SERVER['REMOTE_ADDR']), array('validate' => false));
 
-      $history = new UserLoginHistory();
-      $history->save(array('user_id' => $user['UserModel']['id'], 'ip' => $_SERVER['REMOTE_ADDR']), array('validate' => false));
-
-      unset($user['UserAccount']['password']);
       $loggedUser->Admin = new stdClass();
       $loggedUser->Admin->id = 0;
       $loggedUser->User = arrayToObject($user['UserModel']);
 
       $roles = new UserRoleAccess();
-      $loggedUser->Role = Hash::combine($roles->findByUserId($user['UserAccount']['user_id']), 'UserRoleAccess.role_id', 'UserRoleAccess.role_id');
+      $loggedUser->Role = Hash::combine($roles->findByUserId($user['UserModel']['id']), 'UserRoleAccess.role_id', 'UserRoleAccess.role_id');
     }
 
     return array(
@@ -171,20 +168,13 @@ class UserModel extends AppModel {
   }
 
   public function updateProfile($data) {
-    if(!empty($data['UserAccount']['password'])) {
-      $data['UserAccount']['password'] = sha1($data['UserAccount']['password']);
-      $data['UserAccount']['password_confirmation'] = sha1($data['UserAccount']['password_confirmation']);
-    } else {
-      unset($data['UserAccount']['password']);
+    $inputPassword = trim($data['UserModel']['password']);
+    if(!empty($inputPassword)) {
+      $wp_hasher = new PasswordHash(8, true);
+      $data['UserModel']['user_pass'] = $wp_hasher->HashPassword($inputPassword);
     }
 
-    #unset($data['UserModel']['email']);
-
-    $account = new UserAccount();
-    $dataAccount = $account->findByUserId($data['UserModel']['id']);
-    $data['UserAccount']['id'] = $dataAccount['UserAccount']['id'];
-
-    if($this->saveAll($data, array('validate' => true, 'callbacks' => false))) {
+    if($this->save($data, array('validate' => true, 'callbacks' => false))) {
       return true;
     }
 

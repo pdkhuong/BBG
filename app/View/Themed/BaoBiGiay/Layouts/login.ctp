@@ -23,7 +23,6 @@
     echo $this->fetch('meta');
     echo $this->Html->css('font-gesta');
     echo $this->Html->css('bootstrap.min');
-    echo $this->Html->css('rainbow');
     echo $this->Html->css('radio-checkbox');
 
     echo $this->fetch('css');

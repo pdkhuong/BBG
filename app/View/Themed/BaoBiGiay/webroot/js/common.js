@@ -527,8 +527,10 @@ $(document).ready(function() {
       $(this).next().slideToggle();
       $('#menu li a').removeClass('active');
       $(this).addClass('active');
+      if($(this).hasClass("has_sub")){
+        return false;
+      }
     }
-    return false;
   });
 });
 

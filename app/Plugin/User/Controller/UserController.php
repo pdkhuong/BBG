@@ -131,5 +131,84 @@ class UserController extends AppController
 
     $this->set('dataList', $dataList);
   }
+  public function login($referer = '') {
+    if ($this->loggedUser->User->id > 0) {
+      $this->redirect($this->request->webroot);
+    }
+    if (empty($referer)) {
+      $referer = $this->request->webroot;
+    } else {
+      $referer = urldecode($referer);
+    }
+
+    $this->layout = "login";
+
+    if (!empty($this->request->data)) {
+      $this->setCookie();
+      $result = $this->UserModel->verifyLogin($this->request->data['UserModel']['user_email'], $this->request->data['UserModel']['password']);
+      if($result['status']) {
+        $this->Session->write('loggedUser', $result['user']);
+        $this->redirect($referer);
+      } else {
+        $this->Session->setFlash($result['message'], 'flash/error');
+      }
+    }
+  }
+  public function forgotPassword() {
+    $this->layout = "login";
+    if(!empty($this->request->data)) {
+      $data = $this->UserModel->findByUserEmail($this->request->data['UserModel']['user_email']);
+      if(empty($data)) {
+        $this->Session->setFlash(__('The email you entered is not exist'), 'flash/error');
+      } else {
+        $data['UserModel']['user_activation_key'] = UtilLib::generateToken();
+        $data['UserModel']['user_registered'] = date('Y-m-d H:i:s');
+        $this->UserModel->save($data['UserModel']);
+        App::uses('CakeEmail', 'Network/Email');
+
+        $Email = new CakeEmail('noreply');
+        $noreplyConf = $Email->config();
+
+        $Email->emailFormat('html');
+        $Email->template('User.reset_password');
+
+        $Email->viewVars(array(
+        'token' => $data['UserModel']['user_activation_key'],
+        'name' => $data['UserModel']['display_name']
+        ));
+        $Email->from($noreplyConf['from']);
+        $Email->to($data['UserModel']['user_email']);
+        $Email->subject(__('Please activate your account'));
+        $Email->send();
+        $this->Session->setFlash(__('Recover password link is sent'), 'flash/error');
+      }
+    }
+  }
+  public function myProfile(){
+    if ($this->loggedUser->User->id <= 0) {
+      $this->Session->setFlash(__('Please login to continue'), 'flash/error');
+      $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'UserAccount', 'action' => 'login')));
+    }
+
+    $loggedUserData = $this->UserModel->findById($this->loggedUser->User->id);
+    if (empty($this->request->data)) {
+      $this->request->data = $loggedUserData;
+    }else {
+      $this->request->data['UserModel']['user_email'] = $loggedUserData['UserModel']['user_email'];
+      $this->request->data['UserModel']['id'] = $this->loggedUser->User->id;
+      if($this->UserModel->updateProfile($this->request->data)) {
+        $this->Session->setFlash(__('Your profile have been saved successfully.'), 'flash/success');
+        $this->loggedUser->User->name = $this->request->data['UserModel']['firstname'] . ' '.$this->request->data['UserModel']['lastname'];
+        $this->Session->write('loggedUser', $this->loggedUser);
+      }
+    }
+
+    return;
+  }
+  public function logout() {
+    $this->Session->destroy();
+    $this->Cookie->destroy();
+    $this->redirect($this->referer());
+  }
 
 }

@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.20)
 # Database: baobigiay
-# Generation Time: 2015-10-11 08:36:26 +0000
+# Generation Time: 2015-10-12 03:31:26 +0000
 # ************************************************************
 
 
@@ -140,7 +140,12 @@ LOCK TABLES `user_role_right` WRITE;
 
 INSERT INTO `user_role_right` (`id`, `role_id`, `plugin`, `controller`, `action`, `description`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(17,3,'System',NULL,NULL,NULL,NULL,NULL,NULL);
+	(17,3,'System',NULL,NULL,NULL,NULL,NULL,NULL),
+	(18,4,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
+	(20,5,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
+	(21,6,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
+	(22,7,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
+	(23,8,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL);
 
 /*!40000 ALTER TABLE `user_role_right` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -177,7 +182,7 @@ LOCK TABLES `wp_users` WRITE;
 
 INSERT INTO `wp_users` (`id`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `firstname`, `lastname`, `display_name`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(3,'useradd','$P$BDh32Nbk0xEImHtg5SXpT6Pifd6aep1','','testadd1@gmail.com','','0000-00-00 00:00:00','',0,'fa1','fl1','fa1 fl1',NULL,'2015-10-11 05:31:28',NULL);
+	(3,'useradd','$P$BiIK8Q.819FyIaAR4Zodb2BZBiblU50','','testadd1@gmail.com','','0000-00-00 00:00:00','55f81a472136e1875bb8fd073404f53a',0,'fa1','fl1','fa1 fl1',NULL,'2015-10-12 04:00:48',NULL);
 
 /*!40000 ALTER TABLE `wp_users` ENABLE KEYS */;
 UNLOCK TABLES;

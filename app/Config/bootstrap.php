@@ -188,14 +188,6 @@ define("ATRIBUTE_TYPE_VIDEO", 4);
 define("ATRIBUTE_TYPE_GALLERY", 5);
 define("ATRIBUTE_TYPE_DOCUMENT", 6);
 
-Configure::write('TRADESHOW_ATTRIBUTE_TYPE', array(
-  ATRIBUTE_TYPE_PLAIN_TEXT  => array('name' => 'Plain Text'),
-  ATRIBUTE_TYPE_RICH_TEXT   => array('name' => 'Rich Text'),
-  ATRIBUTE_TYPE_IMAGE       => array('name' => 'Image', 'filetype' => array('png','jpg','gif')),
-  ATRIBUTE_TYPE_VIDEO       => array('name' => 'Video', 'filetype' => array('mp4')),
-  ATRIBUTE_TYPE_GALLERY     => array('name' => 'Gallery', 'filetype' => array('png','jpg','gif')),
-  ATRIBUTE_TYPE_DOCUMENT    => array('name' => 'Document', 'filetype' => array('pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx')),
-));
 
 Configure::write('FILE_PLUGIN_CONFIG', array(
   'thumbnail' => array(

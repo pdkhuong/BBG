@@ -48,7 +48,7 @@
             <a href="http://dev.ucm.com/?m[0]=config&amp;p[0]=config_admin"><i class="fa fa-cogs"></i>                Settings            </a>
         </li>
       <li class="">
-        <a href="#"><i class="fa fa-users"></i> <?php echo __("Users")?></a>
+        <a class="has_sub" href="#"><i class="fa fa-users"></i> <?php echo __("Users")?></a>
         <ul>
           <li><a href="<?php echo Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'search'))?>">List User</a></li>
           <li><a href="<?php echo Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'search'))?>">List User Role</a></li>
