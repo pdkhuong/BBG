@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['UserModel']['id']) && $this->data['UserModel']['id'] > 0): ?>
-    <?= __('Edit') ?>: <?= $this->data['UserModel']['email'] ?>
+    <?= __('Edit') ?>: <?= $this->data['UserModel']['user_email'] ?>
   <? else: ?>
     <?= __('Add') ?>
   <? endif; ?>
@@ -21,15 +21,12 @@
     'type' => 'file'
   ));
   ?>
-  <?= $this->Form->input('name', array('label' => 'Name')) ?>
-  <?= $this->Form->input('email', array('label' => 'Email')) ?>
-  <?= $this->Form->input('address', array('label' => 'Address', 'autocomplete' => 'off')) ?>
-  <?= $this->Form->input('status', array('label' => 'Status', 'options' => Configure::read('User.UserStatus'))) ?>
-
-  <hr>
-  <?= $this->Form->input('UserAccount.id', array('type' => 'hidden')) ?>
-  <?= $this->Form->input('UserAccount.password', array('label' => 'Password', 'autocomplete' => 'off')) ?>
-  <?= $this->Form->input('UserAccount.password_hint', array('label' => 'Password Hint', 'autocomplete' => 'off')) ?>
+  <?= $this->Form->input('user_email', array('label' => 'Email')) ?>
+  <?= $this->Form->input('user_login', array('label' => 'Usename')) ?>
+  <?= $this->Form->input('firstname', array('label' => 'Fist Name')) ?>
+  <?= $this->Form->input('lastname', array('label' => 'Last Name')) ?>
+  <?= $this->Form->input('user_status', array('label' => 'Status', 'options' => Configure::read('User.UserStatus'))) ?>
+  <?= $this->Form->input('password', array('label' => 'Password', 'autocomplete' => 'off')) ?>
 
   <?php
   echo $this->Form->input('id', array('type' => 'hidden'));

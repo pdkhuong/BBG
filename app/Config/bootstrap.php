@@ -139,13 +139,12 @@ Configure::write('USER_EXCLUDE_CONTROLLER', array(
       'MultiLanguageController' => array('change' => 1)
     ),
     'User' => array(
-      'UserAccountController' => array(
+      /*'UserAccountController' => array(
         'register' => 1, 'logout' => 1, 'login' => 1, 'activate' => 1,
         'myProfile' => 1, 'forgotPassword' => 1, 'resetPassword' => 1,
         'profile' => 1,
       ),
-      'UserAdminController' => array('logout' => 1, 'login' => 1),
-      'OAuthController' => array('fbLogin' => 1, 'googleLogin' => 1, 'twitterLogin' => 1),
+      'UserAdminController' => array('logout' => 1, 'login' => 1),*/
     ),
   )
 ));
@@ -160,7 +159,7 @@ Configure::write('USER_EXCLUDE_PARENT_CONTROLLER', array(
   'plugin' => array(
     'Plugin01' => array(
       'Test01Controller' => 1
-    )
+    ),
   )
 ));
 
@@ -189,14 +188,6 @@ define("ATRIBUTE_TYPE_VIDEO", 4);
 define("ATRIBUTE_TYPE_GALLERY", 5);
 define("ATRIBUTE_TYPE_DOCUMENT", 6);
 
-Configure::write('TRADESHOW_ATTRIBUTE_TYPE', array(
-  ATRIBUTE_TYPE_PLAIN_TEXT  => array('name' => 'Plain Text'),
-  ATRIBUTE_TYPE_RICH_TEXT   => array('name' => 'Rich Text'),
-  ATRIBUTE_TYPE_IMAGE       => array('name' => 'Image', 'filetype' => array('png','jpg','gif')),
-  ATRIBUTE_TYPE_VIDEO       => array('name' => 'Video', 'filetype' => array('mp4')),
-  ATRIBUTE_TYPE_GALLERY     => array('name' => 'Gallery', 'filetype' => array('png','jpg','gif')),
-  ATRIBUTE_TYPE_DOCUMENT    => array('name' => 'Document', 'filetype' => array('pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx')),
-));
 
 Configure::write('FILE_PLUGIN_CONFIG', array(
   'thumbnail' => array(

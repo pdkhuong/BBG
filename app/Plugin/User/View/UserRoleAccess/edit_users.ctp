@@ -34,8 +34,8 @@
             <?= $this->Form->checkbox("deletelist[{$data['UserModel']['id']}]", array('name' => "deletelist[{$data['UserModel']['id']}]")) ?>
           </td>
           <td><?= $data['UserModel']['id'] ?></td>
-          <td><?= $data['UserModel']['name'] ?></td>
-          <td><?= $data['UserModel']['email'] ?></td>
+          <td><?= $data['UserModel']['display_name'] ?></td>
+          <td><?= $data['UserModel']['user_email'] ?></td>
         </tr>
       <?php endforeach; ?>
     </tbody>
@@ -74,8 +74,8 @@
             <?= $this->Form->checkbox("addlist[{$data['UserModel']['id']}]", array('name' => "addlist[{$data['UserModel']['id']}]")) ?>
           </td>
           <td><?= $data['UserModel']['id'] ?></td>
-          <td><?= $data['UserModel']['name'] ?></td>
-          <td><?= $data['UserModel']['email'] ?></td>
+          <td><?= $data['UserModel']['display_name'] ?></td>
+          <td><?= $data['UserModel']['user_email'] ?></td>
         </tr>
       <?php endforeach; ?>
     </tbody>

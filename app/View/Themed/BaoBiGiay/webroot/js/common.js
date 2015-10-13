@@ -521,6 +521,17 @@ $(document).ready(function() {
         $('#sfDialogModel').attr('data-id-selector-content', id).addClass('fade').modal('show');
       }
     });
+  $('#menu > li > a').click(function(){
+    if ($(this).attr('class') != 'active'){
+      $('#menu li ul').slideUp();
+      $(this).next().slideToggle();
+      $('#menu li a').removeClass('active');
+      $(this).addClass('active');
+      if($(this).hasClass("has_sub")){
+        return false;
+      }
+    }
+  });
 });
 
 function sfDialogModelClose() {

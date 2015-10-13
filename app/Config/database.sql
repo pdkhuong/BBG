@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.20)
 # Database: baobigiay
-# Generation Time: 2015-10-07 02:45:00 +0000
+# Generation Time: 2015-10-12 03:31:26 +0000
 # ************************************************************
 
 
@@ -18,76 +18,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-# Dump of table user
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `user`;
-
-CREATE TABLE `user` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `firstname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lastname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
-  `address` text,
-  `status` tinyint(2) NOT NULL DEFAULT '0',
-  `created_time` datetime DEFAULT NULL,
-  `updated_time` datetime DEFAULT NULL,
-  `deleted_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-
-INSERT INTO `user` (`id`, `name`, `firstname`, `lastname`, `username`, `email`, `address`, `status`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(1,'test 11',NULL,NULL,NULL,'test1aaaa@gmail.com','aaaa@gmail.com',-1,'2015-10-06 15:45:48','2015-10-06 15:45:48',NULL);
-
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table user_account
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `user_account`;
-
-CREATE TABLE `user_account` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
-  `password` varchar(40) DEFAULT '',
-  `password_hint` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `reset_token_password` varchar(100) DEFAULT NULL,
-  `reset_token_time` datetime DEFAULT NULL,
-  `last_login` datetime DEFAULT NULL,
-  `number_attempt` int(5) unsigned NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `oauth_uid` text,
-  `oauth_provider` varchar(255) DEFAULT NULL,
-  `oauth_data` text,
-  `created_time` datetime DEFAULT NULL,
-  `updated_time` datetime DEFAULT NULL,
-  `deleted_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_account_user` (`user_id`),
-  CONSTRAINT `user_account_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `user_account` WRITE;
-/*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-
-INSERT INTO `user_account` (`id`, `user_id`, `password`, `password_hint`, `reset_token_password`, `reset_token_time`, `last_login`, `number_attempt`, `status`, `oauth_uid`, `oauth_provider`, `oauth_data`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(1,1,'7c4a8d09ca3762af61e59520943dc26494f8941b','123456','06d073155bb7d7a0e17ab5b1c45ff296','2015-10-06 15:45:48',NULL,0,0,NULL,NULL,NULL,'2015-10-06 15:45:48','2015-10-06 15:45:48',NULL);
-
-/*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table user_admin
@@ -121,57 +51,6 @@ VALUES
 UNLOCK TABLES;
 
 
-# Dump of table user_data_access
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `user_data_access`;
-
-CREATE TABLE `user_data_access` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
-  `model` varchar(255) NOT NULL DEFAULT '',
-  `type` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_data_access_user` (`user_id`),
-  CONSTRAINT `user_data_access_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table user_data_access_detail
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `user_data_access_detail`;
-
-CREATE TABLE `user_data_access_detail` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `data_access_id` int(11) unsigned NOT NULL,
-  `data_id` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `data_access_id` (`data_access_id`,`data_id`),
-  KEY `data_id` (`data_id`),
-  CONSTRAINT `user_data_access_detail_data_access` FOREIGN KEY (`data_access_id`) REFERENCES `user_data_access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table user_login_history
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `user_login_history`;
-
-CREATE TABLE `user_login_history` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
-  `ip` varchar(40) DEFAULT '',
-  `created_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_login_history_account` (`user_id`),
-  CONSTRAINT `user_login_history_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 # Dump of table user_role
 # ------------------------------------------------------------
 
@@ -193,7 +72,11 @@ LOCK TABLES `user_role` WRITE;
 INSERT INTO `user_role` (`id`, `name`, `description`, `created_time`, `deleted_time`, `updated_time`)
 VALUES
 	(3,'Administrator','Administrator',NULL,NULL,NULL),
-	(4,'Content Editor','Content Editor',NULL,NULL,NULL);
+	(4,'Content Editor','Content Editor',NULL,NULL,NULL),
+	(5,'Staff','Staff',NULL,NULL,NULL),
+	(6,'Customer','customer',NULL,NULL,NULL),
+	(7,'Lead','lead',NULL,NULL,NULL),
+	(8,'Vendor','vendor',NULL,NULL,NULL);
 
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -207,17 +90,29 @@ DROP TABLE IF EXISTS `user_role_access`;
 CREATE TABLE `user_role_access` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `role_id` int(11) unsigned NOT NULL,
-  `user_id` int(11) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
   `created_time` datetime DEFAULT NULL,
   `deleted_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_role_access_unique` (`role_id`,`user_id`),
-  KEY `user_role_access_user` (`user_id`),
-  CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `user_role_access_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `role_id` (`role_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`),
+  CONSTRAINT `user_role_access_user` FOREIGN KEY (`user_id`) REFERENCES `wp_users` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `user_role_access` WRITE;
+/*!40000 ALTER TABLE `user_role_access` DISABLE KEYS */;
+
+INSERT INTO `user_role_access` (`id`, `role_id`, `user_id`, `created_time`, `deleted_time`, `updated_time`)
+VALUES
+	(1,5,3,'2015-10-11 05:04:35','2015-10-11 05:16:29','2015-10-11 05:04:35'),
+	(2,6,3,'2015-10-11 05:10:24','2015-10-11 05:16:29','2015-10-11 05:10:24'),
+	(3,4,3,'2015-10-11 05:16:00',NULL,'2015-10-11 05:16:00'),
+	(4,5,3,'2015-10-11 05:35:20',NULL,'2015-10-11 05:35:20');
+
+/*!40000 ALTER TABLE `user_role_access` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table user_role_right
@@ -245,9 +140,51 @@ LOCK TABLES `user_role_right` WRITE;
 
 INSERT INTO `user_role_right` (`id`, `role_id`, `plugin`, `controller`, `action`, `description`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(17,3,'System',NULL,NULL,NULL,NULL,NULL,NULL);
+	(17,3,'System',NULL,NULL,NULL,NULL,NULL,NULL),
+	(18,4,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
+	(20,5,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
+	(21,6,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
+	(22,7,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
+	(23,8,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL);
 
 /*!40000 ALTER TABLE `user_role_right` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table wp_users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `wp_users`;
+
+CREATE TABLE `wp_users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_login` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_pass` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_nicename` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_url` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_activation_key` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `user_status` int(11) NOT NULL DEFAULT '0',
+  `firstname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `lastname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `display_name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `created_time` datetime DEFAULT NULL,
+  `updated_time` datetime DEFAULT NULL,
+  `deleted_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_login_key` (`user_login`),
+  KEY `user_nicename` (`user_nicename`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `wp_users` WRITE;
+/*!40000 ALTER TABLE `wp_users` DISABLE KEYS */;
+
+INSERT INTO `wp_users` (`id`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `firstname`, `lastname`, `display_name`, `created_time`, `updated_time`, `deleted_time`)
+VALUES
+	(3,'useradd','$P$BiIK8Q.819FyIaAR4Zodb2BZBiblU50','','testadd1@gmail.com','','0000-00-00 00:00:00','55f81a472136e1875bb8fd073404f53a',0,'fa1','fl1','fa1 fl1',NULL,'2015-10-12 04:00:48',NULL);
+
+/*!40000 ALTER TABLE `wp_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

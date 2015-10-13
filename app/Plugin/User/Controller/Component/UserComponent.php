@@ -4,7 +4,7 @@ App::uses('Component', 'Controller');
 
 class UserComponent extends Component {
 
-  var $uses = array('User.UserAccount', 'User.UserModel', 'User.UserAdmin', 'User.UserRoleAccess');
+  var $uses = array('User.UserModel', 'User.UserAdmin', 'User.UserRoleAccess');
 
   public function initialize(Controller $controller) {
     $controller->loggedUser = $controller->Session->read('loggedUser');
@@ -14,13 +14,13 @@ class UserComponent extends Component {
       $controller->Cookie->name = 'remember_me';
       $cookie = $controller->Cookie->read('User');
       if (!empty($cookie)) {
-        if ($cookie['model_class'] == 'UserAccount') {
-          $user_model = ClassRegistry::init('User.UserAccount');
+        if ($cookie['model_class'] == 'UserModel') {
+          $user_model = ClassRegistry::init('User.UserModel');
           $user = $user_model->find('first', array(
             'conditions' => array(
-              'UserModel.email' => $cookie['email'],
-              'UserAccount.password' => $cookie['password'],
-              'UserModel.status' => USER_ACTIVE,
+              'UserModel.user_email' => $cookie['email'],
+              'UserModel.password' => $cookie['password'],
+              'UserModel.user_status' => USER_ACTIVE,
             ),
             'multiLanguageIsUsed' => false
           ));
@@ -144,11 +144,10 @@ class UserComponent extends Component {
     } elseif (!(isset($rolesC[$classController][$controller->action]['id']) || isset($rolesC[$classController]['id']))) {
       $access = false;
     }
-
     if (!$access) {
       if ($controller->loggedUser->User->id == 0) {
         $controller->Session->setFlash(__('You are not authorized to access this page'), 'flash/error');
-        $controller->redirect(Router::url(array('plugin' => 'User', 'controller' => 'UserAccount', 'action' => 'login')));
+        $controller->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'login')));
       } else {
         $controller->Session->setFlash(__('You are not authorized to access this page'), 'flash/error');
         $controller->redirect('/');

@@ -59,7 +59,7 @@
         <div style="margin: -10px 0px 0px 10px" id="plugin_controller_all_<?= $controller ?>">
           <?php
           foreach ($dataController['action'] as $action => $dataAction) {
-            if ($dataAction['status'] == USER_FUNC_DISABLE) {
+            if (isset($dataAction['status']) && $dataAction['status'] == USER_FUNC_DISABLE) {
               continue;
             }
             echo "<div>";
@@ -110,7 +110,7 @@
     <div style="margin: -10px 0px 0px 10px" id="controller_all_<?= $controller ?>">
       <?php
       foreach ($dataController['action'] as $action => $dataAction) {
-        if ($dataAction['status'] == USER_FUNC_DISABLE) {
+        if (isset($dataAction['status']) && $dataAction['status'] == USER_FUNC_DISABLE) {
           continue;
         }
         echo "<div>";

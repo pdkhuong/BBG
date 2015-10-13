@@ -1159,3 +1159,14 @@ background: #FFF;
 .data-settings-right{
     right:10px;
 }
+
+#menu li a:hover, #menu li a.active {
+    background: #999;
+    color: #fff;
+}
+#menu li ul {
+    display: none; // used to hide sub-menus
+}
+#menu li ul li a {
+    border-bottom: 1px dotted #ccc;
+}
