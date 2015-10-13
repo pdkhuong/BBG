@@ -4,7 +4,7 @@ $this->HTML->script('libs/dataTables.bootstrap', array('inline' => false));
 $this->HTML->script('datatables.js', array('inline' => false));
 $this->HTML->css('dataTables.bootstrap', array('inline' => false));
 ?>
-<div class="page-title" id="page-title">
+<div class="page-title" id="page-titl">
   <div class="row">
     <div class="col-md-9">
       <h1><i class="fa fa-bars"></i>
@@ -12,7 +12,7 @@ $this->HTML->css('dataTables.bootstrap', array('inline' => false));
       </h1>
     </div>
     <div class="col-md-3 text-right">
-      <?php echo $this->Html->link('<i class="fa fa-plus"></i> ' . __('Add'), Router::url(array('action' => 'edit')), array('class' => 'btn btn-inverse', 'escape' => false, 'id' => '_addProduct')); ?>
+      <?php echo $this->Html->link('<i class="fa fa-plus"></i> ' . __('Add'), Router::url(array('action' => 'edit')), array('class' => 'btn btn-inverse btn-large btn-primary', 'escape' => false, 'id' => '_addProduct')); ?>
     </div>
   </div>
 </div>

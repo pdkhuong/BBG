@@ -47,6 +47,9 @@
         <li>
             <a href="http://dev.ucm.com/?m[0]=config&amp;p[0]=config_admin"><i class="fa fa-cogs"></i>                Settings            </a>
         </li>
+      <li>
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Product', 'action' => 'index'))?>"><i class="fa fa-qrcode"></i>Products</a>
+      </li>
       <li class="">
         <a class="has_sub" href="#"><i class="fa fa-users"></i> <?php echo __("Users")?></a>
         <ul>
