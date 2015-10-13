@@ -21,6 +21,39 @@ class PurcheOrderController extends AppController {
     parent::afterFilter();
   }
 
+  /**
+   * list tat ca hoa don cua customer nao
+   * @param int $categoryId
+   *
+   */
+  public function index($customerId = 0) {
+    $dataList = array();
+    $category = array();
+    $conditions = array();
+    if ($categoryId && $categoryId != 24) {
+      $category = $this->TradeshowCategory->findById($categoryId);
+      $listCategory = $this->TradeshowCategory->getTreeList($categoryId);
+      $listCategoryId = array();
+      $listCategoryId[] = $categoryId;
+      if ($listCategory) {
+        foreach ($listCategory as $category1) {
+          if (isset($category1->id)) {
+            $listCategoryId[] = $category1->id;
+          }
+        }
+      }
+      $strCategoryId = implode(",", $listCategoryId);
+      $conditions[] = "TradeshowProduct.category_id IN ($strCategoryId)";
+    }
+    $dataList = $this->TradeshowProduct->find('all', array('conditions' => $conditions));
+    //echo "<pre>";print_r($dataList); die();
+    $this->set('dataList', $dataList);
+    $this->set('category', $category);
+    $listCategories = $this->TradeshowCategory->getTreeList();
+
+    $this->set("listCategories", $listCategories);
+  }
+
   public function edit($id = 0, $categoryId = 0, $shopId = 1) {
     //get attribute
     /* $attrs = $this->TradeshowAttribute->find("all", array(
@@ -208,34 +241,6 @@ class PurcheOrderController extends AppController {
     $this->TradeshowProduct->deleteLogic($id);
 
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
-  }
-
-  public function index($categoryId = 0) {
-    $dataList = array();
-    $category = array();
-    $conditions = array();
-    if ($categoryId && $categoryId != 24) {
-      $category = $this->TradeshowCategory->findById($categoryId);
-      $listCategory = $this->TradeshowCategory->getTreeList($categoryId);
-      $listCategoryId = array();
-      $listCategoryId[] = $categoryId;
-      if ($listCategory) {
-        foreach ($listCategory as $category1) {
-          if (isset($category1->id)) {
-            $listCategoryId[] = $category1->id;
-          }
-        }
-      }
-      $strCategoryId = implode(",", $listCategoryId);
-      $conditions[] = "TradeshowProduct.category_id IN ($strCategoryId)";
-    }
-    $dataList = $this->TradeshowProduct->find('all', array('conditions' => $conditions));
-    //echo "<pre>";print_r($dataList); die();
-    $this->set('dataList', $dataList);
-    $this->set('category', $category);
-    $listCategories = $this->TradeshowCategory->getTreeList();
-
-    $this->set("listCategories", $listCategories);
   }
 
   public function index2() {

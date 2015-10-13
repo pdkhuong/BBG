@@ -1,16 +1,15 @@
 <?php
 
-class EventController extends AppController {
+class ProductController extends AppController {
 
   var $uses = array(
-    'TradeshowEventShop',
-    'TradeshowProduct',
-    'TradeshowEventProduct'
+    'Product',
+    'ProductUnit'
   );
 
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->modelClass = 'TradeshowEvent';
+    $this->modelClass = 'Product';
   }
 
   function beforeRender() {
@@ -22,38 +21,18 @@ class EventController extends AppController {
   }
 
   public function edit($id = 0) {
-    if (empty($this->request->data)) {//show on edit
-      $this->request->data = $this->TradeshowEvent->findById($id);
-      if ($this->request->data) {
-        $this->request->data['TradeshowEvent']['from_date'] = $this->_formatDate($this->request->data['TradeshowEvent']['from_date'], 'Y-m-d');
-        $this->request->data['TradeshowEvent']['to_date'] = $this->_formatDate($this->request->data['TradeshowEvent']['to_date'], 'Y-m-d');
-      }
+    $listUnit = Hash::combine($this->ProductUnit->find('all'), '{n}.ProductUnit.id', '{n}.ProductUnit.name');
+    $this->set('listUnit', $listUnit);
+    if (empty($this->request->data)) {
+      $this->request->data = $this->Product->findById($id);
     } else {//save
-      $this->request->data['TradeshowEvent']['status'] = EVENT_STATUS_NEW;
-      if ($this->request->data['TradeshowEvent']['txt_from_date']) {
-        $this->request->data['TradeshowEvent']['from_date'] = $this->_formatDate($this->request->data['TradeshowEvent']['txt_from_date'], 'Y-m-d H:i:s');
-      }
-      if ($this->request->data['TradeshowEvent']['txt_to_date']) {
-        $this->request->data['TradeshowEvent']['to_date'] = $this->_formatDate($this->request->data['TradeshowEvent']['txt_to_date'], 'Y-m-d H:i:s');
-      }
-      $this->TradeshowEvent->set($this->request->data);
-      if ($this->TradeshowEvent->save()) {
-        //save event_shop
-        try {
-          $eventId = $this->TradeshowEvent->getID();
-          $shopId = SHOP_DEFAULT_ID;
-          $eventShopDb = $this->TradeshowEventShop->findByEventIdAndShopId($eventId, $shopId);
-          if (!$eventShopDb) {
-            $eventShopData = array('event_id' => $eventId, 'shop_id' => SHOP_DEFAULT_ID);
-            $this->TradeshowEventShop->save($eventShopData, false);
-          }
-        } catch (Exception $ex) {
-
-        }
+      $this->Product->set($this->request->data);
+      if ($this->Product->save()) {
         //end save event shop
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
         return $this->redirect(Router::url(array('action' => 'index')));
       } else {
+        //print_r($this->Product->validationErrors);
         $this->Session->setFlash(__('Unable to save your data.'), 'flash/error');
       }
     }
@@ -70,21 +49,9 @@ class EventController extends AppController {
   }
 
   public function index() {
-    $condition = array();
-    $condition['TradeshowEvent.deleted_time'] = null;
-
-    $this->set('displayPaging', true);
-    $this->Paginator->settings = array(
-      'conditions' => $condition,
-      'limit' => 10
-    );
-    $dataList = $this->Paginator->paginate('TradeshowEvent');
-    if ($dataList) {
-      foreach ($dataList as $key => $data) {
-        $dataList[$key]['TradeshowEvent']['from_date'] = $this->_formatDate($data['TradeshowEvent']['from_date'], 'Y-m-d');
-        $dataList[$key]['TradeshowEvent']['to_date'] = $this->_formatDate($data['TradeshowEvent']['to_date'], 'Y-m-d');
-      }
-    }
+    $conditions = array();
+    $conditions['Product.deleted_time'] = null;
+    $dataList = $this->Product->find('all', array('conditions' => $conditions));
     $this->set('dataList', $dataList);
   }
 
