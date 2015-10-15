@@ -24,7 +24,7 @@
       'bootstrap.min',
       'font-awesome.min',
       'main',
-      'theme',
+      //'theme',
       'radio-checkbox',
       'jquery.ui',
       'sfinput',
@@ -34,7 +34,7 @@
     echo $this->fetch('css');
 
     echo $this->Html->script(array(
-      'libs/jquery-1.10.2.min',
+      'libs/jquery-1.11.3.min',
       'libs/jquery-ui.min',
       'libs/bootstrap.min',
       'libs/jquery.tmpl.min',

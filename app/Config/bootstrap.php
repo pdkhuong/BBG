@@ -94,17 +94,6 @@ Configure::write('Dispatcher.filters', array(
  * Configures default file logging options
  */
 App::uses('CakeLog', 'Log');
-//CakeLog::config('debug', array(
-//  'engine' => 'File',
-//  'types' => array('notice', 'info', 'debug'),
-//  'file' => 'debug',
-//));
-//CakeLog::config('error', array(
-//  'engine' => 'File',
-//  'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-//  'file' => 'error',
-//));
-
 /*
   Load the plugin
  */
@@ -113,18 +102,7 @@ CakePlugin::load('DebugKit');
 CakePlugin::load('Blocks', array('bootstrap' => TRUE));
 CakePlugin::load('MultiLanguage', array('bootstrap' => TRUE, 'routes' => TRUE));
 CakePlugin::load('File', array('bootstrap' => TRUE, 'routes' => TRUE));
-//CakePlugin::load('EmailTemplate', array('bootstrap' => TRUE, 'routes' => TRUE));
 CakePlugin::load('User', array('bootstrap' => TRUE, 'routes' => TRUE));
-//CakePlugin::load('Questionnaire', array('bootstrap' => TRUE, 'routes' => TRUE));
-//CakePlugin::load('Revision');
-//CakePlugin::load('RequestLog', array('bootstrap' => TRUE, 'routes' => TRUE));
-//CakePlugin::load('DBlogger', array('bootstrap' => false, 'routes' => true));
-//CakeLog::config('default', array(
-//  'engine' => 'DBlogger.DatabaseLog',
-//  'types' => array('emergency', 'alert', 'critical', 'error', 'warning', 'notice')
-//        )
-//);
-//CakePlugin::load('UnitTest', array('bootstrap' => true, 'routes' => true));
 
 /*
  * Config User url access rule
@@ -181,33 +159,14 @@ Configure::write('USER_EXCLUDE_URL_REGEX', array(
  */
 Configure::write('AppDateFormat', 'ymd');
 
-define("ATRIBUTE_TYPE_PLAIN_TEXT", 1);
-define("ATRIBUTE_TYPE_RICH_TEXT", 2);
-define("ATRIBUTE_TYPE_IMAGE", 3);
-define("ATRIBUTE_TYPE_VIDEO", 4);
-define("ATRIBUTE_TYPE_GALLERY", 5);
-define("ATRIBUTE_TYPE_DOCUMENT", 6);
-
-
-Configure::write('FILE_PLUGIN_CONFIG', array(
-  'thumbnail' => array(
-    'extensions' => array('png', 'jpg', 'gif'),
-    'listItemViewType' => 'thumbnail',
-    'selectedItemViewType' => 'thumbnail',
-    'canUpload' => TRUE,
-    'limitFileNumber' => 1
-  ),
-  'files' => array(
-    'extensions' => array('png', 'jpg', 'gif', 'pdf', 'mp4'),
-    'listItemViewType' => 'name',
-    'selectedItemViewType' => 'name',
-    'canUpload' => TRUE,
-    'limitFileNumber' => 1
-  ),
-));
 
 //HTTP Access
 define('SF_HTTP_ACCESS_USER', '');
 define('SF_HTTP_ACCESS_PASS', '');
+
+Configure::write('SHIP_TYPE', array(
+  1 => 'Truck',
+  2 => 'POS'
+));
 
 include_once(__DIR__ . '/functions.php');

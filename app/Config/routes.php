@@ -30,7 +30,7 @@
 Router::connect('/', array('controller' => 'Dashboard', 'action' => 'display'));
 
 Router::connect('/purche-order', array('controller' => 'PurcheOrder', 'action' => 'index'));
-Router::connect('/evepurche-ordernts/:action/*', array('controller' => 'PurcheOrder'));
+Router::connect('/purche-order/:action/*', array('controller' => 'PurcheOrder'));
 
 Router::connect('/products', array('controller' => 'Product', 'action' => 'index'));
 Router::connect('/products/:id', array('controller' => 'Product', 'action' => 'index'), array('pass' => array('id'), 'id' => '[0-9]+'));

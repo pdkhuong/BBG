@@ -3,14 +3,14 @@
 class PurcheOrderController extends AppController {
 
   var $uses = array(
-    'TradeshowCategory',
-    'TradeshowAttribute',
-    'TradeshowCategoryAttribute',
-    'TradeshowProductAttribute');
+    'Product',
+    'PurcheOrder',
+    'PurcheOrderProduct'
+  );
 
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->modelClass = 'TradeshowProduct';
+    $this->modelClass = 'PurcheOrder';
   }
 
   function beforeRender() {
@@ -30,31 +30,40 @@ class PurcheOrderController extends AppController {
     $dataList = array();
     $category = array();
     $conditions = array();
-    if ($categoryId && $categoryId != 24) {
-      $category = $this->TradeshowCategory->findById($categoryId);
-      $listCategory = $this->TradeshowCategory->getTreeList($categoryId);
-      $listCategoryId = array();
-      $listCategoryId[] = $categoryId;
-      if ($listCategory) {
-        foreach ($listCategory as $category1) {
-          if (isset($category1->id)) {
-            $listCategoryId[] = $category1->id;
-          }
-        }
-      }
-      $strCategoryId = implode(",", $listCategoryId);
-      $conditions[] = "TradeshowProduct.category_id IN ($strCategoryId)";
+    if ($customerId) {
+      $purcheOrderList = $this->PurcheOrder->find("all", array(
+        'conditions' => array(
+          'customer_id' => $customerId
+        )
+      ));
     }
-    $dataList = $this->TradeshowProduct->find('all', array('conditions' => $conditions));
-    //echo "<pre>";print_r($dataList); die();
     $this->set('dataList', $dataList);
-    $this->set('category', $category);
-    $listCategories = $this->TradeshowCategory->getTreeList();
-
-    $this->set("listCategories", $listCategories);
   }
-
-  public function edit($id = 0, $categoryId = 0, $shopId = 1) {
+  public function edit($id=0){
+    $shipType = Configure::read("SHIP_TYPE");
+    $this->set('shipType', $shipType);
+    $errorObj = array();
+    if (empty($this->request->data)) {
+      $this->request->data = $this->PurcheOrder->findById($id);
+    } else {
+      print_r($this->request->data);die();
+      $this->PurcheOrder->set($this->request->data);
+      if ($this->PurcheOrder->save()) {
+        //end save event shop
+        $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
+        return $this->redirect(Router::url(array('action' => 'index')));
+      } else {
+        $errorObj = $this->PurcheOrder->validationErrors;
+        $this->Session->setFlash(__('Unable to save your data.'), 'flash/error');
+      }
+    }
+    $this->set('errorObj', $errorObj);
+    $listProduct = $this->Product->find("all");
+    $this->set('listProduct', $listProduct);
+    //echo "<pre>"; print_r($this->request->data);
+    //echo "<pre>"; print_r($listProduct);die();
+  }
+  public function edit2($id = 0, $categoryId = 0, $shopId = 1) {
     //get attribute
     /* $attrs = $this->TradeshowAttribute->find("all", array(
       'conditions' =>
