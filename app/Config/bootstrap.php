@@ -169,4 +169,5 @@ Configure::write('SHIP_TYPE', array(
   2 => 'POS'
 ));
 
+define("ITEM_PER_PAGE", 15);
 include_once(__DIR__ . '/functions.php');
