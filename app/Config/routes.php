@@ -29,21 +29,17 @@
  */
 Router::connect('/', array('controller' => 'Dashboard', 'action' => 'display'));
 
-Router::connect('/purche-order', array('controller' => 'PurcheOrder', 'action' => 'index'));
-Router::connect('/evepurche-ordernts/:action/*', array('controller' => 'PurcheOrder'));
+Router::connect('/purchase-order', array('controller' => 'PurchaseOrder', 'action' => 'index'));
+Router::connect('/purchase-order/:action/*', array('controller' => 'PurchaseOrder'));
 
 Router::connect('/products', array('controller' => 'Product', 'action' => 'index'));
-Router::connect('/products/:id', array('controller' => 'Product', 'action' => 'index'), array('pass' => array('id'), 'id' => '[0-9]+'));
 Router::connect('/products/:action/*', array('controller' => 'Product'));
-Router::connect('/categories', array('controller' => 'Category', 'action' => 'index'));
-Router::connect('/categories/:id', array('controller' => 'Category', 'action' => 'index'), array('pass' => array('id'), 'id' => '[0-9]+'));
-Router::connect('/categories/:action/*', array('controller' => 'Category'));
-Router::connect('/attributes', array('controller' => 'Attribute', 'action' => 'index'));
-Router::connect('/attributes/:action/*', array('controller' => 'Attribute'));
 
-Router::connect('/api/products/:action/*', array('controller' => 'AppApiProduct'));
-Router::connect('/api/templates/:action/*', array('controller' => 'AppApiTemplate'));
-Router::connect('/app-download', array('controller' => 'AppDownload', 'action' => 'index'));
+Router::connect('/settings', array('controller' => 'Settings', 'action' => 'index'));
+Router::connect('/settings/:action/*', array('controller' => 'Settings'));
+
+Router::connect('/costing', array('controller' => 'Costing', 'action' => 'index'));
+Router::connect('/settings/:action/*', array('controller' => 'Costing'));
 
 CakePlugin::routes();
 

@@ -7,17 +7,18 @@
 </h3>
 
 <hr />
-<div class="posts form">
-  <?php
+<div class="well form-horizontal page-body posts form">
+<?php
   echo $this->Form->create('Product', array(
     'novalidate' => true,
     'inputDefaults' => array(
       'div' => 'form-group',
-      'wrapInput' => false,
+      'label' => array(
+        'class' => 'col col-md-3 control-label text-left'
+      ),
+      'wrapInput' => 'col col-md-9',
       'class' => 'form-control'
     ),
-    'class' => 'well',
-    'type' => 'file'
   ));
   ?>
 
@@ -34,6 +35,7 @@
   );
   ?>
   <?php echo $this->Form->input('price', array('label' => array('text' => __('Price')))) ?>
+
   <?php
   echo $this->Form->input('id', array('type' => 'hidden'));
   echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-large btn-primary'));
