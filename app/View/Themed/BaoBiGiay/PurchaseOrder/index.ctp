@@ -14,40 +14,51 @@
 echo $this->Form->create('PurchaseOder', array(
   'novalidate' => true,
   'inputDefaults' => array(
+    'div' => 'form-group',
+    'label' => array(
+      'class' => 'col col-md-2 control-label text-left'
+    ),
+    'wrapInput' => 'col col-md-7',
     'class' => 'form-control'
   ),
   'type' => 'get'
 ));
 ?>
-<div class="row">
-  <div class="col-md-12">
+<div class="well form-horizontal page-body posts form">
     <div class="form-group">
+      <label class="col col-md-2 control-label text-left"><?php echo __('Order date From') ?></label>
       <div class="col col-md-3">
-        <div class="row">
-          <?php
-          echo $this->Form->input('customer_id', array(
-              'label' => false,
-              'type' => 'select',
-              //'options' => $contentTypes,
-              //'selected' => $type,
-              'empty' => __('All')
-            )
-          );
-          ?>
+        <div class='input-group date _datetime_picker' data-date-format="YYYY-MM-DD">
+          <input value="<?php echo $orderDateFrom?>" name="order_date_from" type='text' class="form-control" readonly="readonly"/>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
-      <div class="col col-md-8">
-        <?php echo $this->Form->input('order_no', array('label' => false, 'value' => $orderNo)) ?>
-      </div>
-      <div class="col col-md-1">
-        <div class="row">
-          <?php echo $this->Form->button(__('Search'), array('class' => 'btn btn-inverse col-sm-12', 'type' => 'submit', 'escape' => false)); ?>
+
+      <label class="col col-md-1 control-label text-left"><?php echo __('To') ?></label>
+      <div class="col col-md-3">
+        <div class='input-group date _datetime_picker' data-date-format="YYYY-MM-DD">
+          <input value="<?php echo $orderDateTo?>" name="order_date_to" type='text' class="form-control" readonly="readonly"/>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
     </div>
-  </div>
+
+  <?php
+  echo $this->Form->input('customer_id', array(
+      'options' => array(),
+      'selected'=>$customerId,
+      'empty' => __("Please select ..."),
+      'text' => __("Customer"),
+      array('require'=>true, 'allowEmpty'=>false),
+    )
+  );
+  ?>
+  <?php echo $this->Form->input('order_no', array('label' => array('text' => __('Order No.')), 'value' => $orderNo)) ?>
+  <?php echo $this->Form->submit(__('Search'), array('class' => 'btn btn-large btn-primary', 'id' => "_submit"));?>
 </div>
 <?php echo $this->Form->end(); ?>
+
+
 <div class="page-body">
   <div class="row">
     <div class="col-md-12">
@@ -79,8 +90,8 @@ echo $this->Form->create('PurchaseOder', array(
                   <td><?php echo $data['PurchaseOrder']['buyer_name']; ?></td>
                   <td><?php echo $data['PurchaseOrder']['term']; ?></td>
                   <td><?php echo $data['PurchaseOrder']['ship_via']; ?></td>
-                  <td><?php echo $data['PurchaseOrder']['order_date']; ?></td>
-                  <td><?php echo $data['PurchaseOrder']['received_date']; ?></td>
+                  <td><?php echo reformatDate($data['PurchaseOrder']['order_date']); ?></td>
+                  <td><?php echo reformatDate($data['PurchaseOrder']['received_date']); ?></td>
                   <td>
                     <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit')) . '/' . $data['PurchaseOrder']['id'], array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false)) ?>
                     <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete')) . '/' . $data['PurchaseOrder']['id'], array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false), __('Are you sure you want to delete #%s?', $data['PurchaseOrder']['id'])) ?>
@@ -101,3 +112,8 @@ echo $this->Form->create('PurchaseOder', array(
   </div>
 </div>
 <?php
+echo $this->Html->css('bootstrap-datetimepicker.css');
+echo $this->Html->script('libs/moment.js');
+echo $this->Html->script('libs/bootstrap-datetimepicker.js');
+echo $this->Html->script('costing.js');
+?>

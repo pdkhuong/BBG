@@ -13,6 +13,12 @@ var PurchaseOrder = {
         useCurrent: false
       });
     }
+    if($('._datetime_picker').size()){
+      $('._datetime_picker').datetimepicker({
+        pickTime: false,
+        useCurrent: false
+      });
+    }
 
     var bodyElement = $("body");
     //luc load page

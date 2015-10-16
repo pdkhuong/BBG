@@ -56,4 +56,12 @@ class PurchaseOrderProduct extends AppModel {
       ),
     ),
   );
+  public function deleteByPurchaseOderId($purchaseOrderId){
+    $query = "DELETE FROM {$this->useTable} WHERE purchase_order_id={$purchaseOrderId}";
+    $this->query($query);
+  }
+  public function deleteByProductrId($productId){
+    $query = "DELETE FROM {$this->useTable} WHERE product_id={$productId}";
+    $this->query($query);
+  }
 }

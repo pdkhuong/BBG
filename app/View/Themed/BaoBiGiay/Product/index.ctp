@@ -1,9 +1,3 @@
-<?php
-$this->HTML->script('libs/jquery.dataTables.min', array('inline' => false));
-$this->HTML->script('libs/dataTables.bootstrap', array('inline' => false));
-$this->HTML->script('datatables.js', array('inline' => false));
-$this->HTML->css('dataTables.bootstrap', array('inline' => false));
-?>
 <div class="page-title" id="page-titl">
   <div class="row">
     <div class="col-md-9">
@@ -21,7 +15,7 @@ $this->HTML->css('dataTables.bootstrap', array('inline' => false));
   <div class="row">
     <div class="col-md-12">
       <div class='table-responsive'>
-        <table cellpadding='0' cellspacing='0' class='table items-table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
+        <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
           <thead>
             <tr>
               <th width="10%"><?php echo __('No.') ?></th>
@@ -54,5 +48,10 @@ $this->HTML->css('dataTables.bootstrap', array('inline' => false));
         </table>
       </div>
     </div>
+    <?php if ($this->Paginator->param('pageCount') > 1): ?>
+      <div class="col-md-12">
+        <?php echo $this->Paginator->pagination(array('ul' => 'pagination')); ?>
+      </div>
+    <?php endif; ?>
   </div>
 </div>

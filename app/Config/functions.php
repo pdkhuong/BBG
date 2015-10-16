@@ -37,3 +37,6 @@ function convertPixel2MM($pixel, $dpi = 72) {
   $inchs = $pixel / $dpi;
   return $inchs * 25.4;
 }
+function reformatDate($date, $format = 'Y-m-d'){
+  return date($format, strtotime($date));
+}

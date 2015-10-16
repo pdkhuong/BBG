@@ -85,8 +85,7 @@ class PurchaseOrderController extends AppController {
 
   private function _savePurchaseOrderProduct($purchaseOrderId, $addedProducts){
     if($addedProducts){
-      $query = "DELETE FROM {$this->PurchaseOrderProduct->useTable} WHERE purchase_order_id={$purchaseOrderId}";
-      $this->PurchaseOrderProduct->query($query);
+      $this->PurchaseOrderProduct->deleteByPurchaseOderId($purchaseOrderId);
       foreach($addedProducts as $productId => $data){
         $insertData = array();
         $insertData['purchase_order_id'] = $purchaseOrderId;
@@ -100,12 +99,9 @@ class PurchaseOrderController extends AppController {
 
 
   public function delete($id) {
-    if ($this->TradeshowProduct->isInUsed($id)) {
-      $this->Session->setFlash(__('Unable to delete your data. It\'s in used'), 'flash/error');
-      return $this->redirect($this->referer());
-    }
-    $this->TradeshowProduct->deleteLogic($id);
-
+    $this->PurchaseOrderProduct->deleteByPurchaseOderId($id);
+    $this->PurchaseOrder->deleteLogic($id);
+    $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
   public function index() {
@@ -113,24 +109,36 @@ class PurchaseOrderController extends AppController {
     $orderNo = isset($_GET['order_no']) ? strval($_GET['order_no']) : '';
     $orderDateFrom = isset($_GET['order_date_from']) ? strval($_GET['order_date_from']) : '';
     $orderDateTo = isset($_GET['order_date_to']) ? strval($_GET['order_date_to']) : '';
-    $receivedDateFrom = isset($_GET['received_date_from']) ? strval($_GET['received_date_from']) : '';
-    $receivedDateTo = isset($_GET['received_date_to']) ? strval($_GET['received_date_to']) : '';
+    //$receivedDateFrom = isset($_GET['received_date_from']) ? strval($_GET['received_date_from']) : '';
+    //$receivedDateTo = isset($_GET['received_date_to']) ? strval($_GET['received_date_to']) : '';
 
     $this->set('customerId', $customerId);
     $this->set('orderNo', $orderNo);
     $this->set('orderDateFrom', $orderDateFrom);
     $this->set('orderDateTo', $orderDateTo);
-    $this->set('receivedDateFrom', $receivedDateFrom);
-    $this->set('receivedDateTo', $receivedDateTo);
+    //$this->set('receivedDateFrom', $receivedDateFrom);
+    //$this->set('receivedDateTo', $receivedDateTo);
 
-    $condition = array();
-    $condition['PurchaseOrder.deleted_time'] = null;
+    $conditions = array();
+    $conditions['PurchaseOrder.deleted_time'] = null;
+    if($customerId){
+      $conditions['PurchaseOrder.customer_id'] = $customerId;
+    }
+    if($orderNo){
+      $conditions[] = "PurchaseOrder.order_no LIKE  '%{$orderNo}%'";
+    }
+    if($orderDateFrom){
+      $conditions[] = "PurchaseOrder.order_date >= date('{$orderDateFrom}')";
+    }
+    if($orderDateTo){
+      $conditions[] = "PurchaseOrder.order_date <= date('{$orderDateTo}')";
+    }
     $this->set('displayPaging', true);
     $page = isset($this->request->params['paging']['PurchaseOrder']['page']) ? intval($this->request->params['paging']['PurchaseOrder']['page']) : 1;
 
     $offset = ($page - 1) * ITEM_PER_PAGE;
     $this->Paginator->settings = array(
-      'conditions' => $condition,
+      'conditions' => $conditions,
       'limit' => ITEM_PER_PAGE,
       'offset' => $offset,
     );
@@ -138,7 +146,7 @@ class PurchaseOrderController extends AppController {
       $dataList = $this->Paginator->paginate('PurchaseOrder');
     }catch(Exception $e){
       $dataList = array();
-      //$this->redirect(Router::url(array('action' => 'index')) . '?code='.$code.'&type='.$type);
+      $this->redirect(Router::url(array('action' => 'index')) . '?customer_id='.$customerId.'&order_no='.$orderNo.'&order_date_from='.$orderDateFrom.'&order_date_to='.$orderDateTo);
     }
     //echo "<pre>"; print_r($dataList); die();
     $this->set('dataList', $dataList);

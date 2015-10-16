@@ -39,6 +39,7 @@ class ProductController extends AppController {
   }
 
   public function delete($id) {
+    $this->PurchaseOrderProduct->deleteByProductId($id);
     $this->Product->deleteLogic($id);
     $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
     return $this->redirect(Router::url(array('action' => 'index')));
@@ -47,7 +48,21 @@ class ProductController extends AppController {
   public function index() {
     $conditions = array();
     $conditions['Product.deleted_time'] = null;
-    $dataList = $this->Product->find('all', array('conditions' => $conditions));
+    $this->set('displayPaging', true);
+    $page = isset($this->request->params['paging']['Product']['page']) ? intval($this->request->params['paging']['Product']['page']) : 1;
+
+    $offset = ($page - 1) * ITEM_PER_PAGE;
+    $this->Paginator->settings = array(
+      'conditions' => $conditions,
+      'limit' => ITEM_PER_PAGE,
+      'offset' => $offset,
+    );
+    try{
+      $dataList = $this->Paginator->paginate('Product');
+    }catch(Exception $e){
+      $dataList = array();
+      $this->redirect(Router::url(array('action' => 'index')));
+    }
     $this->set('dataList', $dataList);
   }
 

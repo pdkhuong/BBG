@@ -40,10 +40,10 @@ echo $this->Form->create('PurchaseOrder', array(
   $isErrorReceivedDate = isset($errorObj['received_date']) ? TRUE : FALSE;
   ?>
   <div class="form-group required <?php if($isErrorOrderDate) echo 'has-error error' ?>">
-    <label for="txt_order_date" class="col col-md-3 control-label text-left"><?php echo __('Order date') ?></label>
+    <label class="col col-md-3 control-label text-left"><?php echo __('Order date') ?></label>
     <div class="col col-md-3">
-      <div class='input-group date' id='div_order_date' data-date-format="YYYY-MM-DD">
-        <input value="<?php echo isset($this->data['PurchaseOrder']['order_date']) && $this->data['PurchaseOrder']['order_date'] ? date('Y-m-d', strtotime($this->data['PurchaseOrder']['order_date'])) : '' ?>" name="data[PurchaseOrder][order_date]" id="txt_from_date" type='text' class="form-control" readonly="readonly"/>
+      <div class='input-group date _datetime_picker' data-date-format="YYYY-MM-DD">
+        <input value="<?php echo isset($this->data['PurchaseOrder']['order_date']) && $this->data['PurchaseOrder']['order_date'] ? reformatDate($this->data['PurchaseOrder']['order_date']) : '' ?>" name="data[PurchaseOrder][order_date]" type='text' class="form-control" readonly="readonly"/>
         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
       </div>
     </div>
@@ -55,10 +55,10 @@ echo $this->Form->create('PurchaseOrder', array(
   </div>
 
   <div class="form-group required <?php if($isErrorReceivedDate) echo 'has-error error' ?>">
-    <label for="txt_received_date" class="col col-md-3 control-label text-left"><?php echo __('Received date') ?></label>
+    <label class="col col-md-3 control-label text-left"><?php echo __('Received date') ?></label>
     <div class="col col-md-3">
-      <div class='input-group date' id='div_received_date' data-date-format="YYYY-MM-DD">
-        <input value="<?php echo isset($this->data['PurchaseOrder']['received_date']) && $this->data['PurchaseOrder']['received_date'] ? date('Y-m-d', strtotime($this->data['PurchaseOrder']['received_date'])) : '' ?>" name="data[PurchaseOrder][received_date]" id="txt_from_date" type='text' class="form-control" readonly="readonly"/>
+      <div class='input-group date _datetime_picker' data-date-format="YYYY-MM-DD">
+        <input value="<?php echo isset($this->data['PurchaseOrder']['received_date']) && $this->data['PurchaseOrder']['received_date'] ? reformatDate($this->data['PurchaseOrder']['received_date']) : '' ?>" name="data[PurchaseOrder][received_date]" type='text' class="form-control" readonly="readonly"/>
         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
       </div>
     </div>
