@@ -6,7 +6,7 @@
       </h1>
     </div>
     <div class="col-md-3 text-right">
-      <?php echo $this->Html->link('<i class="fa fa-plus"></i> ' . __('Add'), Router::url(array('action' => 'edit')), array('class' => 'btn btn-inverse', 'escape' => false)); ?>
+      <?php echo $this->Html->link('<i class="fa fa-plus"></i> ' . __('Add'), Router::url(array('action' => 'edit')), array('class' => 'btn btn-inverse btn-large btn-primary', 'escape' => false)); ?>
     </div>
   </div>
 </div>
