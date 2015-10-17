@@ -51,11 +51,4 @@
 
   <?php echo $this->Form->end(); ?>
 
-  <div class="form-group">
-    <div class = 'col-sm-offset-3 col-sm-5'>
-      <small>
-            (*) <?= __("Leave password and password confirmation to blank if you don't want to change your password.") ?>
-      </small>
-    </div>
-  </div>
 </div>

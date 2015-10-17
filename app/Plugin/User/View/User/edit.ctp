@@ -1,8 +1,8 @@
 <h3>
   <? if (isset($this->data['UserModel']['id']) && $this->data['UserModel']['id'] > 0): ?>
-    <?= __('Edit') ?>: <?= $this->data['UserModel']['user_email'] ?>
+    <?= __('Edit User') ?>: <?= $this->data['UserModel']['user_email'] ?>
   <? else: ?>
-    <?= __('Add') ?>
+    <?= __('Add User') ?>
   <? endif; ?>
 </h3>
 
@@ -26,6 +26,7 @@
   <?= $this->Form->input('firstname', array('label' => 'Fist Name')) ?>
   <?= $this->Form->input('lastname', array('label' => 'Last Name')) ?>
   <?= $this->Form->input('user_status', array('label' => 'Status', 'options' => Configure::read('User.UserStatus'))) ?>
+  <?= $this->Form->input('role', array('label' => 'Role', 'options' => $roles)) ?>
   <?= $this->Form->input('password', array('label' => 'Password', 'autocomplete' => 'off')) ?>
 
   <?php

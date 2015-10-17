@@ -27,6 +27,7 @@ class UserController extends AppController
   }
 
   public function register(){
+    $this->redirect('/');
     if (empty($this->request->data)) {
       $this->request->data = NULL;
     } else {
@@ -65,11 +66,14 @@ class UserController extends AppController
     $this->set('data', $data);
   }
 
-  public function edit($id = 0)
-  {
-
+  public function edit($id = 0){
+    $this->set('roles', Hash::combine($this->UserRole->find('all'), '{n}.UserRole.id', '{n}.UserRole.name'));
     if (empty($this->request->data)) {
       $this->request->data = $this->UserModel->findById($id);
+      $roleAccess = $this->UserRoleAccess->findByUserId($id);
+      if (!empty($roleAccess)) {
+        $this->request->data['UserModel']['role'] = $roleAccess['UserRole']['id'];
+      }
     } else {
       if ($this->request->data['UserModel']['password']) {
         $wp_hasher = new PasswordHash(8, true);
@@ -79,7 +83,7 @@ class UserController extends AppController
       }
       $this->request->data['UserModel']['display_name'] = $this->request->data['UserModel']['firstname'].' '.$this->request->data['UserModel']['lastname'];
       if ($this->UserModel->save($this->request->data)) {
-        $this->UserModel->addRegisteredRole($this->UserModel->getId());
+        $this->UserModel->onlyOneRole($this->UserModel->getId(), $this->request->data['UserModel']['role']);
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
         return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'search')));
       }
@@ -187,7 +191,7 @@ class UserController extends AppController
   public function myProfile(){
     if ($this->loggedUser->User->id <= 0) {
       $this->Session->setFlash(__('Please login to continue'), 'flash/error');
-      $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'UserAccount', 'action' => 'login')));
+      $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'login')));
     }
 
     $loggedUserData = $this->UserModel->findById($this->loggedUser->User->id);

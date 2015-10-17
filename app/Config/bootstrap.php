@@ -117,16 +117,18 @@ Configure::write('USER_EXCLUDE_CONTROLLER', array(
       'MultiLanguageController' => array('change' => 1)
     ),
     'User' => array(
-      /*'UserAccountController' => array(
+      'UserController' => array(
         'register' => 1, 'logout' => 1, 'login' => 1, 'activate' => 1,
         'myProfile' => 1, 'forgotPassword' => 1, 'resetPassword' => 1,
         'profile' => 1,
       ),
-      'UserAdminController' => array('logout' => 1, 'login' => 1),*/
+      'UserAdminController' => array('logout' => 1, 'login' => 1),
     ),
   )
 ));
-
+Configure::write('USER_EXCLUDE_URL', array(
+  '/app-download'
+));
 /*
  * Only Controller is defined. Donot define action
  */
@@ -141,9 +143,6 @@ Configure::write('USER_EXCLUDE_PARENT_CONTROLLER', array(
   )
 ));
 
-Configure::write('USER_EXCLUDE_URL', array(
-  '/app-download'
-));
 
 Configure::write('USER_EXCLUDE_URL_REGEX', array(
   '/^\/multi-language\/change\/[a-z]{3}$/',
