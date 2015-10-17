@@ -39,5 +39,24 @@ class Vendor extends AppModel {
         'rule' => '/^[0-9]{10,11}$/i',
 		'message' => 'Please supply a valid fax number.'
     ),
+	'code' => array(
+      'size' => array(
+        'rule' => array(
+          0 => 'maxLength',
+          1 => 100,
+        ),
+        'message' => 'Please enter a text no larger than 100 characters long',
+        'allowEmpty' => false,
+      ),
+      'unique_code' => array(
+        'rule' => array(
+          0 => 'checkUnique',
+          1 => array(
+            0 => 'code',
+          ),
+        ),
+        'message' => 'Customer code already exists',
+      ),
+    ),
   );
 }

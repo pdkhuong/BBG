@@ -23,6 +23,7 @@ echo $this->Form->create('Vendor', array(
   ?>
 
   <?php echo $this->Form->input('name', array('label' => array('text' => __('Tên')))) ?>
+  <?php echo $this->Form->input('code', array('label' => array('text' => __('Code')))) ?>
   <?php echo $this->Form->input('email', array('label' => array('text' => __('Email')))) ?>
   <?php echo $this->Form->input('phone', array('label' => array('text' => __('Điện thoại')))) ?>
   <?php echo $this->Form->input('fax', array('label' => array('text' => __('Fax')))) ?>
