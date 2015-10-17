@@ -1,9 +1,3 @@
-<?php
-$this->HTML->script('libs/jquery.dataTables.min', array('inline' => false));
-$this->HTML->script('libs/dataTables.bootstrap', array('inline' => false));
-$this->HTML->script('datatables.js', array('inline' => false));
-$this->HTML->css('dataTables.bootstrap', array('inline' => false));
-?>
 <div class="page-title" id="page-titl">
   <div class="row">
     <div class="col-md-9">

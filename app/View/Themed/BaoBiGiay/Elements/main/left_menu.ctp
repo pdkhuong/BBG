@@ -7,7 +7,7 @@
               if($loggedUser->Admin->id>0){
                 echo __('Administrator');
               }elseif($loggedUser->User->id>0){
-                echo $loggedUser->User->username;
+                echo $loggedUser->User->display_name;
               }else{
                 echo __('Guest');
               }

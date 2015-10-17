@@ -27,13 +27,9 @@ define('USER_MIN_PASSWORD_LENGTH', 6);
 
 //define default role
 define('USER_ROLE_ANONYM', 1);
-define('USER_ROLE_REGISTER_DEFAUT', 5);//staff
-define('USER_ROLE_ADMIN', 3);
-define('USER_ROLE_CONTENT', 4);
-define('USER_ROLE_STAFF', 5);
-define('USER_ROLE_CUSTOMER', 6);
-define('USER_ROLE_LEAD', 7);
-define('USER_ROLE_VENDOR', 8);
+define('USER_ROLE_REGISTER_DEFAUT', 1);//staff
+define('USER_ROLE_ADMIN', 2);
+define('USER_ROLE_STAFF', 3);
 
 Configure::write('User.UserRole', array(USER_DATA_INCLUDE => __('Include'), USER_DATA_EXCLUDE => __('Exclude')));
 

@@ -29,17 +29,7 @@ class UserRoleRight extends AppModel {
         'message' => 'Please enter a valid number',
       ),
     ),
-    'is_owner' =>
-    array(
-      'notNull' =>
-      array(
-        'rule' => 'notEmpty',
-        'required' => true,
-        'message' => 'This field cannot be left blank',
-      ),
-    ),
   );
-
   public function getRightByRole($roleId) {
     if (!is_array($roleId)) {
       $roleId = array($roleId);
@@ -68,5 +58,4 @@ class UserRoleRight extends AppModel {
     }
     return array($rolesP, $rolesC);
   }
-
 }

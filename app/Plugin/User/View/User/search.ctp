@@ -37,7 +37,6 @@
 
           <td class='actions'>
             <?= $this->Html->link(__('Roles'), Router::url(array('plugin' => 'User', 'controller' => 'UserRoleAccess', 'action' => 'editRoles')) . '/' . $data['UserModel']['id'], array('class' => 'btn btn-default btn-xs btn-edit')) ?>
-            <?= $this->Html->link(__('Permission'), Router::url(array('plugin' => 'User', 'controller' => 'UserDataAccess', 'action' => 'index')) . '/' . $data['UserModel']['id'], array('class' => 'btn btn-default btn-xs btn-view')) ?>
             <?= $this->Html->link(__('Edit'), Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'edit')) . '/' . $data['UserModel']['id'], array('class' => 'btn btn-default btn-xs btn-edit')) ?>
             <?= $this->Form->postLink(__('Delete'), Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'delete')) . '/' . $data['UserModel']['id'], array('class' => 'btn btn-default btn-xs btn-delete'), __('Are you sure you want to delete #%s?', $data['UserModel']['id'])) ?>
           </td>

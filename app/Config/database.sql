@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.20)
 # Database: baobigiay
-# Generation Time: 2015-10-17 12:25:42 +0000
+# Generation Time: 2015-10-17 15:53:59 +0000
 # ************************************************************
 
 
@@ -361,12 +361,8 @@ LOCK TABLES `user_role` WRITE;
 
 INSERT INTO `user_role` (`id`, `name`, `description`, `created_time`, `deleted_time`, `updated_time`)
 VALUES
-	(3,'Administrator','Administrator',NULL,NULL,NULL),
-	(4,'Content Editor','Content Editor',NULL,NULL,NULL),
-	(5,'Staff','Staff',NULL,NULL,NULL),
-	(6,'Customer','customer',NULL,NULL,NULL),
-	(7,'Lead','lead',NULL,NULL,NULL),
-	(8,'Vendor','vendor',NULL,NULL,NULL);
+	(2,'Administrator','Administrator',NULL,NULL,NULL),
+	(3,'Staff','Staff',NULL,NULL,NULL);
 
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -396,10 +392,7 @@ LOCK TABLES `user_role_access` WRITE;
 
 INSERT INTO `user_role_access` (`id`, `role_id`, `user_id`, `created_time`, `deleted_time`, `updated_time`)
 VALUES
-	(1,5,3,'2015-10-11 05:04:35','2015-10-11 05:16:29','2015-10-11 05:04:35'),
-	(2,6,3,'2015-10-11 05:10:24','2015-10-11 05:16:29','2015-10-11 05:10:24'),
-	(3,4,3,'2015-10-11 05:16:00',NULL,'2015-10-11 05:16:00'),
-	(4,5,3,'2015-10-11 05:35:20',NULL,'2015-10-11 05:35:20');
+	(1,2,3,'2015-10-17 15:51:22',NULL,'2015-10-17 15:51:22');
 
 /*!40000 ALTER TABLE `user_role_access` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -430,12 +423,11 @@ LOCK TABLES `user_role_right` WRITE;
 
 INSERT INTO `user_role_right` (`id`, `role_id`, `plugin`, `controller`, `action`, `description`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(17,3,'System',NULL,NULL,NULL,NULL,NULL,NULL),
-	(18,4,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
-	(20,5,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
-	(21,6,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
-	(22,7,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL),
-	(23,8,NULL,'DashboardController',NULL,NULL,NULL,NULL,NULL);
+	(45,3,NULL,'DashboardController',NULL,NULL,'2015-10-17 16:59:27','2015-10-17 16:59:27',NULL),
+	(46,2,NULL,'DashboardController',NULL,NULL,'2015-10-17 16:59:31','2015-10-17 16:59:31',NULL),
+	(47,2,NULL,'ProductController',NULL,NULL,'2015-10-17 16:59:31','2015-10-17 16:59:31',NULL),
+	(48,2,NULL,'ProductOrderController',NULL,NULL,'2015-10-17 16:59:31','2015-10-17 16:59:31',NULL),
+	(49,2,'User','UserController',NULL,NULL,'2015-10-17 16:59:31','2015-10-17 16:59:31',NULL);
 
 /*!40000 ALTER TABLE `user_role_right` ENABLE KEYS */;
 UNLOCK TABLES;
