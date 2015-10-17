@@ -23,6 +23,15 @@
   ));
   ?>
     <?php echo $this->Form->input('order_no', array('label' => array('text' => __('Order No.')))) ?>
+    <?php
+    echo $this->Form->input('customer_id',
+      array('options' => $listCustomer,
+        'selected'=>NULL,
+        'label' => array('text' => __('Customer')),
+        'empty' => __("Please select customer..."),
+      )
+    );
+    ?>
     <?php echo $this->Form->input('buyer_name', array('label' => array('text' => __('Buyer Name')))) ?>
     <?php echo $this->Form->input('term', array('label' => array('text' => __('Terms')))) ?>
     <?php

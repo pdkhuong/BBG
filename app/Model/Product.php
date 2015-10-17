@@ -46,6 +46,16 @@ class Product extends AppModel {
         'allowEmpty' => false,
       )
     ),
+    'specification' => array(
+      'size' => array(
+        'rule' => array(
+          0 => 'maxLength',
+          1 => 200,
+        ),
+        'message' => 'Please enter a text no larger than 200 characters long',
+        'allowEmpty' => false,
+      )
+    ),
     'price' => array(
       'numeric' => array (
         'rule' => 'numeric',

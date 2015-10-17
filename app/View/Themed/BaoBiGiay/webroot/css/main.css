@@ -2520,3 +2520,4 @@ body.error .logo h1 {
 }
 form .required label:after {color: #b94a48;content: ' *';display:inline;}
 label.required:before {color: #b94a48;content: '* ';display:inline;}
+.modal-body .required label:after {color: #b94a48;content: ' *';display:inline;}

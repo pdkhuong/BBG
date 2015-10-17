@@ -4,14 +4,14 @@ App::uses('AppModel', 'Model');
 
 class PurchaseOrder extends AppModel {
 
-  var $useTable = 'Purchase_order';
+  var $useTable = 'purchase_order';
   var $multiLanguage = array ();
 
   public $belongsTo = array (
-    /*'Customer' => array (
+    'Customer' => array (
       'className' => 'Customer',
       'foreignKey' => 'customer_id',
-    ),*/
+    ),
   );
 
   public $actsAs = array('MultiLanguage.MultiLanguage');
