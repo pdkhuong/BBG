@@ -46,7 +46,7 @@ class CustomerController extends AppController {
     $this->set('displayPaging', true);
     $this->Paginator->settings = array(
       'conditions' => $condition,
-      'limit' => 10
+      'limit' => ITEM_PER_PAGE
     );
     $dataList = $this->Paginator->paginate('Customer');
     $this->set('dataList', $dataList);
