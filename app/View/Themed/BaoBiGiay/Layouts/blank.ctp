@@ -22,7 +22,10 @@
     <?php
     echo $this->Html->meta('icon');
 
-    echo $this->Html->css('bootstrap.min');
+    echo $this->Html->css(array(
+      //'bootstrap.min',
+      //'font-awesome.min',
+    ));
 
     echo $this->fetch('css');
 

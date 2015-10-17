@@ -1,18 +1,5 @@
 var PurchaseOrder = {
   init: function() {
-    if($('#div_order_date').size()){
-      $('#div_order_date').datetimepicker({
-        pickTime: false,
-        useCurrent: false,
-       // format:'YYYY/MM/DD hh:mm A'
-      });
-    }
-    if($('#div_received_date').size()){
-      $('#div_received_date').datetimepicker({
-        pickTime: false,
-        useCurrent: false
-      });
-    }
     if($('._datetime_picker').size()){
       $('._datetime_picker').datetimepicker({
         pickTime: false,
@@ -40,8 +27,105 @@ var PurchaseOrder = {
 
   },
 
+};
+var ProductOrder = {
+  init: function(){
+    this.addProductProgress()
+    this.removeProductProgress();
+    this.editProductProgress();
+    $('body').on('hidden.bs.modal', '.modal', function () {
+      //$(this).removeData('bs.modal');
+      ProductOrder.resetModalData()
+    });
+  },
+  resetModalData: function(){
+    $('#_progress_id').val('');
+    $('#_progress_order').val('');
+    $('#_progress_name').val('');
+    $('#_progress_location').val('');
+    $('#_progress_description').val('');
+    $('#_progress_msg').addClass("hidden");
+  },
+  addProductProgress: function(){
+    var bodyElement = $("body");
+    //bodyElement.on("click", "#_progress_ok", function(e) {
+    $('#_progress_ok').click(function(){
+      var errorMsg = '';
+
+      var progressOrder = $('#_progress_order').val();
+      var progressName = $('#_progress_name').val();
+      var progressId = $('#_progress_id').val();
+      var progressAtLocation = $('#_progress_location').val();
+      var progressDescription = $('#_progress_description').val();
+      if(!progressName){
+        errorMsg = 'Please input name';
+      }else if(!progressAtLocation){
+        errorMsg = 'Please input location';
+      }
+      if(errorMsg){
+        $('#_progress_msg').removeClass("hidden");
+        $('#_progress_msg').html(errorMsg);
+        return false;
+      }else{
+        var maxOrder = 0;
+        $('._progress_order').each(function(){
+          var itemOrder = parseInt($(this).html());
+          if(itemOrder > maxOrder){
+            maxOrder =  itemOrder;
+          }
+        });
+        var tableElement = $('#_bodyAddedProgress');
+        var mapData = {};
+        mapData.progress_name = progressName;
+        mapData.progress_location = progressAtLocation;
+        mapData.progress_description = progressDescription;
+        if(!progressId){
+          mapData.order = (maxOrder + 1);
+          mapData.id = Product.uniqId('pp_');
+          var html = $("#tableRowTemplateProductOrder").tmpl(mapData);
+          tableElement.append(html);
+        }else{
+          mapData.id = progressId;
+          mapData.order = progressOrder;
+          var html = $("#tableRowTemplateProductOrder").tmpl(mapData);
+          var selectedRow = $('#_row_'+progressId);
+          selectedRow.replaceWith(html);
+        }
 
 
+      }
+      ProductOrder.resetModalData();
+    });
+  },
+  removeProductProgress: function(){
+    var bodyElement = $("body");
+    bodyElement.on("click", "._removeProgress", function(e) {
+      var selectedRow = $(this).parent().parent();
+      selectedRow.remove();
+      var order = 0;
+      $('._progress_order').each(function(){
+        order ++;
+        $(this).html(order);
+      });
+    });
+  },
+  editProductProgress: function(){
+    var bodyElement = $("body");
+    bodyElement.on("click", "._editProgress", function(e) {
+      var progressId = $(this).attr('data-id');
+      var selectedRow = $(this).parent().parent();
+      var td = selectedRow.children('td');
+      var mapData = {};
+      if(td.length) {
+        $('#_progress_id').val(progressId);
+        $('#_progress_order').val(td[0].innerText);
+        $('#_progress_name').val(td[1].innerText);
+        $('#_progress_location').val(td[2].innerText);
+        $('#_progress_description').val(td[3].innerText);
+      }
+      $('#progressModal').modal();
+    });
+  }
 };
 var Product = {
   init:function(){
@@ -104,6 +188,16 @@ var Product = {
     }
     return isInt;
   },
+  uniqId: function(prefix){
+    var text = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for(var i=0; i < 10; i++){
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    var id = Math.round(new Date().getTime() + (Math.random() * 100))+text;
+    var ret = prefix ? prefix+id : id;
+    return ret;
+  },
   Round: function(value){
     value = Math.round(value * 1000);
     return value/1000;
@@ -136,4 +230,5 @@ var Product = {
 $(document).ready(function() {
   PurchaseOrder.init();
   Product.init();
+  ProductOrder.init();
 });

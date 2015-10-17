@@ -41,6 +41,9 @@ Router::connect('/settings/:action/*', array('controller' => 'Settings'));
 Router::connect('/costing', array('controller' => 'Costing', 'action' => 'index'));
 Router::connect('/settings/:action/*', array('controller' => 'Costing'));
 
+Router::connect('/product-order', array('controller' => 'ProductOrder', 'action' => 'index'));
+Router::connect('/product-order/:action/*', array('controller' => 'ProductOrder'));
+
 CakePlugin::routes();
 
 /**

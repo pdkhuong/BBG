@@ -35,6 +35,9 @@
       <li class="<?php if($this->params['controller'] == 'Product') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Product', 'action' => 'index'))?>"><i class="fa fa-shopping-cart"> </i>Products</a>
       </li>
+      <li class="<?php if($this->params['controller'] == 'ProductOrder') echo 'active'?>">
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'ProductOrder', 'action' => 'index'))?>"><i class="fa fa-tasks"> </i>Product Order</a>
+      </li>
       <li class="<?php if($this->params['controller'] == 'Costing') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Costing', 'action' => 'index'))?>"><i class="fa fa-dollar"> </i>Costing</a>
       </li>

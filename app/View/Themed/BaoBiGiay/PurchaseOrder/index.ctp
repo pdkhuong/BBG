@@ -45,7 +45,7 @@ echo $this->Form->create('PurchaseOder', array(
 
   <?php
   echo $this->Form->input('customer_id', array(
-      'options' => array(),
+      'options' => $listCustomer,
       'selected'=>$customerId,
       'empty' => __("Please select ..."),
       'text' => __("Customer"),
@@ -86,10 +86,10 @@ echo $this->Form->create('PurchaseOder', array(
                 ?>
                 <tr>
                   <td><?php echo $data['PurchaseOrder']['order_no']; ?></td>
-                  <td><?php echo $data['PurchaseOrder']['customer_id']; ?></td>
+                  <td><?php echo $data['Customer']['name']; ?></td>
                   <td><?php echo $data['PurchaseOrder']['buyer_name']; ?></td>
                   <td><?php echo $data['PurchaseOrder']['term']; ?></td>
-                  <td><?php echo $data['PurchaseOrder']['ship_via']; ?></td>
+                  <td><?php echo $shipType[$data['PurchaseOrder']['ship_via']]; ?></td>
                   <td><?php echo reformatDate($data['PurchaseOrder']['order_date']); ?></td>
                   <td><?php echo reformatDate($data['PurchaseOrder']['received_date']); ?></td>
                   <td>

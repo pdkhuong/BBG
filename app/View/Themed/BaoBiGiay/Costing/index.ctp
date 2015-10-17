@@ -1,9 +1,3 @@
-<?php
-$this->HTML->script('libs/jquery.dataTables.min', array('inline' => false));
-$this->HTML->script('libs/dataTables.bootstrap', array('inline' => false));
-$this->HTML->script('datatables.js', array('inline' => false));
-$this->HTML->css('dataTables.bootstrap', array('inline' => false));
-?>
 <div class="page-title" id="page-titl">
   <div class="row">
     <div class="col-md-9">
@@ -26,10 +20,9 @@ $this->HTML->css('dataTables.bootstrap', array('inline' => false));
             <tr>
               <th width="10%"><?php echo __('No.') ?></th>
               <th width="20%"><?php echo __('Name') ?></th>
-              <th width="15%"><?php echo __('Specification') ?></th>
-              <th width="15%"><?php echo __('Description') ?></th>
+              <th width="20%"><?php echo __('Description') ?></th>
               <th width="10%"><?php echo __('Unit') ?></th>
-              <th width="10%"><?php echo __('Price') ?></th>
+              <th width="20%"><?php echo __('Price') ?></th>
               <th width="20%"><?php echo __('Actions'); ?></th>
             </tr>
           </thead>
@@ -40,7 +33,6 @@ $this->HTML->css('dataTables.bootstrap', array('inline' => false));
               <tr>
                 <td><?php echo ($data['Product']['item_no']); ?></td>
                 <td><?php echo ($data['Product']['name']); ?></td>
-                <td><?php echo ($data['Product']['specification']); ?></td>
                 <td><?php echo ($data['Product']['description']); ?></td>
                 <td><?php echo ($data['ProductUnit']['name']); ?></td>
                 <td><?php echo ($data['Product']['price']); ?></td>
@@ -57,9 +49,9 @@ $this->HTML->css('dataTables.bootstrap', array('inline' => false));
       </div>
     </div>
     <?php if ($this->Paginator->param('pageCount') > 1): ?>
-    <div class="col-md-12">
-      <?php echo $this->Paginator->pagination(array('ul' => 'pagination')); ?>
-    </div>
+      <div class="col-md-12">
+        <?php echo $this->Paginator->pagination(array('ul' => 'pagination')); ?>
+      </div>
     <?php endif; ?>
   </div>
 </div>

@@ -10,11 +10,36 @@ class PdfLib extends FPDI {
   var $currentPage = 0;
 
   public function Header() {
-
+    $headerData = $this->getHeaderData();
+    if($headerData['title'] && $headerData['title']=='custom' && $headerData['string']){
+      $curPage = $this->getPage();
+      //if($curPage!=1){
+        $html   = $headerData['string'];
+        //$this->setY(20);
+        $this->writeHTML($html);
+        //$this->Line($this->getPageWidth()-50, 47, 50, 47);
+      //}
+    }
   }
 
   function Footer() {
-
+    /*$headerData = $this->getHeaderData();
+    if($headerData['title'] &&$headerData['title']=='custom' && $headerData['string']){
+      $this->Line($this->getPageWidth()-50, $this->getPageHeight()-50, 50, $this->getPageHeight()-50);
+      $this->SetY($this->getPageHeight()-30);
+      if($this->getFooterMargin()){
+        $this->setX($this->getFooterMargin()+10);
+      }
+      $html1 = '<label style="font-size:30px; text-align:left">Dr. Ing. h.c. F. Porsche AG</label>';
+      $html2 = '<label style="font-size:30px; text-align:right">'.$this->getAliasNumPage().'/'.$this->getAliasNbPages().'&nbsp;&nbsp;&nbsp;&nbsp;</label>';
+      $this->writeHTML($html1);
+      if($this->getFooterMargin()){
+        $this->setX($this->getPageWidth()-100);
+      }
+      $this->SetY($this->getPageHeight()-30);
+      $this->writeHTML($html2);
+    }
+    */
   }
 
   public function importPdf($file) {

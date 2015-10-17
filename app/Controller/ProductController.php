@@ -61,7 +61,7 @@ class ProductController extends AppController {
       $dataList = $this->Paginator->paginate('Product');
     }catch(Exception $e){
       $dataList = array();
-      $this->redirect(Router::url(array('action' => 'index')));
+      //$this->redirect(Router::url(array('action' => 'index')));
     }
     $this->set('dataList', $dataList);
   }

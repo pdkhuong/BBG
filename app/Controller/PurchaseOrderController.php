@@ -6,7 +6,8 @@ class PurchaseOrderController extends AppController {
     'Product',
     'ProductUnit',
     'PurchaseOrder',
-    'PurchaseOrderProduct'
+    'PurchaseOrderProduct',
+    'Customer'
   );
 
   public function beforeFilter() {
@@ -23,6 +24,7 @@ class PurchaseOrderController extends AppController {
   }
 
   public function edit($id=0){
+    $listCustomer = $this->Customer->find("list");
     $listProduct = Hash::combine($this->Product->find("all"), '{n}.Product.id', '{n}');
     $addedProducts = array();
     $shipType = Configure::read("SHIP_TYPE");
@@ -79,6 +81,7 @@ class PurchaseOrderController extends AppController {
     $this->set('errorObj', $errorObj);
     $this->set('addedProducts', $addedProducts);
     $this->set('listProduct', $listProduct);
+    $this->set("listCustomer", $listCustomer);
     //echo "<pre>"; print_r($addedProducts);die();
     //echo "<pre>"; print_r($listProduct);die();
   }
@@ -105,6 +108,7 @@ class PurchaseOrderController extends AppController {
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
   public function index() {
+    $listCustomer = $this->Customer->find("list");
     $customerId = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : 0;
     $orderNo = isset($_GET['order_no']) ? strval($_GET['order_no']) : '';
     $orderDateFrom = isset($_GET['order_date_from']) ? strval($_GET['order_date_from']) : '';
@@ -150,6 +154,9 @@ class PurchaseOrderController extends AppController {
     }
     //echo "<pre>"; print_r($dataList); die();
     $this->set('dataList', $dataList);
+    $this->set("listCustomer", $listCustomer);
+    $shipType = Configure::read("SHIP_TYPE");
+    $this->set('shipType', $shipType);
   }
 
 }
