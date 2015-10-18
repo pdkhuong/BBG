@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <h1><i class="fa fa-bars"></i>
-        <?php echo __('Khách hàng tiềm năng') ?>
+        <?php echo __('Leads') ?>
       </h1>
     </div>
     <div class="col-md-3 text-right">
@@ -18,11 +18,11 @@
         <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
           <thead>
             <tr>
-              <th width="25%"><?php echo __('Tên') ?></th>
+              <th width="25%"><?php echo __('Name') ?></th>
 			  <th width="20%"><?php echo __('Email') ?></th>
-			  <th width="10%"><?php echo __('Điện thoại') ?></th>
-			  <th width="35%"><?php echo __('Địa chỉ'); ?></th>
-			  <th width="20%"><?php echo __('Tác vụ'); ?></th>
+			  <th width="10%"><?php echo __('Phone') ?></th>
+			  <th width="35%"><?php echo __('Address'); ?></th>
+			  <th width="20%"><?php echo __('Actions'); ?></th>
             </tr>
           </thead>
           <tbody>

@@ -1,8 +1,8 @@
 <h3>
 	<?php if (isset($this->data['Lead']['id']) && $this->data['Lead']['id'] > 0): ?>
-		<?php echo __('Chỉnh sửa khách hàng tiềm năng') ?>: <?= $this->data['Lead']['name'] ?>
+		<?php echo __('Edit Lead') ?>: <?= $this->data['Lead']['name'] ?>
 		<?php else: ?>
-		<?php  echo __('Thêm khách hàng tiềm năng') ?>
+		<?php  echo __('Add Lead') ?>
 	<?php endif; ?>
 </h3>
 
@@ -22,13 +22,13 @@ echo $this->Form->create('Lead', array(
 ));
   ?>
 
-  <?php echo $this->Form->input('name', array('label' => array('text' => __('Tên')))) ?>
+  <?php echo $this->Form->input('name', array('label' => array('text' => __('Name')))) ?>
   <?php echo $this->Form->input('code', array('label' => array('text' => __('Code')))) ?>
   <?php echo $this->Form->input('email', array('label' => array('text' => __('Email')))) ?>
-  <?php echo $this->Form->input('phone', array('label' => array('text' => __('Điện thoại')))) ?>
+  <?php echo $this->Form->input('phone', array('label' => array('text' => __('Phone')))) ?>
   <?php echo $this->Form->input('fax', array('label' => array('text' => __('Fax')))) ?>
-  <?php echo $this->Form->input('address', array('label' => array('text' => __('Địa chỉ')))) ?>
-  <?php echo $this->Form->input('info', array('rows' => '5', 'type' => 'textarea', 'label' => array('text' => __('Thông tin')))) ?>
+  <?php echo $this->Form->input('address', array('label' => array('text' => __('Address')))) ?>
+  <?php echo $this->Form->input('info', array('rows' => '5', 'type' => 'textarea', 'label' => array('text' => __('Information')))) ?>
 
   <?php
   echo $this->Form->input('id', array('type' => 'hidden'));
