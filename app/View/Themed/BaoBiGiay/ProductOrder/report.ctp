@@ -4,57 +4,57 @@
     <td> Số <b><?php echo $data['ProductOrder']['order_no']?></b></td>
   </tr>
   <tr>
-    <td> Mã Khách hàng: <b><?php echo $data['Customer']['code']?></b></td>
+    <td>Mã Khách hàng: <b><?php echo $data['Customer']['code']?></b></td>
     <td></td>
   </tr>
   <tr>
-    <td> Mã Sản Phẩm: <b><?php echo $data['OutputProduct']['item_no']?></b></td>
-    <td> Tên sản phẩm <b><?php echo $data['OutputProduct']['name']?></b></td>
+    <td>Mã Sản Phẩm: <b><?php echo $data['OutputProduct']['item_no']?></b></td>
+    <td>Tên sản phẩm <b><?php echo $data['OutputProduct']['name']?></b></td>
   </tr>
   <tr>
-    <td> Qui cách sản phẩm: <b><?php echo $data['OutputProduct']['specification']?></b></td>
+    <td>Qui cách sản phẩm: <b><?php echo $data['OutputProduct']['specification']?></b></td>
     <td></td>
   </tr>
   <tr>
-    <td> Số lượng: <b><?php echo number_format($data['ProductOrder']['num_product'], 0, '.', '.')?>
+    <td>Số lượng: <b><?php echo number_format($data['ProductOrder']['num_product'], 0, '.', '.')?>
         (giá <?php echo number_format($data['OutputProduct']['price'], 2, ',', '.')?>vnđ)</b>
     </td>
-    <td> ĐVT: <b><?php echo $listUnit[$data['OutputProduct']['product_unit_id']]['name']?></b></td>
+    <td>ĐVT: <b><?php echo $listUnit[$data['OutputProduct']['product_unit_id']]['name']?></b></td>
   </tr>
   <tr>
-    <td> Ngày giao: <b><?php echo reformatDate($data['ProductOrder']['delivery_date'], 'd/m/Y')?></b></td>
-    <td> Nơi giao: <b><?php echo $data['ProductOrder']['delivery_location']?></b></td>
+    <td>Ngày giao: <b><?php echo reformatDate($data['ProductOrder']['delivery_date'], 'd/m/Y')?></b></td>
+    <td>Nơi giao: <b><?php echo $data['ProductOrder']['delivery_location']?></b></td>
   </tr>
   <tr>
-    <td> Số lượng cho phép chênh lệch: <b><?php echo $data['ProductOrder']['difference_percent']?>%</b></td>
+    <td>Số lượng cho phép chênh lệch: <b><?php echo $data['ProductOrder']['difference_percent']?>%</b></td>
     <td></td>
   </tr>
   <tr>
-    <td> <b>Yêu cầu giấy:</b></td>
+    <td><b>Yêu cầu giấy:</b></td>
     <td></td>
   </tr>
   <tr>
-    <td> Giấy mặt: <?php echo $data['InputProduct']['name']?></td>
+    <td>Giấy mặt: <?php echo $data['InputProduct']['name']?></td>
     <td></td>
   </tr>
   <tr>
-    <td> Qui cách: <?php echo $data['InputProduct']['specification']?></td>
+    <td>Qui cách: <?php echo $data['InputProduct']['specification']?></td>
     <td></td>
   </tr>
   <tr>
-    <td> Ra: <?php echo $data['ProductOrder']['output_product_note']?></td>
+    <td>Ra: <?php echo $data['ProductOrder']['output_product_note']?></td>
     <td></td>
   </tr>
   <tr>
-    <td> Số lượng: <?php echo number_format($reportNum, 2, ',', '.')?> Tấm (tờ in) </td>
+    <td>Số lượng: <?php echo number_format($reportNum, 2, ',', '.')?> Tấm (tờ in) </td>
     <td></td>
   </tr>
   <tr>
-    <td> Hao phí: <?php echo number_format($haoPhi, 2, ',', '.')?> tờ</td>
+    <td>Hao phí: <?php echo number_format($haoPhi, 2, ',', '.')?> tờ</td>
     <td></td>
   </tr>
   <tr>
-    <td> <b>Công đoạn sản xuất:</b></td>
+    <td><b>Công đoạn sản xuất:</b></td>
     <td></td>
   </tr>
 </table>
