@@ -25,7 +25,7 @@
   <?php echo $this->Form->input('name', array('label' => array('text' => __('Name')))) ?>
   <?php echo $this->Form->input('description', array('label' => array('text' => __('Description')))) ?>
 
-  <?php if($this->data['File']['id'] && $this->data['File']['file_path']) :?>
+  <?php if($this->data && $this->data['File']['id'] && $this->data['File']['file_path']) :?>
     <div class="form-group">
       <label class="col col-md-3 control-label text-left">Current File</label>
       <div class="col col-md-9">
