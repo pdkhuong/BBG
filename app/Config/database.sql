@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.20)
 # Database: baobigiay
-# Generation Time: 2015-10-18 07:18:46 +0000
+# Generation Time: 2015-10-18 08:09:16 +0000
 # ************************************************************
 
 
@@ -186,8 +186,8 @@ LOCK TABLES `product` WRITE;
 
 INSERT INTO `product` (`id`, `item_no`, `name`, `specification`, `description`, `product_unit_id`, `price`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(1,'Item001','test item name',NULL,'des',1,1212.12,'2015-10-13 10:12:05','2015-10-13 10:41:50',NULL),
-	(2,'Item002','product 2',NULL,'',2,232,'2015-10-13 10:42:19','2015-10-13 10:44:37','2015-10-13 10:44:37'),
+	(1,'Item001','test item name',NULL,'des',1,1212.12,'2015-10-13 10:12:05','2015-10-18 10:05:35','2015-10-18 10:05:35'),
+	(2,'Item002','product 2',NULL,'',2,232,'2015-10-13 10:42:19','2015-10-13 10:44:37',NULL),
 	(3,'p002','product 2','22,5 x 8,5 x 13 cm','',2,212,'2015-10-15 10:28:24','2015-10-17 11:08:47',NULL),
 	(4,'p003','product 3','57 x 65   Cm','',2,332,'2015-10-15 10:28:38','2015-10-17 11:40:26',NULL),
 	(5,'p005','product 4',NULL,'',1,66,'2015-10-15 10:28:56','2015-10-15 10:28:56',NULL),
@@ -315,7 +315,7 @@ LOCK TABLES `purchase_order` WRITE;
 
 INSERT INTO `purchase_order` (`id`, `customer_id`, `order_no`, `order_date`, `received_date`, `buyer_name`, `term`, `ship_via`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(1,9,'PO-001','2015-08-31 00:00:00','2015-10-31 00:00:00','Khuong','term','1','2015-10-15 19:29:48','2015-10-17 18:27:42',NULL),
+	(1,9,'PO-001','2015-08-31 00:00:00','2015-10-31 00:00:00','Khuong','term','1','2015-10-15 19:29:48','2015-10-18 10:08:44',NULL),
 	(2,3,'PO-002','2015-10-04 00:00:00','2015-10-31 00:00:00','test 2','term','1','2015-10-16 08:32:51','2015-10-17 14:22:24',NULL);
 
 /*!40000 ALTER TABLE `purchase_order` ENABLE KEYS */;
@@ -345,12 +345,70 @@ INSERT INTO `purchase_order_product` (`id`, `product_id`, `purchase_order_id`, `
 VALUES
 	(4,4,2,3,'2015-10-17 14:22:24','2015-10-17 14:22:24',NULL),
 	(5,3,2,44,'2015-10-17 14:22:24','2015-10-17 14:22:24',NULL),
-	(6,1,2,5,'2015-10-17 14:22:24','2015-10-17 14:22:24',NULL),
-	(7,4,1,2,'2015-10-17 18:27:42','2015-10-17 18:27:42',NULL),
-	(8,3,1,33,'2015-10-17 18:27:42','2015-10-17 18:27:42',NULL),
-	(9,1,1,4,'2015-10-17 18:27:42','2015-10-17 18:27:42',NULL);
+	(10,2,1,226,'2015-10-18 10:08:44','2015-10-18 10:08:44',NULL),
+	(11,4,1,2,'2015-10-18 10:08:44','2015-10-18 10:08:44',NULL),
+	(12,3,1,33,'2015-10-18 10:08:44','2015-10-18 10:08:44',NULL);
 
 /*!40000 ALTER TABLE `purchase_order_product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table purchase_order_vendor
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `purchase_order_vendor`;
+
+CREATE TABLE `purchase_order_vendor` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `vendor_id` int(11) DEFAULT NULL,
+  `order_no` varchar(200) DEFAULT NULL,
+  `order_date` datetime DEFAULT NULL,
+  `received_date` datetime DEFAULT NULL,
+  `seller_name` varchar(200) DEFAULT NULL,
+  `term` varchar(255) DEFAULT NULL,
+  `ship_via` varchar(100) DEFAULT NULL,
+  `created_time` datetime DEFAULT NULL,
+  `updated_time` datetime DEFAULT NULL,
+  `deleted_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `purchase_order_vendor` WRITE;
+/*!40000 ALTER TABLE `purchase_order_vendor` DISABLE KEYS */;
+
+INSERT INTO `purchase_order_vendor` (`id`, `vendor_id`, `order_no`, `order_date`, `received_date`, `seller_name`, `term`, `ship_via`, `created_time`, `updated_time`, `deleted_time`)
+VALUES
+	(1,1,'ewew','2015-10-26 00:00:00','2015-10-28 00:00:00','rer','re','1','2015-10-18 09:54:28','2015-10-18 10:08:28',NULL);
+
+/*!40000 ALTER TABLE `purchase_order_vendor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table purchase_order_vendor_product
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `purchase_order_vendor_product`;
+
+CREATE TABLE `purchase_order_vendor_product` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `purchase_order_vendor_id` int(11) NOT NULL,
+  `num_item` int(11) NOT NULL,
+  `created_time` datetime DEFAULT NULL,
+  `updated_time` datetime DEFAULT NULL,
+  `deleted_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `purchase_order_vendor_product` WRITE;
+/*!40000 ALTER TABLE `purchase_order_vendor_product` DISABLE KEYS */;
+
+INSERT INTO `purchase_order_vendor_product` (`id`, `product_id`, `purchase_order_vendor_id`, `num_item`, `created_time`, `updated_time`, `deleted_time`)
+VALUES
+	(6,2,1,22,'2015-10-18 10:08:28','2015-10-18 10:08:28',NULL),
+	(7,3,1,33,'2015-10-18 10:08:28','2015-10-18 10:08:28',NULL);
+
+/*!40000 ALTER TABLE `purchase_order_vendor_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -533,30 +591,33 @@ LOCK TABLES `user_role_right` WRITE;
 
 INSERT INTO `user_role_right` (`id`, `role_id`, `plugin`, `controller`, `action`, `description`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(85,3,NULL,'CostingController',NULL,NULL,'2015-10-18 05:59:52','2015-10-18 05:59:52',NULL),
-	(86,3,NULL,'CustomerController',NULL,NULL,'2015-10-18 05:59:52','2015-10-18 05:59:52',NULL),
-	(87,3,NULL,'DashboardController',NULL,NULL,'2015-10-18 05:59:52','2015-10-18 05:59:52',NULL),
-	(88,3,NULL,'LeadController',NULL,NULL,'2015-10-18 05:59:52','2015-10-18 05:59:52',NULL),
-	(89,3,NULL,'ProductController',NULL,NULL,'2015-10-18 05:59:52','2015-10-18 05:59:52',NULL),
-	(90,3,NULL,'ProductOrderController',NULL,NULL,'2015-10-18 05:59:52','2015-10-18 05:59:52',NULL),
-	(91,3,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-18 05:59:52','2015-10-18 05:59:52',NULL),
-	(92,3,NULL,'SalaryController',NULL,NULL,'2015-10-18 05:59:52','2015-10-18 05:59:52',NULL),
-	(93,3,NULL,'VendorController',NULL,NULL,'2015-10-18 05:59:52','2015-10-18 05:59:52',NULL),
-	(94,2,NULL,'CostingController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(95,2,NULL,'CustomerController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(96,2,NULL,'DashboardController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(97,2,NULL,'FileController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(98,2,NULL,'LeadController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(99,2,NULL,'ProductController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(100,2,NULL,'ProductOrderController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(101,2,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(102,2,NULL,'SalaryController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(103,2,NULL,'SettingsController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(104,2,NULL,'VendorController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(105,2,'User','UserController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(106,2,'User','UserRoleAccessController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(107,2,'User','UserRoleController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL),
-	(108,2,'User','UserRoleRightController',NULL,NULL,'2015-10-18 07:15:17','2015-10-18 07:15:17',NULL);
+	(109,3,NULL,'CostingController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(110,3,NULL,'CustomerController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(111,3,NULL,'DashboardController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(112,3,NULL,'FileController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(113,3,NULL,'LeadController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(114,3,NULL,'ProductController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(115,3,NULL,'ProductOrderController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(116,3,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(117,3,NULL,'PurchaseOrderVendorController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(118,3,NULL,'SalaryController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(119,3,NULL,'VendorController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
+	(120,2,NULL,'CostingController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(121,2,NULL,'CustomerController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(122,2,NULL,'DashboardController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(123,2,NULL,'FileController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(124,2,NULL,'LeadController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(125,2,NULL,'ProductController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(126,2,NULL,'ProductOrderController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(127,2,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(128,2,NULL,'PurchaseOrderVendorController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(129,2,NULL,'SalaryController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(130,2,NULL,'SettingsController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(131,2,NULL,'VendorController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(132,2,'User','UserController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(133,2,'User','UserRoleAccessController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(134,2,'User','UserRoleController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
+	(135,2,'User','UserRoleRightController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL);
 
 /*!40000 ALTER TABLE `user_role_right` ENABLE KEYS */;
 UNLOCK TABLES;

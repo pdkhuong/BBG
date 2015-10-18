@@ -59,6 +59,9 @@ Router::connect('/lead/:action/*', array('controller' => 'Lead'));
 Router::connect('/vendor', array('controller' => 'Vendor', 'action' => 'index'));
 Router::connect('/vendor/:action/*', array('controller' => 'Vendor'));
 
+Router::connect('/pa', array('controller' => 'PurchaseOrderVendor', 'action' => 'index'));
+Router::connect('/pa/:action/*', array('controller' => 'PurchaseOrderVendor'));
+
 CakePlugin::routes();
 
 /**

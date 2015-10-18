@@ -2,9 +2,9 @@
 
 App::uses('AppModel', 'Model');
 
-class PurchaseOrderProduct extends AppModel {
+class PurchaseOrderVendorProduct extends AppModel {
 
-  var $useTable = 'purchase_order_product';
+  var $useTable = 'purchase_order_vendor_product';
   var $multiLanguage = array ();
 
   public $belongsTo = array (
@@ -13,10 +13,10 @@ class PurchaseOrderProduct extends AppModel {
       'className' => 'Product',
       'foreignKey' => 'product_id',
     ),
-    'PurchaseOrder' =>
+    'PurchaseOrderVendor' =>
     array (
-      'className' => 'PurchaseOrder',
-      'foreignKey' => 'purchase_order_id',
+      'className' => 'PurchaseOrderVendor',
+      'foreignKey' => 'purchase_order_vendor_id',
     ),
   );
 
@@ -33,7 +33,7 @@ class PurchaseOrderProduct extends AppModel {
         'message' => 'Please enter a valid number',
       ),
     ),
-    'purchase_order_id' => array (
+    'purchase_order_vendor_id' => array (
       'notNull' => array (
         'rule' => 'notEmpty',
         'required' => true,
@@ -56,8 +56,8 @@ class PurchaseOrderProduct extends AppModel {
       ),
     ),
   );
-  public function deleteByPurchaseOrderId($purchaseOrderId){
-    $query = "DELETE FROM {$this->useTable} WHERE purchase_order_id={$purchaseOrderId}";
+  public function deleteByPurchaseOrderVendorId($purchaseOrderId){
+    $query = "DELETE FROM {$this->useTable} WHERE purchase_order_vendor_id={$purchaseOrderId}";
     $this->query($query);
   }
   public function deleteByProductId($productId){
