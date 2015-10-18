@@ -97,11 +97,10 @@ App::uses('CakeLog', 'Log');
 /*
   Load the plugin
  */
-CakePlugin::load('System', array('bootstrap' => TRUE, 'routes' => TRUE));
-CakePlugin::load('DebugKit');
+//CakePlugin::load('System', array('bootstrap' => TRUE, 'routes' => TRUE));
+//CakePlugin::load('DebugKit');
 CakePlugin::load('Blocks', array('bootstrap' => TRUE));
 CakePlugin::load('MultiLanguage', array('bootstrap' => TRUE, 'routes' => TRUE));
-CakePlugin::load('File', array('bootstrap' => TRUE, 'routes' => TRUE));
 CakePlugin::load('User', array('bootstrap' => TRUE, 'routes' => TRUE));
 
 /*
@@ -168,5 +167,17 @@ Configure::write('SHIP_TYPE', array(
   2 => 'POS'
 ));
 
+Configure::write('UPLOAD_EXTENSION', array(
+  array('mime' => 'image/jpeg', 'ext' => 'jpg'),
+  array('mime' => 'image/png', 'ext' => 'png'),
+  array('mime' => 'image/gif', 'ext' => 'gif'),
+  array('mime' => 'application/pdf', 'ext' => 'pdf'),
+  array('mime' => 'application/msword', 'ext' => 'doc'),
+  array('mime' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'ext' => 'docx'),
+  array('mime' => 'application/vnd.ms-excel', 'ext' => 'xls'),
+  array('mime' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'ext' => 'xlsx'),
+));
+
 define("ITEM_PER_PAGE", 20);
+define("UPLOAD_BASE_DIR", 'files/uploads');
 include_once(__DIR__ . '/functions.php');

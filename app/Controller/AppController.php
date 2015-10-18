@@ -58,8 +58,7 @@ class AppController extends Controller {
     'Text',
     'Js',
     'Blocks.Elements',
-    'MultiLanguage.MultiLanguage',
-    'File.File');
+    'MultiLanguage.MultiLanguage');
   public $components = array(
     'Session' => array(
       'className' => 'SFSession'

@@ -33,7 +33,7 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
 
-  public $actsAs = array('File.File');
+  public $actsAs = array();
   public $structures = null;
   public $inputData = array();
   public $schemaCreate = '';
