@@ -7,7 +7,7 @@ class DashboardController extends AppController {
    *
    * @var array
    */
-  public $uses = array('TradeshowEvent');
+  public $uses = array('Calendar','ProductOrder');
 
   public function beforeFilter() {
     parent::beforeFilter();
@@ -26,33 +26,42 @@ class DashboardController extends AppController {
    *
    */
   public function display() {
-    try {
-      $eventFinish = $this->TradeshowEvent->find('first',array('conditions' => array('to_date < "'.date('Y-m-d').'"'), 'order' => array('to_date DESC')));
-      if(empty($eventFinish)) {
-        $limit = 5;
-      } else {
-        $limit = 4;
-      }
-
-      $this->TradeshowEvent->virtualFields = array(
-        'openingStatus' => 'IF(from_date > "'.date('Y-m-d').'",1,0)'
-      );
-      $eventNews = $this->TradeshowEvent->find('all',array('conditions' => array('to_date > "'.date('Y-m-d').'"'), 'order' => array('from_date ASC'), 'limit' => $limit, 'page' => 1));
-
-      $this->set('eventFinish',$eventFinish);
-      $this->set('eventNews',$eventNews);
-
-      $this->render('display');
-    } catch (MissingViewException $e) {
-      if (Configure::read('debug')) {
-        throw $e;
-      }
-      throw new NotFoundException();
-    }
+	define('TIMEZONE', 'Asia/Bangkok');
+	date_default_timezone_set(TIMEZONE);
+    $now = date("Y-m-d");
+    $optionCalendar = array(
+							'limit' => 10,
+							'order' => array('from_date' => 'asc'),
+							'conditions' => array('from_date >=' => $now)
+							);
+	 
+	$calendar = $this->Calendar->find('all', $optionCalendar);
+	foreach($calendar as $key =>$value){
+		$calendar[$key]['Calendar']['from_date'] = $this->_formatDate($calendar[$key]['Calendar']['from_date'], 'd-m-Y H:i');
+		$calendar[$key]['Calendar']['to_date'] = $this->_formatDate($calendar[$key]['Calendar']['to_date'], 'd-m-Y H:i');
+	}
+	
+    $optionProductOrder = array(
+							'limit' => 10,
+							'order' => array('delivery_date' => 'asc'),
+							'conditions' => array('delivery_date >=' => $now)
+							);
+	 
+	$productOrder = $this->ProductOrder->find('all', $optionProductOrder);
+	foreach($productOrder as $key =>$value){
+		$productOrder[$key]['ProductOrder']['delivery_date'] = $this->_formatDate($productOrder[$key]['ProductOrder']['delivery_date'], 'd-m-Y');
+	}
+	
+	$this->set('calendar', $calendar);
+	$this->set('productOrder', $productOrder);
+	//var_dump($productOrder);
   }
 
   public function index() {
 
+  }
+  private function _formatDate($date, $format = 'Y-m-d H:i:s') {
+    return date($format, strtotime($date));
   }
 
 }
