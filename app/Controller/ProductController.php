@@ -4,7 +4,9 @@ class ProductController extends AppController {
 
   var $uses = array(
     'Product',
-    'ProductUnit'
+    'ProductUnit',
+    'PurchaseOrderVendorProduct',
+    'PurchaseOrderProduct'
   );
 
   public function beforeFilter() {
@@ -40,6 +42,7 @@ class ProductController extends AppController {
 
   public function delete($id) {
     $this->PurchaseOrderProduct->deleteByProductId($id);
+    $this->PurchaseOrderVendorProduct->deleteByProductId($id);
     $this->Product->deleteLogic($id);
     $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
     return $this->redirect(Router::url(array('action' => 'index')));

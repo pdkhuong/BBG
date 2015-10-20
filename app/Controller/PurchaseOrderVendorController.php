@@ -1,18 +1,18 @@
 <?php
 
-class PurchaseOrderController extends AppController {
+class PurchaseOrderVendorController extends AppController {
 
   var $uses = array(
     'Product',
     'ProductUnit',
-    'PurchaseOrder',
-    'PurchaseOrderProduct',
-    'Customer'
+    'PurchaseOrderVendor',
+    'PurchaseOrderVendorProduct',
+    'Vendor'
   );
 
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->modelClass = 'PurchaseOrder';
+    $this->modelClass = 'PurchaseOrderVendor';
   }
 
   function beforeRender() {
@@ -24,22 +24,22 @@ class PurchaseOrderController extends AppController {
   }
 
   public function edit($id=0){
-    $listCustomer = $this->Customer->find("list");
+    $listVendor = $this->Vendor->find("list");
     $listProduct = Hash::combine($this->Product->find("all"), '{n}.Product.id', '{n}');
     $addedProducts = array();
     $shipType = Configure::read("SHIP_TYPE");
     $this->set('shipType', $shipType);
     $errorObj = array();
     if (empty($this->request->data)) {
-      $this->request->data = $this->PurchaseOrder->findById($id);
-      $currentPurchaseOrderProducts = $this->PurchaseOrderProduct->findAllByPurchaseOrderId($id);
-      if($currentPurchaseOrderProducts){
+      $this->request->data = $this->PurchaseOrderVendor->findById($id);
+      $currentPurchaseOrderVendorProducts = $this->PurchaseOrderVendorProduct->findAllByPurchaseOrderVendorId($id);
+      if($currentPurchaseOrderVendorProducts){
         $listProductUnit = Hash::combine($this->ProductUnit->find('all'), '{n}.ProductUnit.id', '{n}.ProductUnit');
-        foreach($currentPurchaseOrderProducts as $currentPO){
+        foreach($currentPurchaseOrderVendorProducts as $currentPO){
           $tmpPO = array();
           $tmpPO['Product'] = $currentPO['Product'];
           $tmpPO['ProductUnit'] = $listProductUnit[$currentPO['Product']['product_unit_id']];
-          $tmpPO['numOfProduct'] = $currentPO['PurchaseOrderProduct']['num_item'];
+          $tmpPO['numOfProduct'] = $currentPO['PurchaseOrderVendorProduct']['num_item'];
           $addedProducts[$tmpPO['Product']['id']] = $tmpPO;
         }
       }
@@ -61,16 +61,16 @@ class PurchaseOrderController extends AppController {
       }else{
         $errorMsg = __('Please add product');
       }
-      $this->PurchaseOrder->set($this->request->data);
+      $this->PurchaseOrderVendor->set($this->request->data);
       if(!$errorMsg){
-        if ($this->PurchaseOrder->save()) {
-          $purchaseOrderId = $this->PurchaseOrder->getId();
-          $this->_savePurchaseOrderProduct($purchaseOrderId, $addedProducts);
+        if ($this->PurchaseOrderVendor->save()) {
+          $purchaseOrderId = $this->PurchaseOrderVendor->getId();
+          $this->_savePurchaseOrderVendorProduct($purchaseOrderId, $addedProducts);
           //end save event shop
           $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
           return $this->redirect(Router::url(array('action' => 'index')));
         } else {
-          $errorObj = $this->PurchaseOrder->validationErrors;
+          $errorObj = $this->PurchaseOrderVendor->validationErrors;
           $this->Session->setFlash(__('Unable to save your data.'), 'flash/error');
         }
       }else{
@@ -81,42 +81,42 @@ class PurchaseOrderController extends AppController {
     $this->set('errorObj', $errorObj);
     $this->set('addedProducts', $addedProducts);
     $this->set('listProduct', $listProduct);
-    $this->set("listCustomer", $listCustomer);
+    $this->set("listVendor", $listVendor);
     //echo "<pre>"; print_r($addedProducts);die();
     //echo "<pre>"; print_r($listProduct);die();
   }
 
-  private function _savePurchaseOrderProduct($purchaseOrderId, $addedProducts){
+  private function _savePurchaseOrderVendorProduct($purchaseOrderId, $addedProducts){
     if($addedProducts){
-      $this->PurchaseOrderProduct->deleteByPurchaseOrderId($purchaseOrderId);
+      $this->PurchaseOrderVendorProduct->deleteByPurchaseOrderVendorId($purchaseOrderId);
       foreach($addedProducts as $productId => $data){
         $insertData = array();
-        $insertData['purchase_order_id'] = $purchaseOrderId;
+        $insertData['purchase_order_vendor_id'] = $purchaseOrderId;
         $insertData['product_id'] = $productId;
         $insertData['num_item'] = $data['numOfProduct'];
-        $this->PurchaseOrderProduct->save($insertData);
-        $this->PurchaseOrderProduct->clear();
+        $this->PurchaseOrderVendorProduct->save($insertData);
+        $this->PurchaseOrderVendorProduct->clear();
       }
     }
   }
 
 
   public function delete($id) {
-    $this->PurchaseOrderProduct->deleteByPurchaseOrderId($id);
-    $this->PurchaseOrder->deleteLogic($id);
+    $this->PurchaseOrderVendorProduct->deleteByPurchaseOrderVendorId($id);
+    $this->PurchaseOrderVendor->deleteLogic($id);
     $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
   public function index() {
-    $listCustomer = $this->Customer->find("list");
-    $customerId = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : 0;
+    $listVendor = $this->Vendor->find("list");
+    $vendorId = isset($_GET['vendor_id']) ? intval($_GET['vendor_id']) : 0;
     $orderNo = isset($_GET['order_no']) ? strval($_GET['order_no']) : '';
     $orderDateFrom = isset($_GET['order_date_from']) ? strval($_GET['order_date_from']) : '';
     $orderDateTo = isset($_GET['order_date_to']) ? strval($_GET['order_date_to']) : '';
     //$receivedDateFrom = isset($_GET['received_date_from']) ? strval($_GET['received_date_from']) : '';
     //$receivedDateTo = isset($_GET['received_date_to']) ? strval($_GET['received_date_to']) : '';
 
-    $this->set('customerId', $customerId);
+    $this->set('vendorId', $vendorId);
     $this->set('orderNo', $orderNo);
     $this->set('orderDateFrom', $orderDateFrom);
     $this->set('orderDateTo', $orderDateTo);
@@ -124,21 +124,21 @@ class PurchaseOrderController extends AppController {
     //$this->set('receivedDateTo', $receivedDateTo);
 
     $conditions = array();
-    $conditions['PurchaseOrder.deleted_time'] = null;
-    if($customerId){
-      $conditions['PurchaseOrder.customer_id'] = $customerId;
+    $conditions['PurchaseOrderVendor.deleted_time'] = null;
+    if($vendorId){
+      $conditions['PurchaseOrderVendor.vendor_id'] = $vendorId;
     }
     if($orderNo){
-      $conditions[] = "PurchaseOrder.order_no LIKE  '%{$orderNo}%'";
+      $conditions[] = "PurchaseOrderVendor.order_no LIKE  '%{$orderNo}%'";
     }
     if($orderDateFrom){
-      $conditions[] = "PurchaseOrder.order_date >= date('{$orderDateFrom}')";
+      $conditions[] = "PurchaseOrderVendor.order_date >= date('{$orderDateFrom}')";
     }
     if($orderDateTo){
-      $conditions[] = "PurchaseOrder.order_date <= date('{$orderDateTo}')";
+      $conditions[] = "PurchaseOrderVendor.order_date <= date('{$orderDateTo}')";
     }
     $this->set('displayPaging', true);
-    $page = isset($this->request->params['paging']['PurchaseOrder']['page']) ? intval($this->request->params['paging']['PurchaseOrder']['page']) : 1;
+    $page = isset($this->request->params['paging']['PurchaseOrderVendor']['page']) ? intval($this->request->params['paging']['PurchaseOrderVendor']['page']) : 1;
 
     $offset = ($page - 1) * ITEM_PER_PAGE;
     $this->Paginator->settings = array(
@@ -147,14 +147,14 @@ class PurchaseOrderController extends AppController {
       'offset' => $offset,
     );
     try{
-      $dataList = $this->Paginator->paginate('PurchaseOrder');
+      $dataList = $this->Paginator->paginate('PurchaseOrderVendor');
     }catch(Exception $e){
       $dataList = array();
-      $this->redirect(Router::url(array('action' => 'index')) . '?customer_id='.$customerId.'&order_no='.$orderNo.'&order_date_from='.$orderDateFrom.'&order_date_to='.$orderDateTo);
+      //$this->redirect(Router::url(array('action' => 'index')) . '?customer_id='.$customerId.'&order_no='.$orderNo.'&order_date_from='.$orderDateFrom.'&order_date_to='.$orderDateTo);
     }
     //echo "<pre>"; print_r($dataList); die();
     $this->set('dataList', $dataList);
-    $this->set("listCustomer", $listCustomer);
+    $this->set("listVendor", $listVendor);
     $shipType = Configure::read("SHIP_TYPE");
     $this->set('shipType', $shipType);
   }

@@ -39,10 +39,28 @@ Router::connect('/settings', array('controller' => 'Settings', 'action' => 'inde
 Router::connect('/settings/:action/*', array('controller' => 'Settings'));
 
 Router::connect('/costing', array('controller' => 'Costing', 'action' => 'index'));
-Router::connect('/settings/:action/*', array('controller' => 'Costing'));
+Router::connect('/costing/:action/*', array('controller' => 'Costing'));
+
+Router::connect('/salary', array('controller' => 'Salary', 'action' => 'index'));
+Router::connect('/salary/:action/*', array('controller' => 'Salary'));
 
 Router::connect('/product-order', array('controller' => 'ProductOrder', 'action' => 'index'));
 Router::connect('/product-order/:action/*', array('controller' => 'ProductOrder'));
+
+Router::connect('/file', array('controller' => 'File', 'action' => 'index'));
+Router::connect('/file/:action/*', array('controller' => 'File'));
+
+Router::connect('/customer', array('controller' => 'Customer', 'action' => 'index'));
+Router::connect('/customer/:action/*', array('controller' => 'Customer'));
+
+Router::connect('/lead', array('controller' => 'Lead', 'action' => 'index'));
+Router::connect('/lead/:action/*', array('controller' => 'Lead'));
+
+Router::connect('/vendor', array('controller' => 'Vendor', 'action' => 'index'));
+Router::connect('/vendor/:action/*', array('controller' => 'Vendor'));
+
+Router::connect('/pa', array('controller' => 'PurchaseOrderVendor', 'action' => 'index'));
+Router::connect('/pa/:action/*', array('controller' => 'PurchaseOrderVendor'));
 
 CakePlugin::routes();
 

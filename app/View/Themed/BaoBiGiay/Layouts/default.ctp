@@ -28,8 +28,6 @@
       'radio-checkbox',
       'jquery.ui',
       'sfinput',
-      'File.file',
-      'File.fileuploader',
     ));
     echo $this->fetch('css');
 
@@ -43,8 +41,6 @@
       'radio-checkbox',
       'common',
       'core',
-      'File.file',
-      'File.fileuploader',
       'sfinput',
     ));
     echo $this->Layout->js();

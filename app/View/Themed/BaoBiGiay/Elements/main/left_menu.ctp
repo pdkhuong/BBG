@@ -32,6 +32,15 @@
       <li class="<?php if($this->params['controller'] == 'Dashboard') echo 'active'?>">
           <a href="/"><i class="fa fa-home"></i> Dashboard</a>
       </li>
+      <li class="<?php if($this->params['controller'] == 'Customer') echo 'active'?>">
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Customer', 'action' => 'index'))?>"><i class="fa fa-users"> </i>Customers</a>
+      </li>
+      <li class="<?php if($this->params['controller'] == 'Lead') echo 'active'?>">
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Lead', 'action' => 'index'))?>"><i class="fa fa-users"> </i>Leads</a>
+      </li>
+      <li class="<?php if($this->params['controller'] == 'Vendor') echo 'active'?>">
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Vendor', 'action' => 'index'))?>"><i class="fa fa-users"> </i>Vendors</a>
+      </li>
       <li class="<?php if($this->params['controller'] == 'Product') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Product', 'action' => 'index'))?>"><i class="fa fa-shopping-cart"> </i>Products</a>
       </li>
@@ -44,7 +53,15 @@
       <li class="<?php if($this->params['controller'] == 'PurchaseOrder') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'PurchaseOrder', 'action' => 'index'))?>"><i class="fa fa-clipboard"> </i>Purchase Order</a>
       </li>
-
+      <li class="<?php if($this->params['controller'] == 'PurchaseOrderVendor') echo 'active'?>">
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'PurchaseOrderVendor', 'action' => 'index'))?>"><i class="fa fa-clipboard"> </i>PA</a>
+      </li>
+      <li class="<?php if($this->params['controller'] == 'Salary') echo 'active'?>">
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Salary', 'action' => 'index'))?>"><i class="fa fa-dollar"> </i>Salary</a>
+      </li>
+      <li class="<?php if($this->params['controller'] == 'File') echo 'active'?>">
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'File', 'action' => 'index'))?>"><i class="fa fa-file-o"> </i>Files</a>
+      </li>
       <li class="<?php if($this->params['controller'] == 'User') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'search'))?>"> <i class="fa fa-users"> </i>Users</a>
       </li>
