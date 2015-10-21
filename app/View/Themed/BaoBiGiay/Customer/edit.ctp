@@ -29,6 +29,58 @@ echo $this->Form->create('Customer', array(
   <?php echo $this->Form->input('fax', array('label' => array('text' => __('Fax')))) ?>
   <?php echo $this->Form->input('address', array('label' => array('text' => __('Address')))) ?>
   <?php echo $this->Form->input('info', array('rows' => '5', 'type' => 'textarea', 'label' => array('text' => __('Information')))) ?>
+  
+  Contacts
+  <div class='table-responsive well'>
+    <table cellpadding='0' cellspacing='0' class='table'>
+      <thead>
+      <tr>
+        <th width="20%"><?php echo __('Name') ?></th>
+        <th width="20%"><?php echo __('Email') ?></th>
+        <th width="15%"><?php echo __('Phone') ?></th>
+        <th width="30%"><?php echo __('Address') ?></th>
+        <th width="15%"><?php echo __('Action') ?></th>
+      </tr>
+      </thead>
+      <tbody id="_bodyAddedContact">
+      <?php if($addedContact):?>
+        <?php foreach($addedContact as $contactId => $contact):?>
+          <tr id="_row_<?php echo $contactId?>">
+            <td>
+              <span class="_contact_name"><?php echo $contact['name']?></span>
+              <?php echo $this->Form->input("CustomerContact.{$contactId}.name", array('type' => 'hidden', 'value' => $contact['name']));?>
+            </td>
+            <td>
+              <?php echo $contact['email']?>
+              <?php echo $this->Form->input("CustomerContact.{$contactId}.email", array('type' => 'hidden', 'value' => $contact['email']));?>
+            </td>
+            <td>
+              <?php echo $contact['phone']?>
+              <?php echo $this->Form->input("CustomerContact.{$contactId}.phone", array('type' => 'hidden', 'value' => $contact['phone']));?>
+            </td>
+            <td>
+              <?php echo $contact['address']?>
+              <?php echo $this->Form->input("CustomerContact.{$contactId}.address", array('type' => 'hidden', 'value' => $contact['address']));?>
+              <?php echo $this->Form->input("CustomerContact.{$contactId}.info", array('type' => 'hidden', 'value' => $contact['info']));?>
+              <?php echo $this->Form->input("CustomerContact.{$contactId}.fax", array('type' => 'hidden', 'value' => $contact['fax']));?>
+            </td>
+            <td>
+              <a class="btn btn-default btn-sm _editContact" data-id=<?php echo $contactId?>> Edit </a>
+              <a class="btn btn-default btn-sm _removeContact"> Remove </a>
+            </td>
+          </tr>
+        <?php endforeach;?>
+      <?php endif;?>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-group">
+    <div class="col col-md-9">
+    </div>
+    <div class="col-md-3 text-right">
+      <button type="button" class="btn btn-default btn-sm _addContact" data-toggle="modal" data-target="#contactModal"><?php echo __("Add Contact")?></button>
+  </div>
 
   <?php
   echo $this->Form->input('id', array('type' => 'hidden'));
@@ -36,3 +88,91 @@ echo $this->Form->create('Customer', array(
   echo $this->Form->end();
   ?>
 </div>
+
+
+<?php
+echo $this->Html->script('customer.js');
+?>
+
+<div id="contactModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><?php echo __("Add Contact")?></h4>
+      </div>
+      <div class="modal-body">
+        <div id="_contact_msg" class="alert alert-danger hidden"></div>
+        <div class="form-group required">
+          <label class="col col-md-3 control-label text-left"><?php echo __('Name')?></label>
+          <div class="col col-md-9 required">
+            <input id="_contact_name" class="form-control" maxlength="255" type="text" required="required">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col col-md-3 control-label text-left"><?php echo __('Email')?></label>
+          <div class="col col-md-9">
+            <input id="_contact_email" class="form-control" maxlength="255" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col col-md-3 control-label text-left"><?php echo __('Phone')?></label>
+          <div class="col col-md-9">
+            <input id="_contact_phone" class="form-control" maxlength="255" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col col-md-3 control-label text-left"><?php echo __('Fax')?></label>
+          <div class="col col-md-9">
+            <input id="_contact_fax" class="form-control" maxlength="255" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col col-md-3 control-label text-left"><?php echo __('Information')?></label>
+          <div class="col col-md-9">
+            <input id="_contact_info" class="form-control" maxlength="255" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col col-md-3 control-label text-left"><?php echo __('Address')?></label>
+          <div class="col col-md-9">
+            <input id="_contact_address" class="form-control" maxlength="255" type="text">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input id="_contact_id" type="hidden" >
+        <button id="_contact_ok" type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script id="tableRowTemplateContact" type="text/x-jQuery-tmpl">
+  <tr id="_row_${id}">
+    <td>${name}</span>
+      <?php echo $this->Form->input('CustomerContact.${id}.name', array('type' => 'hidden', 'value' => '${name}'));?>
+    </td>
+    <td>
+      ${email}
+      <?php echo $this->Form->input('CustomerContact.${id}.email', array('type' => 'hidden', 'value' => '${email}'));?>
+    </td>
+    <td>
+      ${phone}
+      <?php echo $this->Form->input('CustomerContact.${id}.phone', array('type' => 'hidden', 'value' => '${phone}'));?>
+    </td>
+    <td>
+      ${address}
+      <?php echo $this->Form->input('CustomerContact.${id}.address', array('type' => 'hidden', 'value' => '${address}'));?>
+      <?php echo $this->Form->input('CustomerContact.${id}.info', array('type' => 'hidden', 'value' => '${info}'));?>
+      <?php echo $this->Form->input('CustomerContact.${id}.fax', array('type' => 'hidden', 'value' => '${fax}'));?>
+    </td>
+    <td>
+    <a class="btn btn-default btn-sm _editContact" data-id=${id}> Edit </a>
+    <a class="btn btn-default btn-sm _removeContact"> Remove </a>
+    </td>
+  </tr>
+</script>

@@ -103,6 +103,9 @@ class CalendarController extends AppController {
     }
     $this->Calendar->deleteLogic($id);
 	$this->CalendarCustomer->deleteAll(array('calendar_id' => $id), false);
+	$this->CalendarLead->deleteAll(array('calendar_id' => $id), false);
+	$this->CalendarVendor->deleteAll(array('calendar_id' => $id), false);
+	$this->CalendarUser->deleteAll(array('calendar_id' => $id), false);
 
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }

@@ -11,12 +11,10 @@ class CalendarUser extends AppModel {
       'foreignKey' => 'calendar_id'
     ),
 	'User' => array(
-		'className' => 'UserModel',
+		'className' => 'User.UserModel',
 		'foreignKey' => 'user_id'
 	),
   );
   var $multiLanguage = null;
-
-  public $actsAs = array('MultiLanguage.MultiLanguage');
   var $validate = array ();
 }
