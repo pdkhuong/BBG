@@ -62,6 +62,9 @@ Router::connect('/vendor/:action/*', array('controller' => 'Vendor'));
 Router::connect('/pa', array('controller' => 'PurchaseOrderVendor', 'action' => 'index'));
 Router::connect('/pa/:action/*', array('controller' => 'PurchaseOrderVendor'));
 
+Router::connect('/calendar', array('controller' => 'Calendar', 'action' => 'index'));
+Router::connect('/calendar/:action/*', array('controller' => 'Calendar'));
+
 CakePlugin::routes();
 
 /**

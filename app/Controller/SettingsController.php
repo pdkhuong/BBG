@@ -23,6 +23,7 @@ class SettingsController extends AppController {
     if (empty($this->request->data)) {
       $this->request->data = $this->Settings->findById($id);
     } else {//save
+      $this->request->data['Settings']['key'] = trim($this->request->data['Settings']['key']);
       $this->Settings->set($this->request->data);
       if ($this->Settings->save()) {
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');

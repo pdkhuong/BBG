@@ -32,6 +32,9 @@
       <li class="<?php if($this->params['controller'] == 'Dashboard') echo 'active'?>">
           <a href="/"><i class="fa fa-home"></i> Dashboard</a>
       </li>
+      <li class="<?php if($this->params['controller'] == 'Calendar') echo 'active'?>">
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Calendar', 'action' => 'index'))?>"><i class="fa fa-calendar"> </i>Calendars</a>
+      </li>
       <li class="<?php if($this->params['controller'] == 'Customer') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Customer', 'action' => 'index'))?>"><i class="fa fa-users"> </i>Customers</a>
       </li>
@@ -59,15 +62,20 @@
       <li class="<?php if($this->params['controller'] == 'Salary') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Salary', 'action' => 'index'))?>"><i class="fa fa-dollar"> </i>Salary</a>
       </li>
+      <?php if($loggedUser->Admin->id > 0 || isset($loggedUser->Role[USER_ROLE_ADMIN])): ?>
       <li class="<?php if($this->params['controller'] == 'File') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'File', 'action' => 'index'))?>"><i class="fa fa-file-o"> </i>Files</a>
       </li>
       <li class="<?php if($this->params['controller'] == 'User') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'search'))?>"> <i class="fa fa-users"> </i>Users</a>
       </li>
+      <li class="<?php if($this->params['controller'] == 'UserRole') echo 'active'?>">
+        <a href="<?php echo Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'search'))?>"> <i class="fa fa-users"> </i>User Roles</a>
+      </li>
       <li class="<?php if($this->params['controller'] == 'Settings') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Settings', 'action' => 'index'))?>"><i class="fa fa-cogs"> </i>Settings</a>
       </li>
+      <?php endif;?>
     </ul>
 
 

@@ -1,15 +1,15 @@
 <h3>
-  <? if (isset($this->data['Product']['id']) && $this->data['Product']['id'] > 0): ?>
-    <?= __('Edit Product') ?>: <?= $this->data['Product']['id'] ?>
+  <? if (isset($this->data['Costing']['id']) && $this->data['Costing']['id'] > 0): ?>
+    <?= __('Edit Costing') ?>: <?= $this->data['Costing']['id'] ?>
   <? else: ?>
-    <?= __('Add Product') ?>
+    <?= __('Add Costing') ?>
   <? endif; ?>
 </h3>
 
 <hr />
 <div class="well form-horizontal page-body posts form">
 <?php
-  echo $this->Form->create('Product', array(
+  echo $this->Form->create('Costing', array(
     'novalidate' => true,
     'inputDefaults' => array(
       'div' => 'form-group',
@@ -22,19 +22,58 @@
   ));
   ?>
 
-  <?php echo $this->Form->input('item_no', array('label' => array('text' => __('Item No.')))) ?>
-  <?php echo $this->Form->input('name', array('label' => array('text' => __('Name')))) ?>
-  <?php echo $this->Form->input('description', array('label' => array('text' => __('Description')))) ?>
   <?php
-  echo $this->Form->input('product_unit_id',
-    array('options' => $listUnit,
+  echo $this->Form->input('customer_id',
+    array('options' => $listCustomer,
       'selected'=>NULL,
-      'empty' => __("Please select ..."),
-      array('require'=>true, 'allowEmpty'=>false),
+      'label' => array('text' => __('Customer')),
+      'empty' => __("Please select customer..."),
     )
   );
   ?>
-  <?php echo $this->Form->input('price', array('label' => array('text' => __('Price')))) ?>
+  <?php
+  echo $this->Form->input('product_id',
+    array('options' => $listProduct,
+      'selected'=>NULL,
+      'empty' => __("Please select product..."),
+    )
+  );
+  ?>
+
+  <?php echo $this->Form->input('person_ic', array('label' => array('text' => __('Person In Charged')))) ?>
+  <?php echo $this->Form->input('spec_length', array('label' => array('text' => __('Specification Length (cm)')))) ?>
+  <?php echo $this->Form->input('spec_width', array('label' => array('text' => __('Specification Width (cm)')))) ?>
+  <?php echo $this->Form->input('paper_length', array('label' => array('text' => __('Paper Length (cm)')))) ?>
+  <?php echo $this->Form->input('paper_width', array('label' => array('text' => __('Paper Width (cm)')))) ?>
+  <?php echo $this->Form->input('paper_substance', array('label' => array('text' => __('Paper Substance (gsm)')))) ?>
+  <?php echo $this->Form->input('paper_cutting', array('label' => array('text' => __('Paper Cutting (outs)')))) ?>
+  <?php echo $this->Form->input('paper_price_ton', array('label' => array('text' => __('Paper Price (/Ton)')))) ?>
+  <?php echo $this->Form->input('paper_price_ram', array('label' => array('text' => __('Paper Price (/Ram)')))) ?>
+  <?php echo $this->Form->input('printing_color', array('label' => array('text' => __('Printing Color (Colors)')))) ?>
+  <?php echo $this->Form->input('printing_coverage', array('label' => array('text' => __('Printing Coverage (%)')))) ?>
+  <?php echo $this->Form->input('printing_cost', array('label' => array('text' => __('Printing Cost (pass)')))) ?>
+  <?php echo $this->Form->input('printing_films', array('label' => array('text' => __('Printing Films (set)')))) ?>
+  <?php echo $this->Form->input('vanish_oil', array('label' => array('text' => __('Vanish Oil (pass)')))) ?>
+  <?php echo $this->Form->input('vanish_uv', array('label' => array('text' => __('Vanish UV (pass)')))) ?>
+  <?php echo $this->Form->input('vanish_opp', array('label' => array('text' => __('Vanish OPP (pass)')))) ?>
+  <?php echo $this->Form->input('ply', array('label' => array('text' => __('PLY (pass)')))) ?>
+  <?php echo $this->Form->input('limination', array('label' => array('text' => __('Limination (pass)')))) ?>
+  <?php echo $this->Form->input('die_cut', array('label' => array('text' => __('Die-Cut (pass)')))) ?>
+  <?php echo $this->Form->input('gluing_1', array('label' => array('text' => __('Gluing 1 (pass)')))) ?>
+  <?php echo $this->Form->input('gluing_2', array('label' => array('text' => __('Gluing 2 (pass)')))) ?>
+  <?php echo $this->Form->input('gluing_3', array('label' => array('text' => __('Gluing 3 (pass)')))) ?>
+  <?php echo $this->Form->input('packaging', array('label' => array('text' => __('Packaging (%)')))) ?>
+  <?php echo $this->Form->input('transportation', array('label' => array('text' => __('Transportation (%)')))) ?>
+  <?php echo $this->Form->input('quantity', array('label' => array('text' => __('Quantity')))) ?>
+  <?php echo $this->Form->input('mk', array('label' => array('text' => __('MK (%)')))) ?>
+  <?php echo $this->Form->input('exchange', array('label' => array('text' => __('Exchange (VND)')))) ?>
+
+  <?php echo $this->Form->input('inner_surf_substance', array('label' => array('text' => __('Inner Surf Substance')))) ?>
+  <?php echo $this->Form->input('inner_surf_price', array('label' => array('text' => __('Inner Surf Price')))) ?>
+  <?php echo $this->Form->input('b_flute_substance', array('label' => array('text' => __('B - Flute Substance')))) ?>
+  <?php echo $this->Form->input('b_flute_price', array('label' => array('text' => __('B - Flute Price')))) ?>
+  <?php echo $this->Form->input('e_flute_substance', array('label' => array('text' => __('E - Flute Substance')))) ?>
+  <?php echo $this->Form->input('e_flute_price', array('label' => array('text' => __('E - Flute Price')))) ?>
 
   <?php
   echo $this->Form->input('id', array('type' => 'hidden'));
@@ -42,3 +81,9 @@
   echo $this->Form->end();
   ?>
 </div>
+<?php
+echo $this->Html->css('bootstrap-datetimepicker.css');
+echo $this->Html->script('libs/moment.js');
+echo $this->Html->script('libs/bootstrap-datetimepicker.js');
+echo $this->Html->script('costing.js');
+?>

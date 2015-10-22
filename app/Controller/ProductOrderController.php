@@ -27,6 +27,7 @@ class ProductOrderController extends AppController {
   public function edit($id = 0) {
     $listCustomer = $this->Customer->find("list");
     $listProduct = $this->Product->find("list");
+    $errorObj = array();
     $listUser = Hash::combine($this->UserModel->find('all'), '{n}.UserModel.id', '{n}.UserModel.display_name');
     $addedProgress = array();
     $productProgressBeforeAdded = $this->ProductOrderProgress->findAllByProductOrderId($id);
@@ -35,7 +36,7 @@ class ProductOrderController extends AppController {
       $addedProgress = $productProgressBeforeAdded;
       $this->request->data = $this->ProductOrder->findById($id);
     } else {//save
-      $addedProgress = $this->request->data['ProductOrderProgress'];
+      $addedProgress = isset($this->request->data['ProductOrderProgress']) ? $this->request->data['ProductOrderProgress'] : array();
       $this->ProductOrder->set($this->request->data);
       if ($this->ProductOrder->save()) {
         $productOrderId = $this->ProductOrder->getId();
@@ -43,9 +44,11 @@ class ProductOrderController extends AppController {
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
         return $this->redirect(Router::url(array('action' => 'index')));
       } else {
+        $errorObj = $this->ProductOrder->validationErrors;
         $this->Session->setFlash(__('Unable to save your data.'), 'flash/error');
       }
     }
+    $this->set('errorObj', $errorObj);
     $this->set("listCustomer", $listCustomer);
     $this->set("listProduct", $listProduct);
     $this->set('listUser', $listUser);

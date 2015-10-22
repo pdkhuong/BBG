@@ -49,14 +49,14 @@ class ProductOrder extends AppModel {
     'num_product' => array(
       'numeric' => array (
         'rule' => 'numeric',
-        'message' => 'Please enter a valid price',
+        'message' => 'Please enter a valid number product',
         'allowEmpty' => false,
       ),
     ),
     'customer_id' => array(
       'numeric' => array (
         'rule' => 'numeric',
-        'message' => 'Please enter a valid price',
+        'message' => 'Please select customer',
         'allowEmpty' => false,
       ),
     ),

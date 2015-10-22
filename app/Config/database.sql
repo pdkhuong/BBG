@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.20)
 # Database: baobigiay
-# Generation Time: 2015-10-18 08:09:16 +0000
+# Generation Time: 2015-10-22 09:20:16 +0000
 # ************************************************************
 
 
@@ -20,6 +20,95 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+# Dump of table calendar
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `calendar`;
+
+CREATE TABLE `calendar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  `from_date` datetime NOT NULL,
+  `to_date` datetime NOT NULL,
+  `deleted_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table calendar_customer
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `calendar_customer`;
+
+CREATE TABLE `calendar_customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calendar_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `updated_time` datetime NOT NULL,
+  `deleted_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table calendar_lead
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `calendar_lead`;
+
+CREATE TABLE `calendar_lead` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calendar_id` int(11) NOT NULL,
+  `lead_id` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `updated_time` datetime NOT NULL,
+  `deleted_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table calendar_user
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `calendar_user`;
+
+CREATE TABLE `calendar_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calendar_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `updated_time` datetime NOT NULL,
+  `deleted_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table calendar_vendor
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `calendar_vendor`;
+
+CREATE TABLE `calendar_vendor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calendar_id` int(11) NOT NULL,
+  `vendor_id` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `updated_time` datetime NOT NULL,
+  `deleted_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table costing
 # ------------------------------------------------------------
 
@@ -29,7 +118,7 @@ CREATE TABLE `costing` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
-  `costing_date` datetime DEFAULT NULL,
+  `person_ic` varchar(200) DEFAULT NULL,
   `spec_length` float DEFAULT NULL,
   `spec_width` float DEFAULT NULL,
   `paper_length` float DEFAULT NULL,
@@ -41,20 +130,21 @@ CREATE TABLE `costing` (
   `printing_color` int(11) DEFAULT NULL,
   `printing_coverage` int(11) DEFAULT NULL,
   `printing_cost` float DEFAULT NULL,
-  `printing_firms` float DEFAULT NULL,
+  `printing_films` float DEFAULT NULL,
   `vanish_oil` float DEFAULT NULL,
   `vanish_uv` float DEFAULT NULL,
   `vanish_opp` float DEFAULT NULL,
   `ply` float DEFAULT NULL,
   `limination` float DEFAULT NULL,
   `die_cut` float DEFAULT NULL,
-  `gluing_40` float DEFAULT NULL,
-  `gluing_60` float DEFAULT NULL,
-  `gluing_80` float DEFAULT NULL,
+  `gluing_1` float DEFAULT NULL,
+  `gluing_2` float DEFAULT NULL,
+  `gluing_3` float DEFAULT NULL,
   `packaging` float DEFAULT NULL,
   `transportation` float DEFAULT NULL,
   `quantity` float DEFAULT NULL,
   `mk` float DEFAULT NULL,
+  `exchange` float DEFAULT NULL,
   `inner_surf_substance` float DEFAULT NULL,
   `inner_surf_price` float DEFAULT NULL,
   `b_flute_substance` float DEFAULT NULL,
@@ -87,19 +177,26 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
 
-INSERT INTO `customer` (`id`, `name`, `code`, `email`, `phone`, `fax`, `address`, `info`, `deleted_time`)
-VALUES
-	(1,'Phan Há»“ng PhÃºc','CKPGFQIHHHHHFNQH','phanhongphuc@gmail.com','01227744772','0123456789','201 Hai BÃ  TrÆ°ng , PhÆ°á»ng 5 , quáº­n 3, TpHCM','KhÃ¡ch hÃ ng má»›i','2015-10-09 16:55:34'),
-	(9,'ÄoÃ n Thá»‹ Cáº©m Xin','FEKAJGYGSRUWLSNI','DoanThiCamXin@hotmail.com','0902212230','0826482063','285/C145 CÃ¡ch Máº¡ng ThÃ¡ng 8 - Tp Há»“ ChÃ­ Minh','Chá»‹ sinh ngÃ y 2 thÃ¡ng 10 nÄƒm 1971 vÃ  Chá»‹ lÃ  Chá»‹ cáº£ trong gia Ä‘Ã¬nh cá»§a 2 Chá»‹ em. \r\nChá»‹ Ä‘Ã£ tham gia sinh hoáº¡t vÄƒn nghá»‡ tá»« CLB ca sÄ© tráº», Trung tÃ¢m vÄƒn hoÃ¡ quáº­n 10 nÄƒm 1991',NULL),
-	(10,'Äáº·ng Thá»‹ Thanh Lanh','TLWJCKIPPMMZCRKU','ThanhLanh@yahoo.com','0908960568','0805688960','126/8 CÃ¡ch Máº¡ng ThÃ¡ng TÃ¡m, PhÆ°á»ng 7, Quáº­n 3 - Tp Há»“ ChÃ­ Minh','Lanh sinh ra táº¡i Huáº¿, trong gia Ä‘Ã¬nh gá»“m 6 anh em vÃ  má»™t ngÆ°á»i chá»‹ nuÃ´i, Lanh lÃ  con thá»© 3 trong gia Ä‘Ã¬nh. ',NULL),
-	(11,'Trá»‹nh Thanh Äá»','WTLZMFGDGLTLGBAU','TrinhThanhe@gmail.com','09339095507','08355073909','319/2A Hai BÃ  TrÆ°ng, PhÆ°á»ng 8, Quáº­n 3 - Tp Há»“ ChÃ­ Minh','Äá» sinh ngÃ y 2 thÃ¡ng 4 nÄƒm 1981 táº¡i HÃ  Ná»™i, lÃ  ca sÄ© dÃ²ng nháº¡c nháº¹ cá»§a Viá»‡t Nam',NULL),
-	(12,'VÆ°Æ¡ng Háº£i ChÃ­','XKEGEBXOUSAJRQOR','VuongHaiChi@gmail.com','0969765226','0832269765','194 HoÃ ng VÄƒn Thá»¥, PhÆ°á»ng 9, Quáº­n PhÃº Nhuáº­n - Há»“ ChÃ­ Minh','Sinh ra vÃ  lá»›n lÃªn táº¡i HÃ  Ná»™i, nay láº­p nghiá»‡p á»Ÿ SÃ i GÃ²n, vá»›i VÆ°Æ¡ng Háº£i ChÃ­, HÃ  Ná»™i mÃ£i mÃ£i váº«n Ä‘áº¹p, nÃªn thÆ¡ vÃ  cá»• kÃ­nh. ',NULL);
 
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
-UNLOCK TABLES;
+# Dump of table customer_contact
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `customer_contact`;
+
+CREATE TABLE `customer_contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `fax` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `info` text,
+  `deleted_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table file
@@ -119,17 +216,6 @@ CREATE TABLE `file` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `file` WRITE;
-/*!40000 ALTER TABLE `file` DISABLE KEYS */;
-
-INSERT INTO `file` (`id`, `name`, `description`, `original_filename`, `file_path`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(1,'test name 222222','test des 2222','AppBody-Sample-English.docx','files/uploads/562345dcdfb0a_1445152220.docx',NULL,'2015-10-18 09:10:20',NULL),
-	(2,'AppBody-Sample-English',NULL,'AppBody-Sample-English.docx','files/uploads/5623416c3650f_1445151084.docx',NULL,NULL,NULL),
-	(3,'test name','test des','AppBody-Sample-English.docx','files/uploads/562345b2c9aee_1445152178.docx','2015-10-18 09:09:38','2015-10-18 09:10:09','2015-10-18 09:10:09');
-
-/*!40000 ALTER TABLE `file` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table lead
@@ -150,16 +236,26 @@ CREATE TABLE `lead` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `lead` WRITE;
-/*!40000 ALTER TABLE `lead` DISABLE KEYS */;
 
-INSERT INTO `lead` (`id`, `name`, `code`, `email`, `phone`, `fax`, `address`, `info`, `deleted_time`)
-VALUES
-	(1,'Triá»‡u Trá»ng Sau','LDNCTPOOLRMTYBYJ','TrieuTrongSau@gmail.com','0984672618','0836184672','16 ÄÆ°á»ng 3 thÃ¡ng 2 , PhÆ°á»ng 1 , ÄÃ  Láº¡t - LÃ¢m Äá»“ng','Triá»‡u Trá»ng Sau lÃ  cá»±u thÃ nh viÃªn nhÃ³m MP5, cÅ©ng lÃ  ngÆ°á»i láº­p ra nhÃ³m nháº¡c nÃ y. Sau Ä‘Ã³ cÃ¡c thÃ¡nh viÃªn trong nhÃ³m tÃ¡ch ra solo, Triá»‡u Trá»ng Sau solo tá»« Ä‘áº§u nÄƒm 2009. ',NULL),
-	(2,'Láº¡c Thá»‹ XuÃ¢n UyÃªn','AGBYSNHNGXUYPGQF','LacThiXuanUyen@hotmail.com','0912010916','0830916201','44 Tráº§n PhÃº, P4, Q5 - Há»“ ChÃ­ Minh','Láº¡c Thá»‹ XuÃ¢n UyÃªn sinh ngÃ y 1/9/1984, cÃ²n cÃ³ biá»‡t danh lÃ  A MÃ­, lÃ  con thá»© 4 trong má»™t gia Ä‘Ã¬nh cÃ³ 5 chá»‹ em gÃ¡i, táº¡i quáº­n 5, má»™t khu dÃ¢n cÆ° Ä‘Æ°á»£c má»‡nh danh lÃ  \"phá»‘ ngÆ°á»i Hoa\" cá»§a ThÃ nh phá»‘ Há»“ ChÃ­ Minh. ',NULL);
 
-/*!40000 ALTER TABLE `lead` ENABLE KEYS */;
-UNLOCK TABLES;
+# Dump of table lead_contact
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `lead_contact`;
+
+CREATE TABLE `lead_contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lead_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `fax` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `info` text,
+  `deleted_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table product
@@ -181,20 +277,6 @@ CREATE TABLE `product` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `product` WRITE;
-/*!40000 ALTER TABLE `product` DISABLE KEYS */;
-
-INSERT INTO `product` (`id`, `item_no`, `name`, `specification`, `description`, `product_unit_id`, `price`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(1,'Item001','test item name',NULL,'des',1,1212.12,'2015-10-13 10:12:05','2015-10-18 10:05:35','2015-10-18 10:05:35'),
-	(2,'Item002','product 2',NULL,'',2,232,'2015-10-13 10:42:19','2015-10-13 10:44:37',NULL),
-	(3,'p002','product 2','22,5 x 8,5 x 13 cm','',2,212,'2015-10-15 10:28:24','2015-10-17 11:08:47',NULL),
-	(4,'p003','product 3','57 x 65   Cm','',2,332,'2015-10-15 10:28:38','2015-10-17 11:40:26',NULL),
-	(5,'p005','product 4',NULL,'',1,66,'2015-10-15 10:28:56','2015-10-15 10:28:56',NULL),
-	(6,'p006','product 5',NULL,'',1,44555,'2015-10-15 10:29:17','2015-10-15 10:29:17',NULL);
-
-/*!40000 ALTER TABLE `product` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table product_order
@@ -222,15 +304,6 @@ CREATE TABLE `product_order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `product_order` WRITE;
-/*!40000 ALTER TABLE `product_order` DISABLE KEYS */;
-
-INSERT INTO `product_order` (`id`, `output_product_id`, `input_product_id`, `num_product`, `customer_id`, `order_no`, `delivery_date`, `delivery_location`, `difference_percent`, `output_product_note`, `special_note`, `created_user_id`, `approved_user_id`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(1,3,4,30000,1,'001','2015-10-28 00:00:00','ho chi minh',-3,'2  Con/tá» in','HÃ ng Ä‘Æ°á»£c Ä‘Ã³ng trong bao nylon trÆ°á»›c khi vÃ o thÃ¹ng carton. \r\nGiao hÃ ng Ä‘Ãºng thá»i gian trÃªn',3,3,'2015-10-16 19:10:44','2015-10-16 19:47:46',NULL);
-
-/*!40000 ALTER TABLE `product_order` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table product_order_progress
@@ -251,20 +324,6 @@ CREATE TABLE `product_order_progress` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `product_order_progress` WRITE;
-/*!40000 ALTER TABLE `product_order_progress` DISABLE KEYS */;
-
-INSERT INTO `product_order_progress` (`id`, `product_order_id`, `name`, `location`, `description`, `order`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(10,1,'Cáº¯t giáº¥y táº¥m','TrÆ°á»ng SÆ¡n','Khá»• 65',1,'2015-10-16 19:47:46','2015-10-16 19:47:46',NULL),
-	(11,1,'In 4 MÃ€U CMYK','Há»’NG PHÃšC','',2,'2015-10-16 19:47:46','2015-10-16 19:47:46',NULL),
-	(12,1,'CÃ¡n uv','HAVUPACKAGE','',3,'2015-10-16 19:47:46','2015-10-16 19:47:46',NULL),
-	(13,1,'Báº¿ ','Havupackage','',4,'2015-10-16 19:47:46','2015-10-16 19:47:46',NULL),
-	(14,1,'DÃ¡n','Havupackage','',5,'2015-10-16 19:47:46','2015-10-16 19:47:46',NULL),
-	(15,1,'ÄÃ³ng gÃ³i','Havupackage','',6,'2015-10-16 19:47:46','2015-10-16 19:47:46',NULL);
-
-/*!40000 ALTER TABLE `product_order_progress` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table product_unit
@@ -283,7 +342,7 @@ LOCK TABLES `product_unit` WRITE;
 
 INSERT INTO `product_unit` (`id`, `name`)
 VALUES
-	(1,'EACH'),
+	(1,'Each'),
 	(2,'Piece');
 
 /*!40000 ALTER TABLE `product_unit` ENABLE KEYS */;
@@ -310,16 +369,6 @@ CREATE TABLE `purchase_order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `purchase_order` WRITE;
-/*!40000 ALTER TABLE `purchase_order` DISABLE KEYS */;
-
-INSERT INTO `purchase_order` (`id`, `customer_id`, `order_no`, `order_date`, `received_date`, `buyer_name`, `term`, `ship_via`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(1,9,'PO-001','2015-08-31 00:00:00','2015-10-31 00:00:00','Khuong','term','1','2015-10-15 19:29:48','2015-10-18 10:08:44',NULL),
-	(2,3,'PO-002','2015-10-04 00:00:00','2015-10-31 00:00:00','test 2','term','1','2015-10-16 08:32:51','2015-10-17 14:22:24',NULL);
-
-/*!40000 ALTER TABLE `purchase_order` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table purchase_order_product
@@ -338,19 +387,6 @@ CREATE TABLE `purchase_order_product` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `purchase_order_product` WRITE;
-/*!40000 ALTER TABLE `purchase_order_product` DISABLE KEYS */;
-
-INSERT INTO `purchase_order_product` (`id`, `product_id`, `purchase_order_id`, `num_item`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(4,4,2,3,'2015-10-17 14:22:24','2015-10-17 14:22:24',NULL),
-	(5,3,2,44,'2015-10-17 14:22:24','2015-10-17 14:22:24',NULL),
-	(10,2,1,226,'2015-10-18 10:08:44','2015-10-18 10:08:44',NULL),
-	(11,4,1,2,'2015-10-18 10:08:44','2015-10-18 10:08:44',NULL),
-	(12,3,1,33,'2015-10-18 10:08:44','2015-10-18 10:08:44',NULL);
-
-/*!40000 ALTER TABLE `purchase_order_product` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table purchase_order_vendor
@@ -373,15 +409,6 @@ CREATE TABLE `purchase_order_vendor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `purchase_order_vendor` WRITE;
-/*!40000 ALTER TABLE `purchase_order_vendor` DISABLE KEYS */;
-
-INSERT INTO `purchase_order_vendor` (`id`, `vendor_id`, `order_no`, `order_date`, `received_date`, `seller_name`, `term`, `ship_via`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(1,1,'ewew','2015-10-26 00:00:00','2015-10-28 00:00:00','rer','re','1','2015-10-18 09:54:28','2015-10-18 10:08:28',NULL);
-
-/*!40000 ALTER TABLE `purchase_order_vendor` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table purchase_order_vendor_product
@@ -400,16 +427,6 @@ CREATE TABLE `purchase_order_vendor_product` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `purchase_order_vendor_product` WRITE;
-/*!40000 ALTER TABLE `purchase_order_vendor_product` DISABLE KEYS */;
-
-INSERT INTO `purchase_order_vendor_product` (`id`, `product_id`, `purchase_order_vendor_id`, `num_item`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(6,2,1,22,'2015-10-18 10:08:28','2015-10-18 10:08:28',NULL),
-	(7,3,1,33,'2015-10-18 10:08:28','2015-10-18 10:08:28',NULL);
-
-/*!40000 ALTER TABLE `purchase_order_vendor_product` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table salary
@@ -430,26 +447,6 @@ CREATE TABLE `salary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `salary` WRITE;
-/*!40000 ALTER TABLE `salary` DISABLE KEYS */;
-
-INSERT INTO `salary` (`id`, `customer_id`, `user_id`, `amount`, `date`, `mark_up`, `created_time`, `updated_time`, `deleted_time`)
-VALUES
-	(1,9,3,40328297,'2015-10-02 00:00:00',10,'2015-10-18 05:02:46','2015-10-18 05:45:17',NULL),
-	(2,9,3,59837765,'2015-10-06 00:00:00',5,'2015-10-18 05:16:16','2015-10-18 05:16:16',NULL),
-	(3,10,3,308255241,'2015-10-12 00:00:00',3,'2015-10-18 05:16:40','2015-10-18 05:16:40',NULL),
-	(4,10,3,170595999,'2015-10-12 00:00:00',4,'2015-10-18 05:16:48','2015-10-18 05:16:48',NULL),
-	(5,11,3,81060000,'2015-10-13 00:00:00',2,'2015-10-18 05:16:59','2015-10-18 05:16:59',NULL),
-	(6,10,3,49923536,'2015-10-13 00:00:00',2,'2015-10-18 05:17:16','2015-10-18 05:17:16',NULL),
-	(7,10,3,105980647,'2015-10-06 00:00:00',2,'2015-10-18 05:17:50','2015-10-18 05:17:50',NULL),
-	(8,11,3,214737165,'2015-10-07 00:00:00',3,'2015-10-18 05:18:05','2015-10-18 05:18:05',NULL),
-	(9,11,3,42738329,'2015-10-12 00:00:00',40,'2015-10-18 05:18:22','2015-10-18 05:18:22',NULL),
-	(10,12,3,1111,'2015-10-02 00:00:00',2,'2015-10-18 05:57:45','2015-10-18 06:01:23','2015-10-18 06:01:23'),
-	(11,9,5,1221,'2015-10-05 00:00:00',434,'2015-10-18 06:00:15','2015-10-18 06:00:15',NULL),
-	(12,10,5,54545454,'2015-10-15 00:00:00',23232,'2015-10-18 06:00:29','2015-10-18 06:00:29',NULL);
-
-/*!40000 ALTER TABLE `salary` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table settings
@@ -470,7 +467,36 @@ LOCK TABLES `settings` WRITE;
 
 INSERT INTO `settings` (`id`, `key`, `val`, `name`)
 VALUES
-	(1,'assumed','1000','Assumed');
+	(1,'printing_ink_price','175','Printing - Ink Price'),
+	(2,'ink_loss_prn_color','200',' Ink loss/Prn / Color'),
+	(3,'trial_prn','30','Trial Prn'),
+	(4,'printing_cost','150','Printing Cost'),
+	(5,'time_cost','3500','Time Cost'),
+	(6,'time_waste','45','Time Waste'),
+	(7,'prn_plate','180000','Prn Plate'),
+	(8,'film_cost','800000','Film Cost'),
+	(9,'prn_wastg','1','Prn Wastg'),
+	(10,'vanish_oil','600','Vanish - Oil'),
+	(11,'vanish_uv','950','Vanish - UV'),
+	(12,'vanish_opp','1800','Vanish - OPP'),
+	(13,'limination','500','Limination'),
+	(14,'limination _wastage','1','Limination - Wastage'),
+	(15,'die_cut','1500000','Die-Cut'),
+	(16,'die_cut_labour','150','Die-Cut - Labour'),
+	(17,'die_cut_wastage','1','Die-Cut - Wastage'),
+	(18,'gluing_1','40','Gluing 1'),
+	(19,'gluing_2','60','Gluing 2'),
+	(20,'gluing_3','80','Gluing 3'),
+	(21,'sales_tax','0','Sales Tax'),
+	(22,'capital_investment','300000','Capital  Investment '),
+	(23,'depreciation_period','5','Depreciation Period'),
+	(24,'engineer','250','Engineer'),
+	(25,'3_team_leaders','600','3 Team Leaders'),
+	(26,'12_workers','2400','12 Workers (3 Shifts)'),
+	(27,'maintenance','500','Maintenance'),
+	(28,'chemical','500','Chemical'),
+	(29,'usd_to_vnd','14000','1  USD   to VND'),
+	(30,'assumed','2000','Assumed');
 
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -549,8 +575,7 @@ CREATE TABLE `user_role_access` (
   PRIMARY KEY (`id`),
   KEY `role_id` (`role_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`),
-  CONSTRAINT `user_role_access_user` FOREIGN KEY (`user_id`) REFERENCES `wp_users` (`ID`)
+  CONSTRAINT `user_role_access_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `user_role_access` WRITE;
@@ -558,9 +583,10 @@ LOCK TABLES `user_role_access` WRITE;
 
 INSERT INTO `user_role_access` (`id`, `role_id`, `user_id`, `created_time`, `deleted_time`, `updated_time`)
 VALUES
-	(1,2,3,'2015-10-17 15:51:22',NULL,'2015-10-17 15:51:22'),
-	(3,3,4,'2015-10-17 17:59:08',NULL,'2015-10-17 17:59:08'),
-	(6,3,5,'2015-10-17 18:13:46',NULL,'2015-10-17 18:13:46');
+	(1,2,1,'2015-10-22 11:17:19',NULL,'2015-10-22 11:17:19'),
+	(2,3,2,'2015-10-22 11:18:13',NULL,'2015-10-22 11:18:13'),
+	(3,3,3,'2015-10-22 11:18:46',NULL,'2015-10-22 11:18:46'),
+	(4,3,4,'2015-10-22 11:19:19',NULL,'2015-10-22 11:19:19');
 
 /*!40000 ALTER TABLE `user_role_access` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -591,33 +617,35 @@ LOCK TABLES `user_role_right` WRITE;
 
 INSERT INTO `user_role_right` (`id`, `role_id`, `plugin`, `controller`, `action`, `description`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(109,3,NULL,'CostingController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(110,3,NULL,'CustomerController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(111,3,NULL,'DashboardController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(112,3,NULL,'FileController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(113,3,NULL,'LeadController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(114,3,NULL,'ProductController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(115,3,NULL,'ProductOrderController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(116,3,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(117,3,NULL,'PurchaseOrderVendorController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(118,3,NULL,'SalaryController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(119,3,NULL,'VendorController',NULL,NULL,'2015-10-18 09:45:16','2015-10-18 09:45:16',NULL),
-	(120,2,NULL,'CostingController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(121,2,NULL,'CustomerController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(122,2,NULL,'DashboardController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(123,2,NULL,'FileController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(124,2,NULL,'LeadController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(125,2,NULL,'ProductController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(126,2,NULL,'ProductOrderController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(127,2,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(128,2,NULL,'PurchaseOrderVendorController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(129,2,NULL,'SalaryController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(130,2,NULL,'SettingsController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(131,2,NULL,'VendorController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(132,2,'User','UserController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(133,2,'User','UserRoleAccessController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(134,2,'User','UserRoleController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL),
-	(135,2,'User','UserRoleRightController',NULL,NULL,'2015-10-18 09:45:20','2015-10-18 09:45:20',NULL);
+	(1,2,NULL,'CalendarController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(2,2,NULL,'CostingController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(3,2,NULL,'CustomerController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(4,2,NULL,'DashboardController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(5,2,NULL,'FileController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(6,2,NULL,'LeadController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(7,2,NULL,'ProductController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(8,2,NULL,'ProductOrderController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(9,2,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(10,2,NULL,'PurchaseOrderVendorController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(11,2,NULL,'SalaryController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(12,2,NULL,'SettingsController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(13,2,NULL,'VendorController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(14,2,'User','UserController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(15,2,'User','UserRoleAccessController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(16,2,'User','UserRoleController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(17,2,'User','UserRoleRightController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
+	(18,3,NULL,'CalendarController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(19,3,NULL,'CostingController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(20,3,NULL,'CustomerController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(21,3,NULL,'DashboardController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(22,3,NULL,'FileController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(23,3,NULL,'LeadController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(24,3,NULL,'ProductController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(25,3,NULL,'ProductOrderController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(26,3,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(27,3,NULL,'PurchaseOrderVendorController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(28,3,NULL,'SalaryController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
+	(29,3,NULL,'VendorController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL);
 
 /*!40000 ALTER TABLE `user_role_right` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -641,16 +669,26 @@ CREATE TABLE `vendor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `vendor` WRITE;
-/*!40000 ALTER TABLE `vendor` DISABLE KEYS */;
 
-INSERT INTO `vendor` (`id`, `name`, `code`, `email`, `phone`, `fax`, `address`, `info`, `deleted_time`)
-VALUES
-	(1,'Buffet Ngá»c Thá»§y','WDPZUTKCAEDCCBRL','ngocthuybuffet@yahoo.com','0838378543','0838378543','214 B Nguyá»…n TrÃ£i, PhÆ°á»ng Nguyá»…n CÆ° Trinh, Quáº­n 1 - Há»“ ChÃ­ Minh','Æ¯u Ä‘iá»ƒm : \r\n- Thá»©c Äƒn ngon vÃ  phong phÃº, Ä‘áº·c biá»‡t lÃ  cÃ³ nhiá»u háº£i sáº£n.',NULL),
-	(2,'Dá»‹ch vá»¥ Káº¿ toÃ¡n TrÃ­ Viá»‡t','EVNVGNTDLKHURRGN','trivietacc@gmail.com','0934534541','0934534541','251 Chu VÄƒn An - Há»“ ChÃ­ Minh','Cung cáº¥p cÃ¡c dá»‹ch vá»¥ káº¿ toÃ¡n cho doanh nghiá»‡p nhÆ° dá»‹ch vá»¥ káº¿ toÃ¡n thuáº¿ trá»n gÃ³i, dá»‹ch vá»¥ láº­p bÃ¡o cÃ¡o tÃ i chÃ­nh, dá»‹ch vá»¥ káº¿ toÃ¡n trá»n gÃ³i,..',NULL);
 
-/*!40000 ALTER TABLE `vendor` ENABLE KEYS */;
-UNLOCK TABLES;
+# Dump of table vendor_contact
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `vendor_contact`;
+
+CREATE TABLE `vendor_contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vendor_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `fax` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `info` text,
+  `deleted_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table wp_users
@@ -660,33 +698,33 @@ DROP TABLE IF EXISTS `wp_users`;
 
 CREATE TABLE `wp_users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_login` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `user_pass` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `user_nicename` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `user_email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `user_url` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_login` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_pass` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_nicename` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_url` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `user_activation_key` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `user_activation_key` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
   `user_status` int(11) NOT NULL DEFAULT '0',
-  `firstname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `lastname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `display_name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `firstname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `lastname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `display_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `created_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   `deleted_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_login_key` (`user_login`),
-  KEY `user_nicename` (`user_nicename`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `user_login_key` (`user_login`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `wp_users` WRITE;
 /*!40000 ALTER TABLE `wp_users` DISABLE KEYS */;
 
 INSERT INTO `wp_users` (`id`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `firstname`, `lastname`, `display_name`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(3,'admin','$P$BAlJQI3ykZULnoEspvSt/ssjDj1wH3/','','admin@gmail.com','','0000-00-00 00:00:00','55f81a472136e1875bb8fd073404f53a',0,'F Name','L Name','F Name L Name',NULL,'2015-10-17 18:00:11',NULL),
-	(4,'user2','$P$BHfhMh3uBeIxNUaf/C4Pt/HVcSUQZa1','','user2@gmail.com','','0000-00-00 00:00:00','',0,'user','2','user 2','2015-10-17 17:58:45','2015-10-17 18:10:21',NULL),
-	(5,'user1','$P$BejzpWP3cQAhre9umA/SoosnfJD0ci/','','user1@gmail.com','','0000-00-00 00:00:00','',0,'user ','1','user  1','2015-10-17 18:13:46','2015-10-17 18:13:46',NULL);
+	(1,'sonhong','$P$BXgxxNiqjo8hkmIY371PlAHRnGVO2y0','','admin@baobigiay.com','','0000-00-00 00:00:00','',0,'Há»“ng','SÆ¡n','Há»“ng SÆ¡n','2015-10-22 11:17:19','2015-10-22 11:17:19',NULL),
+	(2,'staff1','$P$BuVmKFMFyJ.YMJDImuIvBy8xlZkPAc0','','staff1@baobigiay.com','','0000-00-00 00:00:00','',0,'NhÃ¢n','ViÃªn 01','NhÃ¢n ViÃªn 01','2015-10-22 11:18:13','2015-10-22 11:18:13',NULL),
+	(3,'staff2','$P$BOn.kxRfH9upuu0EaRrAgrou2LVNWO.','','staff2@baobigiay.com','','0000-00-00 00:00:00','',0,'NhÃ¢n','ViÃªn 02','NhÃ¢n ViÃªn 02','2015-10-22 11:18:46','2015-10-22 11:18:46',NULL),
+	(4,'staff3','$P$B3me/JXrGqHy9sJwEUYnJ0I9brvDdu0','','staff3@baobigiay.com','','0000-00-00 00:00:00','',0,'NhÃ¢n','ViÃªn 03','NhÃ¢n ViÃªn 03','2015-10-22 11:19:19','2015-10-22 11:19:19',NULL);
 
 /*!40000 ALTER TABLE `wp_users` ENABLE KEYS */;
 UNLOCK TABLES;
