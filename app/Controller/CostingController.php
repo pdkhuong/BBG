@@ -249,7 +249,7 @@ class CostingController extends AppController {
     $row[3] = 'Vnd/m2';
     $row[4] = '';
     $row[5] = 'Ink Cost / pc:';
-    $inkCostPc = round($printingAreaPC*$settings['printing_ink_price']*$costingDb['Costing']['printing_coverage']/100 * $costingDb['Costing']['printing_cost']);
+    $inkCostPc = round($printingAreaPC*$settings['printing_ink_price']*$costingDb['Costing']['printing_coverage']/100 * $costingDb['Costing']['printing_cost'], 2);
     $row[6] = $inkCostPc;
     $row[7] = 'Vnd/pc';
     $row[8] = $inkCostPc;
@@ -263,7 +263,7 @@ class CostingController extends AppController {
     $row[3] = 'Gm/Color';
     $row[4] = 'Ink loss Cost / pc: ';
     $row[5] = '';
-    $inkLostCostPc = round($costingDb['Costing']['printing_color']*$settings['ink_loss_prn_color']/1000 * 100000 / $costingDb['Costing']['quantity']*$costingDb['Costing']['printing_cost']);
+    $inkLostCostPc = round($costingDb['Costing']['printing_color']*$settings['ink_loss_prn_color']/1000 * 100000 / $costingDb['Costing']['quantity']*$costingDb['Costing']['printing_cost'], 2);
     $row[6] = $inkLostCostPc;
     $row[7] = 'Vnd/pc';
     $row[8] = $inkLostCostPc;
@@ -277,7 +277,7 @@ class CostingController extends AppController {
     $row[3] = 'Sht/Color';
     $row[4] = 'Trial Cost/pc:';
     $row[5] = '';
-    $trialCostPc = round($costingDb['Costing']['paper_cutting']* $costPC * $settings['trial_prn'] * $costingDb['Costing']['printing_color']/ $costingDb['Costing']['quantity']*$costingDb['Costing']['printing_cost']);
+    $trialCostPc = round($costingDb['Costing']['paper_cutting']* $costPC * $settings['trial_prn'] * $costingDb['Costing']['printing_color']/ $costingDb['Costing']['quantity']*$costingDb['Costing']['printing_cost'], 2);
     $row[6] = $trialCostPc;
     $row[7] = 'Vnd/pc';
     $row[8] = $trialCostPc;
@@ -351,7 +351,7 @@ class CostingController extends AppController {
     $row[3] = 'Vnd/m2';
     $row[4] = 'Film Cost/pc :';
     $row[5] = '';
-    $filmCostPc = round($printingAreaPC * $settings['film_cost'] * $costingDb['Costing']['printing_films'] * $costingDb['Costing']['paper_cutting'] * $costingDb['Costing']['printing_color'] / $costingDb['Costing']['quantity']);
+    $filmCostPc = round($printingAreaPC * $settings['film_cost'] * $costingDb['Costing']['printing_films'] * $costingDb['Costing']['paper_cutting'] * $costingDb['Costing']['printing_color'] / $costingDb['Costing']['quantity'], 2);
     $row[6] = $filmCostPc;
     $row[7] = 'Vnd/pc';
     $row[8] = $filmCostPc;
@@ -365,7 +365,7 @@ class CostingController extends AppController {
     $row[3] = '%/Color';
     $row[4] = 'Prn Wastage Cost/pc :';
     $row[5] = '';
-    $prnWastageCostPc = round($sumForPrnWastage* $settings['prn_wastg'] /100 * $costingDb['Costing']['printing_color'] * $costingDb['Costing']['printing_cost']);
+    $prnWastageCostPc = round($sumForPrnWastage* $settings['prn_wastg'] /100 * $costingDb['Costing']['printing_color'] * $costingDb['Costing']['printing_cost'], 2);
     $row[6] = $prnWastageCostPc;
     $row[7] = 'Vnd/pc';
     $row[8] = $prnWastageCostPc;
@@ -397,7 +397,7 @@ class CostingController extends AppController {
     $row[3] = 'Vnd / m2';
     $row[4] = '';
     $row[5] = 'Oil Cost/pc :';
-    $oilCostPc = round($printingAreaPC * $costingDb['Costing']['vanish_oil']* $settings['vanish_oil']);
+    $oilCostPc = round($printingAreaPC * $costingDb['Costing']['vanish_oil']* $settings['vanish_oil'], 2);
     $row[6] = $oilCostPc;
     $row[7] = 'Vnd/pc';
     $row[8] = $oilCostPc;
@@ -410,7 +410,7 @@ class CostingController extends AppController {
     $row[3] = 'Vnd / m2';
     $row[4] = '';
     $row[5] = 'UV Cost/pc :';
-    $uvCostPc = round($costingDb['Costing']['paper_length'] * $costingDb['Costing']['paper_width'] / 10000 * $settings['vanish_uv'] / $costingDb['Costing']['paper_cutting'] * $costingDb['Costing']['vanish_uv']);
+    $uvCostPc = round($costingDb['Costing']['paper_length'] * $costingDb['Costing']['paper_width'] / 10000 * $settings['vanish_uv'] / $costingDb['Costing']['paper_cutting'] * $costingDb['Costing']['vanish_uv'], 2);
     $row[6] = $uvCostPc;
     $row[7] = 'Vnd/pc';
     $row[8] = $uvCostPc;
@@ -423,7 +423,7 @@ class CostingController extends AppController {
     $row[3] = 'Vnd / m2';
     $row[4] = '';
     $row[5] = 'OPP Cost/pc:';
-    $oppCostPc = round($costingDb['Costing']['paper_length'] * $costingDb['Costing']['paper_width'] / 10000 * $settings['vanish_opp'] / $costingDb['Costing']['paper_cutting'] * $costingDb['Costing']['vanish_opp']);
+    $oppCostPc = round($costingDb['Costing']['paper_length'] * $costingDb['Costing']['paper_width'] / 10000 * $settings['vanish_opp'] / $costingDb['Costing']['paper_cutting'] * $costingDb['Costing']['vanish_opp'], 2);
     $row[6] = $oppCostPc;
     $row[7] = 'Vnd/pc';
     $row[8] = $oppCostPc;
@@ -489,7 +489,7 @@ class CostingController extends AppController {
     $bFluteArea = $printingAreaPC * 1.45;
     $row[4] = round($bFluteArea, 3);
     $row[5] = 'M2';
-    $row[6] = round($bFluteArea * $costingDb['Costing']['b_flute_substance']/1000*$costingDb['Costing']['quantity']);
+    $row[6] = round($bFluteArea * $costingDb['Costing']['b_flute_substance']/1000*$costingDb['Costing']['quantity'], 2);
     $bFluteUnitPrice = $costingDb['Costing']['b_flute_price'] / 1000000;
     $row[7] = $bFluteUnitPrice;
     $bFlute = $bFluteArea * $costingDb['Costing']['b_flute_substance'] * $bFluteUnitPrice * $costingDb['Costing']['exchange'] * $costingDb['Costing']['ply'];
@@ -595,7 +595,7 @@ class CostingController extends AppController {
     $row[3] = '/m2';
     $row[4] = 'Mould Cost /pc :';
     $row[5] = '';
-    $dieCut1 = round($costingDb['Costing']['paper_length'] * $costingDb['Costing']['paper_width'] / 10000 * $settings['die_cut']/$costingDb['Costing']['paper_cutting']/$costingDb['Costing']['quantity'] * $costingDb['Costing']['die_cut'] * $costingDb['Costing']['paper_cutting']);
+    $dieCut1 = round($costingDb['Costing']['paper_length'] * $costingDb['Costing']['paper_width'] / 10000 * $settings['die_cut']/$costingDb['Costing']['paper_cutting']/$costingDb['Costing']['quantity'] * $costingDb['Costing']['die_cut'] * $costingDb['Costing']['paper_cutting'], 2);
     $row[6] = $dieCut1;
     $row[7] = 'Vnd/pc';
     $row[8] = $dieCut1;
@@ -608,7 +608,7 @@ class CostingController extends AppController {
     $row[3] = 'Vnd/pass';
     $row[4] = '';
     $row[5] = 'Labour Cost /pc :';
-    $dieCut2 = round($settings['die_cut_labour']/$costingDb['Costing']['paper_cutting']*$costingDb['Costing']['die_cut']);
+    $dieCut2 = round($settings['die_cut_labour']/$costingDb['Costing']['paper_cutting']*$costingDb['Costing']['die_cut'], 2);
     $row[6] = $dieCut2;
     $row[7] = 'Vnd/pc';
     $row[8] = $dieCut2;
@@ -622,7 +622,7 @@ class CostingController extends AppController {
     $row[3] = '%';
     $row[4] = '';
     $row[5] = 'Wastage :';
-    $dieCutWastage = round(($sumPaper + $sumPrinting + $sumVanish +$sumFly + $limination1 ) * $settings['die_cut_wastage']/100 * $costingDb['Costing']['die_cut']);
+    $dieCutWastage = round(($sumPaper + $sumPrinting + $sumVanish +$sumFly + $limination1 ) * $settings['die_cut_wastage']/100 * $costingDb['Costing']['die_cut'], 2);
     $row[6] = $dieCutWastage;
     $row[7] = 'Vnd/pc';
     $row[8] = $dieCutWastage;
@@ -706,7 +706,7 @@ class CostingController extends AppController {
     $row[5] = '';
     $row[6] = $costingDb['Costing']['transportation'];
     $row[7] = '%';
-    $transportation = round($sumAll * $costingDb['Costing']['transportation'] / 100);
+    $transportation = round($sumAll * $costingDb['Costing']['transportation'] / 100, 2);
     $row[8] = $transportation;
     $row[9] = $transportation;
     $data[] = $row;
@@ -734,7 +734,7 @@ class CostingController extends AppController {
     $row[5] = '';
     $row[6] = $settings['sales_tax'];
     $row[7] = '%';
-    $saleTax = round(($sumAll + $transportation) * $settings['sales_tax'] / 100);
+    $saleTax = round(($sumAll + $transportation) * $settings['sales_tax'] / 100, 2);
     $row[8] = $saleTax;
     $row[9] = $saleTax;
     $data[] = $row;
@@ -746,7 +746,7 @@ class CostingController extends AppController {
     $sum1 = $sumAll + $transportation + $packaging + $saleTax;
     $mk = round($sum1  * $costingDb['Costing']['mk'] / 100);
     $sellingPrice = $sum1 + $mk;
-    $grossMU = round(($prnCostPc + $timeWasteCostPc + $manufacturingCost + $dieCut2)/$sellingPrice*100+$costingDb['Costing']['mk'], 1);
+    $grossMU = round(($prnCostPc + $timeWasteCostPc + $manufacturingCost + $dieCut2)/$sellingPrice*100+$costingDb['Costing']['mk'], 2);
     //row 57
     $row = array();
     $row[0] = '';

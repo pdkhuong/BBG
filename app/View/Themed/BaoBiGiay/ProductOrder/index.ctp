@@ -39,7 +39,9 @@
                 <td><?php echo reformatDate($data['ProductOrder']['delivery_date']); ?></td>
                 <td><?php echo ($data['CreatedUser']['display_name']); ?></td>
                 <td>
+                  <?php if($data['has_costing']):?>
                   <?= $this->Html->link('<i class="fa fa-file-pdf-o"></i>', Router::url(array('action' => 'report', $data['ProductOrder']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false)) ?>
+                  <?php endif;?>
                   <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['ProductOrder']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false)) ?>
                   <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete', $data['ProductOrder']['id'])), array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false), __('Are you sure you want to delete #%s?', $data['ProductOrder']['id'])) ?>
                 </td>

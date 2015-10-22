@@ -1,8 +1,8 @@
 <h3>
   <? if (isset($this->data['PurchaseOrderVendor']['id']) && $this->data['PurchaseOrderVendor']['id'] > 0): ?>
-    <?= __('Edit Purchase Order') ?>: #<?= $this->data['PurchaseOrderVendor']['id'] ?>
+    <?= __('Edit Purchase Order (Vendor)') ?>: #<?= $this->data['PurchaseOrderVendor']['id'] ?>
   <? else: ?>
-    <?= __('Add Purchase Order') ?>
+    <?= __('Add Purchase Order (Vendor)') ?>
   <? endif; ?>
 </h3>
 

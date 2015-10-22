@@ -102,16 +102,6 @@ class ProductOrder extends AppModel {
         'allowEmpty' => false,
       ),
     ),
-    'output_product_note' => array(
-      'size' => array(
-        'rule' => array(
-          0 => 'maxLength',
-          1 => 200,
-        ),
-        'message' => 'Please enter a text no larger than 200 characters long',
-        'allowEmpty' => false,
-      )
-    ),
     'special_note' => array(
       'size' => array(
         'rule' => array(
