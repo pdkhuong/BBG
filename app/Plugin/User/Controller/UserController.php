@@ -129,7 +129,7 @@ class UserController extends AppController
     $this->set('selectedRoles', Hash::combine($this->UserRoleAccess->find('all'), '{n}.UserRoleAccess.role_id', '{n}.UserRole.name', '{n}.UserRoleAccess.user_id'));
     $this->set('displayPaging', true);
     $this->Paginator->settings = array(
-    'limit' => 10
+    'limit' => ITEM_PER_PAGE
     );
     $dataList = $this->Paginator->paginate('UserModel');
 

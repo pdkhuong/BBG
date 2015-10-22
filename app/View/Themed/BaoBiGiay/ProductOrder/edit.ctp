@@ -69,7 +69,6 @@
 
   <?php echo $this->Form->input('delivery_location', array('label' => array('text' => __('Delivery Location')))) ?>
   <?php echo $this->Form->input('difference_percent', array('label' => array('text' => __('Difference Percent')))) ?>
-  <?php echo $this->Form->input('output_product_note', array('label' => array('text' => __('Output Note')))) ?>
   <?php
   echo $this->Form->input('created_user_id',
     array('options' => $listUser,

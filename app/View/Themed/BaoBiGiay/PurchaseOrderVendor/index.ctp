@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <h1><i class="fa fa-bars"></i>
-        <?php echo __('Purchase Oder List') ?>
+        <?php echo __('Purchase Oder List (Vendor)') ?>
       </h1>
     </div>
     <div class="col-md-3 text-right">
