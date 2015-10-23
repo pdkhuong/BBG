@@ -7,7 +7,8 @@ class PurchaseOrderVendorController extends AppController {
     'ProductUnit',
     'PurchaseOrderVendor',
     'PurchaseOrderVendorProduct',
-    'Vendor'
+    'Vendor',
+    'User.UserModel'
   );
 
   public function beforeFilter() {
@@ -24,6 +25,19 @@ class PurchaseOrderVendorController extends AppController {
   }
 
   public function edit($id=0){
+    $purchaseOrderVendorDb = $this->PurchaseOrderVendor->findById($id);
+    $listUser = array();
+    $currentUserId = 0;
+    $isAdmin = $this->isAdmin();
+    if($isAdmin){
+      $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
+    }else{
+      $currentUserId = $this->loggedUser->User->id;
+      if($purchaseOrderVendorDb && $purchaseOrderVendorDb['PurchaseOrderVendor']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
+    }
+    $this->set('listUser', $listUser);
     $listVendor = $this->Vendor->find("list");
     $listProduct = Hash::combine($this->Product->find("all"), '{n}.Product.id', '{n}');
     $addedProducts = array();
@@ -31,7 +45,7 @@ class PurchaseOrderVendorController extends AppController {
     $this->set('shipType', $shipType);
     $errorObj = array();
     if (empty($this->request->data)) {
-      $this->request->data = $this->PurchaseOrderVendor->findById($id);
+      $this->request->data = $purchaseOrderVendorDb;
       $currentPurchaseOrderVendorProducts = $this->PurchaseOrderVendorProduct->findAllByPurchaseOrderVendorId($id);
       if($currentPurchaseOrderVendorProducts){
         $listProductUnit = Hash::combine($this->ProductUnit->find('all'), '{n}.ProductUnit.id', '{n}.ProductUnit');
@@ -45,6 +59,9 @@ class PurchaseOrderVendorController extends AppController {
       }
     } else {
       $errorMsg = '';
+      if(!isset($this->request->data['PurchaseOrderVendor']['user_id'])){
+        $this->request->data['PurchaseOrderVendor']['user_id'] = $currentUserId;
+      }
       if(isset($this->request->data['Product']['num_item'])){
         $addedProductItemArr  = $this->request->data['Product']['num_item'];
         foreach($addedProductItemArr as $productId => $numOfProduct){
@@ -102,6 +119,14 @@ class PurchaseOrderVendorController extends AppController {
 
 
   public function delete($id) {
+    $purchaseOrderVendorDb = $this->PurchaseOrderVendor->findById($id);
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      if($purchaseOrderVendorDb && $purchaseOrderVendorDb['PurchaseOrderVendor']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
+    }
     $this->PurchaseOrderVendorProduct->deleteByPurchaseOrderVendorId($id);
     $this->PurchaseOrderVendor->deleteLogic($id);
     $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
@@ -124,6 +149,11 @@ class PurchaseOrderVendorController extends AppController {
     //$this->set('receivedDateTo', $receivedDateTo);
 
     $conditions = array();
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      $conditions['PurchaseOrderVendor.user_id'] = $currentUserId;
+    }
     $conditions['PurchaseOrderVendor.deleted_time'] = null;
     if($vendorId){
       $conditions['PurchaseOrderVendor.vendor_id'] = $vendorId;

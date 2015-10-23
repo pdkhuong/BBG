@@ -104,7 +104,13 @@ class AppController extends Controller {
   function setHeadTitle() {
     $this->set('title_for_layout', "Bao Bì Giấy Hoàng Vương");
   }
-
+  function isAdmin(){
+    $isAdmin = false;
+    if($this->loggedUser->Admin->id > 0 || isset($this->loggedUser->Role[USER_ROLE_ADMIN])){
+      $isAdmin = true;
+    }
+    return $isAdmin;
+  }
   function afterFilter() {
     parent::afterFilter();
     if (isset($_SERVER['HTTP_SF_AJAX_HEADER']) && $_SERVER['HTTP_SF_AJAX_HEADER'] == 'sfDialog') {

@@ -173,7 +173,7 @@
 		</div>
 	</div>
 	
-	<h4><?php echo __('Users'); ?></h4>
+	<h4><?php echo __('Staff Member'); ?></h4>
 	<div class='table-responsive well'>
 		<table cellpadding='0' cellspacing='0' class='table'>
 		  <thead>
@@ -350,7 +350,7 @@ echo $this->Html->script('calendar.js');
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><?php echo __("Add User")?></h4>
+        <h4 class="modal-title"><?php echo __("Add Staff Member")?></h4>
       </div>
       <div class="modal-body">
         <div id="_user_msg" class="alert alert-danger hidden"></div>
@@ -358,8 +358,8 @@ echo $this->Html->script('calendar.js');
 		echo $this->Form->input('user_id',
 			array('options' => $listUser,
 			  'selected'=>NULL,
-			  'label' => array('text' => __('User')),
-			  'empty' => __("Please select user..."),
+			  'label' => array('text' => __('Staff Member')),
+			  'empty' => __("Please select member..."),
 			)
 		);
 		?>

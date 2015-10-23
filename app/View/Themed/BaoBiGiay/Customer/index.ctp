@@ -18,11 +18,12 @@
         <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
           <thead>
             <tr>
-              <th width="25%"><?php echo __('Name') ?></th>
-			  <th width="20%"><?php echo __('Email') ?></th>
-			  <th width="10%"><?php echo __('Phone') ?></th>
-			  <th width="35%"><?php echo __('Address'); ?></th>
-			  <th width="20%"><?php echo __('Actions'); ?></th>
+              <th width="20%"><?php echo __('Name') ?></th>
+              <th width="20%"><?php echo __('Email') ?></th>
+              <th width="20%"><?php echo __('Staff Member') ?></th>
+              <th width="10%"><?php echo __('Phone') ?></th>
+              <th width="20%"><?php echo __('Address'); ?></th>
+              <th width="10%"><?php echo __('Actions'); ?></th>
             </tr>
           </thead>
           <tbody>
@@ -31,9 +32,10 @@
               ?>
               <tr>
                 <td><?php echo ($data['Customer']['name']); ?></td>
-				<td><?php echo ($data['Customer']['email']); ?></td>
-				<td><?php echo ($data['Customer']['phone']); ?></td>
-				<td><?php echo ($data['Customer']['address']); ?></td>
+                <td><?php echo ($data['Customer']['email']); ?></td>
+                <td><?php echo ($data['User']['display_name']); ?></td>
+                <td><?php echo ($data['Customer']['phone']); ?></td>
+                <td><?php echo ($data['Customer']['address']); ?></td>
                 <td>
                   <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Customer']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false)) ?>
                   <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete')) . '/' . $data['Customer']['id'], array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false), __('Are you sure you want to delete #%s?', $data['Customer']['id'])) ?>

@@ -21,7 +21,17 @@ echo $this->Form->create('Customer', array(
   )
 ));
   ?>
-
+  <?php
+  if($listUser){
+    echo $this->Form->input('user_id',
+      array(
+        'options' => $listUser,
+        'empty' => __("Please select staff member ..."),
+        'label' => array('text' => __('Staff Member'))
+      )
+    );
+  }
+  ?>
   <?php echo $this->Form->input('name', array('label' => array('text' => __('Name')))) ?>
   <?php echo $this->Form->input('code', array('label' => array('text' => __('Code')))) ?>
   <?php echo $this->Form->input('email', array('label' => array('text' => __('Email')))) ?>

@@ -4,6 +4,7 @@ class VendorController extends AppController {
   var $uses = array(
     'Vendor',
     'VendorContact',
+    'User.UserModel'
   );
 
   public function beforeFilter() {
@@ -20,42 +21,65 @@ class VendorController extends AppController {
   }
 
   public function edit($id = 0) {
-	$addedContact = array();
+    $vendorDb = $this->Vendor->findById($id);
+    $listUser = array();
+    $currentUserId = 0;
+    $isAdmin = $this->isAdmin();
+    if($isAdmin){
+      $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
+    }else{
+      $currentUserId = $this->loggedUser->User->id;
+      if($vendorDb && $vendorDb['Vendor']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
+    }
+    $this->set('listUser', $listUser);
+	  $addedContact = array();
     $contactBeforeAdded = $this->VendorContact->findAllByVendorId($id);
     $contactBeforeAdded = Hash::combine($contactBeforeAdded, '{n}.VendorContact.id', '{n}.VendorContact');
-	//var_dump($contactBeforeAdded);
     if (empty($this->request->data)) {//show on edit
 	  $addedContact = $contactBeforeAdded;
-      $this->request->data = $this->Vendor->findById($id);
+      $this->request->data = $vendorDb;
     } else {//save
-	  $addedContact = isset($this->request->data['VendorContact'])?$this->request->data['VendorContact']:array();
+      if(!isset($this->request->data['Vendor']['user_id'])){
+        $this->request->data['Vendor']['user_id'] = $currentUserId;
+      }
+	    $addedContact = isset($this->request->data['VendorContact'])?$this->request->data['VendorContact']:array();
       $this->Vendor->set($this->request->data);
       if ($this->Vendor->save()) {
-	    $vendorId = $this->Vendor->getId();
-		$this->_saveContact($vendorId, $addedContact, $contactBeforeAdded);
+        $vendorId = $this->Vendor->getId();
+        $this->_saveContact($vendorId, $addedContact, $contactBeforeAdded);
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
-        return $this->redirect(Router::url(array('action' => 'index')));
+        $this->redirect(Router::url(array('action' => 'index')));
       } else {
         $this->Session->setFlash(__('Unable to save your data.'), 'flash/error');
       }
     }
-	$this->set('addedContact', $addedContact);
+	  $this->set('addedContact', $addedContact);
   }
 
   public function delete($id) {
-    if ($this->Vendor->isInUsed($id)) {
-      $this->Session->setFlash(__('Unable to delete your data. It\'s in used'), 'flash/error');
-      return $this->redirect($this->referer());
+    $vendorDb = $this->Vendor->findById($id);
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      if($vendorDb && $vendorDb['Vendor']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
     }
     $this->Vendor->deleteLogic($id);
-	$this->VendorContact->deleteAll(array('vendor_id' => $id), false);
-
+	  $this->VendorContact->deleteAll(array('vendor_id' => $id), false);
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
 
   public function index() {
     $condition = array();
     $condition['Vendor.deleted_time'] = null;
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      $condition['Vendor.user_id'] = $currentUserId;
+    }
 
     $this->set('displayPaging', true);
     $this->Paginator->settings = array(

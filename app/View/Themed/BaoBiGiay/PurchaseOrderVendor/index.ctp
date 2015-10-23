@@ -71,7 +71,8 @@ echo $this->Form->create('PurchaseOrderVendor', array(
               <thead>
               <tr>
                 <th width="10%"><?php echo __('Order No.') ?></th>
-                <th width="20%"><?php echo __('Vendor') ?></th>
+                <th width="10%"><?php echo __('Vendor') ?></th>
+                <th width="10%"><?php echo __('Staff') ?></th>
                 <th width="15%"><?php echo __('Seller Name') ?></th>
                 <th width="20%"><?php echo __('Terms') ?></th>
                 <th width="5%"><?php echo __('Ship Via') ?></th>
@@ -87,6 +88,7 @@ echo $this->Form->create('PurchaseOrderVendor', array(
                 <tr>
                   <td><?php echo $data['PurchaseOrderVendor']['order_no']; ?></td>
                   <td><?php echo $data['Vendor']['name']; ?></td>
+                  <td><?php echo $data['User']['display_name']; ?></td>
                   <td><?php echo $data['PurchaseOrderVendor']['seller_name']; ?></td>
                   <td><?php echo $data['PurchaseOrderVendor']['term']; ?></td>
                   <td><?php echo $shipType[$data['PurchaseOrderVendor']['ship_via']]; ?></td>

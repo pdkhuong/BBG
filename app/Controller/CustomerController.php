@@ -4,6 +4,7 @@ class CustomerController extends AppController {
   var $uses = array(
     'Customer',
     'CustomerContact',
+    'User.UserModel'
   );
 
   public function beforeFilter() {
@@ -20,21 +21,36 @@ class CustomerController extends AppController {
   }
 
   public function edit($id = 0) {
-	$addedContact = array();
+    $customerDb = $this->Customer->findById($id);
+    $listUser = array();
+    $currentUserId = 0;
+    $isAdmin = $this->isAdmin();
+    if($isAdmin){
+      $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
+    }else{
+      $currentUserId = $this->loggedUser->User->id;
+      if($customerDb && $customerDb['Customer']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
+    }
+    $this->set('listUser', $listUser);
+	  $addedContact = array();
     $contactBeforeAdded = $this->CustomerContact->findAllByCustomerId($id);
     $contactBeforeAdded = Hash::combine($contactBeforeAdded, '{n}.CustomerContact.id', '{n}.CustomerContact');
-	//var_dump($contactBeforeAdded);
     if (empty($this->request->data)) {//show on edit
-	  $addedContact = $contactBeforeAdded;
-      $this->request->data = $this->Customer->findById($id);
+	    $addedContact = $contactBeforeAdded;
+      $this->request->data = $customerDb;
     } else {//save
-	  $addedContact = isset($this->request->data['CustomerContact'])?$this->request->data['CustomerContact']:array();
+	    $addedContact = isset($this->request->data['CustomerContact'])?$this->request->data['CustomerContact']:array();
+      if(!isset($this->request->data['Customer']['user_id'])){
+        $this->request->data['Customer']['user_id'] = $currentUserId;
+      }
       $this->Customer->set($this->request->data);
       if ($this->Customer->save()) {
-	    $customerId = $this->Customer->getId();
-		$this->_saveContact($customerId, $addedContact, $contactBeforeAdded);
+        $customerId = $this->Customer->getId();
+        $this->_saveContact($customerId, $addedContact, $contactBeforeAdded);
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
-        return $this->redirect(Router::url(array('action' => 'index')));
+        $this->redirect(Router::url(array('action' => 'index')));
       } else {
         $this->Session->setFlash(__('Unable to save your data.'), 'flash/error');
       }
@@ -43,20 +59,27 @@ class CustomerController extends AppController {
   }
 
   public function delete($id) {
-    if ($this->Customer->isInUsed($id)) {
-      $this->Session->setFlash(__('Unable to delete your data. It\'s in used'), 'flash/error');
-      return $this->redirect($this->referer());
+    $customerDb = $this->Customer->findById($id);
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      if($customerDb && $customerDb['Customer']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
     }
     $this->Customer->deleteLogic($id);
-	$this->CustomerContact->deleteAll(array('customer_id' => $id), false);
-
+	  $this->CustomerContact->deleteAll(array('customer_id' => $id), false);
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
 
   public function index() {
     $condition = array();
     $condition['Customer.deleted_time'] = null;
-
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      $condition['Customer.user_id'] = $currentUserId;
+    }
     $this->set('displayPaging', true);
     $this->Paginator->settings = array(
       'conditions' => $condition,

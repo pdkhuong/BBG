@@ -7,7 +7,8 @@ class PurchaseOrderController extends AppController {
     'ProductUnit',
     'PurchaseOrder',
     'PurchaseOrderProduct',
-    'Customer'
+    'Customer',
+    'User.UserModel'
   );
 
   public function beforeFilter() {
@@ -24,6 +25,19 @@ class PurchaseOrderController extends AppController {
   }
 
   public function edit($id=0){
+    $purchaseOrderDb = $this->PurchaseOrder->findById($id);
+    $listUser = array();
+    $currentUserId = 0;
+    $isAdmin = $this->isAdmin();
+    if($isAdmin){
+      $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
+    }else{
+      $currentUserId = $this->loggedUser->User->id;
+      if($purchaseOrderDb && $purchaseOrderDb['PurchaseOrder']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
+    }
+    $this->set('listUser', $listUser);
     $listCustomer = $this->Customer->find("list");
     $listProduct = Hash::combine($this->Product->find("all"), '{n}.Product.id', '{n}');
     $addedProducts = array();
@@ -31,7 +45,7 @@ class PurchaseOrderController extends AppController {
     $this->set('shipType', $shipType);
     $errorObj = array();
     if (empty($this->request->data)) {
-      $this->request->data = $this->PurchaseOrder->findById($id);
+      $this->request->data = $purchaseOrderDb;
       $currentPurchaseOrderProducts = $this->PurchaseOrderProduct->findAllByPurchaseOrderId($id);
       if($currentPurchaseOrderProducts){
         $listProductUnit = Hash::combine($this->ProductUnit->find('all'), '{n}.ProductUnit.id', '{n}.ProductUnit');
@@ -102,6 +116,14 @@ class PurchaseOrderController extends AppController {
 
 
   public function delete($id) {
+    $purchaseOrderDb = $this->PurchaseOrder->findById($id);
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      if($purchaseOrderDb && $purchaseOrderDb['PurchaseOrder']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
+    }
     $this->PurchaseOrderProduct->deleteByPurchaseOrderId($id);
     $this->PurchaseOrder->deleteLogic($id);
     $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
@@ -124,6 +146,11 @@ class PurchaseOrderController extends AppController {
     //$this->set('receivedDateTo', $receivedDateTo);
 
     $conditions = array();
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      $conditions['PurchaseOrder.user_id'] = $currentUserId;
+    }
     $conditions['PurchaseOrder.deleted_time'] = null;
     if($customerId){
       $conditions['PurchaseOrder.customer_id'] = $customerId;

@@ -24,6 +24,17 @@
   ?>
     <?php echo $this->Form->input('order_no', array('label' => array('text' => __('Order No.')))) ?>
     <?php
+    if($listUser){
+      echo $this->Form->input('user_id',
+        array(
+          'options' => $listUser,
+          'empty' => __("Please select staff member ..."),
+          'label' => array('text' => __('Staff Member'))
+        )
+      );
+    }
+    ?>
+    <?php
     echo $this->Form->input('customer_id',
       array('options' => $listCustomer,
         'selected'=>NULL,

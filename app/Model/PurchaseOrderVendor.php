@@ -12,10 +12,21 @@ class PurchaseOrderVendor extends AppModel {
       'className' => 'Vendor',
       'foreignKey' => 'vendor_id',
     ),
+    'User' => array (
+      'className' => 'User.UserModel',
+      'foreignKey' => 'user_id',
+    ),
   );
 
   public $actsAs = array('MultiLanguage.MultiLanguage');
   var $validate = array (
+    'user_id' => array(
+      'numeric' => array (
+        'rule' => 'numeric',
+        'message' => 'Please select user',
+        'allowEmpty' => false,
+      ),
+    ),
     'order_no' => array(
       'size' => array(
         'rule' => array(

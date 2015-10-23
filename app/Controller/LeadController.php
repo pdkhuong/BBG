@@ -4,6 +4,7 @@ class LeadController extends AppController {
   var $uses = array(
     'Lead',
     'LeadContact',
+    'User.UserModel'
   );
 
   public function beforeFilter() {
@@ -20,43 +21,66 @@ class LeadController extends AppController {
   }
 
   public function edit($id = 0) {
-	$addedContact = array();
+    $leadDb = $this->Lead->findById($id);
+    $listUser = array();
+    $currentUserId = 0;
+    $isAdmin = $this->isAdmin();
+    if($isAdmin){
+      $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
+    }else{
+      $currentUserId = $this->loggedUser->User->id;
+      if($leadDb && $leadDb['Lead']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
+    }
+    $this->set('listUser', $listUser);
+
+	  $addedContact = array();
     $contactBeforeAdded = $this->LeadContact->findAllByLeadId($id);
     $contactBeforeAdded = Hash::combine($contactBeforeAdded, '{n}.LeadContact.id', '{n}.LeadContact');
-	//var_dump($contactBeforeAdded);
     if (empty($this->request->data)) {//show on edit
 	  $addedContact = $contactBeforeAdded;
-      $this->request->data = $this->Lead->findById($id);
+      $this->request->data = $leadDb;
     } else {//save
-	  $addedContact = isset($this->request->data['LeadContact'])?$this->request->data['LeadContact']:array();
+      if(!isset($this->request->data['Lead']['user_id'])){
+        $this->request->data['Lead']['user_id'] = $currentUserId;
+      }
+	    $addedContact = isset($this->request->data['LeadContact'])?$this->request->data['LeadContact']:array();
       $this->Lead->set($this->request->data);
       if ($this->Lead->save()) {
-	    $leadId = $this->Lead->getId();
-		$this->_saveContact($leadId, $addedContact, $contactBeforeAdded);
+	      $leadId = $this->Lead->getId();
+		    $this->_saveContact($leadId, $addedContact, $contactBeforeAdded);
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
-        return $this->redirect(Router::url(array('action' => 'index')));
+        $this->redirect(Router::url(array('action' => 'index')));
       } else {
         $this->Session->setFlash(__('Unable to save your data.'), 'flash/error');
       }
     }
-	$this->set('addedContact', $addedContact);
+	  $this->set('addedContact', $addedContact);
   }
 
   public function delete($id) {
-    if ($this->Lead->isInUsed($id)) {
-      $this->Session->setFlash(__('Unable to delete your data. It\'s in used'), 'flash/error');
-      return $this->redirect($this->referer());
+    $leadDb = $this->Lead->findById($id);
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      if($leadDb && $leadDb['Lead']['user_id'] != $currentUserId){
+        die("Cannot not access this page");
+      }
     }
     $this->Lead->deleteLogic($id);
-	$this->LeadContact->deleteAll(array('lead_id' => $id), false);
-
+	  $this->LeadContact->deleteAll(array('lead_id' => $id), false);
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
 
   public function index() {
     $condition = array();
     $condition['Lead.deleted_time'] = null;
-
+    $isAdmin = $this->isAdmin();
+    if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      $condition['Lead.user_id'] = $currentUserId;
+    }
     $this->set('displayPaging', true);
     $this->Paginator->settings = array(
       'conditions' => $condition,
