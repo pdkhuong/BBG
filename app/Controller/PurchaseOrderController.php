@@ -55,6 +55,7 @@ class PurchaseOrderController extends AppController {
           $tmpPO['ProductUnit'] = $listProductUnit[$currentPO['Product']['product_unit_id']];
           $tmpPO['numOfProduct'] = $currentPO['PurchaseOrderProduct']['num_item'];
           $addedProducts[$tmpPO['Product']['id']] = $tmpPO;
+          unset($listProduct[$tmpPO['Product']['id']]);
         }
       }
     } else {
