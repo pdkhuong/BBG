@@ -80,7 +80,7 @@
 </script>
 <?php
 echo $this->Html->css('libs/fullcalendar/fullcalendar.css');
-echo $this->Html->script('libs/moment.min.js');
+echo $this->Html->script('libs/moment.js');
 echo $this->Html->script('libs/fullcalendar/fullcalendar.js');
 echo $this->Html->script('libs/fullcalendar/lang-all.js');
 echo $this->Html->script('calendar.js');
