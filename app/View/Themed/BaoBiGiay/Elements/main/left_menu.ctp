@@ -57,7 +57,7 @@
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'PurchaseOrder', 'action' => 'index'))?>"><i class="fa fa-clipboard"> </i>Purchase Order</a>
       </li>
       <li class="<?php if($this->params['controller'] == 'PurchaseOrderVendor') echo 'active'?>">
-        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'PurchaseOrderVendor', 'action' => 'index'))?>"><i class="fa fa-clipboard"> </i>PA</a>
+        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'PurchaseOrderVendor', 'action' => 'index'))?>"><i class="fa fa-clipboard"> </i>Purchase Agreement</a>
       </li>
       <li class="<?php if($this->params['controller'] == 'Salary') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Salary', 'action' => 'index'))?>"><i class="fa fa-dollar"> </i>Salary</a>

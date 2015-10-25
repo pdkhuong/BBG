@@ -92,9 +92,19 @@ echo $this->Form->create('Customer', array(
       <button type="button" class="btn btn-default btn-sm _addContact" data-toggle="modal" data-target="#contactModal"><?php echo __("Add Contact")?></button>
   </div>
 
+  <div class="form-group ">
+    <div class="col col-md-3 text-left">
+      <?php
+      echo $this->Form->button('<i class="fa fa-save"></i> ' . __('Save'), array('class' => 'btn btn-primary', 'type' => 'submit', 'escape' => false));
+      echo ' ';
+      echo $this->Html->link(__('Cancel'), Router::url(array("action" => "index")), array('class' => 'btn btn-default'));
+      ?>
+    </div>
+  </div>
+
   <?php
   echo $this->Form->input('id', array('type' => 'hidden'));
-  echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-large btn-primary'));
+  //echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-large btn-primary'));
   echo $this->Form->end();
   ?>
 </div>

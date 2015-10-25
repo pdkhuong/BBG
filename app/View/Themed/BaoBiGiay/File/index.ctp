@@ -35,8 +35,8 @@
                 <td><?php echo ($data['File']['original_filename']); ?></td>
                 <td><a class="fa fa-file-o" href="<?php echo ($data['File']['file_path']); ?>"> Download</a></td>
                 <td>
-                  <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['File']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false)) ?>
-                  <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete')) . '/' . $data['File']['id'], array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false), __('Are you sure you want to delete #%s?', $data['File']['id'])) ?>
+                  <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['File']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __("Edit"))) ?>
+                  <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete', $data['File']['id'])), array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false, 'title' => __('Delete')), __('Are you sure you want to delete #%s?', $data['File']['id'])) ?>
                 </td>
               </tr>
               <?php

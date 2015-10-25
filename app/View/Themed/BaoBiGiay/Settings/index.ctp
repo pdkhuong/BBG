@@ -35,7 +35,7 @@
                 <td><?php echo ($data['Settings']['name']); ?></td>
                 <td><?php echo ($data['Settings']['val']); ?></td>
                 <td>
-                  <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Settings']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false)) ?>
+                  <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Settings']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Edit'))) ?>
                 </td>
               </tr>
               <?php

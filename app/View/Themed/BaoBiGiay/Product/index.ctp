@@ -39,8 +39,8 @@
                 <td><?php echo ($data['ProductUnit']['name']); ?></td>
                 <td><?php echo ($data['Product']['price']); ?></td>
                 <td>
-                  <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Product']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false)) ?>
-                  <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete')) . '/' . $data['Product']['id'], array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false), __('Are you sure you want to delete #%s?', $data['Product']['id'])) ?>
+                  <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Product']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Edit'))) ?>
+                  <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete')) . '/' . $data['Product']['id'], array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false, 'title' => __('Delete')), __('Are you sure you want to delete #%s?', $data['Product']['id'])) ?>
                 </td>
               </tr>
               <?php

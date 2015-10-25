@@ -75,8 +75,8 @@ echo $this->Form->create('PurchaseOder', array(
                 <td><?php echo reformatDate($data['Salary']['date'], 'd/m/Y'); ?></td>
                 <td><?php echo vnNumberFormat($data['Salary']['entilement']); ?></td>
                 <td>
-                  <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Salary']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false)) ?>
-                  <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete', $data['Salary']['id'])), array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false), __('Are you sure you want to delete #%s?', $data['Salary']['id'])) ?>
+                  <?php echo $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Salary']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Edit'))) ?>
+                  <?php echo $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete', $data['Salary']['id'])), array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false, 'title' => __('Delete')), __('Are you sure you want to delete #%s?', $data['Salary']['id'])) ?>
                 </td>
               </tr>
               <?php

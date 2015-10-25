@@ -95,8 +95,8 @@ echo $this->Form->create('PurchaseOrderVendor', array(
                   <td><?php echo reformatDate($data['PurchaseOrderVendor']['order_date']); ?></td>
                   <td><?php echo reformatDate($data['PurchaseOrderVendor']['received_date']); ?></td>
                   <td>
-                    <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit')) . '/' . $data['PurchaseOrderVendor']['id'], array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false)) ?>
-                    <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete')) . '/' . $data['PurchaseOrderVendor']['id'], array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false), __('Are you sure you want to delete #%s?', $data['PurchaseOrderVendor']['id'])) ?>
+                    <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['PurchaseOrderVendor']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Edit'))) ?>
+                    <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete', $data['PurchaseOrderVendor']['id'])), array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false, 'title' => __('Delete')), __('Are you sure you want to delete #%s?', $data['PurchaseOrderVendor']['id'])) ?>
                   </td>
                 </tr>
               <?php endforeach; ?>
