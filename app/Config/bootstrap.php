@@ -181,3 +181,6 @@ Configure::write('UPLOAD_EXTENSION', array(
 define("ITEM_PER_PAGE", 20);
 define("UPLOAD_BASE_DIR", 'files/uploads');
 include_once(__DIR__ . '/functions.php');
+
+//email nhắc lịch làm việc trước 1 ngày = 86400s
+define("EVENT_REMIDER_TIMER", 86400);
