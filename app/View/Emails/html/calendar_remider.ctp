@@ -6,7 +6,7 @@ Hello <?= $content["receive_name"] ?>,
 <div>Please click <a href="<?= Router::url(array('controller' => 'calendar', 'action' => 'edit', $content["id"]), true)?>">HERE</a> to view your calendar event.</div>
 <br/><br/>
 <div>
-	The event infomation:
+	The Event infomation:
 	<ul>
 		<li>
 			Event name: <?php echo $content["name"];?>

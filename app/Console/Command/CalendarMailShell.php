@@ -20,6 +20,7 @@
 			$events = $this->Calendar->find("all", $optionCalendar);
 						
 			foreach($events as $key => $event){
+				$content = array();
 				$content["id"] = $event["Calendar"]["id"];
 				$content["name"] = $event["Calendar"]["name"];
 				$content["description"] = $event["Calendar"]["description"];
