@@ -30,6 +30,10 @@ define('USER_ROLE_ANONYM', 1);
 define('USER_ROLE_REGISTER_DEFAUT', 1);//staff
 define('USER_ROLE_ADMIN', 2);
 define('USER_ROLE_STAFF', 3);
+define('USER_ROLE_CUSTOMER', 4);
+define('USER_ROLE_MARKETING', 5);
+define('USER_ROLE_ACCOUNTING', 6);
+define('USER_ROLE_DESIGN', 7);
 
 Configure::write('User.UserRole', array(USER_DATA_INCLUDE => __('Include'), USER_DATA_EXCLUDE => __('Exclude')));
 
