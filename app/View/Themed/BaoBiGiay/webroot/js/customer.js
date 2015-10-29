@@ -1,4 +1,12 @@
-$(document).ready(function() {	
+$(document).ready(function() {
+	// pick from_date and to_date for edit page
+	if($('._datetime_picker').size()){
+	  var dateNow = new Date();
+      $('._datetime_picker').datetimepicker({
+        pickTime: true,
+        useCurrent: false,
+      });
+    }
 	//click on button ok (dialog contact)
 	$('#_contact_ok').click(function(){
       var errorMsg = '';
@@ -8,21 +16,17 @@ $(document).ready(function() {
 	  var contactEmail = $("#_contact_email").val();
 	  var contactPhone = $("#_contact_phone").val();
 	  var contactAddress = $("#_contact_address").val();
-	  var contactInfo = $("#_contact_info").val();
-	  var contactFax = $("#_contact_fax").val();
+	  var contactBirthday = $("#_contact_birthday").val();
+	  var contactPosition = $("#_contact_position").val();
 	  
 	  var reg_mail = /^[A-Za-z0-9]+([_\.\-]?[A-Za-z0-9])*@[A-Za-z0-9]+([\.\-]?[A-Za-z0-9]+)*(\.[A-Za-z]+)+$/;
 	  var checkEmail = true;
-	  if(!reg_mail.test(contactEmail) && contactEmail){
+	  if(!reg_mail.test(contactEmail)){
 		checkEmail = false;
 	  }
 	  var checkPhone = true;
-	  if((isNaN(contactPhone) || contactPhone.length<10 || contactPhone.length>11) && contactPhone){
+	  if(isNaN(contactPhone) || contactPhone.length<10 || contactPhone.length>11){
 		checkPhone = false;
-	  }
-	  var checkFax = true;
-	  if((isNaN(contactFax) || contactFax.length<10 || contactFax.length>11) && contactFax){
-		checkFax = false;
 	  }
       if(!contactName){
         errorMsg = 'Please input name';
@@ -30,8 +34,6 @@ $(document).ready(function() {
 		errorMsg = 'Please input a valid email address';
 	  }else if(!checkPhone){
 		errorMsg = 'Please input a valid phone number';
-	  }else if(!checkFax){
-		errorMsg = 'Please input a valid fax number';
 	  }
       if(errorMsg){
         $('#_contact_msg').removeClass("hidden");
@@ -44,8 +46,8 @@ $(document).ready(function() {
 		mapData.email = contactEmail;
 		mapData.phone = contactPhone;
 		mapData.address = contactAddress;
-		mapData.fax = contactFax;
-		mapData.info = contactInfo;		
+		mapData.birthday = contactBirthday;
+		mapData.position = contactPosition;		
         if(!contactId){
           mapData.id = uniqId('pp_');  
           var html = $("#tableRowTemplateContact").tmpl(mapData);
@@ -72,8 +74,8 @@ $(document).ready(function() {
 	    $("#_contact_email").val(null);
 	    $("#_contact_phone").val(null);
 	    $("#_contact_address").val(null);
-	    $("#_contact_info").val(null);
-	    $("#_contact_fax").val(null);
+	    $("#_contact_birthday").val(null);
+	    $("#_contact_position").val(null);
 		$('#_contact_msg').addClass("hidden");
         $('#_contact_msg').html("");
 		$( "._removeContact" ).click(function() {
@@ -101,8 +103,8 @@ $(document).ready(function() {
 				$('#_contact_email').val($('#CustomerContact' + contactId + 'Email').val());
 				$('#_contact_phone').val($('#CustomerContact' + contactId + 'Phone').val());
 				$('#_contact_address').val($('#CustomerContact' + contactId + 'Address').val());
-				$('#_contact_info').val($('#CustomerContact' + contactId + 'Info').val());
-				$('#_contact_fax').val($('#CustomerContact' + contactId + 'Fax').val());
+				$('#_contact_birthday').val($('#CustomerContact' + contactId + 'Birthday').val());
+				$('#_contact_position').val($('#CustomerContact' + contactId + 'Position').val());
 			}
 			$('#contactModal').modal();
 		});

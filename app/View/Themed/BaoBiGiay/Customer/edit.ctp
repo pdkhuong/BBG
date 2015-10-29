@@ -38,7 +38,26 @@ echo $this->Form->create('Customer', array(
   <?php echo $this->Form->input('phone', array('label' => array('text' => __('Phone')))) ?>
   <?php echo $this->Form->input('fax', array('label' => array('text' => __('Fax')))) ?>
   <?php echo $this->Form->input('address', array('label' => array('text' => __('Address')))) ?>
-  <?php echo $this->Form->input('info', array('rows' => '5', 'type' => 'textarea', 'label' => array('text' => __('Information')))) ?>
+  <?php echo $this->Form->input('website', array('label' => array('text' => __('Website')))) ?>  
+	<?php
+	$isErrorFoundation = isset($errorObj['foundation']) ? TRUE : FALSE;
+	?>
+	<div class="form-group required <?php if($isErrorFoundation) echo 'has-error error' ?>">
+		<label class="col col-md-3 control-label text-left"><?php echo __('Foundation') ?></label>
+		<div class="col col-md-3">
+		  <div class='input-group date _datetime_picker' data-date-format="YYYY-MM-DD">
+			<input value="<?php echo isset($this->data['Customer']['foundation']) && $this->data['Customer']['foundation'] ? $this->data['Customer']['foundation'] : '' ?>" name="data[Customer][foundation]" type='text' class="form-control" readonly="readonly"/>
+			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+		  </div>
+		</div>
+		<div class="col col-md-6">
+		  <?php if($isErrorFoundation):?>
+			<span class="help-block text-danger"><?php echo $errorObj['foundation'][0]?></span>
+		  <?php endif;?>
+		</div>
+	</div>  
+  <?php echo $this->Form->input('investment', array('label' => array('text' => __('Investment')))) ?>
+  <?php echo $this->Form->input('career', array('label' => array('text' => __('Career')))) ?>
   
   Contacts
   <div class='table-responsive well'>
@@ -71,8 +90,8 @@ echo $this->Form->create('Customer', array(
             <td>
               <?php echo $contact['address']?>
               <?php echo $this->Form->input("CustomerContact.{$contactId}.address", array('type' => 'hidden', 'value' => $contact['address']));?>
-              <?php echo $this->Form->input("CustomerContact.{$contactId}.info", array('type' => 'hidden', 'value' => $contact['info']));?>
-              <?php echo $this->Form->input("CustomerContact.{$contactId}.fax", array('type' => 'hidden', 'value' => $contact['fax']));?>
+              <?php echo $this->Form->input("CustomerContact.{$contactId}.birthday", array('type' => 'hidden', 'value' => $contact['birthday']));?>
+              <?php echo $this->Form->input("CustomerContact.{$contactId}.position", array('type' => 'hidden', 'value' => $contact['position']));?>
             </td>
             <td>
               <a class="btn btn-default btn-sm _editContact" data-id=<?php echo $contactId?>> Edit </a>
@@ -111,6 +130,9 @@ echo $this->Form->create('Customer', array(
 
 
 <?php
+echo $this->Html->css('bootstrap-datetimepicker.css');
+echo $this->Html->script('libs/moment.js');
+echo $this->Html->script('libs/bootstrap-datetimepicker.js');
 echo $this->Html->script('customer.js');
 ?>
 
@@ -131,34 +153,37 @@ echo $this->Html->script('customer.js');
             <input id="_contact_name" class="form-control" maxlength="255" type="text" required="required">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group required">
           <label class="col col-md-3 control-label text-left"><?php echo __('Email')?></label>
           <div class="col col-md-9">
             <input id="_contact_email" class="form-control" maxlength="255" type="text">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group required">
           <label class="col col-md-3 control-label text-left"><?php echo __('Phone')?></label>
           <div class="col col-md-9">
             <input id="_contact_phone" class="form-control" maxlength="255" type="text">
           </div>
         </div>
         <div class="form-group">
-          <label class="col col-md-3 control-label text-left"><?php echo __('Fax')?></label>
-          <div class="col col-md-9">
-            <input id="_contact_fax" class="form-control" maxlength="255" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col col-md-3 control-label text-left"><?php echo __('Information')?></label>
-          <div class="col col-md-9">
-            <input id="_contact_info" class="form-control" maxlength="255" type="text">
-          </div>
-        </div>
-        <div class="form-group">
           <label class="col col-md-3 control-label text-left"><?php echo __('Address')?></label>
           <div class="col col-md-9">
             <input id="_contact_address" class="form-control" maxlength="255" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col col-md-3 control-label text-left"><?php echo __('Birthday')?></label>
+          <div class="col col-md-6">
+			  <div class='input-group date _datetime_picker' data-date-format="YYYY-MM-DD">
+				<input value="" id="_contact_birthday" type='text' class="form-control" readonly="readonly"/>
+				<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			  </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col col-md-3 control-label text-left"><?php echo __('Position')?></label>
+          <div class="col col-md-9">
+            <input id="_contact_position" class="form-control" maxlength="255" type="text">
           </div>
         </div>
       </div>
@@ -187,8 +212,8 @@ echo $this->Html->script('customer.js');
     <td>
       ${address}
       <?php echo $this->Form->input('CustomerContact.${id}.address', array('type' => 'hidden', 'value' => '${address}'));?>
-      <?php echo $this->Form->input('CustomerContact.${id}.info', array('type' => 'hidden', 'value' => '${info}'));?>
-      <?php echo $this->Form->input('CustomerContact.${id}.fax', array('type' => 'hidden', 'value' => '${fax}'));?>
+      <?php echo $this->Form->input('CustomerContact.${id}.birthday', array('type' => 'hidden', 'value' => '${birthday}'));?>
+      <?php echo $this->Form->input('CustomerContact.${id}.position', array('type' => 'hidden', 'value' => '${position}'));?>
     </td>
     <td>
     <a class="btn btn-default btn-sm _editContact" data-id=${id}> Edit </a>

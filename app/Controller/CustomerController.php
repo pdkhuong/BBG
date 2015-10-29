@@ -4,9 +4,10 @@ class CustomerController extends AppController {
   var $uses = array(
     'Customer',
     'CustomerContact',
-    'User.UserModel'
+    'User.UserModel',
+    'User.UserRoleAccess'
   );
-
+  
   public function beforeFilter() {
     parent::beforeFilter();
     $this->modelClass = 'Customer';
@@ -41,12 +42,37 @@ class CustomerController extends AppController {
 	    $addedContact = $contactBeforeAdded;
       $this->request->data = $customerDb;
     } else {//save
+		$create = true;
+		if($this->request->data['Customer']['id']) $create = false;
 	    $addedContact = isset($this->request->data['CustomerContact'])?$this->request->data['CustomerContact']:array();
       if(!isset($this->request->data['Customer']['user_id'])){
         $this->request->data['Customer']['user_id'] = $currentUserId;
       }
       $this->Customer->set($this->request->data);
       if ($this->Customer->save()) {
+	    if($create){ //tạo customer
+			$user = array("UserModel"=>[
+				'user_login' => $this->request->data['Customer']['name'],
+				'password' => "123456",
+				'password_confirmation' => "123456",
+				'user_email' => $this->request->data['Customer']['email'],
+				'display_name' => $this->request->data['Customer']['name'],
+				'firstname' => $this->request->data['Customer']['name'],
+				'lastname' => $this->request->data['Customer']['name'],
+				'user_status' => 1
+			]);
+			if($this->UserModel->save($user)){//thêm 1 row vào table wp_users				
+				$this->request->data['Customer']['id'] = $this->Customer->getId();
+				$this->request->data['Customer']['customer_user_id'] = $this->UserModel->getId();
+				$this->Customer->save($this->request->data); // update lại customer_user_id cho customer 
+				$userRoleAccessData = array("UserRoleAccess" =>[
+					'role_id' => USER_ROLE_CUSTOMER,
+					'user_id' => $this->UserModel->getId()
+				]);
+				$this->UserRoleAccess->save($userRoleAccessData);
+			}else{ //edit customer
+			}
+		}
         $customerId = $this->Customer->getId();
         $this->_saveContact($customerId, $addedContact, $contactBeforeAdded);
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
@@ -56,6 +82,7 @@ class CustomerController extends AppController {
       }
     }
 	$this->set('addedContact', $addedContact);
+	$this->set("errorObj", $this->Customer->validationErrors);
   }
 
   public function delete($id) {

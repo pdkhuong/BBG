@@ -37,16 +37,28 @@ class Customer extends AppModel {
       ),
     ),
 	  'email' => array(
-      'rule' => array('email', true),
-       'message' => 'Please supply a valid email address.'
+		  'rule' => array('email', true),
+		   'message' => 'Please supply a valid email address.'
     ),
 	  'phone' => array(
-      'rule' => '/^[0-9]{10,11}$/i',
+		  'rule' => '/^[0-9]{10,11}$/i',
+		  'allowEmpty' => true,
 		  'message' => 'Please supply a valid phone number.'
     ),
 	  'fax' => array(
-      'rule' => '/^[0-9]{10,11}$/i',
+		  'rule' => '/^[0-9]{10,11}$/i',
+		  'allowEmpty' => true,
 		  'message' => 'Please supply a valid fax number.'
+    ),
+	  'website' => array(
+		  'rule' => array('url', true),
+		  'allowEmpty' => true,
+		  'message' => 'Please supply a valid website url.'
+    ),
+	  'foundation' => array(
+		  'rule' => array('date', 'ymd'),
+		  'allowEmpty' => false,
+		  'message' => 'Please supply a valid date.'
     ),
 	  'code' => array(
       'size' => array(
