@@ -79,5 +79,24 @@ class Customer extends AppModel {
         'message' => 'Customer code already exists',
       ),
     ),
+	'password' => array(
+      'notNull' => array(
+        'rule' => 'notEmpty',
+        'required' => true,
+        'message' => 'Password field cannot be left blank',
+      ),
+      'size' => array(
+        'rule' => array(
+          0 => 'maxLength',
+          1 => 60,
+        ),
+        'message' => 'Please enter a text no larger than 60 characters long',
+        'allowEmpty' => false,
+      ),
+      'minLength' => array(
+        'rule'    => array('minLength', 6),
+        'message' => 'Minimum 6 characters long'
+      ),
+    ),
   );
 }

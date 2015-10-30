@@ -7,7 +7,7 @@ class DashboardController extends AppController {
    *
    * @var array
    */
-  public $uses = array('Calendar','ProductOrder');
+  public $uses = array('Calendar', 'CalendarUser', 'ProductOrder');
 
   public function beforeFilter() {
     parent::beforeFilter();
@@ -29,10 +29,26 @@ class DashboardController extends AppController {
 	define('TIMEZONE', 'Asia/Bangkok');
 	date_default_timezone_set(TIMEZONE);
     $now = date("Y-m-d");
+	$conditions = array('from_date >=' => $now);
+	$isAdmin = $this->isAdmin();
+	if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      $conditions['user_id'] = $currentUserId;
+    }
     $optionCalendar = array(
 							'limit' => 10,
 							'order' => array('from_date' => 'asc'),
-							'conditions' => array('from_date >=' => $now)
+							'conditions' => $conditions,
+							'joins' => array(
+									array('table' => 'calendar_user',
+										  'alias' => 'CalendarUser',
+										  'type' => 'INNER',
+										  'conditions' => array(
+												'Calendar.id = CalendarUser.calendar_id')
+										)
+									),
+							'fields' => array('Calendar.*', 'CalendarUser.*'),
+							'group' => 'Calendar.id',
 							);
 	 
 	$calendar = $this->Calendar->find('all', $optionCalendar);

@@ -27,10 +27,13 @@ class CalendarController extends AppController {
   }
 
   public function edit($id = 0) {
+	$calendarDb = $this->Calendar->findById($id);
+    $currentUserId = 0;
+    $isAdmin = $this->isAdmin();
 	$listCustomer = $this->Customer->find("list");
 	$listLead = $this->Lead->find("list");
 	$listVendor = $this->Vendor->find("list");
-	$listUser = Hash::combine($this->UserModel->find('all'), '{n}.UserModel.id', '{n}.UserModel.display_name');
+	$listUser = Hash::combine($this->UserModel->find('all'), '{n}.UserModel.id', '{n}.UserModel.display_name');	    
 	$addedCustomer = array();
 	$addedLead = array();
 	$addedVendor = array();
@@ -59,8 +62,17 @@ class CalendarController extends AppController {
 		$value['CalendarUser']["name"] = $value['User']["display_name"];
 		$userBeforeAdded[$value['CalendarUser']['id']] = $value['CalendarUser'];
 	}
+	
+	if(!$isAdmin){
+		$currentUserId = $this->loggedUser->User->id;
+		$userBeforeAddedIds = array();
+		foreach($userBeforeAdded as $key => $value){
+			$userBeforeAddedIds[] = $value['user_id'];
+		}
+		if(!in_array($currentUserId, $userBeforeAddedIds) && count($userBeforeAddedIds)) die("Cannot not access this page");
+    }
     if (empty($this->request->data)) {//show on edit
-      $this->request->data = $this->Calendar->findById($id);
+      $this->request->data = $calendarDb;
 	  $addedCustomer = $customerBeforeAdded;
 	  $addedLead = $leadBeforeAdded;
 	  $addedVendor = $vendorBeforeAdded;
@@ -113,10 +125,26 @@ class CalendarController extends AppController {
   public function index() {
   }
   public function feed(){
-	$dataList = $this->Calendar->find('all', array(
-		'fields' => array('id', 'name', 'from_date', 'to_date'),
-        'conditions' => array('from_date >='=> $this->request->data['start'], ' to_date <=' => $this->request->data['end'])		
-    ));
+	$conditions = array('from_date >='=> $this->request->data['start'], ' to_date <=' => $this->request->data['end']);
+	$isAdmin = $this->isAdmin();
+	if(!$isAdmin){
+      $currentUserId = $this->loggedUser->User->id;
+      $conditions['user_id'] = $currentUserId;
+    }
+	$optionCalendar = array(
+							'conditions' => $conditions,
+							'joins' => array(
+									array('table' => 'calendar_user',
+										  'alias' => 'CalendarUser',
+										  'type' => 'INNER',
+										  'conditions' => array(
+												'Calendar.id = CalendarUser.calendar_id')
+										)
+									),
+							'fields' => array('Calendar.*', 'CalendarUser.*'),
+							'group' => 'Calendar.id',
+							);
+	$dataList = $this->Calendar->find('all', $optionCalendar);
 	$this->set('dataList', $dataList);
   }
   private function _formatDate($date, $format = 'Y-m-d H:i:s') {

@@ -58,6 +58,7 @@ echo $this->Form->create('Customer', array(
 	</div>  
   <?php echo $this->Form->input('investment', array('label' => array('text' => __('Investment')))) ?>
   <?php echo $this->Form->input('career', array('label' => array('text' => __('Career')))) ?>
+  <?php echo $this->Form->input('password', array('label' => array('text' => __('Password')), 'autocomplete' => 'off')) ?>
   
   Contacts
   <div class='table-responsive well'>

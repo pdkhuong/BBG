@@ -53,14 +53,19 @@ class CustomerController extends AppController {
 	    if($create){ //tạo customer
 			$user = array("UserModel"=>[
 				'user_login' => $this->request->data['Customer']['name'],
-				'password' => "123456",
-				'password_confirmation' => "123456",
 				'user_email' => $this->request->data['Customer']['email'],
 				'display_name' => $this->request->data['Customer']['name'],
 				'firstname' => $this->request->data['Customer']['name'],
 				'lastname' => $this->request->data['Customer']['name'],
-				'user_status' => 1
+				'user_status' => USER_ACTIVE
 			]);
+			if ($this->request->data['Customer']['password']) {
+				$wp_hasher = new PasswordHash(8, true);
+				$inputPassword = trim($this->request->data['Customer']['password']);
+				$user['UserModel']['password'] = $this->request->data['Customer']['password'];
+				$user['UserModel']['user_pass'] = $wp_hasher->HashPassword($inputPassword);
+				$user['UserModel']['password_confirmation'] = $inputPassword;
+			}
 			if($this->UserModel->save($user)){//thêm 1 row vào table wp_users				
 				$this->request->data['Customer']['id'] = $this->Customer->getId();
 				$this->request->data['Customer']['customer_user_id'] = $this->UserModel->getId();
@@ -70,8 +75,11 @@ class CustomerController extends AppController {
 					'user_id' => $this->UserModel->getId()
 				]);
 				$this->UserRoleAccess->save($userRoleAccessData);
-			}else{ //edit customer
+			}else{
+				//var_dump($this->UserModel->validationErrors);exit;
 			}
+		}else{ //edit customer
+			// hiện tại không cho đổi password và email của table user
 		}
         $customerId = $this->Customer->getId();
         $this->_saveContact($customerId, $addedContact, $contactBeforeAdded);
