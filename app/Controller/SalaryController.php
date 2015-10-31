@@ -4,7 +4,7 @@ class SalaryController extends AppController {
 
   var $uses = array(
     'Salary',
-    'User',
+    'User.UserModel',
     'Customer'
   );
 
@@ -52,15 +52,28 @@ class SalaryController extends AppController {
   }
   public function index() {
     $currentUserId = $this->loggedUser->User->id;
+    $isAdmin = $this->isAdmin();
+    $isAccounting = $this->isAccounting();
+    $listUser = array();
+    $userId = isset($_GET['user_id']) ? intval($_GET['user_id']) : $currentUserId;
     $dateFrom = isset($_GET['date_from']) ? strval($_GET['date_from']) : date('Y-m-01');
     $dateTo = isset($_GET['date_to']) ? strval($_GET['date_to']) : date('Y-m-d', time());
-
+    if($isAdmin || $isAccounting){
+      $listUser = $this->UserModel->listUser();
+    }else{
+      if($userId!=$currentUserId){
+        $this->Session->setFlash(__('You are not authorized to access this page'), 'flash/error');
+        $this->redirect('/');
+      }
+    }
     $this->set('dateFrom', $dateFrom);
     $this->set('dateTo', $dateTo);
+    $this->set('listUser', $listUser);
+    $this->set('userId', $userId);
 
     $conditions = array();
     $conditions['Salary.deleted_time'] = null;
-    $conditions['Salary.user_id'] = $currentUserId;
+    $conditions['Salary.user_id'] = $userId;
     if($dateFrom){
       $conditions[] = "Salary.date >= date('{$dateFrom}')";
     }

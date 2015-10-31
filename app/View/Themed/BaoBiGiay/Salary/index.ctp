@@ -43,6 +43,18 @@ echo $this->Form->create('PurchaseOder', array(
       </div>
     </div>
   </div>
+  <?php
+  if($listUser){
+    echo $this->Form->input('user_id',
+      array(
+        'options' => $listUser,
+        'selected' => $userId,
+        'empty' => __("Please select staff member ..."),
+        'label' => array('text' => __('Staff Member'))
+      )
+    );
+  }
+  ?>
   <?php echo $this->Form->submit(__('Search'), array('class' => 'btn btn-large btn-primary', 'id' => "_submit"));?>
 </div>
 <?php echo $this->Form->end(); ?>

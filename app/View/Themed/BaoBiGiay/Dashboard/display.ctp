@@ -65,17 +65,17 @@
           </thead>
           <tbody>
           <?php
-          foreach ($productOrder as $data):
+          foreach ($WorksSheet as $data):
             ?>
             <tr>
             <td>
-              <a href="<?php echo Router::url(array('controller' => 'product-order','action' => 'edit', $data['ProductOrder']['id'])); ?>">
-                <?php echo ($data['ProductOrder']['order_no']); ?>
+              <a href="<?php echo Router::url(array('controller' => 'product-order','action' => 'edit', $data['WorksSheet']['id'])); ?>">
+                <?php echo ($data['WorksSheet']['order_no']); ?>
               </a>
             </td>
             <td><?php echo ($data['Customer']['name']); ?></td>
             <td><?php echo ($data['OutputProduct']['name']); ?></td>
-            <td><?php echo ($data['ProductOrder']['delivery_date']); ?></td>
+            <td><?php echo ($data['WorksSheet']['delivery_date']); ?></td>
             </tr>
             <?php
           endforeach;

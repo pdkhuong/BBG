@@ -23,23 +23,38 @@ class PurchaseOrderController extends AppController {
   function afterFilter() {
     parent::afterFilter();
   }
-
-  public function edit($id=0){
-    $purchaseOrderDb = $this->PurchaseOrder->findById($id);
-    $listUser = array();
-    $currentUserId = 0;
-    $isAdmin = $this->isAdmin();
-    if($isAdmin){
-      $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
-    }else{
-      $currentUserId = $this->loggedUser->User->id;
-      if($purchaseOrderDb && $purchaseOrderDb['PurchaseOrder']['user_id'] != $currentUserId){
-        die("Cannot not access this page");
+  public function view($id=0){
+    $data = $this->PurchaseOrder->findById($id);
+    $addedProducts = array();
+    $this->checkCanDo($data);
+    $this->set('data', $data);
+    $shipType = Configure::read("SHIP_TYPE");
+    $this->set('shipType', $shipType);
+    $currentPurchaseOrderProducts = $this->PurchaseOrderProduct->findAllByPurchaseOrderId($id);
+    if($currentPurchaseOrderProducts){
+      $listProductUnit = Hash::combine($this->ProductUnit->find('all'), '{n}.ProductUnit.id', '{n}.ProductUnit');
+      foreach($currentPurchaseOrderProducts as $currentPO){
+        $tmpPO = array();
+        $tmpPO['Product'] = $currentPO['Product'];
+        $tmpPO['ProductUnit'] = $listProductUnit[$currentPO['Product']['product_unit_id']];
+        $tmpPO['numOfProduct'] = $currentPO['PurchaseOrderProduct']['num_item'];
+        $addedProducts[$tmpPO['Product']['id']] = $tmpPO;
       }
     }
+    $this->set('addedProducts', $addedProducts);
+  }
+  public function edit($id=0){
+    $purchaseOrderDb = $this->PurchaseOrder->findById($id);
+    $this->checkCanDo($purchaseOrderDb);
+    $listUser = array();
+    $currentUserId = $this->loggedUser->User->id;
+    $isAdmin = $this->isAdmin();
+    $listProduct = $this->listProduct(false);
+    if($isAdmin){
+      $listUser =  $this->UserModel->listUser();
+    }
     $this->set('listUser', $listUser);
-    $listCustomer = $this->Customer->find("list");
-    $listProduct = Hash::combine($this->Product->find("all"), '{n}.Product.id', '{n}');
+    $listCustomer = $this->listCustomer();
     $addedProducts = array();
     $shipType = Configure::read("SHIP_TYPE");
     $this->set('shipType', $shipType);
@@ -68,7 +83,6 @@ class PurchaseOrderController extends AppController {
           $addedProducts[$productId]['numOfProduct'] = $numOfProduct;
           //xoa nhung product da duoc add ra khoi listProduct
           unset($listProduct[$productId]);
-
           if(empty($numOfProduct) || ! is_numeric($numOfProduct)){
             $errorMsg = __('Please input valid number of product');
           }
@@ -76,12 +90,14 @@ class PurchaseOrderController extends AppController {
       }else{
         $errorMsg = __('Please add product');
       }
+      if(!isset($this->request->data['PurchaseOrder']['user_id'])){
+        $this->request->data['PurchaseOrder']['user_id'] = $currentUserId;
+      }
       $this->PurchaseOrder->set($this->request->data);
       if(!$errorMsg){
         if ($this->PurchaseOrder->save()) {
           $purchaseOrderId = $this->PurchaseOrder->getId();
           $this->_savePurchaseOrderProduct($purchaseOrderId, $addedProducts);
-          //end save event shop
           $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
           return $this->redirect(Router::url(array('action' => 'index')));
         } else {
@@ -97,8 +113,6 @@ class PurchaseOrderController extends AppController {
     $this->set('addedProducts', $addedProducts);
     $this->set('listProduct', $listProduct);
     $this->set("listCustomer", $listCustomer);
-    //echo "<pre>"; print_r($addedProducts);die();
-    //echo "<pre>"; print_r($listProduct);die();
   }
 
   private function _savePurchaseOrderProduct($purchaseOrderId, $addedProducts){
@@ -118,41 +132,27 @@ class PurchaseOrderController extends AppController {
 
   public function delete($id) {
     $purchaseOrderDb = $this->PurchaseOrder->findById($id);
-    $isAdmin = $this->isAdmin();
-    if(!$isAdmin){
-      $currentUserId = $this->loggedUser->User->id;
-      if($purchaseOrderDb && $purchaseOrderDb['PurchaseOrder']['user_id'] != $currentUserId){
-        die("Cannot not access this page");
-      }
+    if($purchaseOrderDb){
+      $this->checkCanDo($purchaseOrderDb);
+      $this->PurchaseOrderProduct->deleteByPurchaseOrderId($id);
+      $this->PurchaseOrder->deleteLogic($id);
+      $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
     }
-    $this->PurchaseOrderProduct->deleteByPurchaseOrderId($id);
-    $this->PurchaseOrder->deleteLogic($id);
-    $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
   public function index() {
-    $listCustomer = $this->Customer->find("list");
+    $listCustomer = $this->listCustomer();
     $customerId = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : 0;
     $orderNo = isset($_GET['order_no']) ? strval($_GET['order_no']) : '';
     $orderDateFrom = isset($_GET['order_date_from']) ? strval($_GET['order_date_from']) : '';
     $orderDateTo = isset($_GET['order_date_to']) ? strval($_GET['order_date_to']) : '';
-    //$receivedDateFrom = isset($_GET['received_date_from']) ? strval($_GET['received_date_from']) : '';
-    //$receivedDateTo = isset($_GET['received_date_to']) ? strval($_GET['received_date_to']) : '';
 
     $this->set('customerId', $customerId);
     $this->set('orderNo', $orderNo);
     $this->set('orderDateFrom', $orderDateFrom);
     $this->set('orderDateTo', $orderDateTo);
-    //$this->set('receivedDateFrom', $receivedDateFrom);
-    //$this->set('receivedDateTo', $receivedDateTo);
 
-    $conditions = array();
-    $isAdmin = $this->isAdmin();
-    if(!$isAdmin){
-      $currentUserId = $this->loggedUser->User->id;
-      $conditions['PurchaseOrder.user_id'] = $currentUserId;
-    }
-    $conditions['PurchaseOrder.deleted_time'] = null;
+    $conditions = $this->getInitCondition();
     if($customerId){
       $conditions['PurchaseOrder.customer_id'] = $customerId;
     }
@@ -180,7 +180,6 @@ class PurchaseOrderController extends AppController {
       $dataList = array();
       $this->redirect(Router::url(array('action' => 'index')) . '?customer_id='.$customerId.'&order_no='.$orderNo.'&order_date_from='.$orderDateFrom.'&order_date_to='.$orderDateTo);
     }
-    //echo "<pre>"; print_r($dataList); die();
     $this->set('dataList', $dataList);
     $this->set("listCustomer", $listCustomer);
     $shipType = Configure::read("SHIP_TYPE");

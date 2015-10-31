@@ -63,7 +63,7 @@ class File extends AppModel {
     }
     return $extension;
   }
-  function uploadFile($fileObj, $dirUpload=UPLOAD_BASE_DIR){
+  function uploadFile($fileObj, $dirUpload=UPLOAD_BASE_DIR, $require = true){
     $data = array();
     if($fileObj){
       $fileName = uniqid() . '_' . time();
@@ -71,7 +71,7 @@ class File extends AppModel {
         if ($fileObj["error"] == 1) {
           $data['error'] = 1;
           $data['message'] = __('File too big');
-        }elseif ($fileObj["error"] == 4) {
+        }elseif ($require && $fileObj["error"] == 4) {
           $data['error'] = 4;
           $data['message'] = __('Please upload file');
         }
@@ -101,6 +101,12 @@ class File extends AppModel {
       }
     }
     return $data;
+  }
+  function deletePhysicalFile($fileId){
+    $fileDb = $this->findById($fileId);
+    if($fileDb && file_exists($fileDb['File']['file_path']) && is_file($fileDb['File']['file_path'])){
+      unlink($fileDb['File']['file_path']);
+    }
   }
   function mkdirs($dir, $mode = 0777, $recursive = true) {
     if (is_null($dir) || $dir === "") {

@@ -146,7 +146,7 @@ class UserComponent extends Component {
     }
     if (!$access) {
       if ($controller->loggedUser->User->id == 0) {
-        $controller->Session->setFlash(__('You are not authorized to access this page'), 'flash/error');
+        $controller->Session->setFlash(__('You are not authorized to access this page. Please login'), 'flash/error');
         $controller->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'login')));
       } else {
         $controller->Session->setFlash(__('You are not authorized to access this page'), 'flash/error');

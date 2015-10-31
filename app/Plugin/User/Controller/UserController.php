@@ -20,12 +20,6 @@ class UserController extends AppController
   {
     parent::afterFilter();
   }
-
-  public function index()
-  {
-
-  }
-
   public function register(){
     $this->redirect('/');
     if (empty($this->request->data)) {
@@ -67,7 +61,9 @@ class UserController extends AppController
   }
 
   public function edit($id = 0){
-    $this->set('roles', Hash::combine($this->UserRole->find('all'), '{n}.UserRole.id', '{n}.UserRole.name'));
+    $roles = Hash::combine($this->UserRole->find('all'), '{n}.UserRole.id', '{n}.UserRole.name');
+    unset($roles[USER_ROLE_CUSTOMER]);
+    $this->set('roles', $roles);
     if (empty($this->request->data)) {
       $this->request->data = $this->UserModel->findById($id);
       $roleAccess = $this->UserRoleAccess->findByUserId($id);
@@ -85,7 +81,7 @@ class UserController extends AppController
       if ($this->UserModel->save($this->request->data)) {
         $this->UserModel->onlyOneRole($this->UserModel->getId(), $this->request->data['UserModel']['role']);
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
-        return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'search')));
+        return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'index')));
       }
     }
   }
@@ -113,7 +109,7 @@ class UserController extends AppController
       if ($this->UserModel->save($this->request->data)) {
         $this->UserModel->onlyOneRole($this->UserModel->getId(), $this->request->data['UserModel']['role']);
         $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
-        return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'search')));
+        return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'index')));
       }
     }
   }
@@ -121,15 +117,34 @@ class UserController extends AppController
   public function delete($id)
   {
     $this->UserModel->deleteLogic($id);
-    return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'search')) . '/');
+    return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'User', 'action' => 'index')));
   }
 
-  public function search()
-  {
+  public function index(){
     $this->set('selectedRoles', Hash::combine($this->UserRoleAccess->find('all'), '{n}.UserRoleAccess.role_id', '{n}.UserRole.name', '{n}.UserRoleAccess.user_id'));
     $this->set('displayPaging', true);
+    $page = isset($this->request->params['paging']['UserModel']['page']) ? intval($this->request->params['paging']['UserModel']['page']) : 1;
+
+    $offset = ($page - 1) * ITEM_PER_PAGE;
+    $conditions = array();
+    $conditions['UserModel.deleted_time'] = null;
+    $conditions['UserRoleAccess.role_id !='] = USER_ROLE_CUSTOMER;
     $this->Paginator->settings = array(
-    'limit' => ITEM_PER_PAGE
+      'limit' => ITEM_PER_PAGE,
+      'offset' => $offset,
+      'joins' => array(
+        array(
+          'table' => 'user_role_access',
+          'alias' => 'UserRoleAccess',
+          'type' => 'LEFT',
+          'conditions' => array(
+            'UserRoleAccess.user_id = UserModel.id',
+            'UserRoleAccess.deleted_time IS NULL'
+          )
+        ),
+      ),
+      'conditions' => $conditions,
+      'fields' => array('UserModel.*',)
     );
     $dataList = $this->Paginator->paginate('UserModel');
 

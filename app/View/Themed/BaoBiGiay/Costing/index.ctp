@@ -11,6 +11,36 @@
   </div>
 </div>
 
+<?php
+echo $this->Form->create('CostingSearch', array(
+    'novalidate' => true,
+    'inputDefaults' => array(
+        'div' => 'form-group',
+        'label' => array(
+            'class' => 'col col-md-2 control-label text-left'
+        ),
+        'wrapInput' => 'col col-md-7',
+        'class' => 'form-control'
+    ),
+    'type' => 'get'
+));
+?>
+<div class="well form-horizontal page-body posts form">
+
+  <?php
+  echo $this->Form->input('customer_id', array(
+          'options' => $listCustomer,
+          'selected'=>$customerId,
+          'empty' => __("Please select ..."),
+          'text' => __("Customer"),
+      )
+  );
+  ?>
+  <?php echo $this->Form->input('keyword', array('placeholder' => array('text' =>__('Type Product Code Or Product Name Here')),'label' => array('text' => __('Keyword')), 'value' => $keyword)) ?>
+  <?php echo $this->Form->submit(__('Search'), array('class' => 'btn btn-large btn-primary', 'id' => "_submit"));?>
+</div>
+<?php echo $this->Form->end(); ?>
+
 <div class="page-body">
   <div class="row">
     <div class="col-md-12">
@@ -18,9 +48,12 @@
         <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
           <thead>
             <tr>
-              <th width="20%"><?php echo __('Customer') ?></th>
-              <th width="30%"><?php echo __('Product') ?></th>
-              <th width="30%"><?php echo __('Person In Charged') ?></th>
+              <th width="15%"><?php echo __('Customer') ?></th>
+              <th width="15%"><?php echo __('Product Code') ?></th>
+              <th width="15%"><?php echo __('Product') ?></th>
+              <th width="10%"><?php echo __('Quantity') ?></th>
+              <th width="10%"><?php echo __('Selling Price') ?></th>
+              <th width="15%"><?php echo __('Person In Charged') ?></th>
               <th width="20%"><?php echo __('Actions'); ?></th>
             </tr>
           </thead>
@@ -30,8 +63,11 @@
               ?>
               <tr>
                 <td><?php echo ($data['Customer']['name']); ?></td>
+                <td><?php echo ($data['Product']['item_no']); ?></td>
                 <td><?php echo ($data['Product']['name']); ?></td>
-                <td><?php echo $data['Costing']['person_ic'] ?></td>
+                <td><?php echo ($data['Costing']['quantity']); ?></td>
+                <td><?php echo ($data['Costing']['selling_price']); ?></td>
+                <td><?php echo $data['User']['display_name'] ?></td>
                 <td>
                   <?= $this->Html->link('<i class="fa fa-file-excel-o"></i>', Router::url(array('action' => 'export', $data['Costing']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Export Excel'))) ?>
                   <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Costing']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Edit'))) ?>

@@ -19,19 +19,22 @@ class VendorController extends AppController {
   function afterFilter() {
     parent::afterFilter();
   }
-
+  public function view($id=0){
+    $data = $this->Vendor->findById($id);
+    $this->checkCanDo($data);
+    $this->set('data', $data);
+    $contacts = $this->VendorContact->findAllByVendorId($id);
+    $this->set('contacts', $contacts);
+  }
   public function edit($id = 0) {
     $vendorDb = $this->Vendor->findById($id);
+    $this->checkCanDo($vendorDb);
+
     $listUser = array();
-    $currentUserId = 0;
+    $currentUserId = $currentUserId = $this->loggedUser->User->id;
     $isAdmin = $this->isAdmin();
     if($isAdmin){
       $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
-    }else{
-      $currentUserId = $this->loggedUser->User->id;
-      if($vendorDb && $vendorDb['Vendor']['user_id'] != $currentUserId){
-        die("Cannot not access this page");
-      }
     }
     $this->set('listUser', $listUser);
 	  $addedContact = array();
@@ -60,27 +63,16 @@ class VendorController extends AppController {
 
   public function delete($id) {
     $vendorDb = $this->Vendor->findById($id);
-    $isAdmin = $this->isAdmin();
-    if(!$isAdmin){
-      $currentUserId = $this->loggedUser->User->id;
-      if($vendorDb && $vendorDb['Vendor']['user_id'] != $currentUserId){
-        die("Cannot not access this page");
-      }
+    if($vendorDb){
+      $this->checkCanDo($vendorDb);
+      $this->Vendor->deleteLogic($id);
+      $this->VendorContact->deleteAll(array('vendor_id' => $id), false);
     }
-    $this->Vendor->deleteLogic($id);
-	  $this->VendorContact->deleteAll(array('vendor_id' => $id), false);
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
 
   public function index() {
-    $condition = array();
-    $condition['Vendor.deleted_time'] = null;
-    $isAdmin = $this->isAdmin();
-    if(!$isAdmin){
-      $currentUserId = $this->loggedUser->User->id;
-      $condition['Vendor.user_id'] = $currentUserId;
-    }
-
+    $condition = $this->getInitCondition();
     $this->set('displayPaging', true);
     $this->Paginator->settings = array(
       'conditions' => $condition,

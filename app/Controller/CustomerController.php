@@ -20,19 +20,21 @@ class CustomerController extends AppController {
   function afterFilter() {
     parent::afterFilter();
   }
-
+  public function view($id=0){
+    $data = $this->Customer->findById($id);
+    $this->checkCanDo($data);
+    $this->set('data', $data);
+    $contacts = $this->CustomerContact->findAllByCustomerId($id);
+    $this->set('contacts', $contacts);
+  }
   public function edit($id = 0) {
     $customerDb = $this->Customer->findById($id);
+    $this->checkCanDo($customerDb);
     $listUser = array();
-    $currentUserId = 0;
+    $currentUserId = $this->loggedUser->User->id;;
     $isAdmin = $this->isAdmin();
     if($isAdmin){
       $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
-    }else{
-      $currentUserId = $this->loggedUser->User->id;
-      if($customerDb && $customerDb['Customer']['user_id'] != $currentUserId){
-        die("Cannot not access this page");
-      }
     }
     $this->set('listUser', $listUser);
 	  $addedContact = array();
@@ -95,26 +97,16 @@ class CustomerController extends AppController {
 
   public function delete($id) {
     $customerDb = $this->Customer->findById($id);
-    $isAdmin = $this->isAdmin();
-    if(!$isAdmin){
-      $currentUserId = $this->loggedUser->User->id;
-      if($customerDb && $customerDb['Customer']['user_id'] != $currentUserId){
-        die("Cannot not access this page");
-      }
+    if($customerDb){
+      $this->checkCanDo($customerDb);
+      $this->Customer->deleteLogic($id);
+      $this->CustomerContact->deleteAll(array('customer_id' => $id), false);
     }
-    $this->Customer->deleteLogic($id);
-	  $this->CustomerContact->deleteAll(array('customer_id' => $id), false);
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
 
   public function index() {
-    $condition = array();
-    $condition['Customer.deleted_time'] = null;
-    $isAdmin = $this->isAdmin();
-    if(!$isAdmin){
-      $currentUserId = $this->loggedUser->User->id;
-      $condition['Customer.user_id'] = $currentUserId;
-    }
+    $condition = $this->getInitCondition();
     $this->set('displayPaging', true);
     $this->Paginator->settings = array(
       'conditions' => $condition,

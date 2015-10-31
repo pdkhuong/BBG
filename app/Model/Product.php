@@ -8,15 +8,40 @@ class Product extends AppModel {
   var $multiLanguage = array ();
 
   public $belongsTo = array (
-    'ProductUnit' =>
-      array (
-        'className' => 'ProductUnit',
-        'foreignKey' => 'product_unit_id',
-      ),
+    'ProductUnit' => array (
+      'className' => 'ProductUnit',
+      'foreignKey' => 'product_unit_id',
+    ),
+    'File' => array (
+      'className' => 'File',
+      'foreignKey' => 'file_id',
+    ),
+    'User' => array (
+      'className' => 'User.UserModel',
+      'foreignKey' => 'user_id',
+    ),
+    'Customer' => array (
+      'className' => 'Customer',
+      'foreignKey' => 'customer_id',
+    ),
   );
 
   public $actsAs = array('MultiLanguage.MultiLanguage');
   var $validate = array (
+    'user_id' => array(
+      'numeric' => array (
+        'rule' => 'numeric',
+        'message' => 'Please select user',
+        'allowEmpty' => false,
+      ),
+    ),
+    'customer_id' => array(
+      'numeric' => array (
+        'rule' => 'numeric',
+        'message' => 'Please select customer',
+        'allowEmpty' => false,
+      ),
+    ),
     'item_no' => array(
       'size' => array(
         'rule' => array(
@@ -60,7 +85,7 @@ class Product extends AppModel {
       'numeric' => array (
         'rule' => 'numeric',
         'message' => 'Please enter a valid price',
-        'allowEmpty' => false,
+        'allowEmpty' => true,
       ),
     ),
     'product_unit_id' =>  array (
@@ -68,6 +93,13 @@ class Product extends AppModel {
         'rule' => 'numeric',
         'message' => 'Please choose product unit',
         'allowEmpty' => false,
+      ),
+    ),
+    'file_id' =>  array (
+      'numeric' => array (
+        'rule' => 'numeric',
+        'message' => 'Please choose product unit',
+        'allowEmpty' => true,
       ),
     ),
   );

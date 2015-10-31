@@ -44,8 +44,8 @@ Router::connect('/costing/:action/*', array('controller' => 'Costing'));
 Router::connect('/salary', array('controller' => 'Salary', 'action' => 'index'));
 Router::connect('/salary/:action/*', array('controller' => 'Salary'));
 
-Router::connect('/product-order', array('controller' => 'ProductOrder', 'action' => 'index'));
-Router::connect('/product-order/:action/*', array('controller' => 'ProductOrder'));
+Router::connect('/product-order', array('controller' => 'WorksSheet', 'action' => 'index'));
+Router::connect('/product-order/:action/*', array('controller' => 'WorksSheet'));
 
 Router::connect('/file', array('controller' => 'File', 'action' => 'index'));
 Router::connect('/file/:action/*', array('controller' => 'File'));
@@ -59,11 +59,14 @@ Router::connect('/lead/:action/*', array('controller' => 'Lead'));
 Router::connect('/vendor', array('controller' => 'Vendor', 'action' => 'index'));
 Router::connect('/vendor/:action/*', array('controller' => 'Vendor'));
 
-Router::connect('/pa', array('controller' => 'PurchaseOrderVendor', 'action' => 'index'));
-Router::connect('/pa/:action/*', array('controller' => 'PurchaseOrderVendor'));
+Router::connect('/purchase-request', array('controller' => 'PurchaseRequest', 'action' => 'index'));
+Router::connect('/purchase-request/:action/*', array('controller' => 'PurchaseRequest'));
 
 Router::connect('/calendar', array('controller' => 'Calendar', 'action' => 'index'));
 Router::connect('/calendar/:action/*', array('controller' => 'Calendar'));
+
+Router::connect('/facsimile-massage', array('controller' => 'FacsimileMassage', 'action' => 'index'));
+Router::connect('/facsimile-massage/:action/*', array('controller' => 'FacsimileMassage'));
 
 CakePlugin::routes();
 

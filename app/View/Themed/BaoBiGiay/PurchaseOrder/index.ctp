@@ -11,7 +11,7 @@
   </div>
 </div>
 <?php
-echo $this->Form->create('PurchaseOder', array(
+echo $this->Form->create('PurchaseOrderSearch', array(
   'novalidate' => true,
   'inputDefaults' => array(
     'div' => 'form-group',
@@ -72,13 +72,12 @@ echo $this->Form->create('PurchaseOder', array(
               <tr>
                 <th width="10%"><?php echo __('Order No.') ?></th>
                 <th width="10%"><?php echo __('Customer') ?></th>
-                <th width="10%"><?php echo __('Staff') ?></th>
                 <th width="15%"><?php echo __('Buyer Name') ?></th>
-                <th width="20%"><?php echo __('Terms') ?></th>
+                <th width="10%"><?php echo __('Staff') ?></th>
                 <th width="5%"><?php echo __('Ship Via') ?></th>
-                <th width="10%"><?php echo __('Order Date') ?></th>
-                <th width="10%"><?php echo __('Received Date') ?></th>
-                <th width="10%"><?php echo __('Actions'); ?></th>
+                <th width="15%"><?php echo __('Order Date') ?></th>
+                <th width="15%"><?php echo __('Received Date') ?></th>
+                <th width="20%"><?php echo __('Actions'); ?></th>
               </tr>
               </thead>
               <tbody>
@@ -88,13 +87,13 @@ echo $this->Form->create('PurchaseOder', array(
                 <tr>
                   <td><?php echo $data['PurchaseOrder']['order_no']; ?></td>
                   <td><?php echo $data['Customer']['name']; ?></td>
-                  <td><?php echo $data['User']['display_name']; ?></td>
                   <td><?php echo $data['PurchaseOrder']['buyer_name']; ?></td>
-                  <td><?php echo $data['PurchaseOrder']['term']; ?></td>
+                  <td><?php echo $data['User']['display_name']; ?></td>
                   <td><?php echo $shipType[$data['PurchaseOrder']['ship_via']]; ?></td>
                   <td><?php echo reformatDate($data['PurchaseOrder']['order_date']); ?></td>
                   <td><?php echo reformatDate($data['PurchaseOrder']['received_date']); ?></td>
                   <td>
+                    <?= $this->Html->link('<i class="fa fa-file-text"></i>', Router::url(array('action' => 'view', $data['PurchaseOrder']['id'])), array('class' => 'btn btn-default btn-sm', 'escape' => false, 'title' => __('View Detail'))) ?>
                     <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['PurchaseOrder']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Edit'))) ?>
                     <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete', $data['PurchaseOrder']['id'])), array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false, 'title' => __('Delete')), __('Are you sure you want to delete #%s?', $data['PurchaseOrder']['id'])) ?>
                   </td>

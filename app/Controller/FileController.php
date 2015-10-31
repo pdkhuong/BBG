@@ -3,7 +3,7 @@
 class FileController extends AppController {
 
   var $uses = array(
-    'file',
+    'File',
   );
 
   public function beforeFilter() {
@@ -20,23 +20,30 @@ class FileController extends AppController {
   }
 
   public function edit($id = 0) {
+    $fileDataDb = $this->File->findById($id);
+    $this->checkCanDo($fileDataDb);
     if (empty($this->request->data)) {
-      $this->request->data = $this->File->findById($id);
+      $this->request->data = $fileDataDb;
     } else {//save
-      $uploadedData = $this->File->uploadFile($_FILES['file_upload']);
-      if($uploadedData && $uploadedData['error']>0){
-        $this->Session->setFlash($uploadedData['message'], 'flash/error');
+      $isRequireUpload = $fileDataDb ? false : true;
+      $fileData = $this->File->uploadFile($_FILES['file_upload'], UPLOAD_BASE_DIR, $isRequireUpload);
+      if($fileData && $fileData['error']>0){
+        $this->Session->setFlash($fileData['message'], 'flash/error');
       }else{
-        $insertData = $uploadedData;
-        $insertData['id'] = $id;
+        if($fileData){
+          $this->File->deletePhysicalFile($id);
+        }
+        $fileData['id'] = $id;
+        $fileData['model'] = 'File';
+        $fileData['user_id'] = $this->loggedUser->User->id;
         $postData = $this->request->data['File'];
         if($postData['name']){
-          $insertData['name'] = $postData['name'];
+          $fileData['name'] = $postData['name'];
         }
         if($postData['description']){
-          $insertData['description'] = $postData['description'];
+          $fileData['description'] = $postData['description'];
         }
-        $this->File->set($insertData);
+        $this->File->set($fileData);
         if ($this->File->save()) {
           $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
           return $this->redirect(Router::url(array('action' => 'index')));
@@ -49,14 +56,20 @@ class FileController extends AppController {
   }
 
   public function delete($id) {
-    $this->File->deleteLogic($id);
-    $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
+    $fileDataDb = $this->File->findById($id);
+    if($fileDataDb){
+      $this->checkCanDo($fileDataDb);
+      $this->File->deletePhysicalFile($id);
+      $this->File->delete($id, true, false);
+      $this->Session->setFlash(__('Your data is deleted successfully'), 'flash/success');
+    }
     return $this->redirect(Router::url(array('action' => 'index')));
   }
 
   public function index() {
     $conditions = array();
     $conditions['File.deleted_time'] = null;
+    $conditions['File.model'] = 'File';
     $this->set('displayPaging', true);
 
     $this->Paginator->settings = array(

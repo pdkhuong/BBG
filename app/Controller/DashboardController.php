@@ -7,7 +7,7 @@ class DashboardController extends AppController {
    *
    * @var array
    */
-  public $uses = array('Calendar', 'CalendarUser', 'ProductOrder');
+  public $uses = array('Calendar', 'CalendarUser', 'WorksSheet');
 
   public function beforeFilter() {
     parent::beforeFilter();
@@ -57,19 +57,19 @@ class DashboardController extends AppController {
 		$calendar[$key]['Calendar']['to_date'] = $this->_formatDate($calendar[$key]['Calendar']['to_date'], 'd-m-Y H:i');
 	}
 	
-    $optionProductOrder = array(
+    $optionWorksSheet = array(
 							'limit' => 10,
 							'order' => array('delivery_date' => 'asc'),
 							'conditions' => array('delivery_date >=' => $now)
 							);
 	 
-	$productOrder = $this->ProductOrder->find('all', $optionProductOrder);
-	foreach($productOrder as $key =>$value){
-		$productOrder[$key]['ProductOrder']['delivery_date'] = $this->_formatDate($productOrder[$key]['ProductOrder']['delivery_date'], 'd-m-Y');
+	$WorksSheet = $this->WorksSheet->find('all', $optionWorksSheet);
+	foreach($WorksSheet as $key =>$value){
+		$WorksSheet[$key]['WorksSheet']['delivery_date'] = $this->_formatDate($WorksSheet[$key]['WorksSheet']['delivery_date'], 'd-m-Y');
 	}
 	
 	$this->set('calendar', $calendar);
-	$this->set('productOrder', $productOrder);
+	$this->set('WorksSheet', $WorksSheet);
 	//var_dump($productOrder);
   }
 

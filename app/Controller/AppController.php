@@ -100,9 +100,146 @@ class AppController extends Controller {
     $this->set('controller', $this);
     $this->setHeadTitle();
   }
+  function checkCanDo($objData = array()){
+    $canDo = true;
+    if(!$this->isAdmin()){
+      $isCustomer = $this->isCustomer();
+      $roleRight = ClassRegistry::init('User.UserRoleRight');
+      list($rolesP, $rolesC) = $roleRight->getRightByRole($this->loggedUser->Role);
+      $currentPlugin = $this->params['plugin'];
+      $currentController = $this->params['controller'].'Controller';
+      $currentAction = $this->params['action'];
+      $modelName = $this->modelClass;
+      $args = $this->passedArgs;
+      $currentUserId = $this->loggedUser->User->id;
+      if(isset($rolesC[$currentController][$currentAction]['owner']) && $rolesC[$currentController][$currentAction]['owner'] == 1){
+        if(empty($objData)){
+          $canDo = true;
+        }else{
+          switch($modelName){
+            case 'Calendar':
+              if(!isset($objData[$modelName]) || $objData[$modelName]['user_id'] != $currentUserId){
+                $canDo = false;
+              }
+              break;
+            case 'Customer':
+              if($isCustomer){
+                if(!isset($objData[$modelName]) || $objData[$modelName]['customer_user_id'] != $currentUserId){
+                  $canDo = false;
+                }
+              }else{
+                if(!isset($objData[$modelName]) || $objData[$modelName]['user_id'] != $currentUserId){
+                  $canDo = false;
+                }
+              }
 
-  function setHeadTitle() {
-    $this->set('title_for_layout', "Bao Bì Giấy Hoàng Vương");
+              break;
+            case 'Product':
+            case 'Costing':
+            case 'PurchaseOrder':
+            case 'PurchaseRequest':
+            case 'FacsimileMassage':
+              if(!isset($objData[$modelName]) || $objData[$modelName]['user_id'] != $currentUserId){
+                $canDo = false;
+              }
+              if($isCustomer){
+                $customerId = $this->getCustomerIdByUser($currentUserId);
+                if(isset($objData[$modelName]) && $objData[$modelName]['customer_id'] == $customerId) {
+                  $canDo = true;
+                }
+              }
+              break;
+            case 'WorksSheet':
+              if(!isset($objData[$modelName]) || $objData[$modelName]['created_user_id'] != $currentUserId){
+                $canDo = false;
+              }
+              if($isCustomer){
+                $customerId = $this->getCustomerIdByUser($currentUserId);
+                if(isset($objData[$modelName]) && $objData[$modelName]['customer_id'] == $customerId) {
+                  $canDo = true;
+                }
+              }
+              break;
+            case 'File':
+            case 'Vendor':
+            case 'Lead':
+              if(!isset($objData[$modelName]) || $objData[$modelName]['user_id'] != $currentUserId){
+                $canDo = false;
+              }
+              break;
+          }
+        }
+      }
+    }
+    if(!$canDo){
+      $this->Session->setFlash(__('You are not authorized to access this page'), 'flash/error');
+      $this->redirect('/');
+    }
+  }
+  function listPermission(){
+    $roleRight = ClassRegistry::init('User.UserRoleRight');
+    return $roleRight->getRightByRole($this->loggedUser->Role);
+  }
+  function getInitCondition(){
+    $conditions = array();
+    $modelName = $this->modelClass;
+    $conditions[$modelName.'.deleted_time'] = null;
+    if(!$this->isAdmin()){
+      $roleRight = ClassRegistry::init('User.UserRoleRight');
+      list($rolesP, $rolesC) = $roleRight->getRightByRole($this->loggedUser->Role);
+      $currentController = $this->params['controller'].'Controller';
+      $currentAction = $this->params['action'];
+      $currentUserId = $this->loggedUser->User->id;
+      $isCustomer = false;
+      $customerId = array();
+      if(isset($this->loggedUser->Role[USER_ROLE_CUSTOMER])){
+        $isCustomer = true;
+        $customerId = $this->getCustomerIdByUser($currentUserId);
+      }
+      if(isset($rolesC[$currentController][$currentAction]['owner']) && $rolesC[$currentController][$currentAction]['owner'] == 1){
+        switch($modelName){
+          case 'Calendar':
+            $conditions[$modelName.'.user_id'] = $currentUserId;
+            break;
+          case 'Customer':
+            if($isCustomer){
+              $conditions[$modelName.'.customer_user_id'] = $currentUserId;
+            }else{
+              $conditions[$modelName.'.user_id'] = $currentUserId;
+            }
+            break;
+          case 'Lead':
+          case 'Vendor':
+            $conditions[$modelName.'.user_id'] = $currentUserId;
+            break;
+          case 'Costing':
+          case 'Product':
+          case 'PurchaseOrder':
+          case 'PurchaseRequest':
+          case 'FacsimileMassage':
+            if($isCustomer){
+              $conditions['OR'] = array(
+                array($modelName.'.user_id' => $currentUserId),
+                array($modelName.'.customer_id' => $customerId),
+              );
+            }else{
+              $conditions[$modelName.'.user_id'] = $currentUserId;
+            }
+            break;
+          case 'WorksSheet':
+            if($isCustomer){
+              $conditions['OR'] = array(
+                array($modelName.'.created_user_id' => $currentUserId),
+                array($modelName.'.customer_id' => $customerId),
+              );
+            }else{
+              $conditions[$modelName.'.created_user_id'] = $currentUserId;
+            }
+            break;
+        }
+      }
+    }
+    return $conditions;
   }
   function isAdmin(){
     $isAdmin = false;
@@ -111,6 +248,87 @@ class AppController extends Controller {
     }
     return $isAdmin;
   }
+  function isCustomer(){
+    $isCustomer = false;
+    if(isset($this->loggedUser->Role[USER_ROLE_CUSTOMER])){
+      $isCustomer = true;
+    }
+    return $isCustomer;
+  }
+  function isAccounting(){
+    $isAccounting = false;
+    if(isset($this->loggedUser->Role[USER_ROLE_ACCOUNTING])){
+      $isAccounting = true;
+    }
+    return $isAccounting;
+  }
+  function listCustomer(){
+    $currentUserId = $this->loggedUser->User->id;
+    $model = ClassRegistry::init('Customer');
+    if($this->isAdmin()){
+      $listCustomer = $model->find("list");
+    }elseif($this->isCustomer()){
+      $customerId = $this->getCustomerIdByUser($currentUserId);
+      $listCustomer = $model->find("list", array('conditions'=> array(
+        'Customer.id' =>$customerId
+      )));
+    }else{
+      $listCustomer = $model->find("list", array('conditions'=> array(
+        'Customer.user_id' =>$currentUserId
+      )));
+    }
+    return $listCustomer;
+  }
+  function listProduct($isList=true){
+    $currentUserId = $this->loggedUser->User->id;
+    $model = ClassRegistry::init('Product');
+    if($isList){
+      if($this->isAdmin()){
+        $listProduct = $model->find("list");
+      }elseif($this->isCustomer()){
+        $customerId = $this->getCustomerIdByUser($currentUserId);
+        $conditions['OR'] = array(
+          array('Product.user_id' => $currentUserId),
+          array('Product.customer_id' => $customerId),
+        );
+        $listProduct = $model->find("list", array('conditions'=> $conditions));
+      }else{
+        $listProduct = $model->find("list", array('conditions'=> array(
+          'Product.user_id' =>$currentUserId
+        )));
+      }
+    }else{
+      if($this->isAdmin()){
+        $listProduct = $model->find("all");
+      }elseif($this->isCustomer()){
+        $customerId = $this->getCustomerIdByUser($currentUserId);
+        $conditions['OR'] = array(
+          array('Product.user_id' => $currentUserId),
+          array('Product.customer_id' => $customerId),
+        );
+        $listProduct = $model->find("all", array('conditions'=> $conditions));
+      }else{
+        $listProduct = $model->find("all", array('conditions'=> array(
+          'Product.user_id' =>$currentUserId
+        )));
+      }
+      $listProduct = Hash::combine($listProduct, '{n}.Product.id', '{n}');
+    }
+    return $listProduct;
+  }
+  function getCustomerIdByUser($linkedUserId){
+    $customerModel = ClassRegistry::init('Customer');
+    $customer = $customerModel->find("first", array('conditions' => array(
+      'customer_user_id' => $linkedUserId
+    )));
+    return isset($customer['Customer']['id']) ? $customer['Customer']['id'] : 0;
+  }
+  //------------------------------
+
+  function setHeadTitle() {
+    $this->set('title_for_layout', "Bao Bì Giấy Hoàng Vương");
+  }
+
   function afterFilter() {
     parent::afterFilter();
     if (isset($_SERVER['HTTP_SF_AJAX_HEADER']) && $_SERVER['HTTP_SF_AJAX_HEADER'] == 'sfDialog') {

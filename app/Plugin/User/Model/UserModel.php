@@ -108,6 +108,21 @@ class UserModel extends AppModel {
     ),
 
   );
+  public function listUser(){
+    $dataList = $this->find('all', array(
+      'joins' => array(
+        array('table' => 'user_role_access',
+          'alias' => 'UserRoleAccess',
+          'type' => 'LEFT',
+          'conditions' => array('UserRoleAccess.user_id = UserModel.id')
+        ),
+      ),
+      'fields' => array('DISTINCT UserModel.*'),
+      'conditions' => array('UserRoleAccess.role_id !=' => USER_ROLE_CUSTOMER),
+    ));
+    $dataList = Hash::combine($dataList, '{n}.UserModel.id', '{n}.UserModel.display_name');
+    return $dataList;
+  }
   public function checkPassword($password, $hash){
     if ( strlen($hash) <= 32 ) {
       $check = hash_equals($hash, md5($password));

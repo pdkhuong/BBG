@@ -12,5 +12,5 @@ Router::connect('/user/access/:action/*', array('plugin' => 'User', 'controller'
 Router::connect('/user/role-access/users/*', array('plugin' => 'User', 'controller' => 'UserRoleAccess', 'action' => 'editUsers'));
 Router::connect('/user/role-access/rights/*', array('plugin' => 'User', 'controller' => 'UserRoleAccess', 'action' => 'editRoles'));
 
-Router::connect('/user', array('plugin' => 'User', 'controller' => 'User', 'action' => 'search'));
+Router::connect('/user', array('plugin' => 'User', 'controller' => 'User', 'action' => 'index'));
 Router::connect('/user/:action/*', array('plugin' => 'User', 'controller' => 'User'));

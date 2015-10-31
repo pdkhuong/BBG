@@ -25,7 +25,7 @@
       'font-awesome.min',
       'main',
       //'theme',
-      'radio-checkbox',
+      //'radio-checkbox',
       'jquery.ui',
       'sfinput',
     ));
@@ -38,7 +38,7 @@
       'libs/jquery.tmpl.min',
       'ckeditor/ckeditor',
       'libs/jquery.gritter.min',
-      'radio-checkbox',
+      //'radio-checkbox',
       'common',
       'core',
       'sfinput',

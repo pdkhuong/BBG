@@ -16,11 +16,6 @@ class UserRoleController extends AppController {
   function afterFilter() {
     parent::afterFilter();
   }
-
-  public function index() {
-    return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'search')) . '/');
-  }
-
   public function view($id) {
     $data = $this->UserRole->findById($id);
     if (!empty($data['UserRole']['deleted_time'])) {
@@ -39,7 +34,7 @@ class UserRoleController extends AppController {
           $this->Session->setFlash(__('Unable to save your data.'), 'flash/error');
         } else {
           $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
-          return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'search')));
+          return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'index')));
         }
       }
     }
@@ -47,10 +42,10 @@ class UserRoleController extends AppController {
 
   public function delete($id) {
     $this->UserRole->deleteLogic($id);
-    return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'search')) . '/');
+    return $this->redirect(Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'index')));
   }
 
-  public function search() {
+  public function index() {
     $condition = array();
     $condition['UserRole.deleted_time'] = null;
 

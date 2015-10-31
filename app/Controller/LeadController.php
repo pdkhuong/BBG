@@ -19,19 +19,21 @@ class LeadController extends AppController {
   function afterFilter() {
     parent::afterFilter();
   }
-
+  public function view($id=0){
+    $data = $this->Lead->findById($id);
+    $this->checkCanDo($data);
+    $this->set('data', $data);
+    $contacts = $this->LeadContact->findAllByLeadId($id);
+    $this->set('contacts', $contacts);
+  }
   public function edit($id = 0) {
     $leadDb = $this->Lead->findById($id);
+    $this->checkCanDo($leadDb);
     $listUser = array();
-    $currentUserId = 0;
+    $currentUserId = $this->loggedUser->User->id;
     $isAdmin = $this->isAdmin();
     if($isAdmin){
       $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
-    }else{
-      $currentUserId = $this->loggedUser->User->id;
-      if($leadDb && $leadDb['Lead']['user_id'] != $currentUserId){
-        die("Cannot not access this page");
-      }
     }
     $this->set('listUser', $listUser);
 
@@ -61,26 +63,16 @@ class LeadController extends AppController {
 
   public function delete($id) {
     $leadDb = $this->Lead->findById($id);
-    $isAdmin = $this->isAdmin();
-    if(!$isAdmin){
-      $currentUserId = $this->loggedUser->User->id;
-      if($leadDb && $leadDb['Lead']['user_id'] != $currentUserId){
-        die("Cannot not access this page");
-      }
+    if($leadDb) {
+      $this->checkCanDo($leadDb);
+      $this->Lead->deleteLogic($id);
+      $this->LeadContact->deleteAll(array('lead_id' => $id), false);
     }
-    $this->Lead->deleteLogic($id);
-	  $this->LeadContact->deleteAll(array('lead_id' => $id), false);
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
 
   public function index() {
-    $condition = array();
-    $condition['Lead.deleted_time'] = null;
-    $isAdmin = $this->isAdmin();
-    if(!$isAdmin){
-      $currentUserId = $this->loggedUser->User->id;
-      $condition['Lead.user_id'] = $currentUserId;
-    }
+    $condition = $this->getInitCondition();
     $this->set('displayPaging', true);
     $this->Paginator->settings = array(
       'conditions' => $condition,

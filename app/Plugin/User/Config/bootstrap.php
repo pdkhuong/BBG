@@ -39,3 +39,10 @@ Configure::write('User.UserRole', array(USER_DATA_INCLUDE => __('Include'), USER
 
 define('USER_AUTO_ACTIVE', 0);
 define('USER_TOKEN_EXPIRE', 180);
+
+Configure::write('User.ExcludeController', array(
+  'MultiLanguage',
+  'UserAdminController',
+
+));
+

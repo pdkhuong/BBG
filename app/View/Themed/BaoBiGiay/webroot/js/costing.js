@@ -28,14 +28,14 @@ var PurchaseOrder = {
   },
 
 };
-var ProductOrder = {
+var WorksSheet = {
   init: function(){
     this.addProductProgress()
     this.removeProductProgress();
     this.editProductProgress();
     $('body').on('hidden.bs.modal', '.modal', function () {
       //$(this).removeData('bs.modal');
-      ProductOrder.resetModalData()
+      WorksSheet.resetModalData()
     });
   },
   resetModalData: function(){
@@ -82,19 +82,19 @@ var ProductOrder = {
         if(!progressId){
           mapData.order = (maxOrder + 1);
           mapData.id = Product.uniqId('pp_');
-          var html = $("#tableRowTemplateProductOrder").tmpl(mapData);
+          var html = $("#tableRowTemplateWorksSheet").tmpl(mapData);
           tableElement.append(html);
         }else{
           mapData.id = progressId;
           mapData.order = progressOrder;
-          var html = $("#tableRowTemplateProductOrder").tmpl(mapData);
+          var html = $("#tableRowTemplateWorksSheet").tmpl(mapData);
           var selectedRow = $('#_row_'+progressId);
           selectedRow.replaceWith(html);
         }
 
 
       }
-      ProductOrder.resetModalData();
+      WorksSheet.resetModalData();
     });
   },
   removeProductProgress: function(){
@@ -118,10 +118,10 @@ var ProductOrder = {
       var mapData = {};
       if(td.length) {
         $('#_progress_id').val(progressId);
-        $('#_progress_order').val(td[0].innerText);
-        $('#_progress_name').val(td[1].innerText);
-        $('#_progress_location').val(td[2].innerText);
-        $('#_progress_description').val(td[3].innerText);
+        $('#_progress_order').val($(td[0]).text());
+        $('#_progress_name').val($(td[1]).text());
+        $('#_progress_location').val($(td[2]).text());
+        $('#_progress_description').val($(td[3]).text());
       }
       $('#progressModal').modal();
     });
@@ -139,11 +139,11 @@ var Product = {
       var td = selectedRow.children('td');
       var mapData = {};
       if(td.length){
-        mapData.id = td[0].innerText;
-        mapData.item_no = td[1].innerText;
-        mapData.name = td[2].innerText;
-        mapData.unit_name = td[3].innerText;
-        mapData.price = td[4].innerText;
+        mapData.id = $(td[0]).text();
+        mapData.item_no = $(td[1]).text();
+        mapData.name = $(td[2]).text();
+        mapData.unit_name = $(td[3]).text();
+        mapData.price = $(td[4]).text();
         selectedRow.remove();
         var dt = $('#_product_dt').dataTable();
         dt.fnAddData(
@@ -167,11 +167,11 @@ var Product = {
       var td = selectedRow.children('td');
       var mapData = {};
       if(td.length){
-        mapData.id = td[0].innerText;
-        mapData.item_no = td[1].innerText;
-        mapData.name = td[2].innerText;
-        mapData.unit_name = td[3].innerText;
-        mapData.price = td[4].innerText;
+        mapData.id = $(td[0]).text();
+        mapData.item_no = $(td[1]).text();
+        mapData.name = $(td[2]).text();
+        mapData.unit_name = $(td[3]).text();
+        mapData.price = $(td[4]).text();
         var tableElement = $('#_bodyAddedProduct');
         var html = $("#tableRowTemplate").tmpl(mapData);
         tableElement.prepend(html);
@@ -230,5 +230,5 @@ var Product = {
 $(document).ready(function() {
   PurchaseOrder.init();
   Product.init();
-  ProductOrder.init();
+  WorksSheet.init();
 });

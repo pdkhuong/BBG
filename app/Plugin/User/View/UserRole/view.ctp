@@ -12,7 +12,7 @@
 
 <hr />
 
-<?= $this->Html->link(__('Back to list'), Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'search')).'/', array('class' => 'btn btn-primary')) ?> &nbsp;
+<?= $this->Html->link(__('Back to list'), Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'index')), array('class' => 'btn btn-primary')) ?> &nbsp;
 <?= $this->Html->link(__('Edit'), Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'edit')).'/'.$data['UserRole']['id'], array('class' => 'btn btn-primary')) ?> &nbsp;
 <?= $this->Html->link(__('Delete'), Router::url(array('plugin' => 'User', 'controller' => 'UserRole', 'action' => 'delete')).'/'.$data['UserRole']['id'], array('confirm' => __('Are you sure you want to delete this?'), 'class' => 'btn btn-danger')) ?>
       

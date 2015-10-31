@@ -19,6 +19,7 @@
       'wrapInput' => 'col col-md-9',
       'class' => 'form-control'
     ),
+    'type' => 'file'
   ));
   ?>
 
@@ -35,7 +36,39 @@
     )
   );
   ?>
+  <?php
+  if($listUser){
+    echo $this->Form->input('user_id',
+      array(
+        'options' => $listUser,
+        'empty' => __("Select Staff ..."),
+        'label' => array('text' => __('Staff Member'))
+      )
+    );
+  }
+  ?>
+  <?php
+  echo $this->Form->input('customer_id',
+    array(
+      'options' => $listCustomer,
+      'empty' => __("Select Customer ..."),
+      'label' => array('text' => __('Customer'))
+    )
+  );
+  ?>
   <?php echo $this->Form->input('price', array('label' => array('text' => __('Price')))) ?>
+  <?php if($this->data && isset($this->data['File']['id']) && $this->data['File']['id'] && $this->data['File']['file_path'] && file_exists($this->data['File']['file_path'])) :?>
+    <div class="form-group">
+      <label class="col col-md-3 control-label text-left">Current Layout</label>
+      <div class="col col-md-9">
+        <a href="/<?php echo $this->data['File']['file_path']?>"><?php echo $this->data['File']['original_filename']?></a>
+      </div>
+    </div>
+
+  <?php endif;?>
+
+  <?php echo $this->Form->input('file', array('name' => 'file_upload', 'type' => 'file', 'label' => array('text' => __('Layout')))) ?>
+
   <div class="form-group ">
     <div class="col col-md-3 text-left">
       <?php
