@@ -39,16 +39,6 @@ class DashboardController extends AppController {
 							'limit' => 10,
 							'order' => array('from_date' => 'asc'),
 							'conditions' => $conditions,
-							'joins' => array(
-									array('table' => 'calendar_user',
-										  'alias' => 'CalendarUser',
-										  'type' => 'INNER',
-										  'conditions' => array(
-												'Calendar.id = CalendarUser.calendar_id')
-										)
-									),
-							'fields' => array('Calendar.*', 'CalendarUser.*'),
-							'group' => 'Calendar.id',
 							);
 	 
 	$calendar = $this->Calendar->find('all', $optionCalendar);
