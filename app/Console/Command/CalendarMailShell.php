@@ -3,10 +3,7 @@
 	class CalendarMailShell extends AppShell{
 		var $uses = array(
 			'Calendar',
-			'CalendarCustomer',
-			'CalendarLead',
-			'CalendarVendor',
-			'CalendarUser',
+			'User.UserModel'
 		  );
 		public function main(){
 			define('TIMEZONE', 'Asia/Bangkok');
@@ -28,36 +25,17 @@
 				$content["to_date"] = $this->_formatDate($events[$key]["Calendar"]["to_date"], "d-m-Y H:i");
 				
 				$id = $event["Calendar"]["id"];
-				$customers = $this->CalendarCustomer->findAllByCalendarId($id);
-				$leads = $this->CalendarLead->findAllByCalendarId($id);
-				$vendors = $this->CalendarVendor->findAllByCalendarId($id);
-				$users = $this->CalendarUser->findAllByCalendarId($id);
-				
-				foreach($customers as $customer){
-					$content["customers"][] = $customer["Customer"]["name"];
-				}
-				foreach($leads as $lead){
-					$content["leads"][] = $lead["Lead"]["name"];
-				}
-				foreach($vendors as $vendor){
-					$content["vendors"][] = $vendor["Vendor"]["name"];
-				}
-				foreach($users as $user){
-					$content["users"][] = $user["User"]["display_name"];
-				}
-				foreach($users as $user){
-					$content["receive_name"] = $user["User"]["display_name"];
-					$Email = new CakeEmail('noreply');
-					$noreplyConf = $Email->config();					
-					$Email->template('calendar_remider');
-					$Email->emailFormat('html');
-					$Email->viewVars(array('emailContent' => $content));
-					$Email->from($noreplyConf['from']);
-					$Email->to($user["User"]["user_email"]);
-					$Email->subject(__('Calendar Reminder'));					
-					//var_dump($Email);exit;
-					$Email->send();
-				}
+				$user = $this->UserModel->findById($event["Calendar"]["user_id"]);
+				$content["receive_name"] = $user["UserModel"]["display_name"];
+				$Email = new CakeEmail('noreply');
+				$noreplyConf = $Email->config();					
+				$Email->template('calendar_remider');
+				$Email->emailFormat('html');
+				$Email->viewVars(array('emailContent' => $content));
+				$Email->from($noreplyConf['from']);
+				$Email->to($user["UserModel"]["user_email"]);
+				$Email->subject(__('Calendar Reminder'));
+				$Email->send();
 			}
 			//echo EVENT_REMIDER_TIMER;
 		}
