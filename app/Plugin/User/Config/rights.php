@@ -70,6 +70,10 @@ $rights = array(
 				'index' => array(
 					'name' => 'index',
 					'status' => 0
+				),
+				'export' => array(
+					'name' => 'export',
+					'status' => 0
 				)
 			)
 		),

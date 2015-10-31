@@ -36,8 +36,20 @@
         <td><?= $data['Customer']['address'] ?></td>
       </tr>
       <tr>
-        <td>Information</td>
-        <td><?= $data['Customer']['info']; ?></td>
+        <td>Website</td>
+        <td><?= $data['Customer']['website']; ?></td>
+      </tr>
+      <tr>
+        <td>Foundation</td>
+        <td><?= reformatDate($data['Customer']['foundation']); ?></td>
+      </tr>
+      <tr>
+        <td>Investment</td>
+        <td><?= $data['Customer']['investment']; ?></td>
+      </tr>
+      <tr>
+        <td>Career</td>
+        <td><?= reformatDate($data['Customer']['career']); ?></td>
       </tr>
       <tr>
         <td>Staff Member</td>
@@ -51,10 +63,12 @@
     <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
       <thead>
       <tr>
-        <th width="25%"><?php echo __('Name') ?></th>
-        <th width="25%"><?php echo __('Email') ?></th>
-        <th width="25%"><?php echo __('Phone') ?></th>
-        <th width="25%"><?php echo __('Address') ?></th>
+        <th width="15%"><?php echo __('Name') ?></th>
+        <th width="15%"><?php echo __('Email') ?></th>
+        <th width="15%"><?php echo __('Phone') ?></th>
+        <th width="20%"><?php echo __('Address') ?></th>
+        <th width="20%"><?php echo __('Birthday') ?></th>
+        <th width="15%"><?php echo __('Position') ?></th>
       </tr>
       </thead>
       <tbody>
@@ -66,6 +80,8 @@
             <td><?php echo $contact['CustomerContact']['email']?></td>
             <td><?php echo $contact['CustomerContact']['phone']?></td>
             <td><?php echo $contact['CustomerContact']['address']?></td>
+            <td><?php echo $contact['CustomerContact']['birthday']?></td>
+            <td><?php echo $contact['CustomerContact']['position']?></td>
           </tr>
         <?php endforeach;?>
       <?php endif;?>
