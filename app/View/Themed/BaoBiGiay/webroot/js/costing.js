@@ -143,7 +143,7 @@ var Product = {
         mapData.item_no = $(td[1]).text();
         mapData.name = $(td[2]).text();
         mapData.unit_name = $(td[3]).text();
-        mapData.price = $(td[4]).text();
+        mapData.spec = $(td[4]).text();
         selectedRow.remove();
         var dt = $('#_product_dt').dataTable();
         dt.fnAddData(
@@ -152,7 +152,7 @@ var Product = {
             mapData.item_no,
             mapData.name,
             mapData.unit_name,
-            mapData.price,
+            mapData.spec,
             '<a class="btn btn-default btn-sm _addProduct">Add product</a>'
           ]
         );
@@ -171,7 +171,7 @@ var Product = {
         mapData.item_no = $(td[1]).text();
         mapData.name = $(td[2]).text();
         mapData.unit_name = $(td[3]).text();
-        mapData.price = $(td[4]).text();
+        mapData.spec = $(td[4]).text();
         var tableElement = $('#_bodyAddedProduct');
         var html = $("#tableRowTemplate").tmpl(mapData);
         tableElement.prepend(html);

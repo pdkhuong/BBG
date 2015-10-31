@@ -34,7 +34,7 @@ class CustomerController extends AppController {
     $currentUserId = $this->loggedUser->User->id;;
     $isAdmin = $this->isAdmin();
     if($isAdmin){
-      $listUser = Hash::combine($this->UserModel->find("all"), '{n}.UserModel.id', '{n}.UserModel.display_name');
+      $listUser =  $this->UserModel->listUser();
     }
     $this->set('listUser', $listUser);
 	  $addedContact = array();

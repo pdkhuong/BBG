@@ -52,11 +52,10 @@
     <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
       <thead>
       <tr>
-        <th width="5%"><?php echo __('ID') ?></th>
-        <th width="10%"><?php echo __('No.') ?></th>
+        <th width="10%"><?php echo __('ID') ?></th>
+        <th width="20%"><?php echo __('No.') ?></th>
         <th width="25%"><?php echo __('Name') ?></th>
         <th width="10%"><?php echo __('Unit') ?></th>
-        <th width="15%"><?php echo __('Price') ?></th>
         <th width="15%"><?php echo __('Num Of Product'); ?></th>
         <th width="20%"><?php echo __('Total Price'); ?></th>
       </tr>
@@ -66,7 +65,7 @@
       if($addedProducts):
         $totalPrice = 0;
         foreach($addedProducts as $productId => $addedProduct):
-          $price = $addedProduct['Product']['price'] * $addedProduct['numOfProduct'];
+          $price = $addedProduct['price'];
           $totalPrice += $price;
           ?>
           <tr>
@@ -74,9 +73,8 @@
             <td><?php echo $addedProduct['Product']['item_no']?></td>
             <td><?php echo $addedProduct['Product']['name']?></td>
             <td><?php echo $addedProduct['ProductUnit']['name']?></td>
-            <td><?php echo $addedProduct['Product']['price']?></td>
             <td><?php echo $addedProduct['numOfProduct']?></td>
-            <td><?php  echo $price?></td>
+            <td><?php  echo $price ? $price : 'N/A'?></td>
           </tr>
         <?php endforeach;?>
       <?php endif;?>
@@ -86,8 +84,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
-        <td><b><?php echo $totalPrice?></b></td>
+        <td><b><?php echo vnNumberFormat($totalPrice, 0)?></b></td>
       </tr>
       </tbody>
     </table>

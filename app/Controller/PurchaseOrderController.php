@@ -8,7 +8,8 @@ class PurchaseOrderController extends AppController {
     'PurchaseOrder',
     'PurchaseOrderProduct',
     'Customer',
-    'User.UserModel'
+    'User.UserModel',
+    'Costing'
   );
 
   public function beforeFilter() {
@@ -38,6 +39,19 @@ class PurchaseOrderController extends AppController {
         $tmpPO['Product'] = $currentPO['Product'];
         $tmpPO['ProductUnit'] = $listProductUnit[$currentPO['Product']['product_unit_id']];
         $tmpPO['numOfProduct'] = $currentPO['PurchaseOrderProduct']['num_item'];
+
+        $costingByCustomerAndProduct = $this->Costing->find("first", array(
+          'conditions' => array(
+            'Costing.customer_id' => $data['Customer']['id'],
+            'Costing.product_id' => $tmpPO['Product']['id'],
+          )
+        ));
+        $price = 0;
+        if($costingByCustomerAndProduct){
+          $costingRecord = $this->Costing->getCostingRecord($costingByCustomerAndProduct, $tmpPO['numOfProduct']);
+          $price = round($costingRecord['sellingPrice']);
+        }
+        $tmpPO['price'] = $price;
         $addedProducts[$tmpPO['Product']['id']] = $tmpPO;
       }
     }

@@ -49,10 +49,11 @@
     <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
       <thead>
       <tr>
-        <th width="10%"><?php echo __('ID') ?></th>
-        <th width="20%"><?php echo __('No.') ?></th>
-        <th width="30%"><?php echo __('Name') ?></th>
+        <th width="5%"><?php echo __('ID') ?></th>
+        <th width="10%"><?php echo __('No.') ?></th>
+        <th width="20%"><?php echo __('Name') ?></th>
         <th width="10%"><?php echo __('Unit') ?></th>
+        <th width="25%"><?php echo __('Specification') ?></th>
         <th width="20%"><?php echo __('Quantity'); ?></th>
         <th width="10%">Action</th>
       </tr>
@@ -65,6 +66,7 @@
             <td><?php echo $addedProduct['Product']['item_no']?></td>
             <td><?php echo $addedProduct['Product']['name']?></td>
             <td><?php echo $addedProduct['ProductUnit']['name']?></td>
+            <td><?php echo $addedProduct['Product']['specification']?></td>
             <td>
               <input type="text" maxlength=10 name="data[Product][num_item][<?php echo $productId?>]" value="<?php echo $addedProduct['numOfProduct']?>"/>
             </td>
@@ -78,16 +80,14 @@
 
   List Product:
   <div class='table-responsive well'>
-    <table id="_product_dt" cellpadding='0' cellspacing='0' class='table items-table' data-nosearchable="0,7" data-nosortable="0,7" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
+    <table id="_product_dt" cellpadding='0' cellspacing='0' class='table items-table' data-nosearchable="0,4" data-nosortable="0,4" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
       <thead>
       <tr>
-        <th width="10%"><?php echo __('ID') ?></th>
-        <th width="10%"><?php echo __('No.') ?></th>
-        <th width="20%"><?php echo __('Name') ?></th>
+        <th width="5%"><?php echo __('ID') ?></th>
+        <th width="20%"><?php echo __('No.') ?></th>
+        <th width="30%"><?php echo __('Name') ?></th>
         <th width="10%"><?php echo __('Unit') ?></th>
-        <th width="20%"><?php echo __('Customer') ?></th>
-        <th width="10%"><?php echo __('Quantity') ?></th>
-        <th width="10%"><?php echo __('Price') ?></th>
+        <th width="15%"><?php echo __('Specification') ?></th>
         <th width="10%">Action</th>
       </tr>
       </thead>
@@ -100,9 +100,7 @@
           <td><?php echo ($data['Product']['item_no']); ?></td>
           <td><?php echo ($data['Product']['name']); ?></td>
           <td><?php echo ($data['ProductUnit']['name']); ?></td>
-          <td><?php echo ($data['Customer']['name']); ?></td>
-          <td><?php echo ($data['Product']['quantity']); ?></td>
-          <td><?php echo ($data['Product']['price']); ?></td>
+          <td><?php echo ($data['Product']['specification']); ?></td>
           <td>
             <a class="btn btn-default btn-sm _addProduct">Add product</a>
           </td>
@@ -147,10 +145,10 @@ echo $this->Html->script('costing.js');
     <td>${item_no}</td>
     <td>${name}</td>
     <td>${unit_name}</td>
+    <td>${spec}</td>
     <td>
-      <input type="text" maxlength=10 name="data[Product][num_item][${id}]" />
+      <input data-id="${id}" type="text" maxlength=10 name="data[Product][num_item][${id}]" />
     </td>
     <td><a class="btn btn-default btn-sm _removeProduct"> Remove </a></td>
   </tr>
 </script>
-
