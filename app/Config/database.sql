@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: 127.0.0.1 (MySQL 5.6.20)
+# Host: 127.0.0.1 (MySQL 10.0.17-MariaDB)
 # Database: baobigiay
-# Generation Time: 2015-10-22 09:20:16 +0000
+# Generation Time: 2015-10-31 04:30:57 +0000
 # ************************************************************
 
 
@@ -28,81 +28,10 @@ DROP TABLE IF EXISTS `calendar`;
 CREATE TABLE `calendar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `description` text,
   `from_date` datetime NOT NULL,
   `to_date` datetime NOT NULL,
-  `deleted_time` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table calendar_customer
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `calendar_customer`;
-
-CREATE TABLE `calendar_customer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `calendar_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `order` int(11) NOT NULL,
-  `created_time` datetime NOT NULL,
-  `updated_time` datetime NOT NULL,
-  `deleted_time` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table calendar_lead
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `calendar_lead`;
-
-CREATE TABLE `calendar_lead` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `calendar_id` int(11) NOT NULL,
-  `lead_id` int(11) NOT NULL,
-  `order` int(11) NOT NULL,
-  `created_time` datetime NOT NULL,
-  `updated_time` datetime NOT NULL,
-  `deleted_time` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table calendar_user
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `calendar_user`;
-
-CREATE TABLE `calendar_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `calendar_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `order` int(11) NOT NULL,
-  `created_time` datetime NOT NULL,
-  `updated_time` datetime NOT NULL,
-  `deleted_time` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table calendar_vendor
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `calendar_vendor`;
-
-CREATE TABLE `calendar_vendor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `calendar_id` int(11) NOT NULL,
-  `vendor_id` int(11) NOT NULL,
-  `order` int(11) NOT NULL,
-  `created_time` datetime NOT NULL,
-  `updated_time` datetime NOT NULL,
   `deleted_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -118,7 +47,7 @@ CREATE TABLE `costing` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
-  `person_ic` varchar(200) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `spec_length` float DEFAULT NULL,
   `spec_width` float DEFAULT NULL,
   `paper_length` float DEFAULT NULL,
@@ -151,6 +80,7 @@ CREATE TABLE `costing` (
   `b_flute_price` float DEFAULT NULL,
   `e_flute_substance` float DEFAULT NULL,
   `e_flute_price` float DEFAULT NULL,
+  `selling_price` float DEFAULT NULL,
   `created_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   `deleted_time` datetime DEFAULT NULL,
@@ -166,13 +96,18 @@ DROP TABLE IF EXISTS `customer`;
 
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `customer_user_id` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `code` varchar(100) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `fax` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `info` text,
+  `website` varchar(255) DEFAULT NULL,
+  `foundation` date NOT NULL COMMENT 'ngày thành lập',
+  `investment` varchar(255) DEFAULT NULL COMMENT 'số vốn',
+  `career` varchar(255) DEFAULT NULL COMMENT 'ngành nghề',
   `deleted_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -188,11 +123,48 @@ CREATE TABLE `customer_contact` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `fax` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `info` text,
+  `birthday` date DEFAULT NULL,
+  `position` varchar(255) DEFAULT NULL COMMENT 'chức vụ',
+  `deleted_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table facsimile_massage
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `facsimile_massage`;
+
+CREATE TABLE `facsimile_massage` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_time` datetime DEFAULT NULL,
+  `updated_time` datetime DEFAULT NULL,
+  `deleted_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table facsimile_massage_product
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `facsimile_massage_product`;
+
+CREATE TABLE `facsimile_massage_product` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `facsimile_massage_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `num_item` int(11) NOT NULL,
+  `price` float DEFAULT NULL,
+  `created_time` datetime DEFAULT NULL,
+  `updated_time` datetime DEFAULT NULL,
   `deleted_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -210,6 +182,8 @@ CREATE TABLE `file` (
   `description` varchar(255) DEFAULT NULL,
   `original_filename` varchar(255) NOT NULL DEFAULT '',
   `file_path` varchar(255) NOT NULL DEFAULT '',
+  `model` varchar(100) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `created_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   `deleted_time` datetime DEFAULT NULL,
@@ -225,6 +199,7 @@ DROP TABLE IF EXISTS `lead`;
 
 CREATE TABLE `lead` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `code` varchar(100) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -270,7 +245,11 @@ CREATE TABLE `product` (
   `specification` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `product_unit_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
+  `file_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `created_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   `deleted_time` datetime DEFAULT NULL,
@@ -294,7 +273,6 @@ CREATE TABLE `product_order` (
   `delivery_date` datetime DEFAULT NULL,
   `delivery_location` varchar(255) DEFAULT NULL,
   `difference_percent` int(11) DEFAULT NULL,
-  `output_product_note` varchar(200) DEFAULT NULL,
   `special_note` text,
   `created_user_id` int(11) DEFAULT NULL,
   `approved_user_id` int(11) DEFAULT NULL,
@@ -357,6 +335,7 @@ DROP TABLE IF EXISTS `purchase_order`;
 CREATE TABLE `purchase_order` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   `order_no` varchar(200) DEFAULT NULL,
   `order_date` datetime DEFAULT NULL,
   `received_date` datetime DEFAULT NULL,
@@ -397,6 +376,7 @@ DROP TABLE IF EXISTS `purchase_order_vendor`;
 CREATE TABLE `purchase_order_vendor` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `vendor_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   `order_no` varchar(200) DEFAULT NULL,
   `order_date` datetime DEFAULT NULL,
   `received_date` datetime DEFAULT NULL,
@@ -554,7 +534,10 @@ LOCK TABLES `user_role` WRITE;
 INSERT INTO `user_role` (`id`, `name`, `description`, `created_time`, `deleted_time`, `updated_time`)
 VALUES
 	(2,'Administrator','Administrator',NULL,NULL,NULL),
-	(3,'Staff','Staff',NULL,NULL,NULL);
+	(4,'Customer','Customer','2015-10-30 06:44:17',NULL,'2015-10-30 07:41:27'),
+	(5,'Marketing','Marketing',NULL,NULL,'2015-10-30 07:42:46'),
+	(6,'Accounting','Marketing','2015-10-30 07:46:22',NULL,'2015-10-30 07:46:22'),
+	(7,'Design','Design','2015-10-30 07:46:35',NULL,'2015-10-30 07:46:35');
 
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -583,10 +566,7 @@ LOCK TABLES `user_role_access` WRITE;
 
 INSERT INTO `user_role_access` (`id`, `role_id`, `user_id`, `created_time`, `deleted_time`, `updated_time`)
 VALUES
-	(1,2,1,'2015-10-22 11:17:19',NULL,'2015-10-22 11:17:19'),
-	(2,3,2,'2015-10-22 11:18:13',NULL,'2015-10-22 11:18:13'),
-	(3,3,3,'2015-10-22 11:18:46',NULL,'2015-10-22 11:18:46'),
-	(4,3,4,'2015-10-22 11:19:19',NULL,'2015-10-22 11:19:19');
+	(1,5,1,'2015-10-31 05:29:32',NULL,'2015-10-31 05:29:32');
 
 /*!40000 ALTER TABLE `user_role_access` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -603,49 +583,154 @@ CREATE TABLE `user_role_right` (
   `plugin` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `controller` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `action` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_owner` tinyint(4) DEFAULT NULL,
   `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `created_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   `deleted_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_role_right_role` (`role_id`),
+  KEY `role_id` (`role_id`),
   CONSTRAINT `user_role_right_role` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `user_role_right` WRITE;
 /*!40000 ALTER TABLE `user_role_right` DISABLE KEYS */;
 
-INSERT INTO `user_role_right` (`id`, `role_id`, `plugin`, `controller`, `action`, `description`, `created_time`, `updated_time`, `deleted_time`)
+INSERT INTO `user_role_right` (`id`, `role_id`, `plugin`, `controller`, `action`, `is_owner`, `description`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(1,2,NULL,'CalendarController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(2,2,NULL,'CostingController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(3,2,NULL,'CustomerController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(4,2,NULL,'DashboardController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(5,2,NULL,'FileController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(6,2,NULL,'LeadController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(7,2,NULL,'ProductController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(8,2,NULL,'ProductOrderController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(9,2,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(10,2,NULL,'PurchaseOrderVendorController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(11,2,NULL,'SalaryController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(12,2,NULL,'SettingsController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(13,2,NULL,'VendorController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(14,2,'User','UserController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(15,2,'User','UserRoleAccessController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(16,2,'User','UserRoleController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(17,2,'User','UserRoleRightController',NULL,NULL,'2015-10-22 11:13:13','2015-10-22 11:13:13',NULL),
-	(18,3,NULL,'CalendarController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(19,3,NULL,'CostingController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(20,3,NULL,'CustomerController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(21,3,NULL,'DashboardController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(22,3,NULL,'FileController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(23,3,NULL,'LeadController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(24,3,NULL,'ProductController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(25,3,NULL,'ProductOrderController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(26,3,NULL,'PurchaseOrderController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(27,3,NULL,'PurchaseOrderVendorController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(28,3,NULL,'SalaryController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL),
-	(29,3,NULL,'VendorController',NULL,NULL,'2015-10-22 11:14:42','2015-10-22 11:14:42',NULL);
+	(1,2,'User',NULL,NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(2,2,NULL,'CalendarController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(3,2,NULL,'CostingController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(4,2,NULL,'CustomerController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(5,2,NULL,'DashboardController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(6,2,NULL,'FacsimileMassageController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(7,2,NULL,'FileController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(8,2,NULL,'LeadController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(9,2,NULL,'ProductController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(10,2,NULL,'PurchaseOrderController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(11,2,NULL,'PurchaseRequestController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(12,2,NULL,'SalaryController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(13,2,NULL,'SettingsController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(14,2,NULL,'VendorController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(15,2,NULL,'WorksSheetController',NULL,NULL,NULL,'2015-10-31 05:21:54','2015-10-31 05:21:54',NULL),
+	(16,5,NULL,'CalendarController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(17,5,NULL,'CalendarController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(18,5,NULL,'CalendarController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(19,5,NULL,'CalendarController','feed',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(20,5,NULL,'CostingController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(21,5,NULL,'CostingController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(22,5,NULL,'CostingController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(23,5,NULL,'CustomerController','view',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(24,5,NULL,'CustomerController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(25,5,NULL,'CustomerController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(26,5,NULL,'CustomerController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(27,5,NULL,'DashboardController',NULL,NULL,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(28,5,NULL,'FacsimileMassageController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(29,5,NULL,'FacsimileMassageController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(30,5,NULL,'FacsimileMassageController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(31,5,NULL,'FacsimileMassageController','report',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(32,5,NULL,'FileController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(33,5,NULL,'FileController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(34,5,NULL,'FileController','index',0,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(35,5,NULL,'LeadController','view',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(36,5,NULL,'LeadController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(37,5,NULL,'LeadController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(38,5,NULL,'LeadController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(39,5,NULL,'ProductController','view',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(40,5,NULL,'ProductController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(41,5,NULL,'ProductController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(42,5,NULL,'ProductController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(43,5,NULL,'PurchaseOrderController','view',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(44,5,NULL,'PurchaseOrderController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(45,5,NULL,'PurchaseOrderController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(46,5,NULL,'PurchaseOrderController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(47,5,NULL,'PurchaseRequestController','view',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(48,5,NULL,'PurchaseRequestController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(49,5,NULL,'PurchaseRequestController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(50,5,NULL,'PurchaseRequestController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(51,5,NULL,'SalaryController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(52,5,NULL,'SalaryController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(53,5,NULL,'SalaryController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(54,5,NULL,'VendorController','view',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(55,5,NULL,'VendorController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(56,5,NULL,'VendorController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(57,5,NULL,'VendorController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(58,5,NULL,'WorksSheetController','edit',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(59,5,NULL,'WorksSheetController','delete',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(60,5,NULL,'WorksSheetController','index',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(61,5,NULL,'WorksSheetController','report',1,NULL,'2015-10-31 05:24:14','2015-10-31 05:24:14',NULL),
+	(62,6,NULL,'CalendarController','edit',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(63,6,NULL,'CalendarController','delete',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(64,6,NULL,'CalendarController','index',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(65,6,NULL,'CalendarController','feed',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(66,6,NULL,'CostingController','edit',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(67,6,NULL,'CostingController','delete',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(68,6,NULL,'CostingController','index',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(69,6,NULL,'CustomerController','view',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(70,6,NULL,'CustomerController','edit',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(71,6,NULL,'CustomerController','delete',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(72,6,NULL,'CustomerController','index',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(73,6,NULL,'DashboardController',NULL,NULL,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(74,6,NULL,'FacsimileMassageController','edit',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(75,6,NULL,'FacsimileMassageController','delete',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(76,6,NULL,'FacsimileMassageController','index',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(77,6,NULL,'FacsimileMassageController','report',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(78,6,NULL,'FileController','edit',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(79,6,NULL,'FileController','delete',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(80,6,NULL,'FileController','index',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(81,6,NULL,'ProductController','view',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(82,6,NULL,'ProductController','edit',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(83,6,NULL,'ProductController','delete',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(84,6,NULL,'ProductController','index',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(85,6,NULL,'PurchaseRequestController','view',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(86,6,NULL,'PurchaseRequestController','edit',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(87,6,NULL,'PurchaseRequestController','delete',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(88,6,NULL,'PurchaseRequestController','index',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(89,6,NULL,'VendorController','view',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(90,6,NULL,'VendorController','edit',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(91,6,NULL,'VendorController','delete',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(92,6,NULL,'VendorController','index',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(93,6,NULL,'WorksSheetController','edit',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(94,6,NULL,'WorksSheetController','delete',1,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(95,6,NULL,'WorksSheetController','index',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(96,6,NULL,'WorksSheetController','report',0,NULL,'2015-10-31 05:26:29','2015-10-31 05:26:29',NULL),
+	(97,7,NULL,'CalendarController','edit',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(98,7,NULL,'CalendarController','delete',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(99,7,NULL,'CalendarController','index',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(100,7,NULL,'CalendarController','feed',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(101,7,NULL,'DashboardController',NULL,NULL,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(102,7,NULL,'FileController','edit',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(103,7,NULL,'FileController','delete',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(104,7,NULL,'FileController','index',0,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(105,7,NULL,'ProductController','view',0,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(106,7,NULL,'ProductController','edit',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(107,7,NULL,'ProductController','delete',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(108,7,NULL,'ProductController','index',0,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(109,7,NULL,'SalaryController','edit',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(110,7,NULL,'SalaryController','delete',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(111,7,NULL,'SalaryController','index',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(112,7,NULL,'WorksSheetController','edit',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(113,7,NULL,'WorksSheetController','delete',1,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(114,7,NULL,'WorksSheetController','index',0,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(115,7,NULL,'WorksSheetController','report',0,NULL,'2015-10-31 05:27:44','2015-10-31 05:27:44',NULL),
+	(116,4,NULL,'CalendarController','edit',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(117,4,NULL,'CalendarController','delete',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(118,4,NULL,'CalendarController','index',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(119,4,NULL,'CalendarController','feed',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(120,4,NULL,'CustomerController','view',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(121,4,NULL,'CustomerController','edit',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(122,4,NULL,'CustomerController','delete',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(123,4,NULL,'CustomerController','index',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(124,4,NULL,'DashboardController',NULL,NULL,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(125,4,NULL,'FileController','edit',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(126,4,NULL,'FileController','delete',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(127,4,NULL,'FileController','index',0,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(128,4,NULL,'ProductController','view',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(129,4,NULL,'ProductController','edit',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(130,4,NULL,'ProductController','delete',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(131,4,NULL,'ProductController','index',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(132,4,NULL,'PurchaseOrderController','view',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL),
+	(133,4,NULL,'PurchaseOrderController','index',1,NULL,'2015-10-31 05:28:48','2015-10-31 05:28:48',NULL);
 
 /*!40000 ALTER TABLE `user_role_right` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -658,6 +743,7 @@ DROP TABLE IF EXISTS `vendor`;
 
 CREATE TABLE `vendor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `code` varchar(100) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -721,10 +807,7 @@ LOCK TABLES `wp_users` WRITE;
 
 INSERT INTO `wp_users` (`id`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `firstname`, `lastname`, `display_name`, `created_time`, `updated_time`, `deleted_time`)
 VALUES
-	(1,'sonhong','$P$BXgxxNiqjo8hkmIY371PlAHRnGVO2y0','','admin@baobigiay.com','','0000-00-00 00:00:00','',0,'Há»“ng','SÆ¡n','Há»“ng SÆ¡n','2015-10-22 11:17:19','2015-10-22 11:17:19',NULL),
-	(2,'staff1','$P$BuVmKFMFyJ.YMJDImuIvBy8xlZkPAc0','','staff1@baobigiay.com','','0000-00-00 00:00:00','',0,'NhÃ¢n','ViÃªn 01','NhÃ¢n ViÃªn 01','2015-10-22 11:18:13','2015-10-22 11:18:13',NULL),
-	(3,'staff2','$P$BOn.kxRfH9upuu0EaRrAgrou2LVNWO.','','staff2@baobigiay.com','','0000-00-00 00:00:00','',0,'NhÃ¢n','ViÃªn 02','NhÃ¢n ViÃªn 02','2015-10-22 11:18:46','2015-10-22 11:18:46',NULL),
-	(4,'staff3','$P$B3me/JXrGqHy9sJwEUYnJ0I9brvDdu0','','staff3@baobigiay.com','','0000-00-00 00:00:00','',0,'NhÃ¢n','ViÃªn 03','NhÃ¢n ViÃªn 03','2015-10-22 11:19:19','2015-10-22 11:19:19',NULL);
+	(1,'marketing','$P$Boj4ZRANYjdBO1G0D9cG2FU35YQ3u7/','','marketing@baobigiay.vn','','0000-00-00 00:00:00','',0,'Test','1','Test 1','2015-10-31 05:29:32','2015-10-31 05:29:32',NULL);
 
 /*!40000 ALTER TABLE `wp_users` ENABLE KEYS */;
 UNLOCK TABLES;

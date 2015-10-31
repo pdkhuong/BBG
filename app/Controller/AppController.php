@@ -177,8 +177,12 @@ class AppController extends Controller {
     }
   }
   function listPermission(){
+    $listRight = array();
     $roleRight = ClassRegistry::init('User.UserRoleRight');
-    return $roleRight->getRightByRole($this->loggedUser->Role);
+    if(isset($this->loggedUser->Role)){
+      $listRight = $roleRight->getRightByRole($this->loggedUser->Role);
+    }
+    return $listRight;
   }
   function getInitCondition(){
     $conditions = array();
