@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['UserRole']['id']) && $this->data['UserRole']['id'] > 0): ?>
-  <?= __('Edit Role' )  ?>: #<?= $this->data['UserRole']['id'] ?>
+  <?= __('Edit Role' )  ?>: <?= $this->data['UserRole']['name'] ?>
   <? else: ?>
   <?= __('Add Role' )  ?>
   <? endif; ?>

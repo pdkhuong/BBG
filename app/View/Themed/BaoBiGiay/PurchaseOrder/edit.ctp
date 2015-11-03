@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['PurchaseOrder']['id']) && $this->data['PurchaseOrder']['id'] > 0): ?>
-    <?= __('Edit Purchase Order') ?>: #<?= $this->data['PurchaseOrder']['id'] ?>
+    <?= __('Edit Purchase Order') ?>
   <? else: ?>
     <?= __('Add Purchase Order') ?>
   <? endif; ?>

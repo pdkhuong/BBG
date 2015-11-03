@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['FacsimileMassage']['id']) && $this->data['FacsimileMassage']['id'] > 0): ?>
-    <?= __('Edit Facsimile Massage') ?>: #<?= $this->data['FacsimileMassage']['id'] ?>
+    <?= __('Edit Facsimile Massage') ?>: <?= $this->data['FacsimileMassage']['name'] ?>
   <? else: ?>
     <?= __('Add Facsimile Massage') ?>
   <? endif; ?>

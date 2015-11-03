@@ -46,9 +46,9 @@ class Product extends AppModel {
       'size' => array(
         'rule' => array(
           0 => 'maxLength',
-          1 => 60,
+          1 => 6,
         ),
-        'message' => 'Please enter a text no larger than 60 characters long',
+        'message' => 'Please enter a text no larger than 6 characters long',
         'allowEmpty' => false,
       ),
       'unique_item_no' => array(
@@ -60,6 +60,10 @@ class Product extends AppModel {
         ),
         'message' => 'Item No. already exists',
       ),
+      'last_number' => array(
+        'rule' => 'checkLastNumber',
+        'message' => 'Last character must be a number'
+      )
     ),
     'name' => array(
       'size' => array(
@@ -103,4 +107,15 @@ class Product extends AppModel {
       ),
     ),
   );
+  public function checkLastNumber($check) {
+    $ret = false;
+    if(isset($check['item_no'])){
+      $itemNo = $check['item_no'];
+      $lastChar = substr($itemNo, -1);
+      if(is_numeric($lastChar)){
+        $ret = true;
+      }
+    }
+    return $ret;
+  }
 }

@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['Salary']['id']) && $this->data['Salary']['id'] > 0): ?>
-    <?= __('Edit Salary Item') ?>: #<?= $this->data['Salary']['id'] ?>
+    <?= __('Edit Salary Item') ?>
   <? else: ?>
     <?= __('Add Salary Item') ?>
   <? endif; ?>

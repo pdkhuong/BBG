@@ -1,6 +1,6 @@
 <h3>
-  <? if (isset($this->data['Product']['id']) && $this->data['Product']['id'] > 0): ?>
-    <?= __('Edit Settings') ?>: <?= $this->data['Product']['id'] ?>
+  <? if (isset($this->data['Settings']['id']) && $this->data['Settings']['id'] > 0): ?>
+    <?= __('Edit Settings') ?>: <?= $this->data['Settings']['name'] ?>
   <? else: ?>
     <?= __('Add Settings') ?>
   <? endif; ?>

@@ -191,6 +191,7 @@ class WorksSheetController extends AppController {
 
         $exportFileName = 'pdf_report_' . date('Y_m_d_H_i_s') . '.pdf';
         $tmpFile = WWW_ROOT . 'files/uploads/tmp/' . $exportFileName;
+        header("Content-type: application/pdf");
         $pdf->Output($tmpFile, 'I');
       }else{
 

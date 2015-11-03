@@ -33,7 +33,7 @@ echo $this->Form->create('Customer', array(
   }
   ?>
   <?php echo $this->Form->input('name', array('label' => array('text' => __('Name')))) ?>
-  <?php echo $this->Form->input('code', array('label' => array('text' => __('Code')))) ?>
+  <?php echo $this->Form->input('code', array('maxlength' =>8, 'label' => array('text' => __('Code')))) ?>
   <?php echo $this->Form->input('email', array('label' => array('text' => __('Email')))) ?>
   <?php echo $this->Form->input('phone', array('label' => array('text' => __('Phone')))) ?>
   <?php echo $this->Form->input('fax', array('label' => array('text' => __('Fax')))) ?>

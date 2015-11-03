@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['Costing']['id']) && $this->data['Costing']['id'] > 0): ?>
-    <?= __('Edit Costing') ?>: <?= $this->data['Costing']['id'] ?>
+    <?= __('Edit Costing') ?>
   <? else: ?>
     <?= __('Add Costing') ?>
   <? endif; ?>

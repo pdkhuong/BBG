@@ -21,7 +21,7 @@
               <th width="10%"><?php echo __('Order No.') ?></th>
               <th width="15%"><?php echo __('Customer') ?></th>
               <th width="20%"><?php echo __('Output Product') ?></th>
-              <th width="5%"><?php echo __('Num Of Product') ?></th>
+              <th width="5%"><?php echo __('Quantity') ?></th>
               <th width="10%"><?php echo __('Delivery Date') ?></th>
               <th width="20%"><?php echo __('Created User') ?></th>
               <th width="15%"><?php echo __('Actions'); ?></th>
@@ -35,7 +35,7 @@
                 <td><?php echo ($data['WorksSheet']['order_no']); ?></td>
                 <td><?php echo ($data['Customer']['name']); ?></td>
                 <td><?php echo ($data['OutputProduct']['name']); ?></td>
-                <td><?php echo ($data['WorksSheet']['num_product']); ?></td>
+                <td><?php echo vnNumberFormat($data['WorksSheet']['num_product'], 0); ?></td>
                 <td><?php echo reformatDate($data['WorksSheet']['delivery_date']); ?></td>
                 <td><?php echo ($data['CreatedUser']['display_name']); ?></td>
                 <td>

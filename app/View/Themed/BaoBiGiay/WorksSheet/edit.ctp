@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['WorksSheet']['id']) && $this->data['WorksSheet']['id'] > 0): ?>
-    <?= __('Edit WorksS heet') ?>: #<?= $this->data['WorksSheet']['id'] ?>
+    <?= __('Edit Works Sheet') ?>
   <? else: ?>
     <?= __('Add Works Sheet') ?>
   <? endif; ?>
@@ -48,7 +48,7 @@
     )
   );
   ?>
-  <?php echo $this->Form->input('num_product', array('label' => array('text' => __('Number Order Product')))) ?>
+  <?php echo $this->Form->input('num_product', array('label' => array('text' => __('Quantity')))) ?>
   <?php
   $isErrorDeliveryDate = isset($errorObj['delivery_date']) ? TRUE : FALSE;
   ?>

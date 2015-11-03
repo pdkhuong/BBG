@@ -24,10 +24,6 @@
         <td><?= $data['Product']['specification'] ?></td>
       </tr>
       <tr>
-        <td>Description</td>
-        <td><?= $data['Product']['description'] ?></td>
-      </tr>
-      <tr>
         <td>Unit</td>
         <td><?= $data['ProductUnit']['name'] ?></td>
       </tr>
@@ -41,11 +37,11 @@
       </tr>
       <tr>
         <td>Quantity</td>
-        <td><?= $data['Product']['quantity'] ?></td>
+        <td><?= vnNumberFormat($data['Product']['quantity'], 0) ?></td>
       </tr>
       <tr>
         <td>Price</td>
-        <td><?= $data['Product']['price'] ?></td>
+        <td><?= vnNumberFormat($data['Product']['price'], 0) ?></td>
       </tr>
       <tr>
         <td>Layout</td>

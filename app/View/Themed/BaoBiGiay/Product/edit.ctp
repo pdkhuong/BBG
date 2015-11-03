@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['Product']['id']) && $this->data['Product']['id'] > 0): ?>
-    <?= __('Edit Product') ?>: <?= $this->data['Product']['id'] ?>
+    <?= __('Edit Product') ?>: <?= $this->data['Product']['name'] ?>
   <? else: ?>
     <?= __('Add Product') ?>
   <? endif; ?>
@@ -23,10 +23,9 @@
   ));
   ?>
 
-  <?php echo $this->Form->input('item_no', array('label' => array('text' => __('Item No.')))) ?>
+  <?php echo $this->Form->input('item_no', array('maxlength' =>6, 'label' => array('text' => __('Item No.')))) ?>
   <?php echo $this->Form->input('name', array('label' => array('text' => __('Name')))) ?>
   <?php echo $this->Form->input('specification', array('label' => array('text' => __('Specification')))) ?>
-  <?php echo $this->Form->input('description', array('label' => array('text' => __('Description')))) ?>
   <?php
   echo $this->Form->input('product_unit_id',
     array('options' => $listUnit,

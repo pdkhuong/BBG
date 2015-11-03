@@ -38,8 +38,8 @@
                 <td><?php echo ($data['Product']['specification']); ?></td>
                 <td><?php echo ($data['Customer']['name']); ?></td>
                 <td><?php echo ($data['ProductUnit']['name']); ?></td>
-                <td><?php echo ($data['Product']['quantity']); ?></td>
-                <td><?php echo ($data['Product']['price']); ?></td>
+                <td><?php echo vnNumberFormat($data['Product']['quantity'], 0); ?></td>
+                <td><?php echo vnNumberFormat($data['Product']['price'], 0); ?></td>
                 <td>
                   <?= $this->Html->link('<i class="fa fa-file-text"></i>', Router::url(array('action' => 'view', $data['Product']['id'])), array('class' => 'btn btn-default btn-sm', 'escape' => false, 'title' => __('View Detail'))) ?>
                   <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Product']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Edit'))) ?>

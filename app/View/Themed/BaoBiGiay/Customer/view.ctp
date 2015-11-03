@@ -45,7 +45,7 @@
       </tr>
       <tr>
         <td>Investment</td>
-        <td><?= $data['Customer']['investment']; ?></td>
+        <td><?= vnNumberFormat($data['Customer']['investment'], 0); ?></td>
       </tr>
       <tr>
         <td>Career</td>

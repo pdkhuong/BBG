@@ -518,7 +518,7 @@ class Costing extends AppModel {
     $row[3] = 'Min/Color';
     $row[4] = 'Time Waste Cost/pc :';
     $row[5] = '';
-    $timeWasteCostPc = $costingDb['Costing']['printing_color'] *$settings['time_cost'] * $settings['time_waste'] / $quantity * $costingDb['Costing']['printing_cost'];
+    $timeWasteCostPc = round($costingDb['Costing']['printing_color'] *$settings['time_cost'] * $settings['time_waste'] / $quantity * $costingDb['Costing']['printing_cost']);
     $row[6] = $timeWasteCostPc;
     $row[7] = 'Vnd';
     $row[8] = $timeWasteCostPc;
@@ -532,7 +532,7 @@ class Costing extends AppModel {
     $row[3] = 'Vnd/Color';
     $row[4] = 'Plate Cost /pc :';
     $row[5] = '';
-    $lateCostPc = $costingDb['Costing']['printing_color'] *$settings['prn_plate'] /$quantity * $costingDb['Costing']['printing_cost'];
+    $lateCostPc = round($costingDb['Costing']['printing_color'] *$settings['prn_plate'] /$quantity * $costingDb['Costing']['printing_cost']);
     $row[6] = $lateCostPc;
     $row[7] = 'Vnd/pc';
     $row[8] = $lateCostPc;
@@ -566,7 +566,7 @@ class Costing extends AppModel {
     $row[8] = $prnWastageCostPc;
     $row[9] = 'Printing';
     $data[] = $row;
-    $sumPrinting = $sumForPrnWastage - $costPC + $prnWastageCostPc;
+    $sumPrinting = round($sumForPrnWastage - $costPC + $prnWastageCostPc);
     //row 28
     $row = array();
     $row[0] = 'Printing Cost / pc / Color:';
@@ -757,12 +757,12 @@ class Costing extends AppModel {
     $row[5] = '';
     $row[6] = $settings['limination'];
     $row[7] = 'Vnd/m2';
-    $limination1 = $printingAreaPC*$settings['limination']*$costingDb['Costing']['limination'];
+    $limination1 = round($printingAreaPC*$settings['limination']*$costingDb['Costing']['limination']);
     $row[8] = $limination1;
     $row[9] = 'Laminate';
     $data[] = $row;
     //row 43
-    $limination = ($sumPaper + $sumPrinting + $sumVanish +$sumFly) * $settings['limination _wastage']/100*$costingDb['Costing']['limination'];
+    $limination = round(($sumPaper + $sumPrinting + $sumVanish +$sumFly) * $settings['limination _wastage']/100*$costingDb['Costing']['limination']);
     $sumLimination = $limination + $limination1;
     $row = array();
     $row[0] = '';
@@ -879,7 +879,7 @@ class Costing extends AppModel {
     $row[9] = $sumGluing;
     $data[] = $row;
     //row 52
-    $sumAll = $sumPaper + $sumPrinting + $sumVanish + $sumFly + $sumLimination + $sumDieCut + $sumGluing;
+    $sumAll = round($sumPaper + $sumPrinting + $sumVanish + $sumFly + $sumLimination + $sumDieCut + $sumGluing);
     $row = array();
     $row[0] = '';
     $row[1] = '';
@@ -938,9 +938,9 @@ class Costing extends AppModel {
     $row[0] = '';
     $row[1] = '';
     $data[] = $row;
-    $sum1 = $sumAll + $transportation + $packaging + $saleTax;
+    $sum1 = round($sumAll + $transportation + $packaging + $saleTax);
     $mk = round($sum1  * $costingDb['Costing']['mk'] / 100);
-    $sellingPrice = $sum1 + $mk;
+    $sellingPrice = round($sum1 + $mk);
     $grossMU = round(($prnCostPc + $timeWasteCostPc + $manufacturingCost + $dieCut2)/$sellingPrice*100+$costingDb['Costing']['mk']);
     //row 57
     $row = array();

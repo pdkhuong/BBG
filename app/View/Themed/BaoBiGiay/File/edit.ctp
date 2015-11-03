@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['File']['id']) && $this->data['File']['id'] > 0): ?>
-    <?= __('Edit File') ?>: <?= $this->data['File']['id'] ?>
+    <?= __('Edit File') ?>: <?= $this->data['File']['name'] ?>
   <? else: ?>
     <?= __('Add File') ?>
   <? endif; ?>

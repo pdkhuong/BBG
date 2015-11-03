@@ -65,8 +65,8 @@ echo $this->Form->create('CostingSearch', array(
                 <td><?php echo ($data['Customer']['name']); ?></td>
                 <td><?php echo ($data['Product']['item_no']); ?></td>
                 <td><?php echo ($data['Product']['name']); ?></td>
-                <td><?php echo ($data['Costing']['quantity']); ?></td>
-                <td><?php echo ($data['Costing']['selling_price']); ?></td>
+                <td><?php echo vnNumberFormat($data['Costing']['quantity'], 0); ?></td>
+                <td><?php echo vnNumberFormat($data['Costing']['selling_price'], 0); ?></td>
                 <td><?php echo $data['User']['display_name'] ?></td>
                 <td>
                   <?= $this->Html->link('<i class="fa fa-file-excel-o"></i>', Router::url(array('action' => 'export', $data['Costing']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Export Excel'))) ?>
