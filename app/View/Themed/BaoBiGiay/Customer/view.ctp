@@ -41,7 +41,7 @@
       </tr>
       <tr>
         <td>Foundation</td>
-        <td><?= reformatDate($data['Customer']['foundation']); ?></td>
+        <td><?= reformatDate($data['Customer']['foundation']); ?> (YYYY-MM-DD)</td>
       </tr>
       <tr>
         <td>Investment</td>
@@ -49,7 +49,7 @@
       </tr>
       <tr>
         <td>Career</td>
-        <td><?= reformatDate($data['Customer']['career']); ?></td>
+        <td><?= $data['Customer']['career']; ?></td>
       </tr>
       <tr>
         <td>Staff Member</td>

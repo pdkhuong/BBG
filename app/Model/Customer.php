@@ -64,9 +64,9 @@ class Customer extends AppModel {
       'size' => array(
         'rule' => array(
           0 => 'maxLength',
-          1 => 100,
+          1 => 8,
         ),
-        'message' => 'Please enter a text no larger than 100 characters long',
+        'message' => 'Please enter a text no larger than 8 characters long',
         'allowEmpty' => false,
       ),
       'unique_code' => array(
