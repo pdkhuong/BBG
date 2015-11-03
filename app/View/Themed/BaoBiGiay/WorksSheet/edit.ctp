@@ -1,6 +1,6 @@
 <h3>
   <? if (isset($this->data['WorksSheet']['id']) && $this->data['WorksSheet']['id'] > 0): ?>
-    <?= __('Edit Works Sheet') ?>
+    <?= __('Edit Works Sheet') ?>: #<?php echo $this->data['WorksSheet']['auto_code']?>
   <? else: ?>
     <?= __('Add Works Sheet') ?>
   <? endif; ?>

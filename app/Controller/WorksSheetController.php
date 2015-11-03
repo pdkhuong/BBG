@@ -34,6 +34,11 @@ class WorksSheetController extends AppController {
     $isAdmin = $this->isAdmin();
     $errorObj = array();
     $listUser = $this->UserModel->listUser();
+    if($worksSheetDb){
+      $autoCode = $worksSheetDb['WorksSheet']['auto_code'];
+    }else{
+      $autoCode = $this->WorksSheet->getUniqCode();
+    }
     $addedProgress = array();
     $productProgressBeforeAdded = $this->WorksSheetProgress->findAllByproductOrderId($id);
     $productProgressBeforeAdded = Hash::combine($productProgressBeforeAdded, '{n}.WorksSheetProgress.id', '{n}.WorksSheetProgress');
@@ -45,6 +50,7 @@ class WorksSheetController extends AppController {
       if(!isset($this->request->data['WorksSheet']['created_user_id'])){
         $this->request->data['WorksSheet']['created_user_id'] = $currentUserId;
       }
+      $this->request->data['WorksSheet']['auto_code'] = $autoCode;
       $this->WorksSheet->set($this->request->data);
       if ($this->WorksSheet->save()) {
         $WorksSheetId = $this->WorksSheet->getId();

@@ -127,4 +127,20 @@ class WorksSheet extends AppModel {
       ),
     ),
   );
+  function getUniqCode(){
+    $conditions = array();
+    $conditions[] = 'YEAR(WorksSheet.created_time)=YEAR(CURDATE()) AND MONTH(WorksSheet.created_time)=MONTH(CURDATE())';
+    $totalByMonth = $this->find('count', array(
+      'conditions' =>$conditions
+    ));
+    $totalByMonth = $totalByMonth+1;
+    $str = $totalByMonth;
+    if($totalByMonth<10){
+      $str = '00'.$totalByMonth;
+    }elseif($totalByMonth<100){
+      $str = '0'.$totalByMonth;
+    }
+    $str = $str. date('my', time());
+    return $str;
+  }
 }

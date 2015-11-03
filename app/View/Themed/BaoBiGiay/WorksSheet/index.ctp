@@ -18,9 +18,10 @@
         <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
           <thead>
             <tr>
+              <th width="10%"><?php echo __('No.') ?></th>
               <th width="10%"><?php echo __('Order No.') ?></th>
-              <th width="15%"><?php echo __('Customer') ?></th>
-              <th width="20%"><?php echo __('Output Product') ?></th>
+              <th width="10%"><?php echo __('Customer') ?></th>
+              <th width="15%"><?php echo __('Output Product') ?></th>
               <th width="5%"><?php echo __('Quantity') ?></th>
               <th width="10%"><?php echo __('Delivery Date') ?></th>
               <th width="20%"><?php echo __('Created User') ?></th>
@@ -32,6 +33,7 @@
             foreach ($dataList as $data):
               ?>
               <tr>
+                <td><?php echo ($data['WorksSheet']['auto_code']); ?></td>
                 <td><?php echo ($data['WorksSheet']['order_no']); ?></td>
                 <td><?php echo ($data['Customer']['name']); ?></td>
                 <td><?php echo ($data['OutputProduct']['name']); ?></td>
