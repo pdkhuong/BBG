@@ -37,7 +37,7 @@ class Customer extends AppModel {
       ),
     ),
 	  'email' => array(
-		  'rule' => array('email', true),
+		  'rule' => array('email', false),
 		   'message' => 'Please supply a valid email address.'
     ),
 	  'phone' => array(
