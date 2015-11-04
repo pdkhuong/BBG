@@ -130,7 +130,7 @@ class CostingController extends AppController {
     $this->set('keyword', $keyword);
     $this->set("listCustomer", $listCustomer);
   }
-  function export($id){
+  function export($id=0){
     $costingDb = $this->Costing->findById($id);
     $this->checkCanDo($costingDb);
     App::uses('ExcelLib', 'Lib');
@@ -140,11 +140,38 @@ class CostingController extends AppController {
     $excel = new ExcelLib();
     $excel->init();
     $excel->writeFromArray($data);
-    $excel->PHPExcel->getActiveSheet()->setTitle('User List');
+    $excel->PHPExcel->getActiveSheet()->setTitle('Costing');
     $excel->PHPExcel->setActiveSheetIndex(0);
     $excel->send2Browser();
 
     die();
+  }
+  function view($id=0){
+    $costingDb = $this->Costing->findById($id);
+    $this->checkCanDo($costingDb);
+    $costingRecord = $this->Costing->getCostingRecord($costingDb);
+    $data = $costingRecord['excelData'];
+    if($data){
+      unset($data[2]);
+      unset($data[4]);
+      unset($data[6]);
+      unset($data[8]);
+      unset($data[10]);
+      unset($data[55]);
+      unset($data[57]);
+      unset($data[59]);
+      unset($data[60]);
+      foreach($data as $iRow => $row){
+        foreach($row as $iCol => $col){
+          if(is_numeric($col)){
+            $col = vnNumberFormat($col,0);
+            $data[$iRow][$iCol] = $col;
+          }
+        }
+      }
+    }
+    $this->set('data', $data);
+    //echo "<pre>"; print_r($data); die();
   }
 
 

@@ -74,6 +74,10 @@ $rights = array(
 				'export' => array(
 					'name' => 'export',
 					'status' => 0
+				),
+				'view' => array(
+					'name' => 'view',
+					'status' => 0
 				)
 			)
 		),

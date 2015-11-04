@@ -69,6 +69,7 @@ echo $this->Form->create('CostingSearch', array(
                 <td><?php echo vnNumberFormat($data['Costing']['selling_price'], 0); ?></td>
                 <td><?php echo $data['User']['display_name'] ?></td>
                 <td>
+                  <?= $this->Html->link('<i class="fa fa-file-text"></i>', Router::url(array('action' => 'view', $data['Costing']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('View'))) ?>
                   <?= $this->Html->link('<i class="fa fa-file-excel-o"></i>', Router::url(array('action' => 'export', $data['Costing']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Export Excel'))) ?>
                   <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['Costing']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Edit'))) ?>
                   <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete')) . '/' . $data['Costing']['id'], array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false, 'title' => __('Delete')), __('Are you sure you want to delete #%s?', $data['Costing']['id'])) ?>
