@@ -1,5 +1,5 @@
 <h3>
-  <?= __('Purchase Request') ?> #<?= $data['PurchaseRequest']['id'] ?>
+  <?= __('Purchase Request') ?>: <?= $data['PurchaseRequest']['order_no'] ?>
 </h3>
 <hr>
 <div class='table-responsive'>
@@ -24,11 +24,11 @@
         <td><?= $data['PurchaseRequest']['seller_name'] ?></td>
       </tr>
       <tr>
-        <td>Order Date</td>
+        <td>Order Date (YYYY-MM-DD)</td>
         <td><?= reformatDate($data['PurchaseRequest']['order_date']); ?></td>
       </tr>
       <tr>
-        <td>Received Date</td>
+        <td>Received Date (YYYY-MM-DD)</td>
         <td><?= reformatDate($data['PurchaseRequest']['received_date']); ?></td>
       </tr>
       <tr>

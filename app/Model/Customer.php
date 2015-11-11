@@ -80,11 +80,6 @@ class Customer extends AppModel {
       ),
     ),
 	'password' => array(
-      'notNull' => array(
-        'rule' => 'notEmpty',
-        'required' => true,
-        'message' => 'Password field cannot be left blank',
-      ),
       'size' => array(
         'rule' => array(
           0 => 'maxLength',
@@ -92,6 +87,7 @@ class Customer extends AppModel {
         ),
         'message' => 'Please enter a text no larger than 60 characters long',
         'allowEmpty' => false,
+        'on' => 'create'
       ),
       'minLength' => array(
         'rule'    => array('minLength', 6),

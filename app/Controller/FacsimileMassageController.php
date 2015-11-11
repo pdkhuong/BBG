@@ -51,10 +51,11 @@ class FacsimileMassageController extends AppController {
           $tmpPO['ProductUnit'] = $listProductUnit[$currentPO['Product']['product_unit_id']];
           $tmpPO['numOfProduct'] = $currentPO['FacsimileMassageProduct']['num_item'];
           $addedProducts[$tmpPO['Product']['id']] = $tmpPO;
-          unset($listProduct[$tmpPO['Product']['id']]);
+          //unset($listProduct[$tmpPO['Product']['id']]);
         }
       }
     } else {
+      echo "<pre>"; print_r($this->request->data); die();
       $errorMsg = '';
       if(isset($this->request->data['Product']['num_item'])){
         $addedProductItemArr  = $this->request->data['Product']['num_item'];
@@ -63,7 +64,7 @@ class FacsimileMassageController extends AppController {
           $addedProducts[$productId] = $listProduct[$productId];
           $addedProducts[$productId]['numOfProduct'] = $numOfProduct;
           //xoa nhung product da duoc add ra khoi listProduct
-          unset($listProduct[$productId]);
+          //unset($listProduct[$productId]);
           if(empty($numOfProduct) || ! is_numeric($numOfProduct)){
             $errorMsg = __('Please input valid number of product');
           }
@@ -168,7 +169,6 @@ class FacsimileMassageController extends AppController {
     $dataObj = $this->FacsimileMassage->findById($id);
     if($dataObj){
       $this->checkCanDo($dataObj);
-      $listUnit = Hash::combine($this->ProductUnit->find('all'), '{n}.ProductUnit.id', '{n}.ProductUnit');
       $this->layout = 'blank';
       App::uses('PdfLib', 'Lib');
       $marginWidth = 50;
@@ -181,15 +181,16 @@ class FacsimileMassageController extends AppController {
       $pdf->SetHeaderData($logoHeaderPath, 200, 'custom', $headerHtml);
       $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
       $pdf->setFooterMargin($marginWidth);
+      $pdf->Cell(0,1, '', 0,1,'C');
       $pdf->AddPage('P');
-      $pageTitle = "BẢNG BÁO GIÁ";
+      $pageTitle = "BẢNG CHÀO GIÁ BAO BÌ";
       $titleHtml = '<label style="font-size:15px; text-align:center"><u>' . $pageTitle . '</u></label><br>';
       $pdf->setY(40);
       $pdf->writeHTML($titleHtml, true, false, false, false, '');
-
+      $totalPage = $pdf->getAliasNbPages();
       $view = new View($this);
       $view->set('data', $dataObj);
-      $view->set('listUnit', $listUnit);
+      $view->set('totalPage', $totalPage);
       $productItems = $this->FacsimileMassageProduct->find('all', array(
         'conditions' => array('facsimile_massage_id' => $id),
         //'order' => array('order asc')

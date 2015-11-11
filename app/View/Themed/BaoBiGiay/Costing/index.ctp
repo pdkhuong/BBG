@@ -48,13 +48,12 @@ echo $this->Form->create('CostingSearch', array(
         <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
           <thead>
             <tr>
-              <th width="15%"><?php echo __('Customer') ?></th>
+              <th width="20%"><?php echo __('Customer') ?></th>
               <th width="15%"><?php echo __('Product Code') ?></th>
-              <th width="15%"><?php echo __('Product') ?></th>
+              <th width="20%"><?php echo __('Product') ?></th>
               <th width="10%"><?php echo __('Quantity') ?></th>
               <th width="10%"><?php echo __('Selling Price') ?></th>
-              <th width="15%"><?php echo __('Person In Charged') ?></th>
-              <th width="20%"><?php echo __('Actions'); ?></th>
+              <th width="25%"><?php echo __('Actions'); ?></th>
             </tr>
           </thead>
           <tbody>
@@ -67,7 +66,6 @@ echo $this->Form->create('CostingSearch', array(
                 <td><?php echo ($data['Product']['name']); ?></td>
                 <td><?php echo vnNumberFormat($data['Costing']['quantity'], 0); ?></td>
                 <td><?php echo vnNumberFormat($data['Costing']['selling_price'], 0); ?></td>
-                <td><?php echo $data['User']['display_name'] ?></td>
                 <td>
                   <?= $this->Html->link('<i class="fa fa-file-text"></i>', Router::url(array('action' => 'view', $data['Costing']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('View'))) ?>
                   <?= $this->Html->link('<i class="fa fa-file-excel-o"></i>', Router::url(array('action' => 'export', $data['Costing']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Export Excel'))) ?>

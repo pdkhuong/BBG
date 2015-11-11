@@ -7,10 +7,6 @@ class Costing extends AppModel {
   var $useTable = 'costing';
   var $multiLanguage = array ();
   public $belongsTo = array (
-    'Customer' => array (
-      'className' => 'Customer',
-      'foreignKey' => 'customer_id',
-    ),
     'Product' => array (
       'className' => 'Product',
       'foreignKey' => 'product_id',
@@ -22,13 +18,6 @@ class Costing extends AppModel {
   );
   public $actsAs = array('MultiLanguage.MultiLanguage');
   var $validate = array (
-    'customer_id' => array(
-      'numeric' => array (
-        'rule' => 'numeric',
-        'message' => 'Please select customer',
-        'allowEmpty' => false,
-      ),
-    ),
     'product_id' => array(
       'numeric' => array (
         'rule' => 'numeric',
@@ -79,11 +68,8 @@ class Costing extends AppModel {
       ),
     ),
     'paper_cutting' => array(
-      'numeric' => array (
-        'rule' => 'numeric',
-        'message' => 'Please enter a valid paper cutting',
-        'allowEmpty' => false,
-      ),
+      'rule' => 'checkNumberNotEmpty',
+      'message' => 'Please enter a valid paper cutting',
     ),
     'paper_price_ton' => array(
       'numeric' => array (
@@ -100,11 +86,8 @@ class Costing extends AppModel {
       ),
     ),
     'printing_color' => array(
-      'numeric' => array (
-        'rule' => 'numeric',
-        'message' => 'Please enter a valid printing color',
-        'allowEmpty' => false,
-      ),
+      'rule' => 'checkNumberNotEmpty',
+      'message' => 'Please enter a valid printing color',
     ),
     'printing_coverage' => array(
       'numeric' => array (
@@ -184,11 +167,8 @@ class Costing extends AppModel {
       ),
     ),
     'quantity' => array(
-      'numeric' => array (
-        'rule' => 'numeric',
-        'message' => 'Please enter a valid quantity',
-        'allowEmpty' => false,
-      ),
+      'rule' => 'checkNumberNotEmpty',
+      'message' => 'Please enter a valid quantity',
     ),
     'mk' => array(
       'numeric' => array (
@@ -269,12 +249,24 @@ class Costing extends AppModel {
       ),
     ),
   );
+  public function checkNumberNotEmpty($check) {
+    $ret = false;
+    $value = array_values($check);
+    $value = $value[0];
+    if(is_numeric($value) && !empty($value)){
+      $ret = true;
+    }
+    return $ret;
+  }
   public function getCostingRecord($costingDb, $quantity=0){
     App::uses('Settings', 'Model');
+    App::uses('Customer', 'Model');
     //$costingDb = $this->Costing->findById($costingId);
-    $exportDate = date('d/m/Y', time());
+    $exportDate = date('Y-m-d', time());
     $settingModel = new Settings();
     $settings = Hash::combine($settingModel->find("all"), '{n}.Settings.key', '{n}.Settings.val');
+    $customerModel = new Customer();
+    $customer = isset($costingDb['Product']['customer_id']) ? $customerModel->findById($costingDb['Product']['customer_id']) : array();
     $data = array();
     if(empty($quantity)){
       $quantity = $costingDb['Costing']['quantity'];
@@ -300,7 +292,7 @@ class Costing extends AppModel {
     $data[] = array();
     //row 4
     $row = array();
-    $row[0] = 'DATE:';
+    $row[0] = 'DATE (YYYY-MM-DD):';
     $row[1] = $exportDate;
     $row[2] = '';
     $row[3] = '';
@@ -316,7 +308,7 @@ class Costing extends AppModel {
     $row = array();
     $row[0] = 'Customer:';
     $row[1] = '';
-    $row[2] = isset($costingDb['Customer']['name']) ? $costingDb['Customer']['name'] : '';
+    $row[2] = isset($customer['Customer']['name']) ? $customer['Customer']['name'] : '';
     $row[3] = '';
     $row[4] = '';
     $row[5] = 'Product Specification:';

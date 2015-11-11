@@ -42,7 +42,6 @@ class PurchaseOrderController extends AppController {
 
         $costingByCustomerAndProduct = $this->Costing->find("first", array(
           'conditions' => array(
-            'Costing.customer_id' => $data['Customer']['id'],
             'Costing.product_id' => $tmpPO['Product']['id'],
           )
         ));
@@ -59,11 +58,11 @@ class PurchaseOrderController extends AppController {
   }
   public function edit($id=0){
     $purchaseOrderDb = $this->PurchaseOrder->findById($id);
+    $selectedCustomerId = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : 0;
     $this->checkCanDo($purchaseOrderDb);
     $listUser = array();
     $currentUserId = $this->loggedUser->User->id;
     $isAdmin = $this->isAdmin();
-    $listProduct = $this->listProduct(false);
     if($isAdmin){
       $listUser =  $this->UserModel->listUser();
     }
@@ -73,8 +72,30 @@ class PurchaseOrderController extends AppController {
     $shipType = Configure::read("SHIP_TYPE");
     $this->set('shipType', $shipType);
     $errorObj = array();
+    $orderNo1 = '';
+    $orderNo2 = '';
+    $orderNo3 = '';
+    if($purchaseOrderDb){//edit load len ban dau
+      $currentOrderNo = $purchaseOrderDb['PurchaseOrder']['order_no'];
+      $orderNoArr = explode('-', $currentOrderNo);
+      $orderNo1 = @$orderNoArr[0];
+      $orderNo2 = @$orderNoArr[1];
+      $orderNo3 = @$orderNoArr[2];
+    }else{//add
+      $orderNo3 = $this->PurchaseOrder->getUniqCodeByMonth();
+    }
+    if($selectedCustomerId){
+      $customer = $this->Customer->findById($selectedCustomerId);
+      $orderNo1 = substr( $customer['Customer']['code'], 0, 3);
+    }
+    $listProduct = Hash::combine($this->listProduct(true, $selectedCustomerId), '{n}.Product.id', '{n}');
+
     if (empty($this->request->data)) {
       $this->request->data = $purchaseOrderDb;
+      if($selectedCustomerId){
+        $this->request->data['PurchaseOrder']['customer_id'] = $selectedCustomerId;
+      }
+      $this->request->data['PurchaseOrder']['order_no'] = $orderNo2;
       $currentPurchaseOrderProducts = $this->PurchaseOrderProduct->findAllByPurchaseOrderId($id);
       if($currentPurchaseOrderProducts){
         $listProductUnit = Hash::combine($this->ProductUnit->find('all'), '{n}.ProductUnit.id', '{n}.ProductUnit');
@@ -107,9 +128,13 @@ class PurchaseOrderController extends AppController {
       if(!isset($this->request->data['PurchaseOrder']['user_id'])){
         $this->request->data['PurchaseOrder']['user_id'] = $currentUserId;
       }
+      $orderNo2 = $this->request->data['PurchaseOrder']['order_no'];
       $this->PurchaseOrder->set($this->request->data);
       if(!$errorMsg){
-        if ($this->PurchaseOrder->save()) {
+        if ($this->PurchaseOrder->validates()) {
+          $this->request->data['PurchaseOrder']['order_no'] = $orderNo1.'-'.$orderNo2.'-'.$orderNo3;
+          $this->PurchaseOrder->set($this->request->data);
+          $this->PurchaseOrder->save(false);
           $purchaseOrderId = $this->PurchaseOrder->getId();
           $this->_savePurchaseOrderProduct($purchaseOrderId, $addedProducts);
           $this->Session->setFlash(__('Your data is saved successfully'), 'flash/success');
@@ -123,6 +148,9 @@ class PurchaseOrderController extends AppController {
       }
 
     }
+    $this->set('orderNo1', $orderNo1);
+    $this->set('orderNo2', $orderNo2);
+    $this->set('orderNo3', $orderNo3);
     $this->set('errorObj', $errorObj);
     $this->set('addedProducts', $addedProducts);
     $this->set('listProduct', $listProduct);

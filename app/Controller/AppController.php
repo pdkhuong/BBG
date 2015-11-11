@@ -76,18 +76,6 @@ class AppController extends Controller {
   function beforeFilter() {
     parent::beforeFilter();
 
-    $js = array();
-    $js['data'] = json_encode(array());
-    $js['messages'] = array(
-      "error_title" => __("Error!!!"),
-      "success_title" => __("Success!!!"),
-      "hint_text" => __("Input keyword for searching"),
-      "no_results_text" => __("No data"),
-      "searching_text" => __("Searching...")
-    );
-
-    $this->set('js', $js);
-
     $this->layout = 'default';
 
     if ($this->RequestHandler->isAjax()) {
@@ -113,7 +101,7 @@ class AppController extends Controller {
       $args = $this->passedArgs;
       $currentUserId = $this->loggedUser->User->id;
       if(isset($rolesC[$currentController][$currentAction]['owner']) && $rolesC[$currentController][$currentAction]['owner'] == 1){
-        if(empty($objData)){
+        if(empty($objData) && isset($rolesC[$currentController][$currentAction]['can_create']) && $rolesC[$currentController][$currentAction]['can_create']){
           $canDo = true;
         }else{
           switch($modelName){
@@ -135,10 +123,31 @@ class AppController extends Controller {
 
               break;
             case 'Product':
-            case 'Costing':
             case 'PurchaseOrder':
             case 'PurchaseRequest':
             case 'FacsimileMassage':
+              if(!isset($objData[$modelName]) || $objData[$modelName]['user_id'] != $currentUserId){
+                $canDo = false;
+              }
+              if($isCustomer){
+                $customerId = $this->getCustomerIdByUser($currentUserId);
+                if(isset($objData[$modelName]['customer_id']) && $objData[$modelName]['customer_id'] == $customerId) {
+                  $canDo = true;
+                }
+              }
+              break;
+            case 'Costing':
+              if(!isset($objData[$modelName]) || $objData[$modelName]['user_id'] != $currentUserId){
+                $canDo = false;
+              }
+              if($isCustomer){
+                $customerId = $this->getCustomerIdByUser($currentUserId);
+                if(isset($objData['Product']['customer_id']) && $objData['Product']['customer_id'] == $customerId) {
+                  $canDo = true;
+                }
+              }
+              break;
+            case 'WorksSheet':
               if(!isset($objData[$modelName]) || $objData[$modelName]['user_id'] != $currentUserId){
                 $canDo = false;
               }
@@ -148,17 +157,9 @@ class AppController extends Controller {
                   $canDo = true;
                 }
               }
-              break;
-            case 'WorksSheet':
-              if(!isset($objData[$modelName]) || $objData[$modelName]['created_user_id'] != $currentUserId){
-                $canDo = false;
-              }
-              if($isCustomer){
-                $customerId = $this->getCustomerIdByUser($currentUserId);
-                if(isset($objData[$modelName]) && $objData[$modelName]['customer_id'] == $customerId) {
-                  $canDo = true;
-                }
-              }
+              //if(empty($objData[$objData]['status'])){
+                //$canDo = false;
+              //}
               break;
             case 'File':
             case 'Vendor':
@@ -168,6 +169,14 @@ class AppController extends Controller {
               }
               break;
           }
+        }
+      }else{
+        switch($modelName) {
+          case 'WorksSheet':
+            if(empty($objData[$modelName]['status'])){
+              $canDo = false;
+            }
+            break;
         }
       }
     }
@@ -216,7 +225,6 @@ class AppController extends Controller {
           case 'Vendor':
             $conditions[$modelName.'.user_id'] = $currentUserId;
             break;
-          case 'Costing':
           case 'Product':
           case 'PurchaseOrder':
           case 'PurchaseRequest':
@@ -230,15 +238,32 @@ class AppController extends Controller {
               $conditions[$modelName.'.user_id'] = $currentUserId;
             }
             break;
-          case 'WorksSheet':
+          case 'Costing':
             if($isCustomer){
               $conditions['OR'] = array(
-                array($modelName.'.created_user_id' => $currentUserId),
+                array($modelName.'.user_id' => $currentUserId),
+                array('Product.customer_id' => $customerId),
+              );
+            }else{
+              $conditions[$modelName.'.user_id'] = $currentUserId;
+            }
+            break;
+          case 'WorksSheet':
+            //$conditions[$modelName.'.status'] = STATUS_APPROVED;
+            if($isCustomer){
+              $conditions['OR'] = array(
+                array($modelName.'.user_id' => $currentUserId),
                 array($modelName.'.customer_id' => $customerId),
               );
             }else{
-              $conditions[$modelName.'.created_user_id'] = $currentUserId;
+              $conditions[$modelName.'.user_id'] = $currentUserId;
             }
+            break;
+        }
+      }else{
+        switch($modelName) {
+          case 'WorksSheet':
+            $conditions[$modelName.'.status'] = STATUS_APPROVED;
             break;
         }
       }
@@ -283,40 +308,33 @@ class AppController extends Controller {
     }
     return $listCustomer;
   }
-  function listProduct($isList=true){
+  function listProduct($hasCosting=null, $byCustomerId=null){
     $currentUserId = $this->loggedUser->User->id;
     $model = ClassRegistry::init('Product');
-    if($isList){
-      if($this->isAdmin()){
-        $listProduct = $model->find("list");
-      }elseif($this->isCustomer()){
-        $customerId = $this->getCustomerIdByUser($currentUserId);
-        $conditions['OR'] = array(
-          array('Product.user_id' => $currentUserId),
-          array('Product.customer_id' => $customerId),
-        );
-        $listProduct = $model->find("list", array('conditions'=> $conditions));
+    $conditions = array();
+    if($hasCosting!==null){
+      if($hasCosting){
+        $conditions['Product.quantity !='] = null;
       }else{
-        $listProduct = $model->find("list", array('conditions'=> array(
-          'Product.user_id' =>$currentUserId
-        )));
+        $conditions['Product.quantity'] = null;
       }
+
+    }
+    if($byCustomerId!==null){
+      $conditions['Product.customer_id'] = $byCustomerId;
+    }
+    if($this->isAdmin()){
+      $listProduct = $model->find("all", array("conditions" => $conditions));
+    }elseif($this->isCustomer()){
+      $customerId = $this->getCustomerIdByUser($currentUserId);
+      $conditions['OR'] = array(
+        array('Product.user_id' => $currentUserId),
+        array('Product.customer_id' => $customerId),
+      );
+      $listProduct = $model->find("all", array('conditions'=> $conditions));
     }else{
-      if($this->isAdmin()){
-        $listProduct = $model->find("all");
-      }elseif($this->isCustomer()){
-        $customerId = $this->getCustomerIdByUser($currentUserId);
-        $conditions['OR'] = array(
-          array('Product.user_id' => $currentUserId),
-          array('Product.customer_id' => $customerId),
-        );
-        $listProduct = $model->find("all", array('conditions'=> $conditions));
-      }else{
-        $listProduct = $model->find("all", array('conditions'=> array(
-          'Product.user_id' =>$currentUserId
-        )));
-      }
-      $listProduct = Hash::combine($listProduct, '{n}.Product.id', '{n}');
+      $conditions['Product.user_id'] = $currentUserId;
+      $listProduct = $model->find("all", array('conditions'=> $conditions));
     }
     return $listProduct;
   }

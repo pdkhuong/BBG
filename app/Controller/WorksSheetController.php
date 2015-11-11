@@ -9,7 +9,10 @@ class WorksSheetController extends AppController {
     'WorksSheetProgress',
     'User.UserModel',
     'ProductUnit',
-    'Costing'
+    'Costing',
+    'PurchaseOrder',
+    'PurchaseOrderProduct',
+    'Vendor'
   );
 
   public function beforeFilter() {
@@ -28,27 +31,66 @@ class WorksSheetController extends AppController {
   public function edit($id = 0) {
     $worksSheetDb = $this->WorksSheet->findById($id);
     $this->checkCanDo($worksSheetDb);
+    $selectedCustomerId = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : 0;
+    $vendorList = $this->Vendor->find('list');
+    $this->set('vendorList', $vendorList);
     $currentUserId = $this->loggedUser->User->id;
     $listCustomer = $this->listCustomer();
-    $listProduct = $this->listProduct();
     $isAdmin = $this->isAdmin();
     $errorObj = array();
     $listUser = $this->UserModel->listUser();
+    $listProductHasPO = array();
     if($worksSheetDb){
+      if(empty($selectedCustomerId)){
+        $selectedCustomerId = $worksSheetDb['WorksSheet']['customer_id'];
+      }
       $autoCode = $worksSheetDb['WorksSheet']['auto_code'];
     }else{
       $autoCode = $this->WorksSheet->getUniqCode();
     }
+    $this->set('autoCode', $autoCode);
+    if($selectedCustomerId){
+      $listProductHasPO = $this->PurchaseOrder->find('all', array(
+        'joins' => array(
+          array(
+            'table' => $this->PurchaseOrderProduct->useTable,
+            'alias' => 'PurchaseOrderProduct',
+            'type' => 'INNER',
+            'conditions' => array(
+              'PurchaseOrder.id = PurchaseOrderProduct.purchase_order_id',
+              'PurchaseOrderProduct.deleted_time IS NULL'
+            )
+          ),
+          array(
+            'table' => $this->Product->useTable,
+            'alias' => 'Product',
+            'type' => 'INNER',
+            'conditions' => array(
+              'Product.id = PurchaseOrderProduct.product_id',
+              'Product.deleted_time IS NULL'
+            )
+          ),
+        ),
+        'conditions' => array('PurchaseOrder.customer_id' => $selectedCustomerId),
+        'fields' => array('PurchaseOrder.*', 'Product.*', 'Customer.*')
+      ));
+      $listProductHasPO = Hash::combine($listProductHasPO, '{n}.Product.id', '{n}.Product.name');
+    }
+
+    $this->set('listProductHasPO', $listProductHasPO);
     $addedProgress = array();
     $productProgressBeforeAdded = $this->WorksSheetProgress->findAllByproductOrderId($id);
     $productProgressBeforeAdded = Hash::combine($productProgressBeforeAdded, '{n}.WorksSheetProgress.id', '{n}.WorksSheetProgress');
     if (empty($this->request->data)) {
       $addedProgress = $productProgressBeforeAdded;
       $this->request->data = $worksSheetDb;
+      if($selectedCustomerId){
+        $this->request->data['WorksSheet']['customer_id'] = $selectedCustomerId;
+      }
     } else {//save
       $addedProgress = isset($this->request->data['WorksSheetProgress']) ? $this->request->data['WorksSheetProgress'] : array();
-      if(!isset($this->request->data['WorksSheet']['created_user_id'])){
-        $this->request->data['WorksSheet']['created_user_id'] = $currentUserId;
+      if(!isset($this->request->data['WorksSheet']['user_id'])){
+        $this->request->data['WorksSheet']['user_id'] = $currentUserId;
       }
       $this->request->data['WorksSheet']['auto_code'] = $autoCode;
       $this->WorksSheet->set($this->request->data);
@@ -64,10 +106,20 @@ class WorksSheetController extends AppController {
     }
     $this->set('errorObj', $errorObj);
     $this->set("listCustomer", $listCustomer);
-    $this->set("listProduct", $listProduct);
     $this->set('listUser', $listUser);
     $this->set('isAdmin', $isAdmin);
     $this->set('addedProgress', $addedProgress);
+  }
+  public function approve($id = 0) {
+    $worksSheetDb = $this->WorksSheet->findById($id);
+    $this->checkCanDo($worksSheetDb);
+    $data['id'] = $id;
+    $data['status'] = STATUS_APPROVED;
+    if ($this->WorksSheet->save($data, false)) {
+      $this->Session->setFlash(__('WorksSheet is approved successfully'), 'flash/success');
+      return $this->redirect(Router::url(array('action' => 'index')));
+    }
+    die();
   }
   private function _saveWorksSheetProgress($WorksSheetId, $addedProgress, $productProgressBeforeAdded){
     if($addedProgress){
@@ -122,19 +174,47 @@ class WorksSheetController extends AppController {
     }catch(Exception $e){
       $dataList = array();
     }
+    $isAdmin = $this->isAdmin();
+    $this->set('isAdmin', $isAdmin);
     $this->set('dataList', $dataList);
   }
   public function report($id){
     $dataObj = $this->WorksSheet->findById($id);
     if($dataObj){
       $this->checkCanDo($dataObj);
-      $costingByCustomerAndProduct = $this->Costing->find("first", array(
+      $costingProduct = $this->Costing->find("first", array(
         'conditions' => array(
-          'Costing.customer_id' => $dataObj['Customer']['id'],
-          'Costing.product_id' => $dataObj['OutputProduct']['id'],
+          'Costing.product_id' => $dataObj['Product']['id'],
         )
       ));
-      if($costingByCustomerAndProduct){
+      if($costingProduct){
+        $productPO = $this->PurchaseOrder->find('first', array(
+          'joins' => array(
+            array(
+              'table' => $this->PurchaseOrderProduct->useTable,
+              'alias' => 'PurchaseOrderProduct',
+              'type' => 'INNER',
+              'conditions' => array(
+                'PurchaseOrder.id = PurchaseOrderProduct.purchase_order_id',
+                'PurchaseOrderProduct.deleted_time IS NULL'
+              )
+            ),
+            array(
+              'table' => $this->Product->useTable,
+              'alias' => 'Product',
+              'type' => 'INNER',
+              'conditions' => array(
+                'Product.id = PurchaseOrderProduct.product_id',
+                'Product.deleted_time IS NULL'
+              )
+            ),
+          ),
+          'conditions' => array(
+            'PurchaseOrder.customer_id' => $dataObj['WorksSheet']['customer_id'],
+            'PurchaseOrderProduct.product_id' => $dataObj['WorksSheet']['product_id']
+          ),
+          'fields' => array('PurchaseOrder.*')
+        ));
         $listUnit = Hash::combine($this->ProductUnit->find('all'), '{n}.ProductUnit.id', '{n}.ProductUnit');
         $this->layout = 'blank';
         App::uses('PdfLib', 'Lib');
@@ -162,18 +242,19 @@ class WorksSheetController extends AppController {
           'order' => array('order asc')
         ));
         $view->set('orderProgress', $orderProgress);
+        $view->set('productPO', $productPO);
         //---------------------
-        $cutting = $costingByCustomerAndProduct['Costing']['paper_cutting'];
-        $numProduc = $dataObj['WorksSheet']['num_product'];
+        $cutting = $costingProduct['Costing']['paper_cutting'];
+        $numProduc = $costingProduct['Costing']['quantity'];
         $haoPhi = ($numProduc/$cutting)/50;
         $reportNum = ($numProduc/$cutting) + $haoPhi;
         $view->set('reportNum', $reportNum);
         $view->set('haoPhi', $haoPhi);
-        $view->set('cutting', $cutting);
+        $view->set('costingProduct', $costingProduct);
+        $paperName = Configure::read("PAPER_NAME");
+        $view->set('paperName', $paperName);
         //--------------------
-        //echo "<pre>"; print_r($dataObj); die();
         $html = $view->render('report_pdf');
-        //echo $html;die();
         //$pdf->setY(40);
         $pdf->setX(30);
         $pdf->writeHTML($html, true, false, false, false, '');
@@ -181,17 +262,29 @@ class WorksSheetController extends AppController {
         $note = trim($dataObj['WorksSheet']['special_note']);
         $strText = str_replace("\n","<br>",$note);
         $pdf->MultiCell(205, 10,$strText, 0, 'J', 0, 1, '', '', true, null, true);
-
         $date = reformatDate($dataObj['WorksSheet']['created_time'], '\N\g\à\y d \t\h\á\n\g m \n\ă\m Y');
         $pdf->setX(130);
         $pdf->MultiCell(205, 10,$date, 0, 'J', 0, 1, '', '', true, null, true);
         //$pdf->Write(0, $date);
-
         $pdf->setX(31);
-        $tabSpace = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
-        $text1 = "Người lập phiếu".$tabSpace."Người duyệt";
-        $pdf->MultiCell(205, 35,$text1, 0, 'J', 0, 1, '', '', true, null, true);
-        $text2 = "<b>".$dataObj['CreatedUser']['display_name']."<b>".$tabSpace.$dataObj['ApprovedUser']['display_name'];
+
+        $htmlFooter = '<table>';
+        $htmlFooter .= '<tr>';
+        $htmlFooter .= '<td width="50%">Người lập phiếu</td>';
+        $htmlFooter .= '<td width="50%">Người duyệt</td>';
+        $htmlFooter .= '</tr>';
+        /*$htmlFooter .= '<tr><td></td></tr>';
+        $htmlFooter .= '<tr><td></td></tr>';
+        $htmlFooter .= '<tr><td></td></tr>';
+        $htmlFooter .= '<tr><td></td></tr>';
+        $htmlFooter .= '<tr>';
+        $htmlFooter .= '<td width="50%">'.$dataObj['User']['display_name'].'</td>';
+        $htmlFooter .= '<td width="50%"></td>';
+        $htmlFooter .= '</tr>';*/
+        $htmlFooter .= '</table>';
+
+        $pdf->MultiCell(205, 35,$htmlFooter, 0, 'J', 0, 1, '', '', true, null, true);
+        //$text2 = "<b>".$dataObj['CreatedUser']['display_name']."<b>".$tabSpace.$dataObj['ApprovedUser']['display_name'];
         //$pdf->setX(31);
         //$pdf->MultiCell(205, 5,$text2, 0, 'J', 0, 1, '', '', true, null, true);
 

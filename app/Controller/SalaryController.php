@@ -5,7 +5,8 @@ class SalaryController extends AppController {
   var $uses = array(
     'Salary',
     'User.UserModel',
-    'Customer'
+    'Customer',
+    'Settings'
   );
 
   public function beforeFilter() {
@@ -51,6 +52,7 @@ class SalaryController extends AppController {
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
   public function index() {
+    $settings = Hash::combine($this->Settings->find("all"), '{n}.Settings.key', '{n}.Settings.val');
     $currentUserId = $this->loggedUser->User->id;
     $isAdmin = $this->isAdmin();
     $isAccounting = $this->isAccounting();
@@ -98,21 +100,43 @@ class SalaryController extends AppController {
         $sumAmount += $amount;
         $sumEntilement += $entilement;
       }
-      if($sumAmount<=100000000){
-        $sumAmount2 = $sumAmount * 0.03;
-      }elseif($sumAmount <= 200000000){
-        $sumAmount2 = $sumAmount * 0.025 + 500000;
-      }elseif($sumAmount <= 300000000){
-        $sumAmount2 = $sumAmount * 0.02 + 2000000;
+      $doanhSo1 = $settings['salary_doanhso_1'];
+      $doanhSo2 = $settings['salary_doanhso_2'];
+      $doanhSo3 = $settings['salary_doanhso_3'];
+
+      $hoahong1 = $settings['salary_hoahong_1'];
+      $hoahong2 = $settings['salary_hoahong_2'];
+      $hoahong3 = $settings['salary_hoahong_3'];
+      $hoahong4 = $settings['salary_hoahong_4'];
+
+      $siengnang1 = $settings['salary_siengnang_1'];
+      $siengnang2 = $settings['salary_siengnang_2'];
+      $siengnang3 = $settings['salary_siengnang_3'];
+
+      $entilementDoanhSo1 = $settings['entilement_doanhso_1'];
+      $entilementDoanhSo2 = $settings['entilement_doanhso_2'];
+      $entilementHoaHong1 = $settings['entilement_hoahong_1'];
+      $entilementHoaHong2 = $settings['entilement_hoahong_2'];
+      $entilementHoaHong3 = $settings['entilement_hoahong_3'];
+      $entilementSiengNang1 = $settings['entilement_siengnang_1'];
+      $entilementSiengNang2 = $settings['entilement_siengnang_2'];
+
+
+      if($sumAmount<=$doanhSo1){
+        $sumAmount2 = $sumAmount * $hoahong1;
+      }elseif($sumAmount <= $doanhSo2){
+        $sumAmount2 = $sumAmount * $hoahong2 + $siengnang1;
+      }elseif($sumAmount <= $doanhSo3){
+        $sumAmount2 = $sumAmount * $hoahong3 + $siengnang2;
       }else{
-        $sumAmount2 = $sumAmount * 0.015+4000000;
+        $sumAmount2 = $sumAmount * $hoahong4+$siengnang3;
       }
-      if($sumEntilement<=10000000){
-        $sumEntilement2 = $sumEntilement * 0.05;
-      }elseif($sumEntilement <= 20000000){
-        $sumEntilement2 = $sumEntilement * 0.045+100000;
+      if($sumEntilement<=$entilementDoanhSo1){
+        $sumEntilement2 = $sumEntilement * $entilementHoaHong1;
+      }elseif($sumEntilement <= $entilementDoanhSo2){
+        $sumEntilement2 = $sumEntilement * $entilementHoaHong2+$entilementSiengNang1;
       }else{
-        $sumEntilement2 = $sumEntilement * 0.03+600000;
+        $sumEntilement2 = $sumEntilement * $entilementHoaHong3+$entilementSiengNang2;
       }
     }
     //die();

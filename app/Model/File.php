@@ -53,19 +53,10 @@ class File extends AppModel {
       )
     ),
   );
-  function getFileExtension($mimeType){
-    $allowExtension = Configure::read("UPLOAD_EXTENSION");
-    $extension = '';
-    foreach($allowExtension as $ext){
-      if($ext['mime'] == $mimeType){
-        $extension = $ext['ext'];
-      }
-    }
-    return $extension;
-  }
   function uploadFile($fileObj, $dirUpload=UPLOAD_BASE_DIR, $require = true){
     $data = array();
     if($fileObj){
+      $allowExtension = Configure::read("UPLOAD_EXTENSION");
       $fileName = uniqid() . '_' . time();
       if ($fileObj["error"] > 0) {
         if ($fileObj["error"] == 1) {
@@ -76,9 +67,9 @@ class File extends AppModel {
           $data['message'] = __('Please upload file');
         }
       } else {
-        $mimeType = mime_content_type($fileObj["tmp_name"]);
-        $extension = $this->getFileExtension($mimeType);
-        if($extension){
+        $extension = substr($fileObj["name"], strrpos($fileObj["name"], '.')+1);
+        $extension = strtolower($extension);
+        if(in_array($extension, $allowExtension)){
           $uploadFile = $dirUpload . '/' . $fileName . '.' . $extension;
           if (!file_exists($dirUpload)) {
             mkdirs($dirUpload);
@@ -95,7 +86,7 @@ class File extends AppModel {
           }
         }else{
           $data['error'] = 10;
-          $data['message'] = __('Fine not allow to upload');
+          $data['message'] = __('File not allow to upload. Supported file type ('. implode(",", $allowExtension).')');
         }
 
       }

@@ -85,6 +85,44 @@ class Product extends AppModel {
         'allowEmpty' => false,
       )
     ),
+    'length' => array(
+      'numeric' => array (
+        'rule' => 'numeric',
+        'message' => 'Please enter a valid length',
+        'allowEmpty' => false,
+      ),
+    ),
+    'width' => array(
+      'numeric' => array (
+        'rule' => 'numeric',
+        'message' => 'Please enter a valid width',
+        'allowEmpty' => false,
+      ),
+    ),
+    'paper_name' => array(
+      'numeric' => array (
+        'rule' => 'numeric',
+        'message' => 'Please enter a valid paper name',
+        'allowEmpty' => false,
+      ),
+    ),
+    'substance' => array(
+      'numeric' => array (
+        'rule' => 'numeric',
+        'message' => 'Please enter a valid substance',
+        'allowEmpty' => false,
+      ),
+    ),
+    'structure' => array(
+      'size' => array(
+        'rule' => array(
+          0 => 'maxLength',
+          1 => 200,
+        ),
+        'message' => 'Please enter a text no larger than 200 characters long',
+        'allowEmpty' => true,
+      )
+    ),
     'price' => array(
       'numeric' => array (
         'rule' => 'numeric',

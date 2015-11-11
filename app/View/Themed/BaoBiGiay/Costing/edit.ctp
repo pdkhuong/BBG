@@ -7,7 +7,7 @@
 </h3>
 
 <hr />
-<div class="well form-horizontal page-body posts form">
+<div class="well form-horizontal page-body posts form _costing">
 <?php
   echo $this->Form->create('Costing', array(
     'novalidate' => true,
@@ -27,23 +27,16 @@
   </div>
   <div class="form-group">
     <?php
-    echo $this->Form->input('customer_id',
-      array('options' => $listCustomer,
-        'selected'=>NULL,
-        'label' => array('text' => __('Customer')),
-        'empty' => __("Please select customer..."),
-      )
-    );
-    ?>
-    <?php
     echo $this->Form->input('product_id',
       array('options' => $listProduct,
         'selected'=>NULL,
         'empty' => __("Please select product..."),
+        'id' => '_costing_product'
       )
     );
     ?>
   </div>
+
   <div class="form-group">
     <?php echo $this->Form->input('spec_length', array('label' => array('text' => __('Specification Length (cm)')))) ?>
     <?php echo $this->Form->input('spec_width', array('label' => array('text' => __('Specification Width (cm)')))) ?>

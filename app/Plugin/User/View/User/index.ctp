@@ -15,7 +15,6 @@
   <table cellpadding='0' cellspacing='0' class='table table-striped table-bordered'>
     <thead>
       <tr>
-        <th>ID</th>
         <th><?= __('Name') ?></th>
         <th><?= __('Email') ?></th>
         <th><?= __('Roles') ?></th>
@@ -30,7 +29,6 @@
       foreach ($dataList as $data):
         ?>
         <tr>
-          <td><?= $data['UserModel']['id'] ?></td>
           <td><?= $data['UserModel']['display_name'] ?></td>
           <td><?= $data['UserModel']['user_email'] ?></td>
           <td>

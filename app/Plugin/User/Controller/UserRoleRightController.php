@@ -203,7 +203,7 @@ class UserRoleRightController extends AppController {
           }
           foreach ($dataController as $action => $val) {
             if ($val == 1) {
-              if ($this->request->data['controllerowner'][$controller][$action] == 1) {
+              if (isset($this->request->data['controllerowner'][$controller][$action]) && $this->request->data['controllerowner'][$controller][$action] == 1) {
                 $rolesCS[$controller][$action] = 1;
               } else {
                 $rolesCS[$controller][$action] = 0;
@@ -211,14 +211,12 @@ class UserRoleRightController extends AppController {
             }
           }
         }
-
         foreach ($this->request->data['controller_all'] as $controller => $val) {
           if ($val == 0) {
             continue;
           }
           $rolesCS[$controller] = array();
         }
-
         foreach ($rolesCS as $controller => $dataController) {
           $data = array();
           $data['role_id'] = $id;
@@ -232,12 +230,18 @@ class UserRoleRightController extends AppController {
             }
             continue;
           }
+          $canCreate = false;
+          if(isset($dataController['can_create'])){
+            $canCreate = true;
+            unset($dataController['can_create']);
+          }
           foreach ($dataController as $action => $val) {
             $data = array();
             $data['role_id'] = $id;
             $data['controller'] = $controller;
             $data['action'] = $action;
             $data['is_owner'] = $val;
+            $data['can_create'] = $canCreate;
             if (isset($rolesC[$controller][$action]['id'])) {
               $data['id'] = $rolesC[$controller][$action]['id'];
               unset($rolesC[$controller][$action]);
@@ -246,7 +250,6 @@ class UserRoleRightController extends AppController {
             $userRoleRight->save($data, false);
           }
         }
-
         //delete
         foreach ($rolesC as $controller => $dataController) {
           if (isset($dataController['id'])) {

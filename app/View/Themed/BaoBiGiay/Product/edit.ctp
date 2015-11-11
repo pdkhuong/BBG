@@ -26,6 +26,19 @@
   <?php echo $this->Form->input('item_no', array('maxlength' =>6, 'label' => array('text' => __('Item No.')))) ?>
   <?php echo $this->Form->input('name', array('label' => array('text' => __('Name')))) ?>
   <?php echo $this->Form->input('specification', array('label' => array('text' => __('Specification')))) ?>
+  <?php echo $this->Form->input('length', array('label' => array('text' => __('Specification Length (cm)')))) ?>
+  <?php echo $this->Form->input('width', array('label' => array('text' => __('Specification Width (cm)')))) ?>
+  <?php
+  echo $this->Form->input('paper_name',
+    array('options' => $paperName,
+      'selected'=>NULL,
+      'empty' => __("Please select ..."),
+      'label' => array('text' => __('Paper Name'))
+    )
+  );
+  ?>
+  <?php echo $this->Form->input('substance', array('label' => array('text' => __('Substance (gsm)')))) ?>
+  <?php echo $this->Form->input('structure', array('rows' =>2, 'label' => array('text' => __('Structure')))) ?>
   <?php
   echo $this->Form->input('product_unit_id',
     array('options' => $listUnit,

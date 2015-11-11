@@ -27,6 +27,8 @@ class ProductController extends AppController {
   public function view($id=0){
     $data = $this->Product->findById($id);
     $this->checkCanDo($data);
+    $paperName = Configure::read("PAPER_NAME");
+    $this->set('paperName', $paperName);
     $this->set('data', $data);
   }
   public function edit($id = 0) {
@@ -41,6 +43,8 @@ class ProductController extends AppController {
     }
     $listUnit = Hash::combine($this->ProductUnit->find('all'), '{n}.ProductUnit.id', '{n}.ProductUnit.name');
     $this->set('listUnit', $listUnit);
+    $paperName = Configure::read("PAPER_NAME");
+    $this->set('paperName', $paperName);
     if (empty($this->request->data)) {
       $this->request->data = $productDb;
     } else {//save

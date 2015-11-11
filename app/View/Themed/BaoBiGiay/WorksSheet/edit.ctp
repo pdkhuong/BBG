@@ -1,13 +1,13 @@
 <h3>
   <? if (isset($this->data['WorksSheet']['id']) && $this->data['WorksSheet']['id'] > 0): ?>
-    <?= __('Edit Works Sheet') ?>: #<?php echo $this->data['WorksSheet']['auto_code']?>
+    <?= __('Edit Works Sheet') ?>: <?php echo $this->data['WorksSheet']['auto_code']?>
   <? else: ?>
-    <?= __('Add Works Sheet') ?>
+    <?= __('Add Works Sheet') ?>: <?php echo $autoCode?>
   <? endif; ?>
 </h3>
 
 <hr />
-<div class="well form-horizontal page-body posts form">
+<div class="well form-horizontal page-body posts form _works_sheet">
 <?php
   echo $this->Form->create('WorksSheet', array(
     'novalidate' => true,
@@ -22,33 +22,27 @@
   ));
   ?>
 
-  <?php echo $this->Form->input('order_no', array('label' => array('text' => __('Order No.')))) ?>
   <?php
+  $currentUrl = isset($this->data['WorksSheet']['id']) ? Router::url(array('action' => 'edit', $this->data['WorksSheet']['id']), true) : Router::url(array('action' => 'edit'), true);
   echo $this->Form->input('customer_id',
     array('options' => $listCustomer,
       'selected'=>NULL,
       'label' => array('text' => __('Customer')),
       'empty' => __("Please select customer..."),
+      'id' => "_change_customer",
+      'data-current-url' =>$currentUrl
     )
   );
   ?>
   <?php
-  echo $this->Form->input('output_product_id',
-    array('options' => $listProduct,
-      'selected'=>NULL,
-      'empty' => __("Please select output product..."),
-    )
-  );
-  ?>
-  <?php
-  echo $this->Form->input('input_product_id',
-    array('options' => $listProduct,
-      'selected'=>NULL,
-      'empty' => __("Please select input product..."),
-    )
-  );
-  ?>
-  <?php echo $this->Form->input('num_product', array('label' => array('text' => __('Quantity')))) ?>
+    echo $this->Form->input('product_id',
+      array('options' => $listProductHasPO,
+        'selected'=>NULL,
+        'empty' => __("Please select product..."),
+        'id' => '_costing_product'
+      )
+    );
+    ?>
   <?php
   $isErrorDeliveryDate = isset($errorObj['delivery_date']) ? TRUE : FALSE;
   ?>
@@ -74,20 +68,11 @@
     echo $this->Form->input('created_user_id',
       array('options' => $listUser,
         'selected'=>NULL,
-        'label' => array('text' => __('Created By User')),
-        'empty' => __("Please select created user..."),
+        'label' => array('text' => __('Created By Staff')),
+        'empty' => __("Please select created staff..."),
       )
     );
   }
-  ?>
-  <?php
-  echo $this->Form->input('approved_user_id',
-    array('options' => $listUser,
-      'selected'=>NULL,
-      'label' => array('text' => __('Approved By User')),
-      'empty' => __("Please select approved user..."),
-    )
-  );
   ?>
   <?php echo $this->Form->input('special_note', array('rows'=>2, 'label' => array('text' => __('Special Note')))) ?>
 
@@ -98,35 +83,28 @@
       <tr>
         <th width="10%"><?php echo __('Order') ?></th>
         <th width="20%"><?php echo __('Progress Name') ?></th>
-        <th width="25%"><?php echo __('At Location') ?></th>
-        <th width="30%"><?php echo __('Description') ?></th>
-        <th width="15%">Action</th>
+        <th width="30%"><?php echo __('Vendor') ?></th>
+        <th width="40%"><?php echo __('Description') ?></th>
       </tr>
       </thead>
       <tbody id="_bodyAddedProgress">
       <?php if($addedProgress):?>
         <?php foreach($addedProgress as $progressId => $progress):?>
-          <tr id="_row_<?php echo $progressId?>">
+          <tr>
+            <td><span><?php echo $progress['order']?></span><?php echo $this->Form->input("WorksSheetProgress.{$progressId}.order", array('type' => 'hidden', 'value' => $progress['order']));?></td>
+            <td><?php echo $progress['name']?><?php echo $this->Form->input("WorksSheetProgress.{$progressId}.name", array('type' => 'hidden', 'value' => $progress['name']));?></td>
             <td>
-              <span class="_progress_order"><?php echo $progress['order']?></span>
-              <?php echo $this->Form->input("WorksSheetProgress.{$progressId}.order", array('type' => 'hidden', 'value' => $progress['order']));?>
+              <?php
+              echo $this->Form->input("WorksSheetProgress.{$progressId}.vendor_id",
+                array('options' => $vendorList,
+                  'selected'=>$progress['vendor_id'],
+                  'label' => false,
+                  'empty' => __("Select Vendor..."),
+                )
+              );
+              ?>
             </td>
-            <td>
-              <?php echo $progress['name']?>
-              <?php echo $this->Form->input("WorksSheetProgress.{$progressId}.name", array('type' => 'hidden', 'value' => $progress['name']));?>
-            </td>
-            <td>
-              <?php echo $progress['location']?>
-              <?php echo $this->Form->input("WorksSheetProgress.{$progressId}.location", array('type' => 'hidden', 'value' => $progress['location']));?>
-            </td>
-            <td>
-              <?php echo $progress['description']?>
-              <?php echo $this->Form->input("WorksSheetProgress.{$progressId}.description", array('type' => 'hidden', 'value' => $progress['description']));?>
-            </td>
-            <td>
-              <a class="btn btn-default btn-sm _editProgress" data-id=<?php echo $progressId?>> Edit </a>
-              <a class="btn btn-default btn-sm _removeProgress"> Remove </a>
-            </td>
+            <td><?php echo $this->Form->input("WorksSheetProgress.{$progressId}.description", array('type' => 'text', 'value' => $progress['description'], 'label' => false));?></td>
           </tr>
         <?php endforeach;?>
       <?php endif;?>
@@ -135,25 +113,19 @@
   </div>
 
   <div class="form-group">
-    <div class="col col-md-9">
+    <div class="form-group ">
+      <div class="col col-md-3 text-left">
+        <?php
+        echo $this->Form->button('<i class="fa fa-save"></i> ' . __('Save'), array('class' => 'btn btn-primary', 'type' => 'submit', 'escape' => false));
+        echo ' ';
+        echo $this->Html->link(__('Cancel'), Router::url(array("action" => "index")), array('class' => 'btn btn-default'));
+        ?>
+      </div>
     </div>
-    <div class="col-md-3 text-right">
-      <button type="button" class="btn btn-default btn-sm _addProgress" data-toggle="modal" data-target="#progressModal"><?php echo __("Add Progress Step(s)")?></button>
-  </div>
-  <div class="form-group ">
-    <div class="col col-md-3 text-left">
-      <?php
-      echo $this->Form->button('<i class="fa fa-save"></i> ' . __('Save'), array('class' => 'btn btn-primary', 'type' => 'submit', 'escape' => false));
-      echo ' ';
-      echo $this->Html->link(__('Cancel'), Router::url(array("action" => "index")), array('class' => 'btn btn-default'));
-      ?>
-    </div>
-  </div>
-  <?php
-  echo $this->Form->input('id', array('type' => 'hidden'));
-  //echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-large btn-primary'));
-  echo $this->Form->end();
-  ?>
+    <?php
+    echo $this->Form->input('id', array('type' => 'hidden'));
+    echo $this->Form->end();
+    ?>
 </div>
 <?php
 echo $this->Html->css('bootstrap-datetimepicker.css');
@@ -162,67 +134,20 @@ echo $this->Html->script('libs/bootstrap-datetimepicker.js');
 echo $this->Html->script('costing.js');
 ?>
 
-<div id="progressModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Progress Step(s)</h4>
-      </div>
-      <div class="modal-body">
-        <div id="_progress_msg" class="alert alert-danger hidden"></div>
-        <div class="form-group required">
-          <label class="col col-md-3 control-label text-left"><?php echo __('Progress Name')?></label>
-          <div class="col col-md-9 required">
-            <input id="_progress_name" class="form-control" maxlength="255" type="text" required="required">
-          </div>
-        </div>
-        <div class="form-group required">
-          <label class="col col-md-3 control-label text-left"><?php echo __('At Location')?></label>
-          <div class="col col-md-9 required">
-            <input id="_progress_location" class="form-control" maxlength="255" type="text" required="required">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col col-md-3 control-label text-left"><?php echo __('Description')?></label>
-          <div class="col col-md-9">
-            <input id="_progress_description" class="form-control" maxlength="255" type="text">
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <input id="_progress_id" type="hidden" >
-        <input id="_progress_order" type="hidden" >
-        <button id="_progress_ok" type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <script id="tableRowTemplateWorksSheet" type="text/x-jQuery-tmpl">
-  <tr id="_row_${id}">
+  <tr>
+    <td><span>${order}</span><?php echo $this->Form->input('WorksSheetProgress.${id}.order', array('type' => 'hidden', 'value' => '${order}'));?></td>
+    <td>${progress_name}<?php echo $this->Form->input('WorksSheetProgress.${id}.name', array('type' => 'hidden', 'value' => '${progress_name}'));?></td>
     <td>
-      <span class="_progress_order">${order}</span>
-      <?php echo $this->Form->input('WorksSheetProgress.${id}.order', array('type' => 'hidden', 'value' => '${order}'));?>
-    </td>
-    <td>
-      ${progress_name}
-      <?php echo $this->Form->input('WorksSheetProgress.${id}.name', array('type' => 'hidden', 'value' => '${progress_name}'));?>
-    </td>
-    <td>
-      ${progress_location}
-      <?php echo $this->Form->input('WorksSheetProgress.${id}.location', array('type' => 'hidden', 'value' => '${progress_location}'));?>
-    </td>
-    <td>
-      ${progress_description}
-      <?php echo $this->Form->input('WorksSheetProgress.${id}.description', array('type' => 'hidden', 'value' => '${progress_description}'));?>
-    </td>
-    <td>
-    <a class="btn btn-default btn-sm _editProgress" data-id=${id}> Edit </a>
-    <a class="btn btn-default btn-sm _removeProgress"> Remove </a>
-    </td>
+    <?php
+    echo $this->Form->input('WorksSheetProgress.${id}.vendor_id',
+      array('options' => $vendorList,
+        'selected'=>NULL,
+        'label' => false,
+        'empty' => __("Select Vendor..."),
+      )
+    );
+    ?>
+    <td><?php echo $this->Form->input('WorksSheetProgress.${id}.description', array('type' => 'text', 'label' => false));?></td>
   </tr>
 </script>

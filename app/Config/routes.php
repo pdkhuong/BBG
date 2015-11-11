@@ -44,8 +44,8 @@ Router::connect('/costing/:action/*', array('controller' => 'Costing'));
 Router::connect('/salary', array('controller' => 'Salary', 'action' => 'index'));
 Router::connect('/salary/:action/*', array('controller' => 'Salary'));
 
-Router::connect('/product-order', array('controller' => 'WorksSheet', 'action' => 'index'));
-Router::connect('/product-order/:action/*', array('controller' => 'WorksSheet'));
+Router::connect('/workssheet', array('controller' => 'WorksSheet', 'action' => 'index'));
+Router::connect('/workssheet/:action/*', array('controller' => 'WorksSheet'));
 
 Router::connect('/file', array('controller' => 'File', 'action' => 'index'));
 Router::connect('/file/:action/*', array('controller' => 'File'));
@@ -67,6 +67,10 @@ Router::connect('/calendar/:action/*', array('controller' => 'Calendar'));
 
 Router::connect('/facsimile-massage', array('controller' => 'FacsimileMassage', 'action' => 'index'));
 Router::connect('/facsimile-massage/:action/*', array('controller' => 'FacsimileMassage'));
+
+Router::connect('/ajax', array('controller' => 'Ajax', 'action' => 'index'));
+Router::connect('/ajax/:action/*', array('controller' => 'Ajax'));
+
 
 CakePlugin::routes();
 

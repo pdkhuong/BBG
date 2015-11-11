@@ -129,6 +129,16 @@
           $options['checked'] = 'checked';
         }
         echo $this->Form->input("controller[$controller][$action]", $options);
+        if($dataAction['name'] == 'edit'){
+          $options = array('class' => '', 'name' => "controller[$controller][can_create]",
+            'label' => 'can create?', 'type' => 'checkbox', 'div' => 'checkbox-inline');
+          if (isset($rolesC[$controller][$action]['can_create']) && $rolesC[$controller][$action]['can_create']) {
+            $options['checked'] = 'checked';
+          }
+          echo $this->Form->input("controller[$controller][can_create]", $options);
+        }
+
+
         echo "</div>";
       }
       ?>

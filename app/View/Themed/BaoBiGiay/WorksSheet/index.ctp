@@ -18,14 +18,13 @@
         <table cellpadding='0' cellspacing='0' class='table' data-nosearchable="0,2,3" data-nosortable="0,2,3" data-idisplaylength="10" data-aasorting="[[1,'asc']]">
           <thead>
             <tr>
-              <th width="10%"><?php echo __('No.') ?></th>
-              <th width="10%"><?php echo __('Order No.') ?></th>
+              <th width="10%"><?php echo __('WS No.') ?></th>
               <th width="10%"><?php echo __('Customer') ?></th>
-              <th width="15%"><?php echo __('Output Product') ?></th>
-              <th width="5%"><?php echo __('Quantity') ?></th>
-              <th width="10%"><?php echo __('Delivery Date') ?></th>
+              <th width="15%"><?php echo __('Product') ?></th>
+              <th width="10%"><?php echo __('Quantity') ?></th>
+              <th width="15%"><?php echo __('Delivery Date') ?></th>
               <th width="20%"><?php echo __('Created User') ?></th>
-              <th width="15%"><?php echo __('Actions'); ?></th>
+              <th width="20%"><?php echo __('Actions'); ?></th>
             </tr>
           </thead>
           <tbody>
@@ -34,17 +33,17 @@
               ?>
               <tr>
                 <td><?php echo ($data['WorksSheet']['auto_code']); ?></td>
-                <td><?php echo ($data['WorksSheet']['order_no']); ?></td>
                 <td><?php echo ($data['Customer']['name']); ?></td>
-                <td><?php echo ($data['OutputProduct']['name']); ?></td>
-                <td><?php echo vnNumberFormat($data['WorksSheet']['num_product'], 0); ?></td>
+                <td><?php echo ($data['Product']['name']); ?></td>
+                <td><?php echo vnNumberFormat($data['Product']['quantity'], 0); ?></td>
                 <td><?php echo reformatDate($data['WorksSheet']['delivery_date']); ?></td>
-                <td><?php echo ($data['CreatedUser']['display_name']); ?></td>
+                <td><?php echo ($data['User']['display_name']); ?></td>
                 <td>
-                  <?php if($data['OutputProduct']['quantity']):?>
                   <?= $this->Html->link('<i class="fa fa-file-pdf-o"></i>', Router::url(array('action' => 'report', $data['WorksSheet']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Export PDF'))) ?>
-                  <?php endif;?>
                   <?= $this->Html->link('<i class="fa fa-edit"></i>', Router::url(array('action' => 'edit', $data['WorksSheet']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Edit'))) ?>
+                  <?php if($isAdmin && empty($data['WorksSheet']['status'])):?>
+                  <?= $this->Html->link('<i class="fa fa-check-square-o"></i>', Router::url(array('action' => 'approve', $data['WorksSheet']['id'])), array('class' => 'btn btn-default btn-edit btn-sm', 'escape' => false, 'title' => __('Approve'))) ?>
+                  <?php endif;?>
                   <?= $this->Form->postLink('<i class="fa fa-trash-o"></i>', Router::url(array('action' => 'delete', $data['WorksSheet']['id'])), array('class' => 'btn btn-default btn-delete btn-sm', 'escape' => false, 'title' => __('Delete')), __('Are you sure you want to delete #%s?', $data['WorksSheet']['id'])) ?>
                 </td>
               </tr>

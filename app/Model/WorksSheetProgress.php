@@ -11,6 +11,10 @@ class WorksSheetProgress extends AppModel {
     'WorksSheet' => array (
       'className' => 'WorksSheet',
       'foreignKey' => 'product_order_id',
+    ),
+    'Vendor' => array (
+      'className' => 'Vendor',
+      'foreignKey' => 'vendor_id',
     )
   );
 
@@ -33,14 +37,14 @@ class WorksSheetProgress extends AppModel {
         'allowEmpty' => false,
       )
     ),
-    'location' => array(
+    'vendor_id' => array(
       'size' => array(
         'rule' => array(
           0 => 'maxLength',
           1 => 255,
         ),
         'message' => 'Please enter a text no larger than 255 characters long',
-        'allowEmpty' => false,
+        'allowEmpty' => true,
       )
     ),
     'order' => array(

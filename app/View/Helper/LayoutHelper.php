@@ -71,6 +71,7 @@ class LayoutHelper extends AppHelper {
         'sNext' => __('Next')
       )
     );
+    $js['ajax_url'] = Router::url('/ajax/',true);
     if (is_array(Configure::read('Js'))) {
       $js = Hash::merge($js, Configure::read('Js'));
     }

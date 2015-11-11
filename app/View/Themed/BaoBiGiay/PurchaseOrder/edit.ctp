@@ -1,13 +1,13 @@
 <h3>
   <? if (isset($this->data['PurchaseOrder']['id']) && $this->data['PurchaseOrder']['id'] > 0): ?>
-    <?= __('Edit Purchase Order') ?>
+    <?= __('Edit Purchase Order') ?>: <?= $orderNo1.'-'.$orderNo2.'-'.$orderNo3 ?>
   <? else: ?>
     <?= __('Add Purchase Order') ?>
   <? endif; ?>
 </h3>
 
 <hr />
-<div class="well form-horizontal page-body posts form">
+<div class="well form-horizontal page-body posts form _purchase_order">
   <?php
     echo $this->Form->create('PurchaseOrder', array(
     'novalidate' => true,
@@ -22,7 +22,18 @@
 
   ));
   ?>
-    <?php echo $this->Form->input('order_no', array('label' => array('text' => __('Order No.')))) ?>
+    <?php
+    $currentUrl = isset($this->data['PurchaseOrder']['id']) ? Router::url(array('action' => 'edit', $this->data['PurchaseOrder']['id']), true) : Router::url(array('action' => 'edit'), true);
+    echo $this->Form->input('customer_id',
+      array('options' => $listCustomer,
+        'selected'=>NULL,
+        'label' => array('text' => __('Customer')),
+        'empty' => __("Please select customer..."),
+        'id' => "_change_customer",
+        'data-current-url' =>$currentUrl
+      )
+    );
+    ?>
     <?php
     if($listUser){
       echo $this->Form->input('user_id',
@@ -34,15 +45,17 @@
       );
     }
     ?>
-    <?php
-    echo $this->Form->input('customer_id',
-      array('options' => $listCustomer,
-        'selected'=>NULL,
-        'label' => array('text' => __('Customer')),
-        'empty' => __("Please select customer..."),
-      )
-    );
-    ?>
+    <div class="form-group required <?php if(isset($errorObj['order_no'])) echo 'has-error error' ?>">
+      <label class="col col-md-3 control-label text-left">Order No.</label>
+      <span class="col col-md-1 control-label text-left"><?php echo $orderNo1?></span>
+      <div class="col col-md-5 required">
+        <?php echo $this->Form->input('order_no', array('div'=>false, 'label' => false, 'wrapInput' => false)) ?>
+      </div>
+      <span class="col col-md-3 control-label text-left"><?php echo $orderNo3?></span>
+    </div>
+
+
+
     <?php echo $this->Form->input('buyer_name', array('label' => array('text' => __('Buyer Name')))) ?>
     <?php echo $this->Form->input('term', array('label' => array('text' => __('Terms')))) ?>
     <?php

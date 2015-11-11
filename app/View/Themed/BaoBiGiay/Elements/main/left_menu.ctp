@@ -74,24 +74,24 @@
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'Costing', 'action' => 'index'))?>"><i class="fa fa-dollar"> </i>Costing</a>
       </li>
       <?php endif;?>
-      <?php if($isSuperAdmin || isset($rolesC['FacsimileMassageController'])):?>
+      <?php if(0):// if($isSuperAdmin || isset($rolesC['FacsimileMassageController'])):?>
       <li class="<?php if($this->params['controller'] == 'FacsimileMassage') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'FacsimileMassage', 'action' => 'index'))?>"><i class="fa fa-file-text"> </i>Facsimile Massage</a>
       </li>
       <?php endif;?>
+      <?php if($isSuperAdmin || isset($rolesC['PurchaseOrderController'])):?>
+        <li class="<?php if($this->params['controller'] == 'PurchaseOrder') echo 'active'?>">
+          <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'PurchaseOrder', 'action' => 'index'))?>"><i class="fa fa-clipboard"> </i>Purchase Order</a>
+        </li>
+      <?php endif;?>
+      <?php if($isSuperAdmin || isset($rolesC['PurchaseRequestController'])):?>
+        <li class="<?php if($this->params['controller'] == 'PurchaseRequest') echo 'active'?>">
+          <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'PurchaseRequest', 'action' => 'index'))?>"><i class="fa fa-clipboard"> </i>Purchase Request</a>
+        </li>
+      <?php endif;?>
       <?php if($isSuperAdmin || isset($rolesC['WorksSheetController'])):?>
       <li class="<?php if($this->params['controller'] == 'WorksSheet') echo 'active'?>">
         <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'WorksSheet', 'action' => 'index'))?>"><i class="fa fa-tasks"> </i>Works Sheet</a>
-      </li>
-      <?php endif;?>
-      <?php if($isSuperAdmin || isset($rolesC['PurchaseOrderController'])):?>
-      <li class="<?php if($this->params['controller'] == 'PurchaseOrder') echo 'active'?>">
-        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'PurchaseOrder', 'action' => 'index'))?>"><i class="fa fa-clipboard"> </i>Purchase Order</a>
-      </li>
-      <?php endif;?>
-      <?php if($isSuperAdmin || isset($rolesC['PurchaseRequestController'])):?>
-      <li class="<?php if($this->params['controller'] == 'PurchaseRequest') echo 'active'?>">
-        <a href="<?php echo Router::url(array('plugin' => false, 'controller' => 'PurchaseRequest', 'action' => 'index'))?>"><i class="fa fa-clipboard"> </i>Purchase Request</a>
       </li>
       <?php endif;?>
       <?php if($isSuperAdmin || isset($rolesC['SalaryController'])):?>

@@ -42,7 +42,10 @@
       )
     );
     ?>
+    <?php echo $this->Form->input('attn', array('label' => array('text' => __('Attn')))) ?>
     <?php echo $this->Form->input('name', array('label' => array('text' => __('Name')))) ?>
+    <?php echo $this->Form->input('num_color', array('label' => array('text' => __('Number Color')))) ?>
+
 
   Added Product(s):
   <div class='table-responsive well'>
@@ -68,9 +71,9 @@
             <td><?php echo $addedProduct['ProductUnit']['name']?></td>
             <td><?php echo $addedProduct['Product']['specification']?></td>
             <td>
-              <input type="text" maxlength=10 name="data[Product][num_item][<?php echo $productId?>]" value="<?php echo $addedProduct['numOfProduct']?>"/>
+              <input type="text" maxlength=10 name="data[Product][num_item][<?php echo $productId?>][]" value="<?php echo $addedProduct['numOfProduct']?>"/>
             </td>
-            <td><a class="btn btn-default btn-sm _removeProduct"> Remove </a></td>
+            <td><a class="btn btn-default btn-sm _removeProduct2"> Remove </a></td>
           </tr>
         <?php endforeach;?>
       <?php endif;?>
@@ -102,7 +105,7 @@
           <td><?php echo ($data['ProductUnit']['name']); ?></td>
           <td><?php echo ($data['Product']['specification']); ?></td>
           <td>
-            <a class="btn btn-default btn-sm _addProduct">Add product</a>
+            <a class="btn btn-default btn-sm _addProduct2">Add product</a>
           </td>
         </tr>
         <?php
@@ -147,8 +150,8 @@ echo $this->Html->script('costing.js');
     <td>${unit_name}</td>
     <td>${spec}</td>
     <td>
-      <input data-id="${id}" type="text" maxlength=10 name="data[Product][num_item][${id}]" />
+      <input data-id="${id}" type="text" maxlength=10 name="data[Product][num_item][${id}][]" />
     </td>
-    <td><a class="btn btn-default btn-sm _removeProduct"> Remove </a></td>
+    <td><a class="btn btn-default btn-sm _removeProduct2"> Remove </a></td>
   </tr>
 </script>

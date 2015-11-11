@@ -109,7 +109,8 @@ CakePlugin::load('User', array('bootstrap' => TRUE, 'routes' => TRUE));
 Configure::write('USER_EXCLUDE_CONTROLLER', array(
   'controller' => array(
     'Test01Controller' => array('action1' => 1),
-    'SystemToolsController' => array()
+    'SystemToolsController' => array(),
+    'AjaxController' => array(),
   ),
   'plugin' => array(
     'MultiLanguage' => array(
@@ -166,19 +167,21 @@ Configure::write('SHIP_TYPE', array(
   1 => 'Truck',
   2 => 'POS'
 ));
+Configure::write('PAPER_NAME', array(
+  1 => 'IVORY',
+  2 => 'DUPLEX',
+  3 => 'BRISTOL',
+  4 => 'COUCHE',
+  5 => 'ART'
+));
 
 Configure::write('UPLOAD_EXTENSION', array(
-  array('mime' => 'image/jpeg', 'ext' => 'jpg'),
-  array('mime' => 'image/png', 'ext' => 'png'),
-  array('mime' => 'image/gif', 'ext' => 'gif'),
-  array('mime' => 'application/pdf', 'ext' => 'pdf'),
-  array('mime' => 'application/msword', 'ext' => 'doc'),
-  array('mime' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'ext' => 'docx'),
-  array('mime' => 'application/vnd.ms-excel', 'ext' => 'xls'),
-  array('mime' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'ext' => 'xlsx'),
+  'jpg', 'png', 'gif', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ai', 'cdr'
 ));
 
 define("ITEM_PER_PAGE", 20);
+define("STATUS_CREATED", 0);
+define("STATUS_APPROVED", 1);
 define("UPLOAD_BASE_DIR", 'files/uploads');
 include_once(__DIR__ . '/functions.php');
 

@@ -75,8 +75,8 @@ echo $this->Form->create('PurchaseRequestSearch', array(
                 <th width="15%"><?php echo __('Seller Name') ?></th>
                 <th width="10%"><?php echo __('Staff') ?></th>
                 <th width="5%"><?php echo __('Ship Via') ?></th>
-                <th width="15%"><?php echo __('Order Date') ?></th>
-                <th width="15%"><?php echo __('Received Date') ?></th>
+                <th width="15%"><?php echo __('Order Date&nbsp; &nbsp;(YYYY-MM-DD)') ?></th>
+                <th width="15%"><?php echo __('Received Date (YYYY-MM-DD)') ?></th>
                 <th width="20%"><?php echo __('Actions'); ?></th>
               </tr>
               </thead>

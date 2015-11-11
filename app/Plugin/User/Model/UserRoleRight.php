@@ -50,6 +50,7 @@ class UserRoleRight extends AppModel {
       } else {
         if (!empty($role['UserRoleRight']['action'])) {
           $rolesC[$role['UserRoleRight']['controller']][$role['UserRoleRight']['action']]['owner'] = $role['UserRoleRight']['is_owner'];
+          $rolesC[$role['UserRoleRight']['controller']][$role['UserRoleRight']['action']]['can_create'] = $role['UserRoleRight']['can_create'];
           $rolesC[$role['UserRoleRight']['controller']][$role['UserRoleRight']['action']]['id'] = $role['UserRoleRight']['id'];
         } elseif (!empty($role['UserRoleRight']['controller'])) {
           $rolesC[$role['UserRoleRight']['controller']]['id'] = $role['UserRoleRight']['id'];

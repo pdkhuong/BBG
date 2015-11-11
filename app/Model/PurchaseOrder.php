@@ -104,4 +104,20 @@ class PurchaseOrder extends AppModel {
       ),
     ),
   );
+  function getUniqCodeByMonth(){
+    $conditions = array();
+    $conditions[] = 'YEAR(PurchaseOrder.created_time)=YEAR(CURDATE()) AND MONTH(PurchaseOrder.created_time)=MONTH(CURDATE())';
+    $totalByMonth = $this->find('count', array(
+      'conditions' =>$conditions
+    ));
+    $totalByMonth = $totalByMonth+1;
+    $str = $totalByMonth;
+    if($totalByMonth<10){
+      $str = '00'.$totalByMonth;
+    }elseif($totalByMonth<100){
+      $str = '0'.$totalByMonth;
+    }
+    $str = date('ym', time()).$str;
+    return $str;
+  }
 }

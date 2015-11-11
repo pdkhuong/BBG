@@ -44,5 +44,22 @@ class FacsimileMassage extends AppModel {
         'allowEmpty' => false,
       )
     ),
+    'attn' => array(
+      'size' => array(
+        'rule' => array(
+          0 => 'maxLength',
+          1 => 200,
+        ),
+        'message' => 'Please enter a text no larger than 200 characters long',
+        'allowEmpty' => false,
+      )
+    ),
+    'num_color' => array(
+      'numeric' => array (
+        'rule' => 'numeric',
+        'message' => 'Please enter a valid num color',
+        'allowEmpty' => false,
+      ),
+    ),
   );
 }

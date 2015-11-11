@@ -50,7 +50,7 @@ class PurchaseRequestController extends AppController {
     $currentUserId = $this->loggedUser->User->id;
     $isAdmin = $this->isAdmin();
     $listVendor = array();
-    $listProduct = $this->listProduct(false);
+    $listProduct = Hash::combine($this->listProduct(), '{n}.Product.id', '{n}');
     if($isAdmin){
       $listUser = $this->UserModel->listUser();
       $listVendor = $this->Vendor->find("list");

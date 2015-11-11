@@ -117,6 +117,7 @@ class AppModel extends Model {
   }
 
   public function delete($id = NULL, $cascade = true, $logic = true) {
+    return parent::delete($id, $cascade);
     if ($logic) {
       $this->validate = false;
       $this->set(array(
@@ -130,6 +131,7 @@ class AppModel extends Model {
   }
 
   public function deleteLogic($data, $conditions = null) {
+    return parent::delete($data);
     $this->validate = false;
     if (is_numeric($data) && is_null($conditions)) {
       $this->set(array(

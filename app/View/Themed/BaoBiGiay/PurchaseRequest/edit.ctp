@@ -1,13 +1,13 @@
 <h3>
   <? if (isset($this->data['PurchaseRequest']['id']) && $this->data['PurchaseRequest']['id'] > 0): ?>
-    <?= __('Edit Purchase Request') ?>
+    <?= __('Edit Purchase Request') ?>: <?= $this->data['PurchaseRequest']['order_no'] ?>
   <? else: ?>
     <?= __('Add Purchase Request') ?>
   <? endif; ?>
 </h3>
 
 <hr />
-<div class="well form-horizontal page-body posts form">
+<div class="well form-horizontal page-body posts form _purchase_order">
   <?php
     echo $this->Form->create('PurchaseRequest', array(
     'novalidate' => true,
@@ -22,7 +22,15 @@
 
   ));
   ?>
-    <?php echo $this->Form->input('order_no', array('label' => array('text' => __('Order No.')))) ?>
+    <?php
+    echo $this->Form->input('vendor_id',
+      array('options' => $listVendor,
+        'selected'=>NULL,
+        'label' => array('text' => __('Vendor')),
+        'empty' => __("Please select vendor..."),
+      )
+    );
+    ?>
     <?php
     if($listUser){
       echo $this->Form->input('user_id',
@@ -34,15 +42,7 @@
       );
     }
     ?>
-    <?php
-    echo $this->Form->input('vendor_id',
-      array('options' => $listVendor,
-        'selected'=>NULL,
-        'label' => array('text' => __('Vendor')),
-        'empty' => __("Please select vendor..."),
-      )
-    );
-    ?>
+    <?php echo $this->Form->input('order_no', array('label' => array('text' => __('Order No.')))) ?>
     <?php echo $this->Form->input('seller_name', array('label' => array('text' => __('Seller Name')))) ?>
     <?php echo $this->Form->input('term', array('label' => array('text' => __('Terms')))) ?>
     <?php

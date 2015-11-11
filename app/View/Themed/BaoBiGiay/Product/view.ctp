@@ -1,5 +1,5 @@
 <h3>
-  <?= __('Product') ?> #<?= $data['Product']['id'] ?>
+  <?= __('Product') ?>: <?= $data['Product']['name'] ?>
 </h3>
 <hr>
 <div class='table-responsive'>
@@ -22,6 +22,26 @@
       <tr>
         <td>Specification</td>
         <td><?= $data['Product']['specification'] ?></td>
+      </tr>
+      <tr>
+        <td>Specification Length (cm)</td>
+        <td><?= $data['Product']['length'] ?></td>
+      </tr>
+      <tr>
+        <td>Specification Width (cm)</td>
+        <td><?= $data['Product']['width'] ?></td>
+      </tr>
+      <tr>
+        <td>Paper Name</td>
+        <td><?= $paperName[$data['Product']['paper_name']] ?></td>
+      </tr>
+      <tr>
+        <td>Substance (gsm)</td>
+        <td><?= $data['Product']['substance'] ?></td>
+      </tr>
+      <tr>
+        <td>Structure</td>
+        <td><?= nl2br($data['Product']['structure']) ?></td>
       </tr>
       <tr>
         <td>Unit</td>

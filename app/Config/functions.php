@@ -41,5 +41,6 @@ function reformatDate($date, $format = 'Y-m-d'){
   return date($format, strtotime($date));
 }
 function vnNumberFormat($number, $decimal = 2){
+  $number = floatval($number);
   return number_format($number, $decimal, ',', '.');
 }

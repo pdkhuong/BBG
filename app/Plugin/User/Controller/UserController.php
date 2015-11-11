@@ -64,8 +64,9 @@ class UserController extends AppController
     $roles = Hash::combine($this->UserRole->find('all'), '{n}.UserRole.id', '{n}.UserRole.name');
     unset($roles[USER_ROLE_CUSTOMER]);
     $this->set('roles', $roles);
+    $userDb = $this->UserModel->findById($id);
     if (empty($this->request->data)) {
-      $this->request->data = $this->UserModel->findById($id);
+      $this->request->data = $userDb;
       $roleAccess = $this->UserRoleAccess->findByUserId($id);
       if (!empty($roleAccess)) {
         $this->request->data['UserModel']['role'] = $roleAccess['UserRole']['id'];
@@ -76,7 +77,11 @@ class UserController extends AppController
         $inputPassword = trim($this->request->data['UserModel']['password']);
         $this->request->data['UserModel']['user_pass'] = $wp_hasher->HashPassword($inputPassword);
         $this->request->data['UserModel']['password_confirmation'] = $inputPassword;
+      }else{
+        $this->request->data['UserModel']['password'] = $userDb['UserModel']['user_pass'];
+        $this->request->data['UserModel']['password_confirmation'] = $userDb['UserModel']['user_pass'];
       }
+      $this->request->data['UserModel']['user_login'] = $this->request->data['UserModel']['user_email'];
       $this->request->data['UserModel']['display_name'] = $this->request->data['UserModel']['firstname'].' '.$this->request->data['UserModel']['lastname'];
       if ($this->UserModel->save($this->request->data)) {
         $this->UserModel->onlyOneRole($this->UserModel->getId(), $this->request->data['UserModel']['role']);

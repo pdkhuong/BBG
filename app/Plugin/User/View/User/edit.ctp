@@ -24,7 +24,6 @@
   ));
   ?>
   <?= $this->Form->input('user_email', array('label' => array('text' => __('Email')))) ?>
-  <?= $this->Form->input('user_login', array('label' => array('text' => __('Usename')))) ?>
   <?= $this->Form->input('firstname', array('label' => array('text' => __('Fist Name')))) ?>
   <?= $this->Form->input('lastname', array('label' => array('text' => __('Last Name')))) ?>
   <?= $this->Form->input('user_status', array('label' => array('text' => __('Status')), 'options' => Configure::read('User.UserStatus'))) ?>

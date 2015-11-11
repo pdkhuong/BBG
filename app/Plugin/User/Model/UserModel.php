@@ -82,7 +82,7 @@ class UserModel extends AppModel {
           0 => 'maxLength',
           1 => 60,
         ),
-        'message' => 'Please enter a text no larger than 60 characters long',
+        'message' => 'Please enter a text no larger than 100 characters long',
         'allowEmpty' => false,
       ),
       'notNull' => array(

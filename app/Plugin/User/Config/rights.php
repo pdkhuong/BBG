@@ -85,10 +85,6 @@ $rights = array(
 			'name' => 'Customer',
 			'status' => 0,
 			'action' => array(
-				'view' => array(
-					'name' => 'view',
-					'status' => 0
-				),
 				'edit' => array(
 					'name' => 'edit',
 					'status' => 0
@@ -100,7 +96,11 @@ $rights = array(
 				'index' => array(
 					'name' => 'index',
 					'status' => 0
-				)
+				),
+				'view' => array(
+					'name' => 'view',
+					'status' => 0
+				),
 			)
 		),
 		'DashboardController' => array(
@@ -157,10 +157,6 @@ $rights = array(
 			'name' => 'Lead',
 			'status' => 0,
 			'action' => array(
-				'view' => array(
-					'name' => 'view',
-					'status' => 0
-				),
 				'edit' => array(
 					'name' => 'edit',
 					'status' => 0
@@ -172,17 +168,17 @@ $rights = array(
 				'index' => array(
 					'name' => 'index',
 					'status' => 0
-				)
+				),
+				'view' => array(
+					'name' => 'view',
+					'status' => 0
+				),
 			)
 		),
 		'ProductController' => array(
 			'name' => 'Product',
 			'status' => 0,
 			'action' => array(
-				'view' => array(
-					'name' => 'view',
-					'status' => 0
-				),
 				'edit' => array(
 					'name' => 'edit',
 					'status' => 0
@@ -194,17 +190,17 @@ $rights = array(
 				'index' => array(
 					'name' => 'index',
 					'status' => 0
-				)
+				),
+				'view' => array(
+					'name' => 'view',
+					'status' => 0
+				),
 			)
 		),
 		'PurchaseOrderController' => array(
 			'name' => 'PurchaseOrder',
 			'status' => 0,
 			'action' => array(
-				'view' => array(
-					'name' => 'view',
-					'status' => 0
-				),
 				'edit' => array(
 					'name' => 'edit',
 					'status' => 0
@@ -216,17 +212,17 @@ $rights = array(
 				'index' => array(
 					'name' => 'index',
 					'status' => 0
-				)
+				),
+				'view' => array(
+					'name' => 'view',
+					'status' => 0
+				),
 			)
 		),
 		'PurchaseRequestController' => array(
 			'name' => 'PurchaseRequest',
 			'status' => 0,
 			'action' => array(
-				'view' => array(
-					'name' => 'view',
-					'status' => 0
-				),
 				'edit' => array(
 					'name' => 'edit',
 					'status' => 0
@@ -238,7 +234,11 @@ $rights = array(
 				'index' => array(
 					'name' => 'index',
 					'status' => 0
-				)
+				),
+				'view' => array(
+					'name' => 'view',
+					'status' => 0
+				),
 			)
 		),
 		'SalaryController' => array(
@@ -281,10 +281,6 @@ $rights = array(
 			'name' => 'Vendor',
 			'status' => 0,
 			'action' => array(
-				'view' => array(
-					'name' => 'view',
-					'status' => 0
-				),
 				'edit' => array(
 					'name' => 'edit',
 					'status' => 0
@@ -296,7 +292,11 @@ $rights = array(
 				'index' => array(
 					'name' => 'index',
 					'status' => 0
-				)
+				),
+				'view' => array(
+					'name' => 'view',
+					'status' => 0
+				),
 			)
 		),
 		'WorksSheetController' => array(

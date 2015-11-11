@@ -70,13 +70,12 @@ echo $this->Form->create('PurchaseOrderSearch', array(
             <table cellpadding='0' cellspacing='0' class='table' data-nosearchable=",3" data-nosortable=",3" data-idisplaylength="10" data-aasorting="[[0,'asc']]">
               <thead>
               <tr>
-                <th width="10%"><?php echo __('Order No.') ?></th>
-                <th width="10%"><?php echo __('Customer') ?></th>
-                <th width="15%"><?php echo __('Buyer Name') ?></th>
-                <th width="10%"><?php echo __('Staff') ?></th>
+                <th width="20%"><?php echo __('Order No.') ?></th>
+                <th width="15%"><?php echo __('Customer') ?></th>
+                <th width="10%"><?php echo __('Buyer Name') ?></th>
                 <th width="5%"><?php echo __('Ship Via') ?></th>
-                <th width="15%"><?php echo __('Order Date') ?></th>
-                <th width="15%"><?php echo __('Received Date') ?></th>
+                <th width="15%"><?php echo __('Order Date&nbsp; &nbsp;(YYYY-MM-DD)') ?></th>
+                <th width="15%"><?php echo __('Received Date (YYYY-MM-DD)') ?></th>
                 <th width="20%"><?php echo __('Actions'); ?></th>
               </tr>
               </thead>
@@ -88,7 +87,6 @@ echo $this->Form->create('PurchaseOrderSearch', array(
                   <td><?php echo $data['PurchaseOrder']['order_no']; ?></td>
                   <td><?php echo $data['Customer']['name']; ?></td>
                   <td><?php echo $data['PurchaseOrder']['buyer_name']; ?></td>
-                  <td><?php echo $data['User']['display_name']; ?></td>
                   <td><?php echo $shipType[$data['PurchaseOrder']['ship_via']]; ?></td>
                   <td><?php echo reformatDate($data['PurchaseOrder']['order_date']); ?></td>
                   <td><?php echo reformatDate($data['PurchaseOrder']['received_date']); ?></td>

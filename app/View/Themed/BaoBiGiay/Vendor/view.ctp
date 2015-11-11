@@ -1,5 +1,5 @@
 <h3>
-  <?= __('Vendor') ?> #<?= $data['Vendor']['id'] ?>
+  <?= __('Vendor') ?>: <?= $data['Vendor']['name'] ?>
 </h3>
 <hr>
 <div class='table-responsive'>
