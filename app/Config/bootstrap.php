@@ -172,7 +172,9 @@ Configure::write('PAPER_NAME', array(
   2 => 'DUPLEX',
   3 => 'BRISTOL',
   4 => 'COUCHE',
-  5 => 'ART'
+  5 => 'ART',
+  6 => 'DECAL',
+  7 => 'CARTON BOARD',
 ));
 
 Configure::write('UPLOAD_EXTENSION', array(

@@ -148,7 +148,7 @@ var WorksSheet = {
             var vanish_opp = parseFloat(costing.vanish_opp);
             var vanish_uv = parseFloat(costing.vanish_uv);
             if(vanish_oil || vanish_opp || vanish_uv){
-              WorksSheet.addRowStep(order, "Cán Màng Bóng");
+              WorksSheet.addRowStep(order, "Loại cán");
               order++;
             }
             var die_cut = parseFloat(costing.die_cut);
