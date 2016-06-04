@@ -31,12 +31,12 @@ class DashboardController extends AppController {
     $now = date("Y-m-d");
 	$conditions = array('from_date >=' => $now);
 	$isAdmin = $this->isAdmin();
-	if(!$isAdmin){
+	/*if(!$isAdmin){
       $currentUserId = $this->loggedUser->User->id;
       $conditions['user_id'] = $currentUserId;
-    }
+    }*/
     $optionCalendar = array(
-							'limit' => 10,
+							'limit' => 30,
 							'order' => array('from_date' => 'asc'),
 							'conditions' => $conditions,
 							);
@@ -48,7 +48,7 @@ class DashboardController extends AppController {
 	}
 	
     $optionWorksSheet = array(
-							'limit' => 10,
+							'limit' => 30,
 							'order' => array('delivery_date' => 'asc'),
 							'conditions' => array('delivery_date >=' => $now)
 							);

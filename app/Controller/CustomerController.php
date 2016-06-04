@@ -4,6 +4,7 @@ class CustomerController extends AppController {
   var $uses = array(
     'Customer',
     'CustomerContact',
+    'Product',
     'User.UserModel',
     'User.UserRoleAccess'
   );
@@ -101,6 +102,7 @@ class CustomerController extends AppController {
       $this->checkCanDo($customerDb);
       $this->Customer->deleteLogic($id);
       $this->CustomerContact->deleteAll(array('customer_id' => $id), false);
+      $this->Product->deleteAll(array('customer_id' => $id), false);
     }
     return $this->redirect(Router::url(array('action' => 'index')) . '/');
   }
